@@ -1,0 +1,515 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/lato-regular.eot");
+  src: url("../fonts/Lato/lato-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-regular.woff2") format("woff2"), url("../fonts/Lato/lato-regular.woff") format("woff"), url("../fonts/Lato/lato-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/lato-bold.eot");
+  src: url("../fonts/Lato/lato-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-bold.woff2") format("woff2"), url("../fonts/Lato/lato-bold.woff") format("woff"), url("../fonts/Lato/lato-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/lato-bolditalic.eot");
+  src: url("../fonts/Lato/lato-bolditalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-bolditalic.woff2") format("woff2"), url("../fonts/Lato/lato-bolditalic.woff") format("woff"), url("../fonts/Lato/lato-bolditalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("../fonts/Lato/lato-italic.eot");
+  src: url("../fonts/Lato/lato-italic.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-italic.woff2") format("woff2"), url("../fonts/Lato/lato-italic.woff") format("woff"), url("../fonts/Lato/lato-italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+html {
+  font-size: 12px;
+  height: 100%;
+}
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  background: #ffffff;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Lato-Light;
+  font-weight: 300;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+}
+code span,
+kbd span,
+pre span,
+samp span {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+pre {
+  padding: 1.25rem 1rem;
+}
+
+code {
+  padding: 0.25rem;
+  background-color: #f7f7f9;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lato-Regular;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 1.78px;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+}
+
+::-webkit-input-placeholder {
+  color: #EE4C2C;
+}
+
+::-moz-placeholder {
+  color: #EE4C2C;
+}
+
+:-ms-input-placeholder {
+  color: #EE4C2C;
+}
+
+:-moz-placeholder {
+  color: #EE4C2C;
+}
+
+.fa-minus-square-o:before, .pytorch-menu-vertical li.on a span.toctree-expand:before, .pytorch-menu-vertical li.current > a span.toctree-expand:before {
+  content: "-";
+  font-size: 1rem;
+  line-height: 1.5625rem;
+}
+
+.fa-plus-square-o:before, .pytorch-menu-vertical li span.toctree-expand:before {
+  content: "+";
+  font-size: 1rem;
+  line-height: 1.5625rem;
+}
+
+nav.pytorch-left-menu {
+  position: fixed;
+  left: 0;
+  top: 90px;
+  width: 385px;
+  padding: 2.1875rem 3.125rem 0 3.125rem;
+  padding-bottom: 110px;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 100%;
+  z-index: 200;
+}
+
+.pytorch-left-menu-search {
+  width: 296px;
+  z-index: 200;
+  background-color: #f3f4f7;
+  padding: 0;
+  margin-bottom: 2.5rem;
+}
+
+.pytorch-content-wrap {
+  background-color: #ffffff;
+  margin-left: 440px;
+  padding-top: 137px;
+  display: flex;
+  position: relative;
+}
+.pytorch-content-wrap:before, .pytorch-content-wrap:after {
+  content: "";
+  display: table;
+}
+.pytorch-content-wrap:after {
+  clear: both;
+}
+.pytorch-content-wrap {
+  *zoom: 1;
+}
+
+.pytorch-left-menu-search input[type=text] {
+  width: 100%;
+  border-radius: 0;
+  padding: 0.5rem 0.75rem;
+  border-color: #EE4C2C;
+  color: #EE4C2C;
+  border-style: solid;
+  font-size: 1rem;
+}
+
+.pytorch-menu-vertical header,
+.pytorch-menu-vertical p.caption {
+  color: #EE4C2C;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  margin-bottom: 1.25rem;
+  padding: 0;
+  text-transform: none;
+}
+.pytorch-menu-vertical ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+}
+.pytorch-menu-vertical > ul {
+  margin-bottom: 2.5rem;
+}
+.pytorch-menu-vertical a {
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.5625rem;
+  padding: 0;
+  text-decoration: none;
+}
+.pytorch-menu-vertical a.reference.internal {
+  margin-bottom: 0.3125rem;
+  position: relative;
+}
+
+.pytorch-content {
+  background: #ffffff;
+  width: 100%;
+  max-width: 675px;
+  position: relative;
+}
+
+.pytorch-content-left {
+  width: 675px;
+}
+
+.pytorch-content-right {
+  width: 230px;
+  height: 100%;
+  border: 1px dashed #ccc;
+  position: absolute;
+  left: 725px;
+}
+
+.pytorch-right-menu {
+  min-height: 100px;
+  position: sticky;
+  top: 100px;
+  width: 230px;
+}
+
+.pytorch-left-menu {
+  color: #252627;
+  background: #f3f4f7;
+}
+
+.pytorch-side-scroll {
+  width: 355px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.wy-breadcrumbs li a {
+  color: #EE4C2C;
+}
+
+.pytorch-container {
+  margin: 0 auto;
+  width: 1240px;
+  position: relative;
+}
+
+.pytorch-header {
+  height: 90px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e7e7e7;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  z-index: 9999;
+}
+
+.pytorch-header-logo {
+  position: absolute;
+  left: 0;
+  top: 22px;
+}
+.pytorch-header-logo img {
+  height: auto;
+  width: 120px;
+}
+
+.pytorch-header .pytorch-main-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.pytorch-header .pytorch-main-menu ul {
+  display: flex;
+  align-items: center;
+}
+.pytorch-header .pytorch-main-menu ul li {
+  display: inline-block;
+  margin-right: 40px;
+  position: relative;
+}
+.pytorch-header .pytorch-main-menu ul li:last-of-type {
+  margin-right: 0;
+}
+.pytorch-header .pytorch-main-menu ul li a {
+  font-family: Lato-Light;
+  font-size: 18px;
+  color: #262626;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 34px;
+  text-decoration: none;
+}
+.pytorch-header .pytorch-main-menu ul li a.active {
+  color: #EE4C2C;
+}
+.pytorch-header .pytorch-main-menu ul li a.active:after {
+  content: "•";
+  position: absolute;
+  bottom: -24px;
+  font-size: 22px;
+  left: 0;
+  right: 0;
+}
+
+ul.pytorch-breadcrumbs {
+  padding-left: 0;
+  list-style-type: none;
+}
+ul.pytorch-breadcrumbs li {
+  display: inline-block;
+}
+ul.pytorch-breadcrumbs a {
+  color: #EE4C2C;
+  text-decoration: none;
+}
+
+.main-content article {
+  max-width: 920px;
+}
+.main-content article a:link, .main-content article a:visited, .main-content article a:hover {
+  color: #3d5a97;
+}
+.main-content article a:link, .main-content article a:visited {
+  text-decoration: underline;
+}
+.main-content article h1 a.headerlink,
+.main-content article h2 a.headerlink,
+.main-content article h3 a.headerlink,
+.main-content article h4 a.headerlink,
+.main-content article h5 a.headerlink,
+.main-content article h6 a.headerlink {
+  display: inline-block;
+  text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  .main-content article h1 a.headerlink,
+  .main-content article h2 a.headerlink,
+  .main-content article h3 a.headerlink,
+  .main-content article h4 a.headerlink,
+  .main-content article h5 a.headerlink,
+  .main-content article h6 a.headerlink {
+    display: none;
+  }
+}
+.main-content article h1:hover a.headerlink,
+.main-content article h2:hover a.headerlink,
+.main-content article h3:hover a.headerlink,
+.main-content article h4:hover a.headerlink,
+.main-content article h5:hover a.headerlink,
+.main-content article h6:hover a.headerlink {
+  display: inline-block;
+}
+.main-content article h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1.78px;
+  line-height: 1.75rem;
+}
+.main-content article h3 {
+  font-size: 1.125rem;
+  letter-spacing: 0;
+  line-height: 1.375rem;
+  text-transform: none;
+  margin-bottom: 1.5rem;
+}
+.main-content article h4 {
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.main-content article h5 {
+  font-size: 0.875rem;
+  letter-spacing: 0;
+  margin-bottom: 1.5rem;
+}
+.main-content article p, .main-content article ul li, .main-content article ol li {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #545454;
+  margin-bottom: 2.5rem;
+}
+.main-content article dl dt, .main-content article dl dd {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #545454;
+  margin-bottom: 2.5rem;
+}
+.main-content article blockquote {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #545454;
+  margin-bottom: 2.5rem;
+}
+.main-content article ul, .main-content article ol {
+  margin-bottom: 2.5rem;
+}
+.main-content article ul li, .main-content article ol li {
+  margin-bottom: 1rem;
+}
+.main-content article dl {
+  margin-bottom: 2.5rem;
+}
+.main-content article dl dt {
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+.main-content article pre {
+  margin-bottom: 2.5rem;
+}
+.main-content article hr {
+  margin-top: 4.6875rem;
+  margin-bottom: 4.6875rem;
+}
+.main-content article blockquote {
+  font-size: 1.125rem;
+  margin: 0 auto;
+  margin-bottom: 2.5rem;
+  width: 65%;
+}
+.main-content article img {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .main-content article > ul,
+  .main-content article > ol {
+    padding-left: 6.25rem;
+  }
+  .main-content article > ul ul, .main-content article > ul ol,
+  .main-content article > ol ul,
+  .main-content article > ol ol {
+    padding-left: 1.25rem;
+  }
+}
+.pytorch-left-menu header,
+.pytorch-left-menu p.caption {
+  display: inline-block;
+  margin-bottom: 0;
+  display: block;
+  white-space: nowrap;
+}
+.pytorch-left-menu ul {
+  margin-bottom: 0;
+}
+.pytorch-left-menu li code {
+  border: none;
+  background: inherit;
+  color: inherit;
+  padding-left: 0;
+  padding-right: 0;
+}
+.pytorch-left-menu li span.toctree-expand {
+  display: block;
+  float: left;
+  margin-left: -1.2em;
+  font-size: 0.8em;
+  line-height: 1.6em;
+}
+.pytorch-left-menu li.on a, .pytorch-left-menu li.current > a {
+  position: relative;
+  border: none;
+}
+.pytorch-left-menu li.on a span.toctree-expand, .pytorch-left-menu li.current > a span.toctree-expand {
+  display: block;
+  font-size: 0.8em;
+  line-height: 1.6em;
+}
+.pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul {
+  display: none;
+}
+.pytorch-left-menu li.toctree-l1.current li.toctree-l2.current > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3.current > ul {
+  display: block;
+}
+.pytorch-left-menu li.toctree-l2.current li.toctree-l3 > a {
+  display: block;
+}
+.pytorch-left-menu li.toctree-l3 {
+  font-size: 0.9em;
+}
+.pytorch-left-menu li.toctree-l3.current li.toctree-l4 > a {
+  display: block;
+}
+.pytorch-left-menu li.toctree-l4 {
+  font-size: 0.9em;
+}
+.pytorch-left-menu li.current ul {
+  display: block;
+}
+.pytorch-left-menu li ul {
+  margin-bottom: 0;
+  display: none;
+}
+.pytorch-left-menu li ul li a {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+.pytorch-left-menu a {
+  display: inline-block;
+  position: relative;
+}
+.pytorch-left-menu a:hover {
+  cursor: pointer;
+}
+.pytorch-left-menu a:active {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=theme.css.map */

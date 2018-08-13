@@ -1,0 +1,151 @@
+.pytorch-left-menu {
+  header,
+  p.caption {
+    display: inline-block;
+    margin-bottom: 0;
+    display: block;
+    white-space: nowrap;
+  }
+
+  ul {
+    margin-bottom: 0;
+  }
+
+  li {
+    &.divide-top {
+    }
+
+    &.divide-bottom {
+    }
+
+    &.current {
+      a {
+        &:hover {
+        }
+      }
+    }
+
+    code {
+      border: none;
+      background: inherit;
+      color: inherit;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    // Expand links
+    span.toctree-expand {
+      display: block;
+      float: left;
+      margin-left: -1.2em;
+
+      font-size: 0.8em;
+      line-height: 1.6em;
+    }
+  }
+
+  // On state for the first level
+  li.on a, li.current > a {
+    position: relative;
+    border: none;
+
+    &:hover {
+      span.toctree-expand {
+      }
+    }
+
+    span.toctree-expand {
+      display: block;
+      font-size: 0.8em;
+      line-height: 1.6em;
+    }
+  }
+
+  li.toctree-l1.current > a {
+  }
+
+  // This is the on state for pages beyond second level
+  li.toctree-l2 a, li.toctree-l3 a, li.toctree-l4 a {
+  }
+
+  li.toctree-l1.current li.toctree-l2, li.toctree-l2.current li.toctree-l3 {
+    > ul {
+      display: none;
+    }
+
+    &.current > ul {
+      display: block;
+    }
+  }
+
+  li.toctree-l2 {
+    &.current {
+      > a {
+      }
+
+      li.toctree-l3 > a {
+        display: block;
+      }
+    }
+
+    a:hover span.toctree-expand {
+    }
+
+    span.toctree-expand {
+    }
+  }
+
+  li.toctree-l3 {
+    font-size: 0.9em;
+
+    &.current {
+      > a {
+      }
+
+      li.toctree-l4 > a {
+        display: block;
+      }
+    }
+
+    a:hover span.toctree-expand {
+    }
+
+    span.toctree-expand {
+    }
+  }
+
+  li.toctree-l4 {
+    font-size: 0.9em;
+  }
+
+  li.current ul {
+    display: block;
+  }
+
+  li ul {
+    margin-bottom: 0;
+    display: none;
+  }
+
+  li ul li a {
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+
+      span.toctree-expand {
+      }
+    }
+
+    &:active {
+      cursor: pointer;
+      span.toctree-expand {}
+    }
+  }
+}
