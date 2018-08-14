@@ -121,7 +121,7 @@ module.exports = function(grunt) {
     },
     exec: {
       build_sphinx: {
-        cmd: 'sphinx-build docs/ docs/build'
+        cmd: 'sphinx-build ../tutorials/ docs/build'
       }
     },
     clean: {
