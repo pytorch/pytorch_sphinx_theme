@@ -421,6 +421,7 @@ ul.pytorch-breadcrumbs a {
 }
 .pytorch-menu-vertical {
   padding-right: 1.25rem;
+  padding-bottom: 90px;
 }
 .pytorch-menu-vertical header,
 .pytorch-menu-vertical p.caption {
