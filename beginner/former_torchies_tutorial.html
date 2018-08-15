@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PyTorch for former Torch users &mdash; PyTorch Tutorials 0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pytorch_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tensors" href="former_torchies/tensor_tutorial.html" />
+    <link rel="prev" title="Optional: Data Parallelism" href="blitz/data_parallel_tutorial.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet"> -->
+</head>
+
+<div class="pytorch-header">
+  <div class="pytorch-container">
+    <div class="pytorch-header-logo">
+      <img src="../_static/pytorch-logo-dark.svg" class="logo" alt="Logo"/>
+    </div>
+
+    <div class="pytorch-main-menu">
+      <ul>
+        <li><a href="">Get Started</a></li>
+        <li><a href="">Features</a></li>
+        <li><a href="">Ecosystem</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="" class="active">Tutorials</a></li>
+        <li><a href="">Docs</a></li>
+        <li><a href="">Resources</a></li>
+        <li><a href="">Github</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+  <div>
+
+    
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-left-menu-search">
+          
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Beginner Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_60min_blitz.html">Deep Learning with PyTorch: A 60 Minute Blitz</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyTorch for former Torch users</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="former_torchies/tensor_tutorial.html">Tensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="former_torchies/autograd_tutorial.html">Autograd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="former_torchies/nn_tutorial.html">nn package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="former_torchies/parallelism_tutorial.html">Multi-GPU examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pytorch_with_examples.html">Learning PyTorch with Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfer_learning_tutorial.html">Transfer Learning tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loading_tutorial.html">Data Loading and Processing Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_nlp_tutorial.html">Deep Learning for NLP with Pytorch</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Intermediate Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/char_rnn_classification_tutorial.html">Classifying Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/char_rnn_generation_tutorial.html">Generating Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/seq2seq_translation_tutorial.html">Translation with a Sequence to Sequence Network and Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/reinforcement_q_learning.html">Reinforcement Learning (DQN) tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/dist_tuto.html">Writing Distributed Applications with PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/spatial_transformer_tutorial.html">Spatial Transformer Networks Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/neural_style_tutorial.html">Neural Transfer with PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/numpy_extensions_tutorial.html">Creating extensions using numpy and scipy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/super_resolution_with_caffe2.html">Transfering a model from PyTorch to Caffe2 and Mobile using ONNX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../advanced/cpp_extension.html">Custom C++ and CUDA Extensions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
+      <div class="pytorch-content-left">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>PyTorch for former Torch users</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/beginner/former_torchies_tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <article itemprop="articleBody">
+            
+  <div class="section" id="pytorch-for-former-torch-users">
+<h1>PyTorch for former Torch users<a class="headerlink" href="#pytorch-for-former-torch-users" title="Permalink to this headline">¶</a></h1>
+<p><strong>Author</strong>: <a class="reference external" href="http://soumith.ch">Soumith Chintala</a></p>
+<p>In this tutorial, you will learn the following:</p>
+<ol class="arabic simple">
+<li>Using torch Tensors, and important difference against (Lua)Torch</li>
+<li>Using the autograd package</li>
+<li>Building neural networks</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>Building a ConvNet</li>
+<li>Building a Recurrent Net</li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li>Use multiple GPUs</li>
+</ol>
+<div class="toctree-wrapper compound">
+</div>
+<p><div class="sphx-glr-thumbcontainer" tooltip="Tensors behave almost exactly the same way in PyTorch as they do in Torch."><div class="figure" id="id1">
+<img alt="../_images/tensor_illustration_flat.png" src="../_images/tensor_illustration_flat.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="former_torchies/tensor_tutorial.html#sphx-glr-beginner-former-torchies-tensor-tutorial-py"><span class="std std-ref">Tensors</span></a></span></p>
+</div>
+</div></p>
+<p><div class="sphx-glr-thumbcontainer" tooltip="Autograd is now a core torch package for automatic differentiation. It uses a tape based system..."><div class="figure" id="id2">
+<img alt="../_images/sphx_glr_autograd_tutorial_thumb.png" src="../_images/sphx_glr_autograd_tutorial_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="former_torchies/autograd_tutorial.html#sphx-glr-beginner-former-torchies-autograd-tutorial-py"><span class="std std-ref">Autograd</span></a></span></p>
+</div>
+</div></p>
+<p><div class="sphx-glr-thumbcontainer" tooltip="We’ve redesigned the nn package, so that it’s fully integrated with autograd. Let&#x27;s review the ..."><div class="figure" id="id3">
+<img alt="../_images/torch-nn-vs-pytorch-nn1.png" src="../_images/torch-nn-vs-pytorch-nn1.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="former_torchies/nn_tutorial.html#sphx-glr-beginner-former-torchies-nn-tutorial-py"><span class="std std-ref">nn package</span></a></span></p>
+</div>
+</div></p>
+<p><div class="sphx-glr-thumbcontainer" tooltip="Data Parallelism is when we split the mini-batch of samples into multiple smaller mini-batches ..."><div class="figure" id="id4">
+<img alt="../_images/sphx_glr_parallelism_tutorial_thumb.png" src="../_images/sphx_glr_parallelism_tutorial_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="former_torchies/parallelism_tutorial.html#sphx-glr-beginner-former-torchies-parallelism-tutorial-py"><span class="std std-ref">Multi-GPU examples</span></a></span></p>
+</div>
+</div></p>
+<div style='clear:both'></div></div>
+
+
+           </article>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="former_torchies/tensor_tutorial.html" class="btn btn-neutral float-right" title="Tensors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="blitz/data_parallel_tutorial.html" class="btn btn-neutral" title="Optional: Data Parallelism" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, PyTorch.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <div class="pytorch-content-right">
+        <div class="pytorch-right-menu">
+        </div>
+      </div>
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.4.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log('Testing...');
+  });
+</script>
+
+
+</body>
+</html>

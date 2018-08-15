@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deep Learning with PyTorch &mdash; PyTorch Tutorials 0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/pytorch_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Word Embeddings: Encoding Lexical Semantics" href="word_embeddings_tutorial.html" />
+    <link rel="prev" title="Introduction to PyTorch" href="pytorch_tutorial.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet"> -->
+</head>
+
+<div class="pytorch-header">
+  <div class="pytorch-container">
+    <div class="pytorch-header-logo">
+      <img src="../../_static/pytorch-logo-dark.svg" class="logo" alt="Logo"/>
+    </div>
+
+    <div class="pytorch-main-menu">
+      <ul>
+        <li><a href="">Get Started</a></li>
+        <li><a href="">Features</a></li>
+        <li><a href="">Ecosystem</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="" class="active">Tutorials</a></li>
+        <li><a href="">Docs</a></li>
+        <li><a href="">Resources</a></li>
+        <li><a href="">Github</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+  <div>
+
+    
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-left-menu-search">
+          
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Beginner Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../deep_learning_60min_blitz.html">Deep Learning with PyTorch: A 60 Minute Blitz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../former_torchies_tutorial.html">PyTorch for former Torch users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch_with_examples.html">Learning PyTorch with Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transfer_learning_tutorial.html">Transfer Learning tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data_loading_tutorial.html">Data Loading and Processing Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deep_learning_nlp_tutorial.html">Deep Learning for NLP with Pytorch</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pytorch_tutorial.html">Introduction to PyTorch</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deep Learning with PyTorch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deep-learning-building-blocks-affine-maps-non-linearities-and-objectives">Deep Learning Building Blocks: Affine maps, non-linearities and objectives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#affine-maps">Affine Maps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-linearities">Non-Linearities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softmax-and-probabilities">Softmax and Probabilities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#objective-functions">Objective Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimization-and-training">Optimization and Training</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-network-components-in-pytorch">Creating Network Components in PyTorch</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-logistic-regression-bag-of-words-classifier">Example: Logistic Regression Bag-of-Words classifier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="word_embeddings_tutorial.html">Word Embeddings: Encoding Lexical Semantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sequence_models_tutorial.html">Sequence Models and Long-Short Term Memory Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced_tutorial.html">Advanced: Making Dynamic Decisions and the Bi-LSTM CRF</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Intermediate Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/char_rnn_classification_tutorial.html">Classifying Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/char_rnn_generation_tutorial.html">Generating Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/seq2seq_translation_tutorial.html">Translation with a Sequence to Sequence Network and Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/reinforcement_q_learning.html">Reinforcement Learning (DQN) tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/dist_tuto.html">Writing Distributed Applications with PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intermediate/spatial_transformer_tutorial.html">Spatial Transformer Networks Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/neural_style_tutorial.html">Neural Transfer with PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/numpy_extensions_tutorial.html">Creating extensions using numpy and scipy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/super_resolution_with_caffe2.html">Transfering a model from PyTorch to Caffe2 and Mobile using ONNX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced/cpp_extension.html">Custom C++ and CUDA Extensions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
+      <div class="pytorch-content-left">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deep_learning_nlp_tutorial.html">Deep Learning for NLP with Pytorch</a> &raquo;</li>
+        
+      <li>Deep Learning with PyTorch</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/beginner/nlp/deep_learning_tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <article itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-beginner-nlp-deep-learning-tutorial-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="deep-learning-with-pytorch">
+<span id="sphx-glr-beginner-nlp-deep-learning-tutorial-py"></span><h1>Deep Learning with PyTorch<a class="headerlink" href="#deep-learning-with-pytorch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="deep-learning-building-blocks-affine-maps-non-linearities-and-objectives">
+<h2>Deep Learning Building Blocks: Affine maps, non-linearities and objectives<a class="headerlink" href="#deep-learning-building-blocks-affine-maps-non-linearities-and-objectives" title="Permalink to this headline">¶</a></h2>
+<p>Deep learning consists of composing linearities with non-linearities in
+clever ways. The introduction of non-linearities allows for powerful
+models. In this section, we will play with these core components, make
+up an objective function, and see how the model is trained.</p>
+<div class="section" id="affine-maps">
+<h3>Affine Maps<a class="headerlink" href="#affine-maps" title="Permalink to this headline">¶</a></h3>
+<p>One of the core workhorses of deep learning is the affine map, which is
+a function <span class="math notranslate nohighlight">\(f(x)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[f(x) = Ax + b\]</div>
+<p>for a matrix <span class="math notranslate nohighlight">\(A\)</span> and vectors <span class="math notranslate nohighlight">\(x, b\)</span>. The parameters to be
+learned here are <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. Often, <span class="math notranslate nohighlight">\(b\)</span> is refered to
+as the <em>bias</em> term.</p>
+<p>PyTorch and most other deep learning frameworks do things a little
+differently than traditional linear algebra. It maps the rows of the
+input instead of the columns. That is, the <span class="math notranslate nohighlight">\(i\)</span>‘th row of the
+output below is the mapping of the <span class="math notranslate nohighlight">\(i\)</span>‘th row of the input under
+<span class="math notranslate nohighlight">\(A\)</span>, plus the bias term. Look at the example below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Author: Robert Guthrie</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="kn">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="kn">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="kn">as</span> <span class="nn">optim</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lin</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># maps from R^5 to R^3, parameters A, b</span>
+<span class="c1"># data is 2x5.  A maps from 5 to 3... can we map &quot;data&quot; under A?</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lin</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>  <span class="c1"># yes</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.1755, -0.3268, -0.5069],
+        [-0.6602,  0.2260,  0.1089]], grad_fn=&lt;ThAddmmBackward&gt;)
+</pre></div>
+</div>
+</div>
+<div class="section" id="non-linearities">
+<h3>Non-Linearities<a class="headerlink" href="#non-linearities" title="Permalink to this headline">¶</a></h3>
+<p>First, note the following fact, which will explain why we need
+non-linearities in the first place. Suppose we have two affine maps
+<span class="math notranslate nohighlight">\(f(x) = Ax + b\)</span> and <span class="math notranslate nohighlight">\(g(x) = Cx + d\)</span>. What is
+<span class="math notranslate nohighlight">\(f(g(x))\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[f(g(x)) = A(Cx + d) + b = ACx + (Ad + b)\]</div>
+<p><span class="math notranslate nohighlight">\(AC\)</span> is a matrix and <span class="math notranslate nohighlight">\(Ad + b\)</span> is a vector, so we see that
+composing affine maps gives you an affine map.</p>
+<p>From this, you can see that if you wanted your neural network to be long
+chains of affine compositions, that this adds no new power to your model
+than just doing a single affine map.</p>
+<p>If we introduce non-linearities in between the affine layers, this is no
+longer the case, and we can build much more powerful models.</p>
+<p>There are a few core non-linearities.
+<span class="math notranslate nohighlight">\(\tanh(x), \sigma(x), \text{ReLU}(x)\)</span> are the most common. You are
+probably wondering: “why these functions? I can think of plenty of other
+non-linearities.” The reason for this is that they have gradients that
+are easy to compute, and computing gradients is essential for learning.
+For example</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\sigma}{dx} = \sigma(x)(1 - \sigma(x))\]</div>
+<p>A quick note: although you may have learned some neural networks in your
+intro to AI class where <span class="math notranslate nohighlight">\(\sigma(x)\)</span> was the default non-linearity,
+typically people shy away from it in practice. This is because the
+gradient <em>vanishes</em> very quickly as the absolute value of the argument
+grows. Small gradients means it is hard to learn. Most people default to
+tanh or ReLU.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In pytorch, most non-linearities are in torch.functional (we have it imported as F)</span>
+<span class="c1"># Note that non-linearites typically don&#39;t have parameters like affine maps do.</span>
+<span class="c1"># That is, they don&#39;t have weights that are updated during training.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[-0.5404, -2.2102],
+        [ 2.1130, -0.0040]])
+tensor([[0.0000, 0.0000],
+        [2.1130, 0.0000]])
+</pre></div>
+</div>
+</div>
+<div class="section" id="softmax-and-probabilities">
+<h3>Softmax and Probabilities<a class="headerlink" href="#softmax-and-probabilities" title="Permalink to this headline">¶</a></h3>
+<p>The function <span class="math notranslate nohighlight">\(\text{Softmax}(x)\)</span> is also just a non-linearity, but
+it is special in that it usually is the last operation done in a
+network. This is because it takes in a vector of real numbers and
+returns a probability distribution. Its definition is as follows. Let
+<span class="math notranslate nohighlight">\(x\)</span> be a vector of real numbers (positive, negative, whatever,
+there are no constraints). Then the i’th component of
+<span class="math notranslate nohighlight">\(\text{Softmax}(x)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\frac{\exp(x_i)}{\sum_j \exp(x_j)}\]</div>
+<p>It should be clear that the output is a probability distribution: each
+element is non-negative and the sum over all components is 1.</p>
+<p>You could also think of it as just applying an element-wise
+exponentiation operator to the input to make everything non-negative and
+then dividing by the normalization constant.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Softmax is also in torch.nn.functional</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>  <span class="c1"># Sums to 1 because it is a distribution!</span>
+<span class="k">print</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># theres also log_softmax</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([ 1.3800, -1.3505,  0.3455,  0.5046,  1.8213])
+tensor([0.2948, 0.0192, 0.1048, 0.1228, 0.4584])
+tensor(1.)
+tensor([-1.2214, -3.9519, -2.2560, -2.0969, -0.7801])
+</pre></div>
+</div>
+</div>
+<div class="section" id="objective-functions">
+<h3>Objective Functions<a class="headerlink" href="#objective-functions" title="Permalink to this headline">¶</a></h3>
+<p>The objective function is the function that your network is being
+trained to minimize (in which case it is often called a <em>loss function</em>
+or <em>cost function</em>). This proceeds by first choosing a training
+instance, running it through your neural network, and then computing the
+loss of the output. The parameters of the model are then updated by
+taking the derivative of the loss function. Intuitively, if your model
+is completely confident in its answer, and its answer is wrong, your
+loss will be high. If it is very confident in its answer, and its answer
+is correct, the loss will be low.</p>
+<p>The idea behind minimizing the loss function on your training examples
+is that your network will hopefully generalize well and have small loss
+on unseen examples in your dev set, test set, or in production. An
+example loss function is the <em>negative log likelihood loss</em>, which is a
+very common objective for multi-class classification. For supervised
+multi-class classification, this means training the network to minimize
+the negative log probability of the correct output (or equivalently,
+maximize the log probability of the correct output).</p>
+</div>
+</div>
+<div class="section" id="optimization-and-training">
+<h2>Optimization and Training<a class="headerlink" href="#optimization-and-training" title="Permalink to this headline">¶</a></h2>
+<p>So what we can compute a loss function for an instance? What do we do
+with that? We saw earlier that Tensors know how to compute gradients
+with respect to the things that were used to compute it. Well,
+since our loss is an Tensor, we can compute gradients with
+respect to all of the parameters used to compute it! Then we can perform
+standard gradient updates. Let <span class="math notranslate nohighlight">\(\theta\)</span> be our parameters,
+<span class="math notranslate nohighlight">\(L(\theta)\)</span> the loss function, and <span class="math notranslate nohighlight">\(\eta\)</span> a positive
+learning rate. Then:</p>
+<div class="math notranslate nohighlight">
+\[\theta^{(t+1)} = \theta^{(t)} - \eta \nabla_\theta L(\theta)\]</div>
+<p>There are a huge collection of algorithms and active research in
+attempting to do something more than just this vanilla gradient update.
+Many attempt to vary the learning rate based on what is happening at
+train time. You don’t need to worry about what specifically these
+algorithms are doing unless you are really interested. Torch provides
+many in the torch.optim package, and they are all completely
+transparent. Using the simplest gradient update is the same as the more
+complicated algorithms. Trying different update algorithms and different
+parameters for the update algorithms (like different initial learning
+rates) is important in optimizing your network’s performance. Often,
+just replacing vanilla SGD with an optimizer like Adam or RMSProp will
+boost performance noticably.</p>
+</div>
+<div class="section" id="creating-network-components-in-pytorch">
+<h2>Creating Network Components in PyTorch<a class="headerlink" href="#creating-network-components-in-pytorch" title="Permalink to this headline">¶</a></h2>
+<p>Before we move on to our focus on NLP, lets do an annotated example of
+building a network in PyTorch using only affine maps and
+non-linearities. We will also see how to compute a loss function, using
+PyTorch’s built in negative log likelihood, and update parameters by
+backpropagation.</p>
+<p>All network components should inherit from nn.Module and override the
+forward() method. That is about it, as far as the boilerplate is
+concerned. Inheriting from nn.Module provides functionality to your
+component. For example, it makes it keep track of its trainable
+parameters, you can swap it between CPU and GPU with the <code class="docutils literal notranslate"><span class="pre">.to(device)</span></code>
+method, where device can be a CPU device <code class="docutils literal notranslate"><span class="pre">torch.device(&quot;cpu&quot;)</span></code> or CUDA
+device <code class="docutils literal notranslate"><span class="pre">torch.device(&quot;cuda:0&quot;)</span></code>.</p>
+<p>Let’s write an annotated example of a network that takes in a sparse
+bag-of-words representation and outputs a probability distribution over
+two labels: “English” and “Spanish”. This model is just logistic
+regression.</p>
+<div class="section" id="example-logistic-regression-bag-of-words-classifier">
+<h3>Example: Logistic Regression Bag-of-Words classifier<a class="headerlink" href="#example-logistic-regression-bag-of-words-classifier" title="Permalink to this headline">¶</a></h3>
+<p>Our model will map a sparse BoW representation to log probabilities over
+labels. We assign each word in the vocab an index. For example, say our
+entire vocab is two words “hello” and “world”, with indices 0 and 1
+respectively. The BoW vector for the sentence “hello hello hello hello”
+is</p>
+<div class="math notranslate nohighlight">
+\[\left[ 4, 0 \right]\]</div>
+<p>For “hello world world hello”, it is</p>
+<div class="math notranslate nohighlight">
+\[\left[ 2, 2 \right]\]</div>
+<p>etc. In general, it is</p>
+<div class="math notranslate nohighlight">
+\[\left[ \text{Count}(\text{hello}), \text{Count}(\text{world}) \right]\]</div>
+<p>Denote this BOW vector as <span class="math notranslate nohighlight">\(x\)</span>. The output of our network is:</p>
+<div class="math notranslate nohighlight">
+\[\log \text{Softmax}(Ax + b)\]</div>
+<p>That is, we pass the input through an affine map and then do log
+softmax.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;me gusta comer en la cafeteria&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;SPANISH&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Give it to me&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;ENGLISH&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;No creo que sea una buena idea&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;SPANISH&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;No it is not a good idea to get lost at sea&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;ENGLISH&quot;</span><span class="p">)]</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;Yo creo que si&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;SPANISH&quot;</span><span class="p">),</span>
+             <span class="p">(</span><span class="s2">&quot;it is lost on me&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="s2">&quot;ENGLISH&quot;</span><span class="p">)]</span>
+
+<span class="c1"># word_to_ix maps each word in the vocab to a unique integer, which will be its</span>
+<span class="c1"># index into the Bag of words vector</span>
+<span class="n">word_to_ix</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">sent</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">data</span> <span class="o">+</span> <span class="n">test_data</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_to_ix</span><span class="p">:</span>
+            <span class="n">word_to_ix</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_ix</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_to_ix</span><span class="p">)</span>
+
+<span class="n">VOCAB_SIZE</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_to_ix</span><span class="p">)</span>
+<span class="n">NUM_LABELS</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="k">class</span> <span class="nc">BoWClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>  <span class="c1"># inheriting from nn.Module!</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">):</span>
+        <span class="c1"># calls the init function of nn.Module.  Dont get confused by syntax,</span>
+        <span class="c1"># just always do it in an nn.Module</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BoWClassifier</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Define the parameters that you will need.  In this case, we need A and b,</span>
+        <span class="c1"># the parameters of the affine mapping.</span>
+        <span class="c1"># Torch defines nn.Linear(), which provides the affine map.</span>
+        <span class="c1"># Make sure you understand why the input dimension is vocab_size</span>
+        <span class="c1"># and the output is num_labels!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">)</span>
+
+        <span class="c1"># NOTE! The non-linearity log softmax does not have parameters! So we don&#39;t need</span>
+        <span class="c1"># to worry about that here</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bow_vec</span><span class="p">):</span>
+        <span class="c1"># Pass the input through the linear layer,</span>
+        <span class="c1"># then pass that through log_softmax.</span>
+        <span class="c1"># Many non-linearities and other functions are in torch.nn.functional</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">log_softmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">bow_vec</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_bow_vector</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">word_to_ix</span><span class="p">):</span>
+    <span class="n">vec</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_to_ix</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
+        <span class="n">vec</span><span class="p">[</span><span class="n">word_to_ix</span><span class="p">[</span><span class="n">word</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">vec</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_target</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">label_to_ix</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">([</span><span class="n">label_to_ix</span><span class="p">[</span><span class="n">label</span><span class="p">]])</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">BoWClassifier</span><span class="p">(</span><span class="n">NUM_LABELS</span><span class="p">,</span> <span class="n">VOCAB_SIZE</span><span class="p">)</span>
+
+<span class="c1"># the model knows its parameters.  The first output below is A, the second is b.</span>
+<span class="c1"># Whenever you assign a component to a class variable in the __init__ function</span>
+<span class="c1"># of a module, which was done with the line</span>
+<span class="c1"># self.linear = nn.Linear(...)</span>
+<span class="c1"># Then through some Python magic from the PyTorch devs, your module</span>
+<span class="c1"># (in this case, BoWClassifier) will store knowledge of the nn.Linear&#39;s parameters</span>
+<span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
+
+<span class="c1"># To run the model, pass in a BoW vector</span>
+<span class="c1"># Here we don&#39;t need to train, so the code is wrapped in torch.no_grad()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="n">sample</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">bow_vector</span> <span class="o">=</span> <span class="n">make_bow_vector</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">word_to_ix</span><span class="p">)</span>
+    <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">bow_vector</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">log_probs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;me&#39;: 0, &#39;gusta&#39;: 1, &#39;comer&#39;: 2, &#39;en&#39;: 3, &#39;la&#39;: 4, &#39;cafeteria&#39;: 5, &#39;Give&#39;: 6, &#39;it&#39;: 7, &#39;to&#39;: 8, &#39;No&#39;: 9, &#39;creo&#39;: 10, &#39;que&#39;: 11, &#39;sea&#39;: 12, &#39;una&#39;: 13, &#39;buena&#39;: 14, &#39;idea&#39;: 15, &#39;is&#39;: 16, &#39;not&#39;: 17, &#39;a&#39;: 18, &#39;good&#39;: 19, &#39;get&#39;: 20, &#39;lost&#39;: 21, &#39;at&#39;: 22, &#39;Yo&#39;: 23, &#39;si&#39;: 24, &#39;on&#39;: 25}
+Parameter containing:
+tensor([[ 0.1194,  0.0609, -0.1268,  0.1274,  0.1191,  0.1739, -0.1099, -0.0323,
+         -0.0038,  0.0286, -0.1488, -0.1392,  0.1067, -0.0460,  0.0958,  0.0112,
+          0.0644,  0.0431,  0.0713,  0.0972, -0.1816,  0.0987, -0.1379, -0.1480,
+          0.0119, -0.0334],
+        [ 0.1152, -0.1136, -0.1743,  0.1427, -0.0291,  0.1103,  0.0630, -0.1471,
+          0.0394,  0.0471, -0.1313, -0.0931,  0.0669,  0.0351, -0.0834, -0.0594,
+          0.1796, -0.0363,  0.1106,  0.0849, -0.1268, -0.1668,  0.1882,  0.0102,
+          0.1344,  0.0406]], requires_grad=True)
+Parameter containing:
+tensor([0.0631, 0.1465], requires_grad=True)
+tensor([[-0.5378, -0.8771]])
+</pre></div>
+</div>
+<p>Which of the above values corresponds to the log probability of ENGLISH,
+and which to SPANISH? We never defined it, but we need to if we want to
+train the thing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">label_to_ix</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SPANISH&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;ENGLISH&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>So lets train! To do this, we pass instances through to get log
+probabilities, compute a loss function, compute the gradient of the loss
+function, and then update the parameters with a gradient step. Loss
+functions are provided by Torch in the nn package. nn.NLLLoss() is the
+negative log likelihood loss we want. It also defines optimization
+functions in torch.optim. Here, we will just use SGD.</p>
+<p>Note that the <em>input</em> to NLLLoss is a vector of log probabilities, and a
+target label. It doesn’t compute the log probabilities for us. This is
+why the last layer of our network is log softmax. The loss function
+nn.CrossEntropyLoss() is the same as NLLLoss(), except it does the log
+softmax for you.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run on test data before we train, just to see a before-and-after</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">instance</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+        <span class="n">bow_vec</span> <span class="o">=</span> <span class="n">make_bow_vector</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">word_to_ix</span><span class="p">)</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">bow_vec</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">log_probs</span><span class="p">)</span>
+
+<span class="c1"># Print the matrix column corresponding to &quot;creo&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())[:,</span> <span class="n">word_to_ix</span><span class="p">[</span><span class="s2">&quot;creo&quot;</span><span class="p">]])</span>
+
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">NLLLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Usually you want to pass over the training data several times.</span>
+<span class="c1"># 100 is much bigger than on a real data set, but real datasets have more than</span>
+<span class="c1"># two instances.  Usually, somewhere between 5 and 30 epochs is reasonable.</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">instance</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="c1"># Step 1. Remember that PyTorch accumulates gradients.</span>
+        <span class="c1"># We need to clear them out before each instance</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># Step 2. Make our BOW vector and also we must wrap the target in a</span>
+        <span class="c1"># Tensor as an integer. For example, if the target is SPANISH, then</span>
+        <span class="c1"># we wrap the integer 0. The loss function then knows that the 0th</span>
+        <span class="c1"># element of the log probabilities is the log probability</span>
+        <span class="c1"># corresponding to SPANISH</span>
+        <span class="n">bow_vec</span> <span class="o">=</span> <span class="n">make_bow_vector</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">word_to_ix</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">make_target</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">label_to_ix</span><span class="p">)</span>
+
+        <span class="c1"># Step 3. Run our forward pass.</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">bow_vec</span><span class="p">)</span>
+
+        <span class="c1"># Step 4. Compute the loss, gradients, and update the parameters by</span>
+        <span class="c1"># calling optimizer.step()</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_function</span><span class="p">(</span><span class="n">log_probs</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">instance</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+        <span class="n">bow_vec</span> <span class="o">=</span> <span class="n">make_bow_vector</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">word_to_ix</span><span class="p">)</span>
+        <span class="n">log_probs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">bow_vec</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">log_probs</span><span class="p">)</span>
+
+<span class="c1"># Index corresponding to Spanish goes up, English goes down!</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())[:,</span> <span class="n">word_to_ix</span><span class="p">[</span><span class="s2">&quot;creo&quot;</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[-0.9297, -0.5020]])
+tensor([[-0.6388, -0.7506]])
+tensor([-0.1488, -0.1313], grad_fn=&lt;SelectBackward&gt;)
+tensor([[-0.2093, -1.6669]])
+tensor([[-2.5330, -0.0828]])
+tensor([ 0.2803, -0.5605], grad_fn=&lt;SelectBackward&gt;)
+</pre></div>
+</div>
+<p>We got the right answer! You can see that the log probability for
+Spanish is much higher in the first example, and the log probability for
+English is much higher in the second for the test data, as it should be.</p>
+<p>Now you see how to make a PyTorch component, pass some data through it
+and do gradient updates. We are ready to dig deeper into what deep NLP
+has to offer.</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.127 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-beginner-nlp-deep-learning-tutorial-py">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../../_downloads/deep_learning_tutorial.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">deep_learning_tutorial.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../../_downloads/deep_learning_tutorial.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">deep_learning_tutorial.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+</div>
+
+
+           </article>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="word_embeddings_tutorial.html" class="btn btn-neutral float-right" title="Word Embeddings: Encoding Lexical Semantics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pytorch_tutorial.html" class="btn btn-neutral" title="Introduction to PyTorch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, PyTorch.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <div class="pytorch-content-right">
+        <div class="pytorch-right-menu">
+        </div>
+      </div>
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.4.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log('Testing...');
+  });
+</script>
+
+
+</body>
+</html>

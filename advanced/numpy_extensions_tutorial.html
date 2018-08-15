@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating extensions using numpy and scipy &mdash; PyTorch Tutorials 0.4.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/pytorch_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Transfering a model from PyTorch to Caffe2 and Mobile using ONNX" href="super_resolution_with_caffe2.html" />
+    <link rel="prev" title="Neural Transfer with PyTorch" href="neural_style_tutorial.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet"> -->
+</head>
+
+<div class="pytorch-header">
+  <div class="pytorch-container">
+    <div class="pytorch-header-logo">
+      <img src="../_static/pytorch-logo-dark.svg" class="logo" alt="Logo"/>
+    </div>
+
+    <div class="pytorch-main-menu">
+      <ul>
+        <li><a href="">Get Started</a></li>
+        <li><a href="">Features</a></li>
+        <li><a href="">Ecosystem</a></li>
+        <li><a href="">Blog</a></li>
+        <li><a href="" class="active">Tutorials</a></li>
+        <li><a href="">Docs</a></li>
+        <li><a href="">Resources</a></li>
+        <li><a href="">Github</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<body class="pytorch-body">
+
+   
+  <div>
+
+    
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-left-menu-search">
+          
+
+          
+            
+            
+              <div class="version">
+                0.4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Beginner Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/deep_learning_60min_blitz.html">Deep Learning with PyTorch: A 60 Minute Blitz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/former_torchies_tutorial.html">PyTorch for former Torch users</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/pytorch_with_examples.html">Learning PyTorch with Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/transfer_learning_tutorial.html">Transfer Learning tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/data_loading_tutorial.html">Data Loading and Processing Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../beginner/deep_learning_nlp_tutorial.html">Deep Learning for NLP with Pytorch</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Intermediate Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/char_rnn_classification_tutorial.html">Classifying Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/char_rnn_generation_tutorial.html">Generating Names with a Character-Level RNN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/seq2seq_translation_tutorial.html">Translation with a Sequence to Sequence Network and Attention</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/reinforcement_q_learning.html">Reinforcement Learning (DQN) tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/dist_tuto.html">Writing Distributed Applications with PyTorch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intermediate/spatial_transformer_tutorial.html">Spatial Transformer Networks Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Advanced Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="neural_style_tutorial.html">Neural Transfer with PyTorch</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating extensions using numpy and scipy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-less-example">Parameter-less example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parametrized-example">Parametrized example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="super_resolution_with_caffe2.html">Transfering a model from PyTorch to Caffe2 and Mobile using ONNX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_extension.html">Custom C++ and CUDA Extensions</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
+      <div class="pytorch-content-left">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Creating extensions using numpy and scipy</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/advanced/numpy_extensions_tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+          <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <article itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-advanced-numpy-extensions-tutorial-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="creating-extensions-using-numpy-and-scipy">
+<span id="sphx-glr-advanced-numpy-extensions-tutorial-py"></span><h1>Creating extensions using numpy and scipy<a class="headerlink" href="#creating-extensions-using-numpy-and-scipy" title="Permalink to this headline">¶</a></h1>
+<p><strong>Author</strong>: <a class="reference external" href="https://github.com/apaszke">Adam Paszke</a></p>
+<p><strong>Updated by</strong>: <cite>Adam Dziedzic</cite> [<a class="reference external" href="https://github.com/adam-dziedzic](https://github.com/adam-dziedzic">https://github.com/adam-dziedzic](https://github.com/adam-dziedzic</a>)</p>
+<p>In this tutorial, we shall go through two tasks:</p>
+<ol class="arabic">
+<li><p class="first">Create a neural network layer with no parameters.</p>
+<blockquote>
+<div><ul class="simple">
+<li>This calls into <strong>numpy</strong> as part of its implementation</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Create a neural network layer that has learnable weights</p>
+<blockquote>
+<div><ul class="simple">
+<li>This calls into <strong>SciPy</strong> as part of its implementation</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Function</span>
+</pre></div>
+</div>
+<div class="section" id="parameter-less-example">
+<h2>Parameter-less example<a class="headerlink" href="#parameter-less-example" title="Permalink to this headline">¶</a></h2>
+<p>This layer doesn’t particularly do anything useful or mathematically
+correct.</p>
+<p>It is aptly named BadFFTFunction</p>
+<p><strong>Layer Implementation</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.fft</span> <span class="kn">import</span> <span class="n">rfft2</span><span class="p">,</span> <span class="n">irfft2</span>
+
+
+<span class="k">class</span> <span class="nc">BadFFTFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="n">numpy_input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">rfft2</span><span class="p">(</span><span class="n">numpy_input</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">input</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad_output</span><span class="p">):</span>
+        <span class="n">numpy_go</span> <span class="o">=</span> <span class="n">grad_output</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">irfft2</span><span class="p">(</span><span class="n">numpy_go</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grad_output</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># since this layer does not have any parameters, we can</span>
+<span class="c1"># simply declare this as a function, rather than as an nn.Module class</span>
+
+
+<span class="k">def</span> <span class="nf">incorrect_fft</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">BadFFTFunction</span><span class="p">()(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Example usage of the created layer:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">incorrect_fft</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>tensor([[ 3.0417,  5.0483,  2.0597,  0.9814, 10.7495],
+        [ 4.4026,  9.7537,  4.8202,  9.2822,  4.0394],
+        [ 6.0976,  2.4883, 10.0111,  1.7143,  8.8211],
+        [ 5.0437,  3.7661, 21.9258,  6.6303,  2.0362],
+        [ 5.5072,  8.3218,  7.8747,  6.9718,  8.6313],
+        [ 5.0437, 10.6791,  8.6786,  1.1225,  2.0362],
+        [ 6.0976,  9.2464,  7.4112, 10.3366,  8.8211],
+        [ 4.4026,  7.6042,  2.7623,  6.6124,  4.0394]],
+       grad_fn=&lt;BadFFTFunction&gt;)
+tensor([[ 0.0945,  0.5886,  0.5266, -1.0130,  1.2630,  0.1317, -1.3555, -1.2696],
+        [-0.1476, -2.0962,  1.2874,  0.2607,  0.6540, -0.9315,  1.3842,  1.2427],
+        [ 0.9584,  0.3864,  0.5588, -1.3559, -0.8664,  0.2832, -2.0004, -0.6808],
+        [-0.6915,  1.7797,  0.6156,  0.3743,  0.8778, -0.6776, -0.2548, -0.4690],
+        [-0.1519,  0.8983,  1.0073,  0.7078, -0.1864, -0.1631, -0.0674, -0.0996],
+        [ 1.1225, -0.3508, -0.3918, -1.6144,  0.3823, -0.2583,  0.5844, -0.5559],
+        [ 0.3290, -1.9354, -1.3929,  1.6801, -0.7753, -1.1944,  0.4510,  0.3689],
+        [-0.2261,  0.6261, -0.1393, -1.2372, -1.6934, -0.2308,  2.0979, -0.0907]],
+       requires_grad=True)
+</pre></div>
+</div>
+</div>
+<div class="section" id="parametrized-example">
+<h2>Parametrized example<a class="headerlink" href="#parametrized-example" title="Permalink to this headline">¶</a></h2>
+<p>In deep learning literature, this layer is confusingly referred
+to as convolution while the actual operation is cross-correlation
+(the only difference is that filter is flipped for convolution,
+which is not the case for cross-correlation).</p>
+<p>Implementation of a layer with learnable weights, where cross-correlation
+has a filter (kernel) that represents weights.</p>
+<p>The backward pass computes the gradient wrt the input and the gradient wrt the filter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">flip</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve2d</span><span class="p">,</span> <span class="n">correlate2d</span>
+<span class="kn">from</span> <span class="nn">torch.nn.modules.module</span> <span class="kn">import</span> <span class="n">Module</span>
+<span class="kn">from</span> <span class="nn">torch.nn.parameter</span> <span class="kn">import</span> <span class="n">Parameter</span>
+
+
+<span class="k">class</span> <span class="nc">ScipyConv2dFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+        <span class="c1"># detach so we can cast to NumPy</span>
+        <span class="nb">input</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="nb">filter</span><span class="o">.</span><span class="n">detach</span><span class="p">(),</span> <span class="n">bias</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="nb">filter</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">bias</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">save_for_backward</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">grad_output</span><span class="p">):</span>
+        <span class="n">grad_output</span> <span class="o">=</span> <span class="n">grad_output</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+        <span class="nb">input</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">bias</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">saved_tensors</span>
+        <span class="n">grad_output</span> <span class="o">=</span> <span class="n">grad_output</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">grad_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">grad_output</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">grad_input</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">grad_output</span><span class="p">,</span> <span class="nb">filter</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+        <span class="c1"># the previous line can be expressed equivalently as:</span>
+        <span class="c1"># grad_input = correlate2d(grad_output, flip(flip(filter.numpy(), axis=0), axis=1), mode=&#39;full&#39;)</span>
+        <span class="n">grad_filter</span> <span class="o">=</span> <span class="n">correlate2d</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">grad_output</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">grad_input</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">grad_filter</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">filter</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">grad_bias</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">bias</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ScipyConv2d</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_width</span><span class="p">,</span> <span class="n">filter_height</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ScipyConv2d</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">filter_width</span><span class="p">,</span> <span class="n">filter_height</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ScipyConv2dFunction</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Example usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="o">=</span> <span class="n">ScipyConv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Filter and bias: &quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">parameters</span><span class="p">()))</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">module</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Output from the convolution: &quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Gradient for the input map: &quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Filter and bias:  [Parameter containing:
+tensor([[-0.1047, -1.1096, -1.0030],
+        [ 1.1461, -0.5395,  0.4215],
+        [ 2.0573,  0.7762,  0.8742]], requires_grad=True), Parameter containing:
+tensor([[0.0074]], requires_grad=True)]
+Output from the convolution:  tensor([[-0.8484,  2.0088,  0.3243, -0.6036, -6.9277,  0.2682,  2.0184,  1.9127],
+        [-2.9952,  1.0626,  1.6441,  7.2906, -1.3856,  2.8226, -3.4011, -4.3457],
+        [-0.7392, -1.0886, -1.2007,  1.0501, -1.1857, -4.6922, -3.8021, -2.7935],
+        [ 1.0458, -1.5121, -1.2984, -0.4915,  0.0671, -4.7189, -0.9962,  1.4660],
+        [ 4.1018,  2.9571,  0.1785,  1.9449,  2.7502, -0.0219, -2.0835,  4.5072],
+        [ 1.4904,  1.6157,  1.5548,  0.1329,  2.1590, -0.7588, -1.6847,  0.4787],
+        [-0.4623,  0.5536,  4.5168, -1.1436,  2.5719,  3.7731,  0.3076, -1.5599],
+        [-2.7760, -0.5267,  0.6995,  2.1271,  0.6328,  4.9513,  0.5861, -0.3419]],
+       grad_fn=&lt;ScipyConv2dFunctionBackward&gt;)
+Gradient for the input map:  tensor([[-0.0202, -0.1833,  0.2126,  1.1943,  1.4614, -0.0065,  0.0261, -0.5380,
+         -0.5096,  0.6962],
+        [ 0.2132, -0.5441, -0.8545, -0.9200,  0.2749, -1.3253,  3.7354, -1.5101,
+         -0.1627, -0.8507],
+        [ 0.6549,  1.3403, -0.7100, -1.0936,  0.1111, -3.3966,  2.6148, -1.4832,
+          2.0836,  1.2639],
+        [-1.7046,  2.0682, -2.7561,  4.0164, -1.5629, -2.6268, -1.3655, -0.8318,
+          1.9358, -1.3513],
+        [-2.9147,  2.4845, -5.1061,  1.8139, -0.5796,  3.7766, -0.0489,  0.4527,
+         -0.5253,  0.0415],
+        [-1.5669,  2.9708, -6.3132,  1.1644, -3.6964,  2.2122, -3.6618,  2.1590,
+         -0.3048,  0.0995],
+        [-3.1451,  3.9573, -2.6746,  3.8430, -3.9354, -2.2780, -2.7929, -0.6416,
+         -0.0136, -0.4647],
+        [ 0.7444,  3.8488,  2.8724,  7.0082, -0.9026,  1.1165, -0.9640, -1.3516,
+         -1.4208,  2.0925],
+        [ 0.7074, -0.1824,  1.2601,  6.5259, -1.1411,  4.0979,  0.2645, -4.8147,
+          0.6487, -0.8966],
+        [ 0.7027, -1.5823,  0.1491,  4.9327, -0.1223,  0.7869,  4.6293, -1.6217,
+          1.1584, -1.5207]])
+</pre></div>
+</div>
+<p><strong>Check the gradients:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.autograd.gradcheck</span> <span class="kn">import</span> <span class="n">gradcheck</span>
+
+<span class="n">moduleConv</span> <span class="o">=</span> <span class="n">ScipyConv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">input</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">double</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">gradcheck</span><span class="p">(</span><span class="n">moduleConv</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Are the gradients correct: &quot;</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Are the gradients correct:  True
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.201 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-advanced-numpy-extensions-tutorial-py">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/numpy_extensions_tutorial.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">numpy_extensions_tutorial.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/numpy_extensions_tutorial.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">numpy_extensions_tutorial.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+           </article>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="super_resolution_with_caffe2.html" class="btn btn-neutral float-right" title="Transfering a model from PyTorch to Caffe2 and Mobile using ONNX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="neural_style_tutorial.html" class="btn btn-neutral" title="Neural Transfer with PyTorch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, PyTorch.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+      <div class="pytorch-content-right">
+        <div class="pytorch-right-menu">
+        </div>
+      </div>
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.4.1',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    console.log('Testing...');
+  });
+</script>
+
+
+</body>
+</html>
