@@ -1,14 +1,70 @@
+.pytorch-menu-vertical {
+  padding-right: rem(20px);
+
+  header,
+  p.caption {
+    color: $orange;
+    font-size: rem(18px);
+    line-height: rem(34px);
+    margin-bottom: rem(20px);
+    padding: 0;
+    text-transform: none;
+  }
+
+  ul {
+    list-style-type: none;
+    padding-left: rem(20px);
+    margin-bottom: rem(20px);
+  }
+
+  > ul {
+    margin-bottom: rem(40px);
+  }
+
+  a:link,
+  a:visited,
+  a:hover {
+    color: #4a4a4a;
+    font-size: rem(16px);
+    line-height: rem(25px);
+    padding: 0;
+    text-decoration: none;
+    &.reference.internal {
+      margin-bottom: rem(5px);
+      position: relative;
+    }
+  }
+}
+
+.pytorch-left-menu-search {
+  width: 296px;
+  z-index: 200;
+  background-color: #f3f4f7;
+  padding: rem(40px) 0 0 0;
+  margin-bottom: rem(40px);
+}
+
 .pytorch-left-menu {
+  background: #f3f4f7;
+  bottom: 0;
+  color: #252627;
+  left: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 20px + 90px;
+  padding: 0 rem(50px) 0 rem(50px);
+  position: fixed;
+  top: 90px;
+  width: 385px;
+  z-index: 200;
+
   header,
   p.caption {
     display: inline-block;
     margin-bottom: 0;
     display: block;
     white-space: nowrap;
-  }
-
-  ul {
-    margin-bottom: 0;
   }
 
   li {
