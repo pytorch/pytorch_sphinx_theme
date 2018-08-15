@@ -1,5 +1,3 @@
-/* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180814 14:08 */
 @charset "UTF-8";
 @font-face {
   font-family: "Lato";
@@ -63,6 +61,11 @@ body {
   box-sizing: border-box;
   font-family: Lato-Light;
   font-weight: 300;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.125rem;
 }
 
 code,
@@ -133,28 +136,6 @@ h1 {
   line-height: 1.5625rem;
 }
 
-nav.pytorch-left-menu {
-  position: fixed;
-  left: 0;
-  top: 90px;
-  width: 385px;
-  padding: 2.1875rem 3.125rem 0 3.125rem;
-  padding-bottom: 110px;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  min-height: 100%;
-  z-index: 200;
-}
-
-.pytorch-left-menu-search {
-  width: 296px;
-  z-index: 200;
-  background-color: #f3f4f7;
-  padding: 0;
-  margin-bottom: 2.5rem;
-}
-
 .pytorch-content-wrap {
   background-color: #ffffff;
   margin-left: 440px;
@@ -183,34 +164,6 @@ nav.pytorch-left-menu {
   font-size: 1rem;
 }
 
-.pytorch-menu-vertical header,
-.pytorch-menu-vertical p.caption {
-  color: #EE4C2C;
-  font-size: 1.125rem;
-  line-height: 2.125rem;
-  margin-bottom: 1.25rem;
-  padding: 0;
-  text-transform: none;
-}
-.pytorch-menu-vertical ul {
-  list-style-type: none;
-  padding-left: 1.25rem;
-}
-.pytorch-menu-vertical > ul {
-  margin-bottom: 2.5rem;
-}
-.pytorch-menu-vertical a {
-  color: #4a4a4a;
-  font-size: 1rem;
-  line-height: 1.5625rem;
-  padding: 0;
-  text-decoration: none;
-}
-.pytorch-menu-vertical a.reference.internal {
-  margin-bottom: 0.3125rem;
-  position: relative;
-}
-
 .pytorch-content {
   background: #ffffff;
   width: 100%;
@@ -235,11 +188,6 @@ nav.pytorch-left-menu {
   position: sticky;
   top: 100px;
   width: 230px;
-}
-
-.pytorch-left-menu {
-  color: #252627;
-  background: #f3f4f7;
 }
 
 .pytorch-side-scroll {
@@ -338,12 +286,21 @@ ul.pytorch-breadcrumbs a {
 
 .main-content article {
   max-width: 920px;
+  margin-bottom: 100px;
 }
 .main-content article a:link, .main-content article a:visited, .main-content article a:hover {
   color: #3d5a97;
 }
 .main-content article a:link, .main-content article a:visited {
   text-decoration: underline;
+}
+.main-content article h1,
+.main-content article h2,
+.main-content article h3,
+.main-content article h4,
+.main-content article h5,
+.main-content article h6 {
+  font-weight: 400;
 }
 .main-content article h1 a.headerlink,
 .main-content article h2 a.headerlink,
@@ -372,17 +329,24 @@ ul.pytorch-breadcrumbs a {
 .main-content article h6:hover a.headerlink {
   display: inline-block;
 }
-.main-content article h2 {
-  font-size: 1.5rem;
+.main-content article h1 {
+  font-size: 2rem;
   margin-bottom: 1.5rem;
   letter-spacing: 1.78px;
+  line-height: 2.625rem;
+  text-transform: uppercase;
+}
+.main-content article h2 {
+  font-size: 1.5rem;
+  letter-spacing: 0;
   line-height: 1.75rem;
+  text-transform: none;
+  margin-bottom: 1.5rem;
 }
 .main-content article h3 {
   font-size: 1.125rem;
   letter-spacing: 0;
   line-height: 1.375rem;
-  text-transform: none;
   margin-bottom: 1.5rem;
 }
 .main-content article h4 {
@@ -398,20 +362,20 @@ ul.pytorch-breadcrumbs a {
 }
 .main-content article p, .main-content article ul li, .main-content article ol li {
   font-size: 1.125rem;
-  line-height: 1.75rem;
-  color: #545454;
+  line-height: 1.875rem;
+  color: #767676;
   margin-bottom: 2.5rem;
 }
 .main-content article dl dt, .main-content article dl dd {
   font-size: 1.125rem;
-  line-height: 1.75rem;
-  color: #545454;
+  line-height: 1.875rem;
+  color: #767676;
   margin-bottom: 2.5rem;
 }
 .main-content article blockquote {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  color: #545454;
+  color: #767676;
   margin-bottom: 2.5rem;
 }
 .main-content article ul, .main-content article ol {
@@ -455,15 +419,71 @@ ul.pytorch-breadcrumbs a {
     padding-left: 1.25rem;
   }
 }
+.pytorch-menu-vertical {
+  padding-right: 1.25rem;
+}
+.pytorch-menu-vertical header,
+.pytorch-menu-vertical p.caption {
+  color: #EE4C2C;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  margin-bottom: 1.25rem;
+  padding: 0;
+  text-transform: none;
+}
+.pytorch-menu-vertical ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.pytorch-menu-vertical > ul {
+  margin-bottom: 2.5rem;
+}
+.pytorch-menu-vertical a:link,
+.pytorch-menu-vertical a:visited,
+.pytorch-menu-vertical a:hover {
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.5625rem;
+  padding: 0;
+  text-decoration: none;
+}
+.pytorch-menu-vertical a:link.reference.internal,
+.pytorch-menu-vertical a:visited.reference.internal,
+.pytorch-menu-vertical a:hover.reference.internal {
+  margin-bottom: 0.3125rem;
+  position: relative;
+}
+
+.pytorch-left-menu-search {
+  width: 296px;
+  z-index: 200;
+  background-color: #f3f4f7;
+  padding: 2.5rem 0 0 0;
+  margin-bottom: 2.5rem;
+}
+
+.pytorch-left-menu {
+  background: #f3f4f7;
+  bottom: 0;
+  color: #252627;
+  left: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-bottom: 110px;
+  padding: 0 3.125rem 0 3.125rem;
+  position: fixed;
+  top: 90px;
+  width: 385px;
+  z-index: 200;
+}
 .pytorch-left-menu header,
 .pytorch-left-menu p.caption {
   display: inline-block;
   margin-bottom: 0;
   display: block;
   white-space: nowrap;
-}
-.pytorch-left-menu ul {
-  margin-bottom: 0;
 }
 .pytorch-left-menu li code {
   border: none;

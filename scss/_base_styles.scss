@@ -1,4 +1,5 @@
 $orange: #EE4C2C;
+$content_text_color: #767676;
 
 @mixin clearfix {
   &:before,
@@ -37,6 +38,11 @@ body {
   box-sizing: border-box;
   font-family: Lato-Light;
   font-weight: 300;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: rem(18px);
 }
 
 code,
@@ -106,28 +112,6 @@ h1 {
   line-height: rem(25px);
 }
 
-nav.pytorch-left-menu {
-  position: fixed;
-  left: 0;
-  top: 90px;
-  width: 385px;
-  padding: rem(35px) rem(50px) 0 rem(50px);
-  padding-bottom: 20px + 90px;
-  bottom: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  min-height: 100%;
-  z-index: 200;
-}
-
-.pytorch-left-menu-search {
-  width: 296px;
-  z-index: 200;
-  background-color: #f3f4f7;
-  padding: 0;
-  margin-bottom: rem(40px);
-}
-
 .pytorch-content-wrap {
   background-color: #ffffff;
   margin-left: 440px;
@@ -145,39 +129,6 @@ nav.pytorch-left-menu {
   color: $orange;
   border-style: solid;
   font-size: rem(16px);
-}
-
-.pytorch-menu-vertical {
-  header,
-  p.caption {
-    color: $orange;
-    font-size: rem(18px);
-    line-height: rem(34px);
-    margin-bottom: rem(20px);
-    padding: 0;
-    text-transform: none;
-  }
-
-  ul {
-    list-style-type: none;
-    padding-left: rem(20px);
-  }
-
-  > ul {
-    margin-bottom: rem(40px);
-  }
-
-  a {
-    color: #4a4a4a;
-    font-size: rem(16px);
-    line-height: rem(25px);
-    padding: 0;
-    text-decoration: none;
-    &.reference.internal {
-      margin-bottom: rem(5px);
-      position: relative;
-    }
-  }
 }
 
 .pytorch-content {
@@ -204,11 +155,6 @@ nav.pytorch-left-menu {
   position: sticky;
   top: 100px;
   width: 230px;
-}
-
-.pytorch-left-menu {
-  color: #252627;
-  background: #f3f4f7;
 }
 
 .pytorch-side-scroll {
