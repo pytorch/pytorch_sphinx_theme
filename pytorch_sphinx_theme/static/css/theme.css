@@ -176,7 +176,7 @@ h1 {
 }
 
 .pytorch-content-right {
-  width: 230px;
+  width: 350px;
   height: 100%;
   border: 1px dashed #ccc;
   position: absolute;
@@ -187,7 +187,7 @@ h1 {
   min-height: 100px;
   position: sticky;
   top: 100px;
-  width: 230px;
+  width: 100%;
 }
 
 .pytorch-side-scroll {
@@ -432,29 +432,6 @@ ul.pytorch-breadcrumbs a {
   padding: 0;
   text-transform: none;
 }
-.pytorch-menu-vertical ul {
-  list-style-type: none;
-  padding-left: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-.pytorch-menu-vertical > ul {
-  margin-bottom: 2.5rem;
-}
-.pytorch-menu-vertical a:link,
-.pytorch-menu-vertical a:visited,
-.pytorch-menu-vertical a:hover {
-  color: #4a4a4a;
-  font-size: 1rem;
-  line-height: 1.5625rem;
-  padding: 0;
-  text-decoration: none;
-}
-.pytorch-menu-vertical a:link.reference.internal,
-.pytorch-menu-vertical a:visited.reference.internal,
-.pytorch-menu-vertical a:hover.reference.internal {
-  margin-bottom: 0.3125rem;
-  position: relative;
-}
 
 .pytorch-left-menu-search {
   width: 296px;
@@ -486,67 +463,135 @@ ul.pytorch-breadcrumbs a {
   display: block;
   white-space: nowrap;
 }
-.pytorch-left-menu li code {
+
+.pytorch-left-menu ul,
+.pytorch-right-menu ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 1.25rem;
+}
+.pytorch-left-menu > ul,
+.pytorch-right-menu > ul {
+  margin-bottom: 2.5rem;
+}
+.pytorch-left-menu a:link,
+.pytorch-left-menu a:visited,
+.pytorch-left-menu a:hover,
+.pytorch-right-menu a:link,
+.pytorch-right-menu a:visited,
+.pytorch-right-menu a:hover {
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.5625rem;
+  padding: 0;
+  text-decoration: none;
+}
+.pytorch-left-menu a:link.reference.internal,
+.pytorch-left-menu a:visited.reference.internal,
+.pytorch-left-menu a:hover.reference.internal,
+.pytorch-right-menu a:link.reference.internal,
+.pytorch-right-menu a:visited.reference.internal,
+.pytorch-right-menu a:hover.reference.internal {
+  margin-bottom: 0.3125rem;
+  position: relative;
+}
+.pytorch-left-menu li code,
+.pytorch-right-menu li code {
   border: none;
   background: inherit;
   color: inherit;
   padding-left: 0;
   padding-right: 0;
 }
-.pytorch-left-menu li span.toctree-expand {
+.pytorch-left-menu li span.toctree-expand,
+.pytorch-right-menu li span.toctree-expand {
   display: block;
   float: left;
   margin-left: -1.2em;
   font-size: 0.8em;
   line-height: 1.6em;
 }
-.pytorch-left-menu li.on a, .pytorch-left-menu li.current > a {
+.pytorch-left-menu li.on a, .pytorch-left-menu li.current > a,
+.pytorch-right-menu li.on a,
+.pytorch-right-menu li.current > a {
   position: relative;
   border: none;
 }
-.pytorch-left-menu li.on a span.toctree-expand, .pytorch-left-menu li.current > a span.toctree-expand {
+.pytorch-left-menu li.on a span.toctree-expand, .pytorch-left-menu li.current > a span.toctree-expand,
+.pytorch-right-menu li.on a span.toctree-expand,
+.pytorch-right-menu li.current > a span.toctree-expand {
   display: block;
   font-size: 0.8em;
   line-height: 1.6em;
 }
-.pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul {
+.pytorch-left-menu li.toctree-l1.current > a,
+.pytorch-right-menu li.toctree-l1.current > a {
+  color: #EE4C2C;
+}
+.pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul,
+.pytorch-right-menu li.toctree-l1.current li.toctree-l2 > ul,
+.pytorch-right-menu li.toctree-l2.current li.toctree-l3 > ul {
   display: none;
 }
-.pytorch-left-menu li.toctree-l1.current li.toctree-l2.current > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3.current > ul {
+.pytorch-left-menu li.toctree-l1.current li.toctree-l2.current > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3.current > ul,
+.pytorch-right-menu li.toctree-l1.current li.toctree-l2.current > ul,
+.pytorch-right-menu li.toctree-l2.current li.toctree-l3.current > ul {
   display: block;
 }
-.pytorch-left-menu li.toctree-l2.current li.toctree-l3 > a {
+.pytorch-left-menu li.toctree-l2.current li.toctree-l3 > a,
+.pytorch-right-menu li.toctree-l2.current li.toctree-l3 > a {
   display: block;
 }
-.pytorch-left-menu li.toctree-l3 {
+.pytorch-left-menu li.toctree-l3,
+.pytorch-right-menu li.toctree-l3 {
   font-size: 0.9em;
 }
-.pytorch-left-menu li.toctree-l3.current li.toctree-l4 > a {
+.pytorch-left-menu li.toctree-l3.current li.toctree-l4 > a,
+.pytorch-right-menu li.toctree-l3.current li.toctree-l4 > a {
   display: block;
 }
-.pytorch-left-menu li.toctree-l4 {
+.pytorch-left-menu li.toctree-l4,
+.pytorch-right-menu li.toctree-l4 {
   font-size: 0.9em;
 }
-.pytorch-left-menu li.current ul {
+.pytorch-left-menu li.current ul,
+.pytorch-right-menu li.current ul {
   display: block;
 }
-.pytorch-left-menu li ul {
+.pytorch-left-menu li ul,
+.pytorch-right-menu li ul {
   margin-bottom: 0;
   display: none;
 }
-.pytorch-left-menu li ul li a {
+.pytorch-left-menu li ul li a,
+.pytorch-right-menu li ul li a {
   margin-bottom: 0;
   font-weight: normal;
 }
-.pytorch-left-menu a {
+.pytorch-left-menu a,
+.pytorch-right-menu a {
   display: inline-block;
   position: relative;
 }
-.pytorch-left-menu a:hover {
+.pytorch-left-menu a:hover,
+.pytorch-right-menu a:hover {
   cursor: pointer;
 }
-.pytorch-left-menu a:active {
+.pytorch-left-menu a:active,
+.pytorch-right-menu a:active {
   cursor: pointer;
+}
+
+.pytorch-right-menu a:link,
+.pytorch-right-menu a:visited,
+.pytorch-right-menu a:hover {
+  color: #EE4C2C;
+}
+.pytorch-right-menu ul ul {
+  padding-left: 20px;
+}
+.pytorch-right-menu li ul {
+  display: block;
 }
 
 /*# sourceMappingURL=theme.css.map */

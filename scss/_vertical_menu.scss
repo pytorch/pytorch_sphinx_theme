@@ -11,30 +11,6 @@
     padding: 0;
     text-transform: none;
   }
-
-  ul {
-    list-style-type: none;
-    padding-left: rem(20px);
-    margin-bottom: rem(20px);
-  }
-
-  > ul {
-    margin-bottom: rem(40px);
-  }
-
-  a:link,
-  a:visited,
-  a:hover {
-    color: #4a4a4a;
-    font-size: rem(16px);
-    line-height: rem(25px);
-    padding: 0;
-    text-decoration: none;
-    &.reference.internal {
-      margin-bottom: rem(5px);
-      position: relative;
-    }
-  }
 }
 
 .pytorch-left-menu-search {
@@ -66,6 +42,33 @@
     margin-bottom: 0;
     display: block;
     white-space: nowrap;
+  }
+}
+
+.pytorch-left-menu,
+.pytorch-right-menu {
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: rem(20px);
+  }
+
+  > ul {
+    margin-bottom: rem(40px);
+  }
+
+  a:link,
+  a:visited,
+  a:hover {
+    color: #4a4a4a;
+    font-size: rem(16px);
+    line-height: rem(25px);
+    padding: 0;
+    text-decoration: none;
+    &.reference.internal {
+      margin-bottom: rem(5px);
+      position: relative;
+    }
   }
 
   li {
@@ -119,6 +122,7 @@
   }
 
   li.toctree-l1.current > a {
+    color: $orange;
   }
 
   // This is the on state for pages beyond second level
@@ -204,5 +208,21 @@
       cursor: pointer;
       span.toctree-expand {}
     }
+  }
+}
+
+.pytorch-right-menu {
+  a:link,
+  a:visited,
+  a:hover {
+    color: #EE4C2C;
+  }
+
+  ul ul {
+    padding-left: 20px;
+  }
+
+  li ul {
+    display: block;
   }
 }
