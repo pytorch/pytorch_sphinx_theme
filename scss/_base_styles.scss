@@ -1,5 +1,6 @@
 $orange: #EE4C2C;
 $content_text_color: #767676;
+$desktop_menu_width: 300px;
 
 @mixin clearfix {
   &:before,
@@ -114,7 +115,7 @@ h1 {
 
 .pytorch-content-wrap {
   background-color: #ffffff;
-  margin-left: 440px;
+  margin-left: $desktop_menu_width + 60px;
   padding-top: 137px;
   display: flex;
   position: relative;
@@ -122,7 +123,7 @@ h1 {
 }
 
 .pytorch-left-menu-search input[type=text] {
-  width: 100%;
+  width: $desktop_menu_width - 40px;
   border-radius: 0;
   padding: rem(8px) rem(12px);
   border-color: $orange;
@@ -143,22 +144,21 @@ h1 {
 }
 
 .pytorch-content-right {
-  width: 350px;
+  width: $desktop_menu_width;
   height: 100%;
-  border: 1px dashed #ccc;
   position: absolute;
   left: 725px;
 }
 
 .pytorch-right-menu {
   min-height: 100px;
-  position: sticky;
+  position: fixed;
   top: 100px;
   width: 100%;
 }
 
 .pytorch-side-scroll {
-  width: 355px;
+  width: $desktop_menu_width + 10px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;

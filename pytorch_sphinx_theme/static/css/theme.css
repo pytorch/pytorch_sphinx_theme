@@ -138,7 +138,7 @@ h1 {
 
 .pytorch-content-wrap {
   background-color: #ffffff;
-  margin-left: 440px;
+  margin-left: 360px;
   padding-top: 137px;
   display: flex;
   position: relative;
@@ -155,7 +155,7 @@ h1 {
 }
 
 .pytorch-left-menu-search input[type=text] {
-  width: 100%;
+  width: 260px;
   border-radius: 0;
   padding: 0.5rem 0.75rem;
   border-color: #EE4C2C;
@@ -176,22 +176,21 @@ h1 {
 }
 
 .pytorch-content-right {
-  width: 350px;
+  width: 300px;
   height: 100%;
-  border: 1px dashed #ccc;
   position: absolute;
   left: 725px;
 }
 
 .pytorch-right-menu {
   min-height: 100px;
-  position: sticky;
+  position: fixed;
   top: 100px;
   width: 100%;
 }
 
 .pytorch-side-scroll {
-  width: 355px;
+  width: 310px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -434,7 +433,7 @@ ul.pytorch-breadcrumbs a {
 }
 
 .pytorch-left-menu-search {
-  width: 296px;
+  width: 295px;
   z-index: 200;
   background-color: #f3f4f7;
   padding: 2.5rem 0 0 0;
@@ -450,10 +449,10 @@ ul.pytorch-breadcrumbs a {
   overflow-x: hidden;
   overflow-y: hidden;
   padding-bottom: 110px;
-  padding: 0 3.125rem 0 3.125rem;
+  padding: 0 1.25rem 0 1.25rem;
   position: fixed;
   top: 90px;
-  width: 385px;
+  width: 300px;
   z-index: 200;
 }
 .pytorch-left-menu header,

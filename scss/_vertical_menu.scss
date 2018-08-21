@@ -14,7 +14,7 @@
 }
 
 .pytorch-left-menu-search {
-  width: 296px;
+  width: $desktop_menu_width - 5px;
   z-index: 200;
   background-color: #f3f4f7;
   padding: rem(40px) 0 0 0;
@@ -30,10 +30,10 @@
   overflow-x: hidden;
   overflow-y: hidden;
   padding-bottom: 20px + 90px;
-  padding: 0 rem(50px) 0 rem(50px);
+  padding: 0 rem(20px) 0 rem(20px);
   position: fixed;
   top: 90px;
-  width: 385px;
+  width: $desktop_menu_width;
   z-index: 200;
 
   header,
