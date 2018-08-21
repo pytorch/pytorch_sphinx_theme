@@ -1,24 +1,23 @@
-$orange: #EE4C2C;
-$content_text_color: #767676;
-$desktop_menu_width: 300px;
+// Bootstrap
 
-@mixin clearfix {
-  &:before,
-  &:after {
-    content:"";
-    display: table;
-  }
-  &:after { clear:both; }
-  & { *zoom:1; }
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
 }
 
-@function rem($px) {
-  @return $px / 16px * 1rem;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1240px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
 }
 
-@mixin desktop {
-  @media screen and (min-width: 768px) { @content; }
-}
+// End Bootstrap
 
 html {
   font-size: 12px;
@@ -33,6 +32,10 @@ body {
   background: #ffffff;
   height: 100%;
   margin: 0;
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 * {
@@ -173,77 +176,6 @@ h1 {
   margin: 0 auto;
   width: 1240px;
   position: relative;
-}
-
-.pytorch-header {
-  height: 90px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #e7e7e7;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-  z-index: 9999;
-}
-
-.pytorch-header-logo {
-  position: absolute;
-  left: 0;
-  top: 22px;
-
-  img {
-    height: auto;
-    width: 120px;
-  }
-}
-
-.pytorch-header .pytorch-main-menu {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  ul {
-    display: flex;
-    align-items: center;
-
-    li {
-      display: inline-block;
-      margin-right: 40px;
-      position: relative;
-
-      &:last-of-type {
-        margin-right: 0;
-      }
-
-      a {
-        font-family: Lato-Light;
-        font-size: 18px;
-        color: #262626;
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 34px;
-        text-decoration: none;
-
-        &.active {
-          color: $orange;
-
-          &:after {
-            content: "•";
-            position: absolute;
-            bottom: -24px;
-            font-size: 22px;
-            left: 0;
-            right: 0;
-          }
-        }
-      }
-    }
-  }
 }
 
 ul.pytorch-breadcrumbs {

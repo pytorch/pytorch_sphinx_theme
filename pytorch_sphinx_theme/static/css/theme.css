@@ -1,3 +1,5 @@
+/* pytorch_sphinx_theme version 0.0.1 | MIT license */
+/* Built 20180821 13:08 */
 @charset "UTF-8";
 @font-face {
   font-family: "Lato";
@@ -41,6 +43,23 @@
   font-weight: 700;
   font-style: italic;
 }
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1240px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+}
+
 html {
   font-size: 12px;
   height: 100%;
@@ -55,6 +74,10 @@ body {
   background: #ffffff;
   height: 100%;
   margin: 0;
+}
+body.no-scroll {
+  height: 100%;
+  overflow: hidden;
 }
 
 * {
@@ -109,19 +132,19 @@ h1 {
 }
 
 ::-webkit-input-placeholder {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 
 ::-moz-placeholder {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 
 :-ms-input-placeholder {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 
 :-moz-placeholder {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 
 .fa-minus-square-o:before, .pytorch-menu-vertical li.on a span.toctree-expand:before, .pytorch-menu-vertical li.current > a span.toctree-expand:before {
@@ -158,8 +181,8 @@ h1 {
   width: 260px;
   border-radius: 0;
   padding: 0.5rem 0.75rem;
-  border-color: #EE4C2C;
-  color: #EE4C2C;
+  border-color: #e44c2c;
+  color: #e44c2c;
   border-style: solid;
   font-size: 1rem;
 }
@@ -198,77 +221,13 @@ h1 {
 }
 
 .wy-breadcrumbs li a {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 
 .pytorch-container {
   margin: 0 auto;
   width: 1240px;
   position: relative;
-}
-
-.pytorch-header {
-  height: 90px;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #e7e7e7;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-  z-index: 9999;
-}
-
-.pytorch-header-logo {
-  position: absolute;
-  left: 0;
-  top: 22px;
-}
-.pytorch-header-logo img {
-  height: auto;
-  width: 120px;
-}
-
-.pytorch-header .pytorch-main-menu {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.pytorch-header .pytorch-main-menu ul {
-  display: flex;
-  align-items: center;
-}
-.pytorch-header .pytorch-main-menu ul li {
-  display: inline-block;
-  margin-right: 40px;
-  position: relative;
-}
-.pytorch-header .pytorch-main-menu ul li:last-of-type {
-  margin-right: 0;
-}
-.pytorch-header .pytorch-main-menu ul li a {
-  font-family: Lato-Light;
-  font-size: 18px;
-  color: #262626;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 34px;
-  text-decoration: none;
-}
-.pytorch-header .pytorch-main-menu ul li a.active {
-  color: #EE4C2C;
-}
-.pytorch-header .pytorch-main-menu ul li a.active:after {
-  content: "•";
-  position: absolute;
-  bottom: -24px;
-  font-size: 22px;
-  left: 0;
-  right: 0;
 }
 
 ul.pytorch-breadcrumbs {
@@ -279,8 +238,222 @@ ul.pytorch-breadcrumbs li {
   display: inline-block;
 }
 ul.pytorch-breadcrumbs a {
-  color: #EE4C2C;
+  color: #e44c2c;
   text-decoration: none;
+}
+
+.header-holder {
+  height: 68px;
+  align-items: center;
+  display: flex;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e2e2;
+}
+@media screen and (min-width: 1100px) {
+  .header-holder {
+    height: 90px;
+  }
+}
+
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.header-container:before, .header-container:after {
+  content: "";
+  display: table;
+}
+.header-container:after {
+  clear: both;
+}
+.header-container {
+  *zoom: 1;
+}
+@media screen and (min-width: 1100px) {
+  .header-container {
+    display: block;
+  }
+}
+
+.header-logo {
+  height: 23px;
+  width: 93px;
+  background-image: url("../images/logo.svg");
+  background-repeat: no-repeat;
+  background-size: 93px 23px;
+  display: block;
+  float: left;
+}
+@media screen and (min-width: 1100px) {
+  .header-logo {
+    background-size: 108px 27px;
+    position: absolute;
+    height: 27px;
+    width: 108px;
+    top: 4px;
+    float: none;
+  }
+}
+
+.main-menu-open-button {
+  background-image: url("../images/icon-menu-dots.svg");
+  background-position: center center;
+  background-size: 25px 7px;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 7px;
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
+@media screen and (min-width: 1100px) {
+  .main-menu-open-button {
+    display: none;
+  }
+}
+
+.header-holder .main-menu {
+  display: none;
+}
+@media screen and (min-width: 1100px) {
+  .header-holder .main-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+.header-holder .main-menu ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.header-holder .main-menu ul li {
+  display: inline-block;
+  margin-right: 40px;
+  position: relative;
+}
+.header-holder .main-menu ul li.active:after {
+  content: "•";
+  bottom: -24px;
+  color: #e44c2c;
+  font-size: 1.375rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+.header-holder .main-menu ul li.active a {
+  color: #e44c2c;
+}
+.header-holder .main-menu ul li:last-of-type {
+  margin-right: 0;
+}
+.header-holder .main-menu ul li a {
+  color: #ffffff;
+  font-size: 1.125rem;
+  letter-spacing: 0;
+  line-height: 2.125rem;
+  text-align: center;
+  text-decoration: none;
+}
+@media screen and (min-width: 1100px) {
+  .header-holder .main-menu ul li a:hover {
+    color: #e44c2c;
+  }
+}
+
+.mobile-main-menu {
+  display: none;
+}
+.mobile-main-menu.open {
+  background-color: #252627;
+  display: block;
+  height: 100%;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100%;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99999;
+}
+
+.mobile-main-menu .container-fluid {
+  align-items: center;
+  display: flex;
+  height: 68px;
+  position: relative;
+}
+.mobile-main-menu .container-fluid:before, .mobile-main-menu .container-fluid:after {
+  content: "";
+  display: table;
+}
+.mobile-main-menu .container-fluid:after {
+  clear: both;
+}
+.mobile-main-menu .container-fluid {
+  *zoom: 1;
+}
+
+.mobile-main-menu.open ul {
+  list-style-type: none;
+  padding: 0;
+}
+.mobile-main-menu.open ul li a {
+  font-size: 1.5rem;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 3rem;
+  text-decoration: none;
+}
+.mobile-main-menu.open ul li.active a {
+  color: #e44c2c;
+}
+
+.main-menu-close-button {
+  background-image: url("../images/icon-close.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  width: 24px;
+  top: -4px;
+}
+
+.mobile-main-menu-header-container {
+  position: relative;
+}
+
+.mobile-main-menu-links-container {
+  display: flex;
+  align-items: center;
+  padding-left: 2.8125rem;
+  height: 100%;
+  min-height: 100%;
+  margin-top: -68px;
+}
+
+.tutorials-header .header-logo {
+  background-image: url("../images/logo-dark.svg");
+}
+.tutorials-header .main-menu ul li a {
+  color: #262626;
+}
+.tutorials-header .main-menu-open-button {
+  background-image: url("../images/icon-menu-dots-dark.svg");
 }
 
 .main-content article {
@@ -424,7 +597,7 @@ ul.pytorch-breadcrumbs a {
 }
 .pytorch-menu-vertical header,
 .pytorch-menu-vertical p.caption {
-  color: #EE4C2C;
+  color: #e44c2c;
   font-size: 1.125rem;
   line-height: 2.125rem;
   margin-bottom: 1.25rem;
@@ -525,7 +698,7 @@ ul.pytorch-breadcrumbs a {
 }
 .pytorch-left-menu li.toctree-l1.current > a,
 .pytorch-right-menu li.toctree-l1.current > a {
-  color: #EE4C2C;
+  color: #e44c2c;
 }
 .pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul,
 .pytorch-right-menu li.toctree-l1.current li.toctree-l2 > ul,

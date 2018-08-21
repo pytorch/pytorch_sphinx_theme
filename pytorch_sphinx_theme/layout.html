@@ -77,29 +77,56 @@
 
   {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
   <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
-  <!-- <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i" rel="stylesheet"> -->
+  <script src="{{ pathto('_static/js/mobile-menu.js', 1) }}"></script>
 </head>
 
-<div class="pytorch-header">
-  <div class="pytorch-container">
-    <div class="pytorch-header-logo">
-      <img src="{{ pathto('_static/' + logo, 1) }}" class="logo" alt="Logo"/>
+<div class="container-fluid header-holder tutorials-header">
+  <div class="container">
+    <div class="header-container">
+      <a class="header-logo" href="/" aria-label="PyTorch"></a>
+
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Get Started</a>
+          </li>
+
+          <li>
+            <a href="#">Features</a>
+          </li>
+
+          <li>
+            <a href="#">Ecosystem</a>
+          </li>
+
+          <li>
+            <a href="#">Blog</a>
+          </li>
+
+          <li class="active">
+            <a href="/">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Resources</a>
+          </li>
+
+          <li>
+            <a href="#">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
     </div>
 
-    <div class="pytorch-main-menu">
-      <ul>
-        <li><a href="">Get Started</a></li>
-        <li><a href="">Features</a></li>
-        <li><a href="">Ecosystem</a></li>
-        <li><a href="">Blog</a></li>
-        <li><a href="" class="active">Tutorials</a></li>
-        <li><a href="">Docs</a></li>
-        <li><a href="">Resources</a></li>
-        <li><a href="">Github</a></li>
-      </ul>
-    </div>
   </div>
 </div>
+
 
 <body class="pytorch-body">
 
@@ -216,6 +243,60 @@
   </script>
 
   {%- block footer %} {% endblock %}
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="/" aria-label="PyTorch"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Get Started</a>
+          </li>
+
+          <li>
+            <a href="#">Features</a>
+          </li>
+
+          <li>
+            <a href="#">Ecosystem</a>
+          </li>
+
+          <li>
+            <a href="#">Blog</a>
+          </li>
+
+          <li class="active">
+            <a href="/">Tutorials</a>
+          </li>
+
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Resources</a>
+          </li>
+
+          <li>
+            <a href="#">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    mobileMenu.bind();
+  </script>
 
 </body>
 </html>
