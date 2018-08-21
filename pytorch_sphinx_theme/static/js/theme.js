@@ -1,5 +1,3 @@
-/* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180821 13:08 */
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"pytorch-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
@@ -241,5 +239,36 @@ if (typeof(window) != 'undefined') {
             clearTimeout(id);
         };
 }());
+
+window.mobileMenu = {
+  bind: function() {
+    $("[data-behavior='open-mobile-menu']").on('click', function(e) {
+      e.preventDefault();
+      $(".mobile-main-menu").addClass("open");
+      $("body").addClass('no-scroll');
+
+      mobileMenu.listenForResize();
+    });
+
+    $("[data-behavior='close-mobile-menu']").on('click', function(e) {
+      e.preventDefault();
+      mobileMenu.close();
+    });
+  },
+
+  listenForResize: function() {
+    $(window).on('resize.ForMobileMenu', function() {
+      if ($(this).width() > 768) {
+        mobileMenu.close();
+      }
+    });
+  },
+
+  close: function() {
+    $(".mobile-main-menu").removeClass("open");
+    $("body").removeClass('no-scroll');
+    $(window).off('resize.ForMobileMenu');
+  }
+};
 
 },{"jquery":"jquery"}]},{},["pytorch-sphinx-theme"]);
