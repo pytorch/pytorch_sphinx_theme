@@ -1,6 +1,46 @@
-/* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180821 13:08 */
 @charset "UTF-8";
+.container-fluid {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1240px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+}
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-md-4 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 33.3333333333%;
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+}
+
 @font-face {
   font-family: "Lato";
   src: url("../fonts/Lato/lato-light.eot");
@@ -43,23 +83,6 @@
   font-weight: 700;
   font-style: italic;
 }
-.container-fluid {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1240px;
-  padding-left: 30px;
-  padding-right: 30px;
-  width: 100%;
-}
-
 html {
   font-size: 12px;
   height: 100%;
@@ -86,9 +109,26 @@ body.no-scroll {
   font-weight: 300;
 }
 
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
 p {
   margin-top: 0;
   margin-bottom: 1.125rem;
+}
+p a:link,
+p a:visited,
+p a:hover {
+  color: #e44c2c;
+  text-decoration: none;
+}
+@media screen and (min-width: 768px) {
+  p a:hover {
+    text-decoration: underline;
+  }
 }
 
 code,
@@ -200,20 +240,23 @@ h1 {
 
 .pytorch-content-right {
   width: 300px;
-  height: 100%;
-  position: absolute;
-  left: 725px;
+  position: relative;
+  float: right;
+  margin-left: 3.75rem;
 }
 
 .pytorch-right-menu {
   min-height: 100px;
+  overflow-x: hidden;
+  overflow-y: hidden;
   position: fixed;
-  top: 100px;
-  width: 100%;
+  top: 255px;
+  width: 300px;
+  z-index: 200;
 }
 
 .pytorch-side-scroll {
-  width: 310px;
+  width: 300px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -240,6 +283,54 @@ ul.pytorch-breadcrumbs li {
 ul.pytorch-breadcrumbs a {
   color: #e44c2c;
   text-decoration: none;
+}
+
+.email-subscribe-form input.email {
+  color: #e44c2c;
+  border: none;
+  border-bottom: 1px solid #939393;
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.125rem;
+  letter-spacing: 0.25px;
+  line-height: 2.25rem;
+}
+.email-subscribe-form ::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #e44c2c;
+}
+.email-subscribe-form ::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #e44c2c;
+}
+.email-subscribe-form :-ms-input-placeholder {
+  /* IE 10+ */
+  color: #e44c2c;
+}
+.email-subscribe-form :-moz-placeholder {
+  /* Firefox 18- */
+  color: #e44c2c;
+}
+.email-subscribe-form input[type="submit"] {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  height: 15px;
+  width: 15px;
+  background-image: url("../images/arrow-right-with-tail.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  background-position: center center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+}
+
+.email-subscribe-form-fields-wrapper {
+  position: relative;
 }
 
 .header-holder {
@@ -456,6 +547,191 @@ ul.pytorch-breadcrumbs a {
   background-image: url("../images/icon-menu-dots-dark.svg");
 }
 
+.site-footer {
+  padding: 2.5rem 0;
+  width: 100%;
+  background-image: url("../images/home-footer-background.jpg");
+  background-size: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+@media screen and (min-width: 768px) {
+  .site-footer {
+    padding: 5rem 0;
+  }
+}
+.site-footer p {
+  color: #ffffff;
+}
+.site-footer ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.site-footer ul li {
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: #8b8a8b;
+  padding-bottom: 0.375rem;
+}
+.site-footer ul li.list-title {
+  padding-bottom: 0.75rem;
+  color: #ffffff;
+}
+.site-footer a:link,
+.site-footer a:visited {
+  color: inherit;
+}
+@media screen and (min-width: 768px) {
+  .site-footer a:hover {
+    color: #e44c2c;
+  }
+}
+
+.docs-tutorials-resources {
+  background-color: #252627;
+  color: #ffffff;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  position: relative;
+  z-index: 201;
+}
+@media screen and (min-width: 768px) {
+  .docs-tutorials-resources {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+.docs-tutorials-resources p {
+  color: #929292;
+  font-size: 1.125rem;
+}
+.docs-tutorials-resources h2 {
+  font-size: 1.5rem;
+  letter-spacing: -0.25px;
+  text-transform: none;
+  margin-bottom: 0.25rem;
+}
+@media screen and (min-width: 768px) {
+  .docs-tutorials-resources h2 {
+    margin-bottom: 1.25rem;
+  }
+}
+.docs-tutorials-resources .col-md-4 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .docs-tutorials-resources .col-md-4 {
+    margin-bottom: 0;
+  }
+}
+.docs-tutorials-resources p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.22px;
+  color: #939393;
+  margin-bottom: 0;
+}
+@media screen and (min-width: 768px) {
+  .docs-tutorials-resources p {
+    margin-bottom: 1.25rem;
+  }
+}
+.docs-tutorials-resources a {
+  font-size: 1.125rem;
+  color: #e44c2c;
+}
+
+.footer-container {
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-logo-wrapper {
+    position: absolute;
+    top: 0;
+    left: 30px;
+  }
+}
+
+.footer-logo {
+  background-image: url("../images/logo-icon.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 24px;
+  display: block;
+  height: 24px;
+  margin-bottom: 2.8125rem;
+  width: 20px;
+}
+@media screen and (min-width: 768px) {
+  .footer-logo {
+    background-size: 29px 36px;
+    height: 36px;
+    margin-bottom: 0;
+    margin-bottom: 0;
+    width: 29px;
+  }
+}
+
+.footer-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 768px) {
+  .footer-links-wrapper {
+    flex-wrap: initial;
+    justify-content: flex-end;
+  }
+}
+
+.footer-links-col {
+  margin-bottom: 3.75rem;
+  width: 50%;
+}
+@media screen and (min-width: 768px) {
+  .footer-links-col {
+    margin-bottom: 0;
+    width: 14%;
+    margin-right: 40px;
+  }
+  .footer-links-col.follow-us-col {
+    width: 18%;
+    margin-right: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  .footer-links-col {
+    width: 18%;
+    margin-right: 30px;
+  }
+}
+
+.footer-social-icons {
+  margin: 0.625rem 0 2.5rem 0;
+}
+.footer-social-icons a {
+  height: 32px;
+  width: 32px;
+  display: inline-block;
+  background-color: #939393;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.footer-social-icons a.facebook {
+  background-image: url("../images/logo-facebook-dark.svg");
+  background-position: center center;
+  background-size: 9px 18px;
+  background-repeat: no-repeat;
+}
+.footer-social-icons a.twitter {
+  background-image: url("../images/logo-twitter-dark.svg");
+  background-position: center center;
+  background-size: 17px 17px;
+  background-repeat: no-repeat;
+}
+
 .main-content article {
   max-width: 920px;
   margin-bottom: 100px;
@@ -618,7 +894,6 @@ ul.pytorch-breadcrumbs a {
   bottom: 0;
   color: #252627;
   left: 0;
-  min-height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-bottom: 110px;
@@ -764,6 +1039,10 @@ ul.pytorch-breadcrumbs a {
 }
 .pytorch-right-menu li ul {
   display: block;
+}
+
+.pytorch-right-menu .pytorch-side-scroll {
+  width: 320px;
 }
 
 /*# sourceMappingURL=theme.css.map */

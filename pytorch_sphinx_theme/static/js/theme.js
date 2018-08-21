@@ -1,3 +1,5 @@
+/* pytorch_sphinx_theme version 0.0.1 | MIT license */
+/* Built 20180823 13:08 */
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"pytorch-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
@@ -270,5 +272,42 @@ window.mobileMenu = {
     $(window).off('resize.ForMobileMenu');
   }
 };
+
+$(window).on('resize', function(e) {
+  handleVerticalMenuHeights();
+});
+
+$(window).on('scroll', function(e) {
+  handleVerticalMenuHeights();
+});
+
+$(window).on('load', function() {
+  handleVerticalMenuHeights();
+});
+
+function handleVerticalMenuHeights() {
+  var windowHeight = $(window).height();
+  var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+
+  if (topOfFooterRelativeToWindow >= windowHeight) {
+    $(".pytorch-left-menu").css({height: "100%"});
+    // $(".pytorch-right-menu").css({height: "100%"});
+    $(".pytorch-right-menu").css({top: 255, bottom: "auto", position: "fixed"});
+  } else {
+    var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow
+    var headerHeight = $('.header-holder').height();
+
+    var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
+    $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
+
+    var rightMenuCoords = document.getElementsByClassName("pytorch-right-menu")[0].getBoundingClientRect();
+    var bottomOfRightMenu = rightMenuCoords.top + rightMenuCoords.height;
+    var bottomOfRightMenuFromRightMenuContainer = topOfFooterRelativeToWindow - bottomOfRightMenu;
+
+    if (bottomOfRightMenuFromRightMenuContainer <= 50) {
+      $(".pytorch-right-menu").css({top: "auto", bottom: 50, position: "absolute"});
+    }
+  }
+}
 
 },{"jquery":"jquery"}]},{},["pytorch-sphinx-theme"]);

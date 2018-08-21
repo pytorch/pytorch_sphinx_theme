@@ -26,7 +26,6 @@
   bottom: 0;
   color: #252627;
   left: 0;
-  min-height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-bottom: 20px + 90px;
@@ -225,4 +224,8 @@
   li ul {
     display: block;
   }
+}
+
+.pytorch-right-menu .pytorch-side-scroll {
+  width: $desktop_menu_width + 20px;
 }

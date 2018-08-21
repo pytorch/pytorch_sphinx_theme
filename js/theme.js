@@ -269,3 +269,40 @@ window.mobileMenu = {
     $(window).off('resize.ForMobileMenu');
   }
 };
+
+$(window).on('resize', function(e) {
+  handleVerticalMenuHeights();
+});
+
+$(window).on('scroll', function(e) {
+  handleVerticalMenuHeights();
+});
+
+$(window).on('load', function() {
+  handleVerticalMenuHeights();
+});
+
+function handleVerticalMenuHeights() {
+  var windowHeight = $(window).height();
+  var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+
+  if (topOfFooterRelativeToWindow >= windowHeight) {
+    $(".pytorch-left-menu").css({height: "100%"});
+    // $(".pytorch-right-menu").css({height: "100%"});
+    $(".pytorch-right-menu").css({top: 255, bottom: "auto", position: "fixed"});
+  } else {
+    var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow
+    var headerHeight = $('.header-holder').height();
+
+    var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
+    $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
+
+    var rightMenuCoords = document.getElementsByClassName("pytorch-right-menu")[0].getBoundingClientRect();
+    var bottomOfRightMenu = rightMenuCoords.top + rightMenuCoords.height;
+    var bottomOfRightMenuFromRightMenuContainer = topOfFooterRelativeToWindow - bottomOfRightMenu;
+
+    if (bottomOfRightMenuFromRightMenuContainer <= 50) {
+      $(".pytorch-right-menu").css({top: "auto", bottom: 50, position: "absolute"});
+    }
+  }
+}

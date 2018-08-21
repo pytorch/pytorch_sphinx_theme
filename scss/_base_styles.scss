@@ -1,24 +1,3 @@
-// Bootstrap
-
-.container-fluid {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0;
-  padding-right: 0;
-  width: 100%;
-}
-
-.container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1240px;
-  padding-left: 30px;
-  padding-right: 30px;
-  width: 100%;
-}
-
-// End Bootstrap
-
 html {
   font-size: 12px;
   height: 100%;
@@ -44,9 +23,16 @@ body {
   font-weight: 300;
 }
 
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
 p {
   margin-top: 0;
   margin-bottom: rem(18px);
+  @include default_link_styles;
 }
 
 code,
@@ -148,20 +134,23 @@ h1 {
 
 .pytorch-content-right {
   width: $desktop_menu_width;
-  height: 100%;
-  position: absolute;
-  left: 725px;
+  position: relative;
+  float: right;
+  margin-left: rem(60px);
 }
 
 .pytorch-right-menu {
   min-height: 100px;
+  overflow-x: hidden;
+  overflow-y: hidden;
   position: fixed;
-  top: 100px;
-  width: 100%;
+  top: 255px;
+  width: $desktop_menu_width;
+  z-index: 200;
 }
 
 .pytorch-side-scroll {
-  width: $desktop_menu_width + 10px;
+  width: $desktop_menu_width;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -190,4 +179,53 @@ ul.pytorch-breadcrumbs {
     color: $orange;
     text-decoration: none;
   }
+}
+
+
+.email-subscribe-form {
+  input.email {
+    color: $orange;
+    border: none;
+    border-bottom: 1px solid #939393;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    font-size: 1.125rem;
+    letter-spacing: 0.25px;
+    line-height: 2.25rem;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $orange;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $orange;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $orange;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $orange;
+  }
+
+  input[type="submit"] {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url("../images/arrow-right-with-tail.svg");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: center center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+  }
+}
+
+.email-subscribe-form-fields-wrapper {
+  position: relative;
 }
