@@ -21,19 +21,66 @@
   margin-bottom: rem(40px);
 }
 
+.pytorch-left-menu-search input[type=text] {
+  width: $desktop_menu_width - 40px;
+  border-radius: 0;
+  padding: rem(8px) rem(12px);
+  border-color: $orange;
+  color: $orange;
+  border-style: solid;
+  font-size: rem(16px);
+}
+
 .pytorch-left-menu {
-  background: #f3f4f7;
-  bottom: 0;
-  color: #252627;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-bottom: 20px + 90px;
-  padding: 0 rem(20px) 0 rem(20px);
-  position: fixed;
-  top: 90px;
-  width: $desktop_menu_width;
-  z-index: 200;
+  display: none;
+  background-color: #f3f4f7;
+
+  &.open-mobile {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    display: block;
+    left: 0;
+    z-index: 99999;
+    width: 100%;
+    padding: 0 0 0 rem(30px);
+
+    .pytorch-side-scroll {
+      width: 100%;
+      z-index: 99;
+    }
+
+    .close-table-of-contents {
+      position: absolute;
+      top: 10px;
+      right: 30px;
+      z-index: 100;
+    }
+  }
+
+  a.close-table-of-contents {
+    display: block;
+
+    @include full-nav-menu-desktop {
+      display: none;
+    }
+  }
+
+  @include full-nav-menu-desktop {
+    background: #f3f4f7;
+    bottom: 0;
+    color: #252627;
+    left: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 20px + 90px;
+    padding: 0 rem(20px) 0 rem(20px);
+    position: fixed;
+    top: 90px;
+    width: $desktop_menu_width;
+    z-index: 200;
+  }
 
   header,
   p.caption {
@@ -41,6 +88,25 @@
     margin-bottom: 0;
     display: block;
     white-space: nowrap;
+  }
+}
+
+.pytorch-right-menu {
+  min-height: 100px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
+  top: 190px;
+  width: $desktop_menu_width;
+  left: 1090px;
+  z-index: 200;
+  bottom: 0;
+
+  &.fixed-to-bottom {
+    top: auto;
+    bottom: 20px;
+    position: absolute;
+    left: 0;
   }
 }
 
@@ -214,7 +280,11 @@
   a:link,
   a:visited,
   a:hover {
-    color: #EE4C2C;
+    color: #4a4a4a;
+
+    &.active {
+      color: $orange;
+    }
   }
 
   ul ul {

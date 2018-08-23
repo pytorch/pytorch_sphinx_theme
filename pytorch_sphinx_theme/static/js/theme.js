@@ -1,5 +1,3 @@
-/* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180823 13:08 */
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"pytorch-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
@@ -291,8 +289,7 @@ function handleVerticalMenuHeights() {
 
   if (topOfFooterRelativeToWindow >= windowHeight) {
     $(".pytorch-left-menu").css({height: "100%"});
-    // $(".pytorch-right-menu").css({height: "100%"});
-    $(".pytorch-right-menu").css({top: 255, bottom: "auto", position: "fixed"});
+    $(".pytorch-right-menu").removeClass("fixed-to-bottom");
   } else {
     var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow
     var headerHeight = $('.header-holder').height();
@@ -300,13 +297,38 @@ function handleVerticalMenuHeights() {
     var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
     $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
 
-    var rightMenuCoords = document.getElementsByClassName("pytorch-right-menu")[0].getBoundingClientRect();
-    var bottomOfRightMenu = rightMenuCoords.top + rightMenuCoords.height;
-    var bottomOfRightMenuFromRightMenuContainer = topOfFooterRelativeToWindow - bottomOfRightMenu;
+    $(".pytorch-right-menu").addClass("fixed-to-bottom");
+  }
+}
 
-    if (bottomOfRightMenuFromRightMenuContainer <= 50) {
-      $(".pytorch-right-menu").css({top: "auto", bottom: 50, position: "absolute"});
-    }
+window.mobileTOC = {
+  bind: function() {
+    $("[data-behavior='open-table-of-contents']").on("click", function(e) {
+      e.preventDefault();
+      $("body").addClass("no-scroll");
+      $(".pytorch-left-menu").addClass("open-mobile");
+
+      mobileTOC.listenForResize();
+    });
+
+    $("[data-behavior='close-table-of-contents']").on("click", function(e) {
+      e.preventDefault();
+      mobileTOC.close();
+    });
+  },
+
+  listenForResize: function() {
+    $(window).on('resize.ForMobileTOC', function() {
+      if ($(this).width() > 768) {
+        mobileTOC.close();
+      }
+    });
+  },
+
+  close: function() {
+    $(".pytorch-left-menu").removeClass("open-mobile");
+    $("body").removeClass('no-scroll');
+    $(window).off('resize.ForMobileTOC');
   }
 }
 

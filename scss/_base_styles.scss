@@ -102,23 +102,25 @@ h1 {
   line-height: rem(25px);
 }
 
+.pytorch-container {
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+  @include full-nav-menu-desktop {
+    padding: 0;
+  }
+}
+
 .pytorch-content-wrap {
   background-color: #ffffff;
-  margin-left: $desktop_menu_width + 60px;
-  padding-top: 137px;
   display: flex;
   position: relative;
   @include clearfix;
-}
 
-.pytorch-left-menu-search input[type=text] {
-  width: $desktop_menu_width - 40px;
-  border-radius: 0;
-  padding: rem(8px) rem(12px);
-  border-color: $orange;
-  color: $orange;
-  border-style: solid;
-  font-size: rem(16px);
+  @include full-nav-menu-desktop {
+    margin-left: $desktop_menu_width + 60px;
+    padding-top: 137px;
+  }
 }
 
 .pytorch-content {
@@ -129,24 +131,23 @@ h1 {
 }
 
 .pytorch-content-left {
-  width: 675px;
+  width: 100%;
+  padding-right: 30px;
+  @include full-nav-menu-desktop {
+    padding-right: 0;
+    width: 675px;
+  }
 }
 
 .pytorch-content-right {
-  width: $desktop_menu_width;
-  position: relative;
-  float: right;
-  margin-left: rem(60px);
-}
-
-.pytorch-right-menu {
-  min-height: 100px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  position: fixed;
-  top: 255px;
-  width: $desktop_menu_width;
-  z-index: 200;
+  display: none;
+  @include full-nav-menu-desktop {
+    display: block;
+    width: $desktop_menu_width;
+    position: relative;
+    float: right;
+    margin-left: rem(60px);
+  }
 }
 
 .pytorch-side-scroll {
@@ -159,12 +160,6 @@ h1 {
 
 .wy-breadcrumbs li a {
   color: $orange;
-}
-
-.pytorch-container {
-  margin: 0 auto;
-  width: 1240px;
-  position: relative;
 }
 
 ul.pytorch-breadcrumbs {
@@ -228,4 +223,17 @@ ul.pytorch-breadcrumbs {
 
 .email-subscribe-form-fields-wrapper {
   position: relative;
+}
+
+.table-of-contents-link-wrapper {
+  display: block;
+  margin-top: 80px;
+
+  @include full-nav-menu-desktop {
+    display: none;
+  }
+
+  a {
+    font-size: rem(22px);
+  }
 }

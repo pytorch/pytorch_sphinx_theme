@@ -135,6 +135,8 @@
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
+      <a href="#" class="close-table-of-contents" data-behavior="close-table-of-contents">Close</a>
+
       <div class="pytorch-side-scroll">
         <div class="pytorch-left-menu-search">
           {% block sidebartitle %}
@@ -179,41 +181,46 @@
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
-      <div class="pytorch-content-left">
-      {%- block content %}
-        {% if theme_style_external_links|tobool %}
-        <div class="rst-content style-external-links">
-        {% else %}
-        <div class="rst-content">
-        {% endif %}
-          {% include "breadcrumbs.html" %}
-          <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
-          {%- block document %}
-           <article itemprop="articleBody">
-            {% block body %}{% endblock %}
-           </article>
-           {% if self.comments()|trim %}
-           <div class="articleComments">
-            {% block comments %}{% endblock %}
-           </div>
-           {% endif%}
-          </div>
-          {%- endblock %}
-          {% include "footer.html" %}
-        </div>
-      {%- endblock %}
+    <div class="pytorch-container">
+      <div class="table-of-contents-link-wrapper">
+        <a href="#" data-behavior="open-table-of-contents">Table of Contents</a>
       </div>
 
-      <div class="pytorch-content-right">
-        <div class="pytorch-right-menu">
-          <div class="pytorch-side-scroll">
-            <div class="local-toc">{{ toc }}</div>
+      <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+        {%- block content %}
+          {% if theme_style_external_links|tobool %}
+          <div class="rst-content style-external-links">
+          {% else %}
+          <div class="rst-content">
+          {% endif %}
+            {% include "breadcrumbs.html" %}
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+            {%- block document %}
+             <article itemprop="articleBody">
+              {% block body %}{% endblock %}
+             </article>
+             {% if self.comments()|trim %}
+             <div class="articleComments">
+              {% block comments %}{% endblock %}
+             </div>
+             {% endif%}
+            </div>
+            {%- endblock %}
+            {% include "footer.html" %}
+          </div>
+        {%- endblock %}
+        </div>
+
+        <div class="pytorch-content-right">
+          <div class="pytorch-right-menu">
+            <div class="pytorch-side-scroll">
+              {{ toc }}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
+      </section>
+    </div>
   </div>
   {% include "versions.html" %}
 
@@ -415,6 +422,7 @@
 
   <script type="text/javascript">
     mobileMenu.bind();
+    mobileTOC.bind();
   </script>
 
 </body>

@@ -199,10 +199,19 @@ h1 {
   line-height: 1.5625rem;
 }
 
+.pytorch-container {
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-container {
+    padding: 0;
+  }
+}
+
 .pytorch-content-wrap {
   background-color: #ffffff;
-  margin-left: 360px;
-  padding-top: 137px;
   display: flex;
   position: relative;
 }
@@ -216,15 +225,11 @@ h1 {
 .pytorch-content-wrap {
   *zoom: 1;
 }
-
-.pytorch-left-menu-search input[type=text] {
-  width: 260px;
-  border-radius: 0;
-  padding: 0.5rem 0.75rem;
-  border-color: #e44c2c;
-  color: #e44c2c;
-  border-style: solid;
-  font-size: 1rem;
+@media screen and (min-width: 1100px) {
+  .pytorch-content-wrap {
+    margin-left: 360px;
+    padding-top: 137px;
+  }
 }
 
 .pytorch-content {
@@ -235,24 +240,27 @@ h1 {
 }
 
 .pytorch-content-left {
-  width: 675px;
+  width: 100%;
+  padding-right: 30px;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-content-left {
+    padding-right: 0;
+    width: 675px;
+  }
 }
 
 .pytorch-content-right {
-  width: 300px;
-  position: relative;
-  float: right;
-  margin-left: 3.75rem;
+  display: none;
 }
-
-.pytorch-right-menu {
-  min-height: 100px;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  position: fixed;
-  top: 255px;
-  width: 300px;
-  z-index: 200;
+@media screen and (min-width: 1100px) {
+  .pytorch-content-right {
+    display: block;
+    width: 300px;
+    position: relative;
+    float: right;
+    margin-left: 3.75rem;
+  }
 }
 
 .pytorch-side-scroll {
@@ -265,12 +273,6 @@ h1 {
 
 .wy-breadcrumbs li a {
   color: #e44c2c;
-}
-
-.pytorch-container {
-  margin: 0 auto;
-  width: 1240px;
-  position: relative;
 }
 
 ul.pytorch-breadcrumbs {
@@ -331,6 +333,19 @@ ul.pytorch-breadcrumbs a {
 
 .email-subscribe-form-fields-wrapper {
   position: relative;
+}
+
+.table-of-contents-link-wrapper {
+  display: block;
+  margin-top: 80px;
+}
+@media screen and (min-width: 1100px) {
+  .table-of-contents-link-wrapper {
+    display: none;
+  }
+}
+.table-of-contents-link-wrapper a {
+  font-size: 1.375rem;
 }
 
 .header-holder {
@@ -748,6 +763,8 @@ ul.pytorch-breadcrumbs a {
 .main-content article h4,
 .main-content article h5,
 .main-content article h6 {
+  padding-top: 90px;
+  margin-top: -90px;
   font-weight: 400;
 }
 .main-content article h1 a.headerlink,
@@ -889,19 +906,64 @@ ul.pytorch-breadcrumbs a {
   margin-bottom: 2.5rem;
 }
 
+.pytorch-left-menu-search input[type=text] {
+  width: 260px;
+  border-radius: 0;
+  padding: 0.5rem 0.75rem;
+  border-color: #e44c2c;
+  color: #e44c2c;
+  border-style: solid;
+  font-size: 1rem;
+}
+
 .pytorch-left-menu {
-  background: #f3f4f7;
-  bottom: 0;
-  color: #252627;
-  left: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-bottom: 110px;
-  padding: 0 1.25rem 0 1.25rem;
+  display: none;
+  background-color: #f3f4f7;
+}
+.pytorch-left-menu.open-mobile {
   position: fixed;
-  top: 90px;
-  width: 300px;
-  z-index: 200;
+  height: 100%;
+  top: 0;
+  display: block;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  padding: 0 0 0 1.875rem;
+}
+.pytorch-left-menu.open-mobile .pytorch-side-scroll {
+  width: 100%;
+  z-index: 99;
+}
+.pytorch-left-menu.open-mobile .close-table-of-contents {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  z-index: 100;
+}
+.pytorch-left-menu a.close-table-of-contents {
+  display: block;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-left-menu a.close-table-of-contents {
+    display: none;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-left-menu {
+    background: #f3f4f7;
+    bottom: 0;
+    color: #252627;
+    left: 0;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding-bottom: 110px;
+    padding: 0 1.25rem 0 1.25rem;
+    position: fixed;
+    top: 90px;
+    width: 300px;
+    z-index: 200;
+  }
 }
 .pytorch-left-menu header,
 .pytorch-left-menu p.caption {
@@ -909,6 +971,24 @@ ul.pytorch-breadcrumbs a {
   margin-bottom: 0;
   display: block;
   white-space: nowrap;
+}
+
+.pytorch-right-menu {
+  min-height: 100px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
+  top: 190px;
+  width: 300px;
+  left: 1090px;
+  z-index: 200;
+  bottom: 0;
+}
+.pytorch-right-menu.fixed-to-bottom {
+  top: auto;
+  bottom: 20px;
+  position: absolute;
+  left: 0;
 }
 
 .pytorch-left-menu ul,
@@ -1032,7 +1112,12 @@ ul.pytorch-breadcrumbs a {
 .pytorch-right-menu a:link,
 .pytorch-right-menu a:visited,
 .pytorch-right-menu a:hover {
-  color: #EE4C2C;
+  color: #4a4a4a;
+}
+.pytorch-right-menu a:link.active,
+.pytorch-right-menu a:visited.active,
+.pytorch-right-menu a:hover.active {
+  color: #e44c2c;
 }
 .pytorch-right-menu ul ul {
   padding-left: 20px;
