@@ -7,6 +7,7 @@
   {%- set titlesuffix = "" %}
 {%- endif %}
 {%- set lang_attr = 'en' if language == None else (language | replace('_', '-')) %}
+{% import 'theme_variables.jinja' as theme_variables %}
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="{{ lang_attr }}" > <![endif]-->
@@ -82,40 +83,40 @@
 <div class="container-fluid header-holder tutorials-header">
   <div class="container">
     <div class="header-container">
-      <a class="header-logo" href="/" aria-label="PyTorch"></a>
+      <a class="header-logo" href="{{ theme_variables.external_urls['home'] }}" aria-label="PyTorch"></a>
 
       <div class="main-menu">
         <ul>
           <li>
-            <a href="#">Get Started</a>
+            <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
           </li>
 
           <li>
-            <a href="#">Features</a>
+            <a href="{{ theme_variables.external_urls['features'] }}">Features</a>
           </li>
 
           <li>
-            <a href="#">Ecosystem</a>
+            <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
           </li>
 
           <li>
-            <a href="#">Blog</a>
+            <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
           <li class="active">
-            <a href="/">Tutorials</a>
+            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
           <li>
-            <a href="#">Docs</a>
+            <a href="{{ theme_variables.external_urls['docs'] }}">Docs</a>
           </li>
 
           <li>
-            <a href="#">Resources</a>
+            <a href="{{ theme_variables.external_urls['resources'] }}">Resources</a>
           </li>
 
           <li>
-            <a href="#">Github</a>
+            <a href="{{ theme_variables.external_urls['github'] }}">Github</a>
           </li>
         </ul>
       </div>
@@ -253,19 +254,19 @@
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
           <p>Lorem ipsum dolor sit amet, consectetur</p>
-          <a href="#" class="with-right-arrow">View Docs</a>
+          <a href="{{ theme_variables.external_urls['docs'] }}" class="with-right-arrow">View Docs</a>
         </div>
 
         <div class="col-md-4 text-center">
           <h2>Tutorials</h2>
           <p>Lorem ipsum dolor sit amet, consectetur</p>
-          <a class="with-right-arrow" href="/">View Tutorials</a>
+          <a class="with-right-arrow" href="{{ theme_variables.external_urls['tutorials'] }}">View Tutorials</a>
         </div>
 
         <div class="col-md-4 text-center">
           <h2>Resources</h2>
           <p>Lorem ipsum dolor sit amet, consectetur</p>
-          <a class="with-right-arrow" href="#">View Resources</a>
+          <a class="with-right-arrow" href="{{ theme_variables.external_urls['resources'] }}">View Resources</a>
         </div>
       </div>
     </div>
@@ -274,40 +275,40 @@
   <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
-        <a href="#" class="footer-logo"></a>
+        <a href="{{ theme_variables.external_urls['home'] }}" class="footer-logo"></a>
       </div>
 
       <div class="footer-links-wrapper">
         <div class="footer-links-col">
           <ul>
-            <li class="list-title"><a href="#">PyTorch</a></li>
-            <li><a href="#">Get Started</a></li>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="/">Tutorials</a></li>
-            <li><a href="#" target="_blank">Docs</a></li>
-            <li><a href="#">Tutorials</a></li>
+            <li class="list-title"><a href="{{ theme_variables.external_urls['home'] }}">PyTorch</a></li>
+            <li><a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a></li>
+            <li><a href="{{ theme_variables.external_urls['features'] }}">Features</a></li>
+            <li><a href="{{ theme_variables.external_urls['blog'] }}">Blog</a></li>
+            <li><a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a></li>
+            <li><a href="{{ theme_variables.external_urls['docs'] }}" target="_blank">Docs</a></li>
+            <li><a href="{{ theme_variables.external_urls['resources'] }}">Resources</a></li>
           </ul>
         </div>
 
         <div class="footer-links-col">
           <ul>
-            <li class="list-title"><a href="#">Ecosystem</a></li>
-            <li><a href="#">Vision</a></li>
-            <li><a href="#">Reasoning</a></li>
-            <li><a href="#">Language</a></li>
-            <li><a href="#">Speech</a></li>
-            <li><a href="#">Tools</a></li>
+            <li class="list-title"><a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a></li>
+            <li><a href="{{ theme_variables.external_urls['vision'] }}">Vision</a></li>
+            <li><a href="{{ theme_variables.external_urls['reasoning'] }}">Reasoning</a></li>
+            <li><a href="{{ theme_variables.external_urls['language'] }}">Language</a></li>
+            <li><a href="{{ theme_variables.external_urls['speech'] }}">Speech</a></li>
+            <li><a href="{{ theme_variables.external_urls['tools'] }}">Tools</a></li>
           </ul>
         </div>
 
         <div class="footer-links-col">
           <ul>
-            <li class="list-title"><a href="#">Support</a></li>
-            <li><a href="#" target="_blank">Discuss</a></li>
-            <li><a href="#" target="_blank">Github</a> Issues</li>
-            <li><a href="#" target="_blank">Slack</a></li>
-            <li><a href="#" target="_blank">Contributing</a></li>
+            <li class="list-title"><a href="{{ theme_variables.external_urls['support'] }}">Support</a></li>
+            <li><a href="{{ theme_variables.external_urls['discuss'] }}" target="_blank">Discuss</a></li>
+            <li><a href="{{ theme_variables.external_urls['github_issues'] }}" target="_blank">Github Issues</a></li>
+            <li><a href="{{ theme_variables.external_urls['slack'] }}" target="_blank">Slack</a></li>
+            <li><a href="{{ theme_variables.external_urls['contributing'] }}" target="_blank">Contributing</a></li>
           </ul>
         </div>
 
@@ -348,8 +349,8 @@
           </ul>
 
           <div class="footer-social-icons">
-            <a href="#" target="_blank" class="facebook"></a>
-            <a href="#" target="_blank" class="twitter"></a>
+            <a href="{{ theme_variables.external_urls['facebook'] }}" target="_blank" class="facebook"></a>
+            <a href="{{ theme_variables.external_urls['twitter'] }}" target="_blank" class="twitter"></a>
           </div>
         </div>
       </div>
@@ -364,7 +365,7 @@
     <div class="container-fluid">
       <div class="container">
         <div class="mobile-main-menu-header-container">
-          <a class="header-logo" href="/" aria-label="PyTorch"></a>
+          <a class="header-logo" href="{{ theme_variables.external_urls['home'] }}" aria-label="PyTorch"></a>
           <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
         </div>
       </div>
@@ -386,23 +387,23 @@
           </li>
 
           <li>
-            <a href="#">Blog</a>
+            <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
           <li class="active">
-            <a href="/">Tutorials</a>
+            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
           <li>
-            <a href="#">Docs</a>
+            <a href="{{ theme_variables.external_urls['docs'] }}">Docs</a>
           </li>
 
           <li>
-            <a href="#">Resources</a>
+            <a href="{{ theme_variables.external_urls['resources'] }}">Resources</a>
           </li>
 
           <li>
-            <a href="#">Github</a>
+            <a href="{{ theme_variables.external_urls['github'] }}">Github</a>
           </li>
         </ul>
       </div>
