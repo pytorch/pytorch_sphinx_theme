@@ -8,3 +8,6 @@ yarn-error.log
 package-lock.json
 pytorch_sphinx_theme/static/fonts/Lato/
 __pycache__
+.env.json
+dist/
+*.egg-info/

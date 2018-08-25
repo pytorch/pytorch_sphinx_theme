@@ -1,3 +1,5 @@
+/* pytorch_sphinx_theme version 0.0.1 | MIT license */
+/* Built 20180825 12:08 */
 @charset "UTF-8";
 .container-fluid {
   margin-left: auto;
@@ -709,7 +711,7 @@ ul.pytorch-breadcrumbs a {
   .footer-links-col {
     margin-bottom: 0;
     width: 14%;
-    margin-right: 40px;
+    margin-right: 23px;
   }
   .footer-links-col.follow-us-col {
     width: 18%;
