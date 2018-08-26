@@ -79,12 +79,12 @@ Next create a file `.env.json` in the root of this repo with some keys/values re
 You can then build the Docs or Tutorials by running
 
 ```
-grunt docs
+grunt --project=docs
 ```
 or
 
 ```
-grunt tutorials
+grunt --project=tutorials
 ```
 
 These will generate a live-reloaded local build for the respective projects available at `localhost:1919`.

@@ -3,6 +3,16 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   var envJSON = grunt.file.readJSON(".env.json");
+  var PROJECT_DIR = "docs/";
+
+  switch (grunt.option('project')) {
+    case "docs":
+      PROJECT_DIR = envJSON.DOCS_DIR;
+      break;
+    case "tutorials":
+      PROJECT_DIR = envJSON.TUTORIALS_DIR;
+      break;
+   }
 
   grunt.initConfig({
     // Read package.json
@@ -134,15 +144,7 @@ module.exports = function(grunt) {
     },
     exec: {
       build_sphinx: {
-        cmd: 'sphinx-build docs/ docs/build'
-      },
-
-      build_sphinx_tutorials: {
-        cmd: 'sphinx-build ' + envJSON.TUTORIALS_DIR + ' docs/build'
-      },
-
-      build_sphinx_docs: {
-        cmd: 'sphinx-build ' + envJSON.DOCS_DIR + ' docs/build'
+        cmd: 'sphinx-build ' + PROJECT_DIR + ' docs/build'
       }
     },
     clean: {
@@ -188,10 +190,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx','connect','open','watch']);
-
-  grunt.registerTask('tutorials', ['clean','copy:fonts', 'copy:images', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx_tutorials','connect','open','watch']);
-
-  grunt.registerTask('docs', ['clean','copy:fonts', 'copy:images', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx_docs','connect','open','watch']);
-
   grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'sass:build','browserify:build','uglify','usebanner','exec:build_sphinx']);
 }
