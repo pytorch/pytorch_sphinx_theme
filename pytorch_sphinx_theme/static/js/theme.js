@@ -1,5 +1,5 @@
 /* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180825 12:08 */
+/* Built 20180827 11:08 */
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"pytorch-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
@@ -274,31 +274,49 @@ window.mobileMenu = {
 };
 
 $(window).on('resize', function(e) {
-  handleVerticalMenuHeights();
+  handleLeftMenu();
+  handleRightMenu();
 });
 
 $(window).on('scroll', function(e) {
-  handleVerticalMenuHeights();
+  handleLeftMenu();
+  handleRightMenu();
 });
 
 $(window).on('load', function() {
-  handleVerticalMenuHeights();
+  handleLeftMenu();
+  handleRightMenu();
 });
 
-function handleVerticalMenuHeights() {
+function handleLeftMenu() {
   var windowHeight = $(window).height();
   var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
 
   if (topOfFooterRelativeToWindow >= windowHeight) {
     $(".pytorch-left-menu").css({height: "100%"});
-    $(".pytorch-right-menu").removeClass("fixed-to-bottom");
+    // $(".pytorch-right-menu").removeClass("fixed-to-bottom");
   } else {
     var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow
     var headerHeight = $('.header-holder').height();
-
     var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
+
     $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
 
+  }
+}
+
+function handleRightMenu() {
+  // if (topOfFooterRelativeToWindow >= windowHeight) {
+  // if the bottom of the right menu is <= 20px from the top of the footer
+  var windowHeight = $(window).height();
+  var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+
+  var bottom = $(".pytorch-right-menu ul:first").offset().top + $(".pytorch-right-menu ul:first").height();
+  var footerTop = $(".docs-tutorials-resources").offset().top;
+
+  if (topOfFooterRelativeToWindow >= windowHeight) {
+    $(".pytorch-right-menu").removeClass("fixed-to-bottom");
+  } else if (bottom >= -40 + footerTop) {
     $(".pytorch-right-menu").addClass("fixed-to-bottom");
   }
 }

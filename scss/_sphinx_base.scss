@@ -1,0 +1,71 @@
+body {
+  background: #ffffff;
+  height: 100%;
+  margin: 0;
+  &.no-scroll {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: rem(18px);
+  @include default_link_styles;
+}
+
+.wy-breadcrumbs li a {
+  color: $orange;
+}
+
+ul.pytorch-breadcrumbs {
+  padding-left: 0;
+  list-style-type: none;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    color: $orange;
+    text-decoration: none;
+  }
+}
+
+.table-of-contents-link-wrapper {
+  display: block;
+  margin-top: 80px;
+
+  @include full-nav-menu-desktop {
+    display: none;
+  }
+
+  a {
+    font-size: rem(22px);
+  }
+}
+
+.tutorials-header {
+  .header-logo {
+    background-image: url("../images/logo-dark.svg");
+  }
+
+  .main-menu ul li a {
+    color: $not_quite_black;
+  }
+
+  .main-menu-open-button {
+    background-image: url("../images/icon-menu-dots-dark.svg");
+  }
+}
+
+.rst-content footer {
+  padding-bottom: rem(40px);
+}
+
+h1 {
+  font-size: rem(32px);
+  letter-spacing: 1.78px;
+  line-height: rem(40px);
+  text-transform: uppercase;
+}

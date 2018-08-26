@@ -1,5 +1,3 @@
-/* pytorch_sphinx_theme version 0.0.1 | MIT license */
-/* Built 20180825 12:08 */
 @charset "UTF-8";
 .container-fluid {
   margin-left: auto;
@@ -44,50 +42,57 @@
 }
 
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-light.eot");
-  src: url("../fonts/Lato/lato-light.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-light.woff2") format("woff2"), url("../fonts/Lato/lato-light.woff") format("woff"), url("../fonts/Lato/lato-light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-lightitalic.eot");
-  src: url("../fonts/Lato/lato-lightitalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-lightitalic.woff2") format("woff2"), url("../fonts/Lato/lato-lightitalic.woff") format("woff"), url("../fonts/Lato/lato-lightitalic.ttf") format("truetype");
-  font-weight: 300;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-regular.eot");
-  src: url("../fonts/Lato/lato-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-regular.woff2") format("woff2"), url("../fonts/Lato/lato-regular.woff") format("woff"), url("../fonts/Lato/lato-regular.ttf") format("truetype");
+  font-family: FreightSans;
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("FreightSansLFPro-Regular"), url("../fonts/FreightSans/freight-sans-regular.woff2") format("woff2"), url("../fonts/FreightSans/freight-sans-regular.woff") format("woff");
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-italic.eot");
-  src: url("../fonts/Lato/lato-italic.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-italic.woff2") format("woff2"), url("../fonts/Lato/lato-italic.woff") format("woff"), url("../fonts/Lato/lato-italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-bold.eot");
-  src: url("../fonts/Lato/lato-bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-bold.woff2") format("woff2"), url("../fonts/Lato/lato-bold.woff") format("woff"), url("../fonts/Lato/lato-bold.ttf") format("truetype");
-  font-weight: 700;
+  font-family: FreightSans;
+  font-weight: 300;
   font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("FreightSansLFPro-Light"), url("../fonts/FreightSans/freight-sans-light.woff2") format("woff2"), url("../fonts/FreightSans/freight-sans-light.woff") format("woff");
 }
 @font-face {
-  font-family: "Lato";
-  src: url("../fonts/Lato/lato-bolditalic.eot");
-  src: url("../fonts/Lato/lato-bolditalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato/lato-bolditalic.woff2") format("woff2"), url("../fonts/Lato/lato-bolditalic.woff") format("woff"), url("../fonts/Lato/lato-bolditalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
+  font-family: IBMPlexMono;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("IBMPlexMono-SemiBold"), url("../fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2") format("woff2"), url("../fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff") format("woff");
+}
+@font-face {
+  font-family: IBMPlexMono;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("IBMPlexMono-Medium"), url("../fonts/IBMPlexMono/IBMPlexMono-Medium.woff2") format("woff2"), url("../fonts/IBMPlexMono/IBMPlexMono-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: IBMPlexMono;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("IBMPlexMono-Regular"), url("../fonts/IBMPlexMono/IBMPlexMono-Regular.woff2") format("woff2"), url("../fonts/IBMPlexMono/IBMPlexMono-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: IBMPlexMono;
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: u+0020-007f;
+  src: local("IBMPlexMono-Light"), url("../fonts/IBMPlexMono/IBMPlexMono-Light.woff2") format("woff2"), url("../fonts/IBMPlexMono/IBMPlexMono-Light.woff") format("woff");
 }
 html {
+  position: relative;
+  min-height: 100%;
   font-size: 12px;
-  height: 100%;
 }
 @media screen and (min-width: 768px) {
   html {
@@ -95,19 +100,9 @@ html {
   }
 }
 
-body {
-  background: #ffffff;
-  height: 100%;
-  margin: 0;
-}
-body.no-scroll {
-  height: 100%;
-  overflow: hidden;
-}
-
 * {
   box-sizing: border-box;
-  font-family: Lato-Light;
+  font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
@@ -115,62 +110,6 @@ a:link,
 a:visited,
 a:hover {
   text-decoration: none;
-}
-
-p {
-  margin-top: 0;
-  margin-bottom: 1.125rem;
-}
-p a:link,
-p a:visited,
-p a:hover {
-  color: #e44c2c;
-  text-decoration: none;
-}
-@media screen and (min-width: 768px) {
-  p a:hover {
-    text-decoration: underline;
-  }
-}
-
-code,
-kbd,
-pre,
-samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.875rem;
-}
-code span,
-kbd span,
-pre span,
-samp span {
-  font-family: inherit;
-  font-size: inherit;
-}
-
-pre {
-  padding: 1.25rem 1rem;
-}
-
-code {
-  padding: 0.25rem;
-  background-color: #f7f7f9;
-  border: 1px solid #cccccc;
-  border-radius: 3px;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: Lato-Regular;
-}
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-  text-decoration: none;
-}
-
-h1 {
-  font-size: 2rem;
-  letter-spacing: 1.78px;
-  line-height: 2.5rem;
-  text-transform: uppercase;
 }
 
 ::-webkit-input-placeholder {
@@ -189,106 +128,6 @@ h1 {
   color: #e44c2c;
 }
 
-.fa-minus-square-o:before, .pytorch-menu-vertical li.on a span.toctree-expand:before, .pytorch-menu-vertical li.current > a span.toctree-expand:before {
-  content: "-";
-  font-size: 1rem;
-  line-height: 1.5625rem;
-}
-
-.fa-plus-square-o:before, .pytorch-menu-vertical li span.toctree-expand:before {
-  content: "+";
-  font-size: 1rem;
-  line-height: 1.5625rem;
-}
-
-.pytorch-container {
-  margin: 0 auto;
-  padding: 0 30px;
-  width: 100%;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-container {
-    padding: 0;
-  }
-}
-
-.pytorch-content-wrap {
-  background-color: #ffffff;
-  display: flex;
-  position: relative;
-}
-.pytorch-content-wrap:before, .pytorch-content-wrap:after {
-  content: "";
-  display: table;
-}
-.pytorch-content-wrap:after {
-  clear: both;
-}
-.pytorch-content-wrap {
-  *zoom: 1;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-content-wrap {
-    margin-left: 360px;
-    padding-top: 137px;
-  }
-}
-
-.pytorch-content {
-  background: #ffffff;
-  width: 100%;
-  max-width: 675px;
-  position: relative;
-}
-
-.pytorch-content-left {
-  width: 100%;
-  padding-right: 30px;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-content-left {
-    padding-right: 0;
-    width: 675px;
-  }
-}
-
-.pytorch-content-right {
-  display: none;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-content-right {
-    display: block;
-    width: 300px;
-    position: relative;
-    float: right;
-    margin-left: 3.75rem;
-  }
-}
-
-.pytorch-side-scroll {
-  width: 300px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100%;
-}
-
-.wy-breadcrumbs li a {
-  color: #e44c2c;
-}
-
-ul.pytorch-breadcrumbs {
-  padding-left: 0;
-  list-style-type: none;
-}
-ul.pytorch-breadcrumbs li {
-  display: inline-block;
-}
-ul.pytorch-breadcrumbs a {
-  color: #e44c2c;
-  text-decoration: none;
-}
-
 .email-subscribe-form input.email {
   color: #e44c2c;
   border: none;
@@ -299,22 +138,6 @@ ul.pytorch-breadcrumbs a {
   font-size: 1.125rem;
   letter-spacing: 0.25px;
   line-height: 2.25rem;
-}
-.email-subscribe-form ::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: #e44c2c;
-}
-.email-subscribe-form ::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #e44c2c;
-}
-.email-subscribe-form :-ms-input-placeholder {
-  /* IE 10+ */
-  color: #e44c2c;
-}
-.email-subscribe-form :-moz-placeholder {
-  /* Firefox 18- */
-  color: #e44c2c;
 }
 .email-subscribe-form input[type="submit"] {
   position: absolute;
@@ -337,17 +160,58 @@ ul.pytorch-breadcrumbs a {
   position: relative;
 }
 
-.table-of-contents-link-wrapper {
-  display: block;
-  margin-top: 80px;
+code, kbd, pre, samp {
+  font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
-@media screen and (min-width: 1100px) {
-  .table-of-contents-link-wrapper {
-    display: none;
-  }
+code span, kbd span, pre span, samp span {
+  font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
-.table-of-contents-link-wrapper a {
-  font-size: 1.375rem;
+
+pre {
+  padding: 1.125rem;
+  background-color: #f7f7f9;
+}
+pre code {
+  font-size: 0.875rem;
+}
+pre.highlight {
+  background-color: #f7f7f9;
+  line-height: 1.3125rem;
+}
+
+code.highlighter-rouge {
+  color: #545454;
+  background-color: #f3f4f7;
+  padding: 2px 6px;
+}
+
+a:link code.highlighter-rouge,
+a:visited code.highlighter-rouge,
+a:hover code.highlighter-rouge {
+  color: #4974D1;
+}
+a:link.has-code,
+a:visited.has-code,
+a:hover.has-code {
+  color: #4974D1;
+}
+
+p code,
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  font-size: 78.5%;
+}
+
+pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
 
 .header-holder {
@@ -554,16 +418,6 @@ ul.pytorch-breadcrumbs a {
   margin-top: -68px;
 }
 
-.tutorials-header .header-logo {
-  background-image: url("../images/logo-dark.svg");
-}
-.tutorials-header .main-menu ul li a {
-  color: #262626;
-}
-.tutorials-header .main-menu-open-button {
-  background-image: url("../images/icon-menu-dots-dark.svg");
-}
-
 .site-footer {
   padding: 2.5rem 0;
   width: 100%;
@@ -749,143 +603,264 @@ ul.pytorch-breadcrumbs a {
   background-repeat: no-repeat;
 }
 
-.main-content article {
+article.pytorch-article {
   max-width: 920px;
-  margin-bottom: 100px;
+  margin: 0 auto;
 }
-.main-content article a:link, .main-content article a:visited, .main-content article a:hover {
-  color: #3d5a97;
-}
-.main-content article a:link, .main-content article a:visited {
-  text-decoration: underline;
-}
-.main-content article h1,
-.main-content article h2,
-.main-content article h3,
-.main-content article h4,
-.main-content article h5,
-.main-content article h6 {
-  padding-top: 90px;
-  margin-top: -90px;
-  font-weight: 400;
-}
-.main-content article h1 a.headerlink,
-.main-content article h2 a.headerlink,
-.main-content article h3 a.headerlink,
-.main-content article h4 a.headerlink,
-.main-content article h5 a.headerlink,
-.main-content article h6 a.headerlink {
-  display: inline-block;
-  text-decoration: none;
-}
-@media screen and (min-width: 768px) {
-  .main-content article h1 a.headerlink,
-  .main-content article h2 a.headerlink,
-  .main-content article h3 a.headerlink,
-  .main-content article h4 a.headerlink,
-  .main-content article h5 a.headerlink,
-  .main-content article h6 a.headerlink {
-    display: none;
-  }
-}
-.main-content article h1:hover a.headerlink,
-.main-content article h2:hover a.headerlink,
-.main-content article h3:hover a.headerlink,
-.main-content article h4:hover a.headerlink,
-.main-content article h5:hover a.headerlink,
-.main-content article h6:hover a.headerlink {
-  display: inline-block;
-}
-.main-content article h1 {
-  font-size: 2rem;
+article.pytorch-article h2,
+article.pytorch-article h3,
+article.pytorch-article h4,
+article.pytorch-article h5,
+article.pytorch-article h6 {
+  margin-top: 1.875rem;
   margin-bottom: 1.5rem;
-  letter-spacing: 1.78px;
-  line-height: 2.625rem;
+  color: #262626;
+}
+article.pytorch-article h2 {
+  font-size: 1.5rem;
+  letter-spacing: 1.33px;
+  line-height: 2rem;
+  margin-top: 3.125rem;
   text-transform: uppercase;
 }
-.main-content article h2 {
+article.pytorch-article h3 {
   font-size: 1.5rem;
-  letter-spacing: 0;
-  line-height: 1.75rem;
+  letter-spacing: -0.25px;
+  line-height: 1.875rem;
   text-transform: none;
-  margin-bottom: 1.5rem;
 }
-.main-content article h3 {
+article.pytorch-article h4,
+article.pytorch-article h5,
+article.pytorch-article h6 {
   font-size: 1.125rem;
-  letter-spacing: 0;
-  line-height: 1.375rem;
-  margin-bottom: 1.5rem;
+  letter-spacing: -0.19px;
+  line-height: 1.875rem;
 }
-.main-content article h4 {
+article.pytorch-article p {
+  margin-bottom: 1.125rem;
+}
+article.pytorch-article p,
+article.pytorch-article ul li,
+article.pytorch-article ol li,
+article.pytorch-article dl dt,
+article.pytorch-article dl dd,
+article.pytorch-article blockquote {
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+  color: #545454;
+}
+article.pytorch-article table {
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+article.pytorch-article table thead {
+  border-bottom: 1px solid #cacaca;
+}
+article.pytorch-article table th,
+article.pytorch-article table tr,
+article.pytorch-article table td {
+  color: #545454;
   font-size: 1rem;
-  letter-spacing: 0;
-  line-height: 1.25rem;
-  margin-bottom: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.17px;
 }
-.main-content article h5 {
-  font-size: 0.875rem;
-  letter-spacing: 0;
-  margin-bottom: 1.5rem;
+article.pytorch-article table th {
+  padding: 0.625rem;
+  color: #262626;
 }
-.main-content article p, .main-content article ul li, .main-content article ol li {
-  font-size: 1.125rem;
-  line-height: 1.875rem;
-  color: #767676;
+article.pytorch-article table td {
+  padding: 0.3125rem;
+}
+article.pytorch-article table tr th:first-of-type,
+article.pytorch-article table tr td:first-of-type {
+  padding-left: 0;
+}
+article.pytorch-article ul,
+article.pytorch-article ol {
+  margin: 1.5rem 0 3.125rem 0;
+}
+@media screen and (min-width: 768px) {
+  article.pytorch-article ul,
+  article.pytorch-article ol {
+    padding-left: 6.25rem;
+  }
+}
+article.pytorch-article ul li,
+article.pytorch-article ol li {
+  margin-bottom: 0.625rem;
+}
+article.pytorch-article dl {
   margin-bottom: 2.5rem;
 }
-.main-content article dl dt, .main-content article dl dd {
-  font-size: 1.125rem;
-  line-height: 1.875rem;
-  color: #767676;
-  margin-bottom: 2.5rem;
-}
-.main-content article blockquote {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  color: #767676;
-  margin-bottom: 2.5rem;
-}
-.main-content article ul, .main-content article ol {
-  margin-bottom: 2.5rem;
-}
-.main-content article ul li, .main-content article ol li {
-  margin-bottom: 1rem;
-}
-.main-content article dl {
-  margin-bottom: 2.5rem;
-}
-.main-content article dl dt {
+article.pytorch-article dl dt {
   margin-bottom: 0.75rem;
   font-weight: 400;
 }
-.main-content article pre {
+article.pytorch-article pre {
   margin-bottom: 2.5rem;
 }
-.main-content article hr {
+article.pytorch-article hr {
   margin-top: 4.6875rem;
   margin-bottom: 4.6875rem;
 }
-.main-content article blockquote {
+article.pytorch-article blockquote {
   font-size: 1.125rem;
   margin: 0 auto;
   margin-bottom: 2.5rem;
   width: 65%;
 }
-.main-content article img {
+article.pytorch-article img {
   width: 100%;
 }
 
+body {
+  background: #ffffff;
+  height: 100%;
+  margin: 0;
+}
+body.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.125rem;
+}
+p a:link,
+p a:visited,
+p a:hover {
+  color: #e44c2c;
+  text-decoration: none;
+}
 @media screen and (min-width: 768px) {
-  .main-content article > ul,
-  .main-content article > ol {
-    padding-left: 6.25rem;
-  }
-  .main-content article > ul ul, .main-content article > ul ol,
-  .main-content article > ol ul,
-  .main-content article > ol ol {
-    padding-left: 1.25rem;
+  p a:hover {
+    text-decoration: underline;
   }
 }
+
+.wy-breadcrumbs li a {
+  color: #e44c2c;
+}
+
+ul.pytorch-breadcrumbs {
+  padding-left: 0;
+  list-style-type: none;
+}
+ul.pytorch-breadcrumbs li {
+  display: inline-block;
+}
+ul.pytorch-breadcrumbs a {
+  color: #e44c2c;
+  text-decoration: none;
+}
+
+.table-of-contents-link-wrapper {
+  display: block;
+  margin-top: 80px;
+}
+@media screen and (min-width: 1100px) {
+  .table-of-contents-link-wrapper {
+    display: none;
+  }
+}
+.table-of-contents-link-wrapper a {
+  font-size: 1.375rem;
+}
+
+.tutorials-header .header-logo {
+  background-image: url("../images/logo-dark.svg");
+}
+.tutorials-header .main-menu ul li a {
+  color: #262626;
+}
+.tutorials-header .main-menu-open-button {
+  background-image: url("../images/icon-menu-dots-dark.svg");
+}
+
+.rst-content footer {
+  padding-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 1.78px;
+  line-height: 2.5rem;
+  text-transform: uppercase;
+}
+
+.pytorch-container {
+  margin: 0 auto;
+  padding: 0 30px;
+  width: 100%;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-container {
+    padding: 0;
+  }
+}
+
+.pytorch-content-wrap {
+  background-color: #ffffff;
+  display: flex;
+  position: relative;
+}
+.pytorch-content-wrap:before, .pytorch-content-wrap:after {
+  content: "";
+  display: table;
+}
+.pytorch-content-wrap:after {
+  clear: both;
+}
+.pytorch-content-wrap {
+  *zoom: 1;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-content-wrap {
+    margin-left: 360px;
+    padding-top: 137px;
+  }
+}
+
+.pytorch-content {
+  background: #ffffff;
+  width: 100%;
+  max-width: 675px;
+  position: relative;
+}
+
+.pytorch-content-left {
+  width: 100%;
+  padding-right: 30px;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-content-left {
+    padding-right: 0;
+    width: 675px;
+  }
+}
+
+.pytorch-content-right {
+  display: none;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-content-right {
+    display: block;
+    width: 300px;
+    position: relative;
+    float: right;
+    margin-left: 3.75rem;
+  }
+}
+
+.pytorch-side-scroll {
+  width: 300px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+
 .pytorch-menu-vertical {
   padding-right: 1.25rem;
   padding-bottom: 90px;
@@ -1095,7 +1070,6 @@ ul.pytorch-breadcrumbs a {
 .pytorch-left-menu li ul li a,
 .pytorch-right-menu li ul li a {
   margin-bottom: 0;
-  font-weight: normal;
 }
 .pytorch-left-menu a,
 .pytorch-right-menu a {

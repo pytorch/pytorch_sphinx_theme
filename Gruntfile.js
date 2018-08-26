@@ -39,8 +39,16 @@ module.exports = function(grunt) {
           {
               expand: true,
               flatten: true,
-              src: ['fonts/Lato/*'],
-              dest: 'pytorch_sphinx_theme/static/fonts/Lato',
+              src: ['fonts/FreightSans/*'],
+              dest: 'pytorch_sphinx_theme/static/fonts/FreightSans',
+              filter: 'isFile'
+          },
+
+          {
+              expand: true,
+              flatten: true,
+              src: ['fonts/IBMPlexMono/*'],
+              dest: 'pytorch_sphinx_theme/static/fonts/IBMPlexMono',
               filter: 'isFile'
           }
         ]

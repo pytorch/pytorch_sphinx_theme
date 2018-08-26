@@ -1,0 +1,72 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 12px;
+
+  @include desktop {
+    font-size: 16px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+  color: $orange;
+}
+
+::-moz-placeholder {
+  color: $orange;
+}
+
+:-ms-input-placeholder {
+  color: $orange;
+}
+
+:-moz-placeholder {
+  color: $orange;
+}
+
+.email-subscribe-form {
+  input.email {
+    color: $orange;
+    border: none;
+    border-bottom: 1px solid #939393;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    font-size: 1.125rem;
+    letter-spacing: 0.25px;
+    line-height: 2.25rem;
+  }
+
+  input[type="submit"] {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    height: 15px;
+    width: 15px;
+    background-image: url("../images/arrow-right-with-tail.svg");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: center center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+  }
+}
+
+.email-subscribe-form-fields-wrapper {
+  position: relative;
+}
