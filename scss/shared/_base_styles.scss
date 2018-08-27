@@ -70,3 +70,13 @@ a:hover {
 .email-subscribe-form-fields-wrapper {
   position: relative;
 }
+
+.anchorjs-link {
+  color: $quick_start_grey !important;
+  @include desktop {
+    &:hover {
+      color: inherit;
+      text-decoration: none !important;
+    }
+  }
+}

@@ -81,7 +81,8 @@ module.exports = function(grunt) {
             flatten: true,
             src: [
               'node_modules/popper.js/dist/umd/popper.min.js',
-              'node_modules/bootstrap/dist/js/bootstrap.min.js'
+              'node_modules/bootstrap/dist/js/bootstrap.min.js',
+              'node_modules/anchor-js/anchor.min.js'
             ],
             dest: 'pytorch_sphinx_theme/static/js/vendor',
             filter: 'isFile'

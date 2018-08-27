@@ -8354,6 +8354,16 @@ a:hover {
   position: relative;
 }
 
+.anchorjs-link {
+  color: #8c8c8c !important;
+}
+@media screen and (min-width: 768px) {
+  .anchorjs-link:hover {
+    color: inherit;
+    text-decoration: none !important;
+  }
+}
+
 code, kbd, pre, samp {
   font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
@@ -8981,6 +8991,10 @@ h1 {
   letter-spacing: 1.78px;
   line-height: 2.5rem;
   text-transform: uppercase;
+}
+
+.headerlink {
+  display: none !important;
 }
 
 .pytorch-container {
