@@ -160,19 +160,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-    usebanner: {
-      dist: {
-        options: {
-          position: 'top',
-          banner: '/* <%= pkg.name %> version <%= pkg.version %> | MIT license */\n' +
-                  '/* Built <%= grunt.template.today("yyyymmdd HH:mm") %> */',
-          linebreak: true
-        },
-        files: {
-          src: [ 'pytorch_sphinx_theme/static/js/theme.js', 'pytorch_sphinx_theme/static/css/theme.css' ]
-        }
-      }
-    },
     exec: {
       build_sphinx: {
         cmd: 'sphinx-build ' + PROJECT_DIR + ' docs/build'
@@ -220,6 +207,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build','browserify:build','uglify','usebanner','exec:build_sphinx']);
+  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev','browserify:dev','exec:build_sphinx','connect','open','watch']);
+  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build','browserify:build','uglify','exec:build_sphinx']);
 }
