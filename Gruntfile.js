@@ -176,7 +176,7 @@ module.exports = function(grunt) {
     watch: {
       /* Compile scss changes into theme directory */
       sass: {
-        files: ['scss/*.scss'],
+        files: ['scss/**/*.scss'],
         tasks: ['sass:dev']
       },
       /* Changes in theme dir rebuild sphinx */
