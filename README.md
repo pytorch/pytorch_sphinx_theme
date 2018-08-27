@@ -90,3 +90,29 @@ grunt --project=tutorials
 These will generate a live-reloaded local build for the respective projects available at `localhost:1919`.
 
 Note that while live reloading works these two projects are hefty and will take a few seconds to build and reload, especially the Docs.
+
+### Built-in Stylesheets and Fonts
+
+There are a couple of stylesheets and fonts inside the Docs and Tutorials repos themselves meant to override the existing theme. To ensure the most accurate styles we should comment out those files until the maintainers of those repos remove them:
+
+#### Docs
+
+```
+# ./docs/source/conf.py
+
+html_context = {
+    # 'css_files': [
+    #     'https://fonts.googleapis.com/css?family=Lato',
+    #     '_static/css/pytorch_theme.css'
+    # ],
+}
+```
+
+#### Tutorials
+
+```
+# ./conf.py
+
+# app.add_stylesheet('css/pytorch_theme.css')
+# app.add_stylesheet('https://fonts.googleapis.com/css?family=Lato')
+```
