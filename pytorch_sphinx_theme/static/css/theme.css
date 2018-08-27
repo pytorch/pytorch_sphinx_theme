@@ -8581,6 +8581,7 @@ a:link,
 a:visited,
 a:hover {
   text-decoration: none;
+  color: #e44c2c;
 }
 
 ::-webkit-input-placeholder {
