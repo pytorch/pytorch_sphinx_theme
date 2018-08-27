@@ -64,6 +64,29 @@ module.exports = function(grunt) {
               filter: 'isFile'
           }
         ]
+      },
+
+      vendor: {
+        files: [
+          {
+              expand: true,
+              cwd: 'node_modules/bootstrap/scss/',
+              src: "**/*",
+              dest: 'scss/vendor/bootstrap',
+              filter: 'isFile'
+          },
+
+          {
+            expand: true,
+            flatten: true,
+            src: [
+              'node_modules/popper.js/dist/umd/popper.min.js',
+              'node_modules/bootstrap/dist/js/bootstrap.min.js'
+            ],
+            dest: 'pytorch_sphinx_theme/static/js/vendor',
+            filter: 'isFile'
+          }
+        ]
       }
     },
 
@@ -197,6 +220,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'sass:build','browserify:build','uglify','usebanner','exec:build_sphinx']);
+  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev','browserify:dev','usebanner','exec:build_sphinx','connect','open','watch']);
+  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build','browserify:build','uglify','usebanner','exec:build_sphinx']);
 }
