@@ -57,16 +57,6 @@
 .pytorch-menu-vertical {
   padding-right: rem(20px);
   padding-bottom: 90px;
-
-  header,
-  p.caption {
-    color: $orange;
-    font-size: rem(18px);
-    line-height: rem(34px);
-    margin-bottom: rem(20px);
-    padding: 0;
-    text-transform: none;
-  }
 }
 
 .pytorch-left-menu-search {
@@ -138,11 +128,15 @@
     z-index: 200;
   }
 
-  header,
   p.caption {
-    display: inline-block;
-    margin-bottom: 0;
+    color: $orange;
     display: block;
+    display: inline-block;
+    font-size: rem(18px);
+    line-height: rem(34px);
+    margin-bottom: rem(16px);
+    padding: 0;
+    text-transform: none;
     white-space: nowrap;
   }
 }
