@@ -35,6 +35,7 @@ ul.pytorch-breadcrumbs {
 .table-of-contents-link-wrapper {
   display: block;
   margin-top: 80px;
+  margin-bottom: rem(20px);
 
   @include full-nav-menu-desktop {
     display: none;

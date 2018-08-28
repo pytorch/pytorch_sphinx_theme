@@ -9240,6 +9240,7 @@ ul.pytorch-breadcrumbs a {
 .table-of-contents-link-wrapper {
   display: block;
   margin-top: 80px;
+  margin-bottom: 1.25rem;
 }
 @media screen and (min-width: 1100px) {
   .table-of-contents-link-wrapper {
