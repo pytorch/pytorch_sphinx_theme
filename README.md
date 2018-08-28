@@ -116,3 +116,15 @@ html_context = {
 # app.add_stylesheet('css/pytorch_theme.css')
 # app.add_stylesheet('https://fonts.googleapis.com/css?family=Lato')
 ```
+
+### Top/Mobile Navigation
+
+The top navigation and mobile menu expect an "active" state for one of the menu items. To ensure that either "Docs" or "Tutorials" is marked as active, set the following config value in the respective `conf.py`, where `{project}` is either `"docs"` or `"tutorials"`.
+
+```
+html_theme_options = {
+  ...
+  'pytorch_project': {project}
+  ...
+}
+```

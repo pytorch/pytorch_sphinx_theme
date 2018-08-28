@@ -103,11 +103,11 @@
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
-          <li class="active">
+          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{% endif %}>
             <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
-          <li>
+          <li {%- if theme_pytorch_project == 'docs' %} class="active"{% endif %}>
             <a href="{{ theme_variables.external_urls['docs'] }}">Docs</a>
           </li>
 
@@ -389,11 +389,11 @@
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
-          <li class="active">
+          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{%- endif %}>
             <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
-          <li>
+          <li {%- if theme_pytorch_docs == 'docs' %} class="active"{%- endif %}>
             <a href="{{ theme_variables.external_urls['docs'] }}">Docs</a>
           </li>
 
