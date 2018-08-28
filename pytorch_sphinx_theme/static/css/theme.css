@@ -9271,15 +9271,15 @@ h1 {
   text-transform: uppercase;
 }
 
-.headerlink {
-  display: none !important;
-}
-
 span.pre {
   color: #545454;
   background-color: #f3f4f7;
   padding: 2px 6px;
   font-size: 78.5%;
+}
+
+.headerlink {
+  display: none !important;
 }
 
 .pytorch-container {

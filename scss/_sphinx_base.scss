@@ -70,13 +70,13 @@ h1 {
   text-transform: uppercase;
 }
 
-.headerlink {
-  display: none !important;
-}
-
 span.pre {
   color: $content_text_color;
   background-color: $light_grey;
   padding: 2px 6px;
   font-size: 78.5%;
+}
+
+.headerlink {
+  display: none !important;
 }

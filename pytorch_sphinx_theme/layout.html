@@ -245,7 +245,6 @@
 
   <script type="text/javascript" src="{{ pathto('_static/js/vendor/popper.min.js', 1) }}"></script>
   <script type="text/javascript" src="{{ pathto('_static/js/vendor/bootstrap.min.js', 1) }}"></script>
-  <script type="text/javascript" src="{{ pathto('_static/js/vendor/anchor.min.js', 1) }}"></script>
   <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 
   <script type="text/javascript">
@@ -412,18 +411,14 @@
 
   <!-- End Mobile Menu -->
 
+  <script type="text/javascript" src="{{ pathto('_static/js/vendor/anchor.min.js', 1) }}"></script>
 
   <script type="text/javascript">
     mobileMenu.bind();
     mobileTOC.bind();
-
-    // Remove Sphinx-generated anchors
-    $(".headerlink").remove();
-
-    anchors.add(".pytorch-article h1, .pytorch-article h2, .pytorch-article h3, .pytorch-article h4, .pytorch-article h5");
-
+    pytorchAnchors.bind();
+    highlightNavigation.bind();
     scrollToAnchor.bind();
   </script>
-
 </body>
 </html>

@@ -1,4 +1,100 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+// Modified from https://stackoverflow.com/a/32396543
+
+window.highlightNavigation = {
+  navigationLinks: $(".pytorch-right-menu li a"),
+  sections: $(
+    $(".pytorch-article .section")
+      .get()
+      .reverse()
+  ),
+  sectionIdTonavigationLink: {},
+
+  bind: function() {
+    // Sphinx automatically tags the first menu item with just a "#" href, which brings
+    // you to the top of the page. We want to instead give this an href of the first content
+    // section so that it highlights like every other menu item.
+    var $firstNavItem = $(".pytorch-right-menu li a:first");
+
+    if ($firstNavItem.attr("href") === "#") {
+      var firstSectionId = $(".pytorch-article .section")
+        .first()
+        .attr("id");
+      $firstNavItem.attr("href", "#" + firstSectionId);
+    }
+
+    highlightNavigation.sections.each(function() {
+      var id = $(this).attr("id");
+      highlightNavigation.sectionIdTonavigationLink[id] = $(
+        ".pytorch-right-menu li a[href='#" + id + "']"
+      );
+    });
+
+    $(window).on("scroll", function() {
+      highlightNavigation.throttle(highlightNavigation.highlight, 100);
+    });
+  },
+
+  throttle: function(fn, interval) {
+    var lastCall, timeoutId;
+    var now = new Date().getTime();
+
+    if (lastCall && now < lastCall + interval) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(function() {
+        lastCall = now;
+        fn();
+      }, interval - (now - lastCall));
+    } else {
+      lastCall = now;
+      fn();
+    }
+  },
+
+  highlight: function() {
+    var scrollPosition = $(window).scrollTop();
+    var offset = $(".header-holder").height() + 25;
+
+    highlightNavigation.sections.each(function() {
+      var currentSection = $(this);
+      var sectionTop = currentSection.offset().top;
+
+      if (scrollPosition >= sectionTop - offset) {
+        var id = currentSection.attr("id");
+        var $navigationLink = highlightNavigation.sectionIdTonavigationLink[id];
+
+        if (!$navigationLink.hasClass("active")) {
+          highlightNavigation.navigationLinks.removeClass("active");
+          $navigationLink.addClass("active");
+        }
+
+        return false;
+      }
+    });
+  }
+};
+
+},{}],2:[function(require,module,exports){
+window.pytorchAnchors = {
+  bind: function() {
+    // Replace Sphinx-generated anchors with anchorjs ones
+    $(".headerlink").text("");
+
+    window.anchors.add(".pytorch-article .headerlink");
+
+    $(".anchorjs-link").each(function() {
+      var $headerLink = $(this).closest(".headerlink");
+      var href = $headerLink.attr("href");
+      var clone = this.outerHTML;
+
+      $clone = $(clone).attr("href", href);
+      $headerLink.before($clone);
+      $headerLink.remove();
+    });
+  }
+};
+
+},{}],3:[function(require,module,exports){
 // Modified from https://stackoverflow.com/a/13067009
 // Going for a JS solution to scrolling to an anchor so we can benefit from
 // less hacky css and smooth scrolling.
@@ -50,7 +146,7 @@ window.scrollToAnchor = {
 
         if(match) {
           anchorOffset = $(match).offset().top - this.getFixedOffset();
-          $('html, body').animate({ scrollTop: anchorOffset});
+          $('html, body').scrollTop(anchorOffset);
 
           // Add the state to history as-per normal anchor links
           if(HISTORY_SUPPORT && pushToHistory) {
@@ -438,4 +534,4 @@ window.mobileTOC = {
   }
 }
 
-},{"jquery":"jquery"}]},{},[1,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,"pytorch-sphinx-theme"]);
