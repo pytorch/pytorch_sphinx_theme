@@ -9275,7 +9275,6 @@ span.pre {
   color: #545454;
   background-color: #f3f4f7;
   padding: 2px 6px;
-  font-size: 78.5%;
 }
 
 .headerlink {
@@ -9358,15 +9357,6 @@ span.pre {
   padding-right: 1.25rem;
   padding-bottom: 90px;
 }
-.pytorch-menu-vertical header,
-.pytorch-menu-vertical p.caption {
-  color: #e44c2c;
-  font-size: 1.125rem;
-  line-height: 2.125rem;
-  margin-bottom: 1.25rem;
-  padding: 0;
-  text-transform: none;
-}
 
 .pytorch-left-menu-search {
   width: 295px;
@@ -9405,9 +9395,15 @@ span.pre {
   z-index: 99;
 }
 .pytorch-left-menu.open-mobile .close-table-of-contents {
+  background-image: url("../images/icon-close.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  height: 24px;
   position: absolute;
-  top: 10px;
   right: 30px;
+  width: 24px;
+  top: 15px;
   z-index: 100;
 }
 .pytorch-left-menu a.close-table-of-contents {
@@ -9435,11 +9431,15 @@ span.pre {
     z-index: 200;
   }
 }
-.pytorch-left-menu header,
 .pytorch-left-menu p.caption {
-  display: inline-block;
-  margin-bottom: 0;
+  color: #e44c2c;
   display: block;
+  display: inline-block;
+  font-size: 1.125rem;
+  line-height: 2.125rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  text-transform: none;
   white-space: nowrap;
 }
 

@@ -97,9 +97,15 @@
     }
 
     .close-table-of-contents {
+      background-image: url("../images/icon-close.svg");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+      height: 24px;
       position: absolute;
-      top: 10px;
       right: 30px;
+      width: 24px;
+      top: 15px;
       z-index: 100;
     }
   }
