@@ -9336,6 +9336,37 @@ article.pytorch-article p.caption {
   margin-top: 1.25rem;
 }
 
+.note {
+  background: #f3f4f7;
+  margin-top: 1.125rem;
+  margin-bottom: 1.125rem;
+  padding-bottom: 1.125rem;
+}
+.note .first {
+  font-size: 1rem;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.note .first:before {
+  content: "\2022";
+  position: relative;
+  padding-left: 10px;
+  padding-right: 15px;
+}
+.note .last {
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.125rem;
+  color: #262626;
+  letter-spacing: 0;
+  line-height: 1.75rem;
+  margin-bottom: 0;
+}
+.note .admonition-title {
+  background: #ee4c2c;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 30px;

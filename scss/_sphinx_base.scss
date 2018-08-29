@@ -1,5 +1,5 @@
 body {
-  background: #ffffff;
+  background: $white;
   height: 100%;
   margin: 0;
   &.no-scroll {
@@ -107,5 +107,37 @@ article.pytorch-article {
 article.pytorch-article {
   p.caption {
     margin-top: rem(20px);
+  }
+}
+
+.note {
+  background: $light_grey;
+  margin-top: rem(18px);
+  margin-bottom: rem(18px);
+  padding-bottom: rem(18px);
+  .first {
+    font-size: rem(16px);
+    color: $white;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    &:before {
+      content: "\2022";
+      position: relative;
+      padding-left: 10px;
+      padding-right: 15px;
+    }
+  }
+  .last {
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: rem(18px);
+    color: $not_quite_black;
+    letter-spacing: 0;
+    line-height: rem(28px);
+    margin-bottom: 0;
+  }
+
+  .admonition-title {
+    background: $red_orange;
   }
 }
