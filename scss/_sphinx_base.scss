@@ -80,3 +80,14 @@ span.pre {
 .headerlink {
   display: none !important;
 }
+
+a:link,
+a:hover,
+a:visited {
+  &.has-code {
+    color: $code_link_color;
+    span {
+      color: $code_link_color;
+    }
+  }
+}

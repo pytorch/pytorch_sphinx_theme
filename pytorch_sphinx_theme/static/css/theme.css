@@ -9282,6 +9282,17 @@ span.pre {
   display: none !important;
 }
 
+a:link.has-code,
+a:hover.has-code,
+a:visited.has-code {
+  color: #4974D1;
+}
+a:link.has-code span,
+a:hover.has-code span,
+a:visited.has-code span {
+  color: #4974D1;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 30px;
