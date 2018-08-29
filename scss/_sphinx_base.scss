@@ -91,3 +91,21 @@ a:visited {
     }
   }
 }
+
+article.pytorch-article {
+  ul,
+  ol {
+    padding-left: rem(20px);
+    margin: 0;
+
+    li {
+      margin: 0;
+    }
+  }
+}
+
+article.pytorch-article {
+  p.caption {
+    margin-top: rem(20px);
+  }
+}

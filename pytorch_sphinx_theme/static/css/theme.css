@@ -9293,6 +9293,20 @@ a:visited.has-code span {
   color: #4974D1;
 }
 
+article.pytorch-article ul,
+article.pytorch-article ol {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+article.pytorch-article ul li,
+article.pytorch-article ol li {
+  margin: 0;
+}
+
+article.pytorch-article p.caption {
+  margin-top: 1.25rem;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 30px;
