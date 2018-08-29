@@ -1,7 +1,7 @@
 // Modified from https://stackoverflow.com/a/32396543
 
 window.highlightNavigation = {
-  navigationLinks: $(".pytorch-right-menu li a"),
+  navigationListItems: $(".pytorch-right-menu li"),
   sections: $(
     $(".pytorch-article .section")
       .get()
@@ -52,7 +52,7 @@ window.highlightNavigation = {
 
   highlight: function() {
     var scrollPosition = $(window).scrollTop();
-    var offset = $(".header-holder").height() + 25;
+    var offset = $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 25;
 
     highlightNavigation.sections.each(function() {
       var currentSection = $(this);
@@ -61,10 +61,13 @@ window.highlightNavigation = {
       if (scrollPosition >= sectionTop - offset) {
         var id = currentSection.attr("id");
         var $navigationLink = highlightNavigation.sectionIdTonavigationLink[id];
+        var $navigationListItem = $navigationLink.closest("li");
 
-        if (!$navigationLink.hasClass("active")) {
-          highlightNavigation.navigationLinks.removeClass("active");
-          $navigationLink.addClass("active");
+        if (!$navigationListItem.hasClass("active")) {
+          highlightNavigation.navigationListItems.removeClass("active");
+          $(".pytorch-right-menu-active-dot").remove();
+          $navigationListItem.addClass("active");
+          $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
         }
 
         return false;

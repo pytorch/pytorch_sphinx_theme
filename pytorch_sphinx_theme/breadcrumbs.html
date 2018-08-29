@@ -28,9 +28,9 @@
 
   <ul class="pytorch-breadcrumbs">
     {% block breadcrumbs %}
-      <li><a href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a> &raquo;</li>
+      <li><a href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a> &gt;</li>
         {% for doc in parents %}
-          <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</li>
+          <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &gt;</li>
         {% endfor %}
       <li>{{ title }}</li>
     {% endblock %}

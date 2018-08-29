@@ -138,27 +138,27 @@
       <a href="#" class="close-table-of-contents" data-behavior="close-table-of-contents"></a>
 
       <div class="pytorch-side-scroll">
-        <div class="pytorch-left-menu-search">
-          {% block sidebartitle %}
-
-          {% if theme_display_version %}
-            {%- set nav_version = version %}
-            {% if READTHEDOCS and current_version %}
-              {%- set nav_version = current_version %}
-            {% endif %}
-            {% if nav_version %}
-              <div class="version">
-                {{ nav_version }}
-              </div>
-            {% endif %}
-          {% endif %}
-
-          {% include "searchbox.html" %}
-
-          {% endblock %}
-        </div>
-
         <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            {% block sidebartitle %}
+
+            {% if theme_display_version %}
+              {%- set nav_version = version %}
+              {% if READTHEDOCS and current_version %}
+                {%- set nav_version = current_version %}
+              {% endif %}
+              {% if nav_version %}
+                <div class="version">
+                  {{ nav_version }}
+                </div>
+              {% endif %}
+            {% endif %}
+
+            {% include "searchbox.html" %}
+
+            {% endblock %}
+          </div>
+
           {% block menu %}
             {#
               The singlehtml builder doesn't handle this toctree call when the
@@ -187,6 +187,16 @@
       </div>
 
       <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
+        <div class="pytorch-page-level-bar">
+          <div class="pytorch-breadcrumbs-wrapper">
+            {% include "breadcrumbs.html" %}
+          </div>
+
+          <div class="pytorch-shortcuts-wrapper">
+            Shortcuts
+          </div>
+        </div>
+
         <div class="pytorch-content-left">
         {%- block content %}
           {% if theme_style_external_links|tobool %}
@@ -194,7 +204,6 @@
           {% else %}
           <div class="rst-content">
           {% endif %}
-            {% include "breadcrumbs.html" %}
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
             {%- block document %}
              <article itemprop="articleBody" class="pytorch-article">
@@ -417,6 +426,7 @@
     mobileMenu.bind();
     mobileTOC.bind();
     pytorchAnchors.bind();
+    sideMenus.bind();
     highlightNavigation.bind();
     scrollToAnchor.bind();
 

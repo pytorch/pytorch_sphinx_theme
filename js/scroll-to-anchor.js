@@ -12,7 +12,7 @@ window.scrollToAnchor = {
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function() {
-        return $(".header-holder").height() + 20;
+        return $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 20;
       },
 
       /**

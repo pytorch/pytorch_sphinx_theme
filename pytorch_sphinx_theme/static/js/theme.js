@@ -2,7 +2,7 @@ require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c=
 // Modified from https://stackoverflow.com/a/32396543
 
 window.highlightNavigation = {
-  navigationLinks: $(".pytorch-right-menu li a"),
+  navigationListItems: $(".pytorch-right-menu li"),
   sections: $(
     $(".pytorch-article .section")
       .get()
@@ -53,7 +53,7 @@ window.highlightNavigation = {
 
   highlight: function() {
     var scrollPosition = $(window).scrollTop();
-    var offset = $(".header-holder").height() + 25;
+    var offset = $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 25;
 
     highlightNavigation.sections.each(function() {
       var currentSection = $(this);
@@ -62,10 +62,13 @@ window.highlightNavigation = {
       if (scrollPosition >= sectionTop - offset) {
         var id = currentSection.attr("id");
         var $navigationLink = highlightNavigation.sectionIdTonavigationLink[id];
+        var $navigationListItem = $navigationLink.closest("li");
 
-        if (!$navigationLink.hasClass("active")) {
-          highlightNavigation.navigationLinks.removeClass("active");
-          $navigationLink.addClass("active");
+        if (!$navigationListItem.hasClass("active")) {
+          highlightNavigation.navigationListItems.removeClass("active");
+          $(".pytorch-right-menu-active-dot").remove();
+          $navigationListItem.addClass("active");
+          $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
         }
 
         return false;
@@ -105,53 +108,6 @@ window.mobileMenu = {
     $(window).off('resize.ForMobileMenu');
   }
 };
-
-$(window).on('resize', function(e) {
-  handleLeftMenu();
-  handleRightMenu();
-});
-
-$(window).on('scroll', function(e) {
-  handleLeftMenu();
-  handleRightMenu();
-});
-
-$(window).on('load', function() {
-  handleLeftMenu();
-  handleRightMenu();
-});
-
-function handleLeftMenu() {
-  var windowHeight = $(window).height();
-  var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
-
-  if (topOfFooterRelativeToWindow >= windowHeight) {
-    $(".pytorch-left-menu").css({height: "100%"});
-    // $(".pytorch-right-menu").removeClass("fixed-to-bottom");
-  } else {
-    var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow
-    var headerHeight = $('.header-holder').height();
-    var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
-
-    $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
-  }
-}
-
-function handleRightMenu() {
-  // if (topOfFooterRelativeToWindow >= windowHeight) {
-  // if the bottom of the right menu is <= 20px from the top of the footer
-  var windowHeight = $(window).height();
-  var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
-
-  var bottom = $(".pytorch-right-menu ul:first").offset().top + $(".pytorch-right-menu ul:first").height();
-  var footerTop = $(".docs-tutorials-resources").offset().top;
-
-  if (topOfFooterRelativeToWindow >= windowHeight) {
-    $(".pytorch-right-menu").removeClass("fixed-to-bottom");
-  } else if (bottom >= -40 + footerTop) {
-    $(".pytorch-right-menu").addClass("fixed-to-bottom");
-  }
-}
 
 },{}],3:[function(require,module,exports){
 window.mobileTOC = {
@@ -220,7 +176,7 @@ window.scrollToAnchor = {
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function() {
-        return $(".header-holder").height() + 20;
+        return $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 20;
       },
 
       /**
@@ -290,6 +246,70 @@ window.scrollToAnchor = {
     };
 
     $(document).ready($.proxy(anchorScrolls, 'init'));
+  }
+};
+
+},{}],6:[function(require,module,exports){
+window.sideMenus = {
+  rightMenuInitialTop: parseInt($(".pytorch-right-menu").css("top"), 10),
+
+  bind: function() {
+    $(window).on('load resize scroll', function(e) {
+      sideMenus.handleLeftMenu();
+      sideMenus.handleRightMenu();
+    });
+
+    $(window).on("load resize", function() {
+      var leftMenuWidth = $(".pytorch-left-menu").width();
+      var contentRightLeftOffset = $(".pytorch-content-right").offset().left;
+      var pageLevelPaddingLeft = parseInt($(".pytorch-page-level-bar").css("padding-left"), 10);
+      $(".pytorch-right-menu").css({left: contentRightLeftOffset});
+      $(".pytorch-shortcuts-wrapper").css({left: contentRightLeftOffset - leftMenuWidth - pageLevelPaddingLeft});
+    });
+  },
+
+  handleLeftMenu: function () {
+    var windowHeight = $(window).height();
+    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+
+    if (topOfFooterRelativeToWindow >= windowHeight) {
+      $(".pytorch-left-menu").css({height: "100%"});
+    } else {
+      var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow;
+      var headerHeight = $('.header-holder').height();
+      var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
+
+      $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
+    }
+  },
+
+  handleRightMenu: function() {
+    var windowHeight = $(window).height();
+    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+
+    var bottom = $(".pytorch-right-menu ul:first").offset().top + $(".pytorch-right-menu ul:first").height();
+    var footerTop = $(".docs-tutorials-resources").offset().top;
+    var headersHeight = $(".header-holder").height() + $(".pytorch-page-level-bar").height();
+    var top = $(window).scrollTop();
+    var initialTop = sideMenus.rightMenuInitialTop;
+
+    if (top === 0) {
+      $(".pytorch-right-menu").css({top: initialTop});
+    } else {
+      var stoppingPoint = headersHeight;
+
+      if (top >= (initialTop - stoppingPoint)) {
+        $(".pytorch-right-menu").css({top: stoppingPoint});
+      } else {
+        $(".pytorch-right-menu").css({top: initialTop - top});
+      }
+    }
+
+    if (topOfFooterRelativeToWindow >= windowHeight) {
+      $(".pytorch-right-menu").removeClass("fixed-to-bottom");
+    } else if (bottom >= -40 + footerTop) {
+      $(".pytorch-right-menu").addClass("fixed-to-bottom");
+    }
   }
 };
 
@@ -537,4 +557,4 @@ if (typeof(window) != 'undefined') {
 
 $(".sphx-glr-thumbcontainer").removeAttr("tooltip");
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,"pytorch-sphinx-theme"]);

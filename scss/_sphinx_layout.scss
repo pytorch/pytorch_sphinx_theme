@@ -1,6 +1,6 @@
 .pytorch-container {
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 rem(30px);
   width: 100%;
   @include full-nav-menu-desktop {
     padding: 0;
@@ -15,7 +15,7 @@
 
   @include full-nav-menu-desktop {
     margin-left: $desktop_menu_width + 60px;
-    padding-top: 137px;
+    padding-top: 220px;
   }
 }
 
@@ -28,9 +28,7 @@
 
 .pytorch-content-left {
   width: 100%;
-  padding-right: 30px;
   @include full-nav-menu-desktop {
-    padding-right: 0;
     width: 675px;
   }
 }
@@ -39,15 +37,14 @@
   display: none;
   @include full-nav-menu-desktop {
     display: block;
-    width: $desktop_menu_width;
+    width: $desktop_menu_width - 70px;
     position: relative;
-    float: right;
-    margin-left: rem(60px);
+    left: 50px;
   }
 }
 
 .pytorch-side-scroll {
-  width: $desktop_menu_width;
+  width: 410px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -55,26 +52,23 @@
 }
 
 .pytorch-menu-vertical {
-  padding-right: rem(20px);
   padding-bottom: 90px;
+  padding-right: rem(30px);
 }
 
 .pytorch-left-menu-search {
-  width: $desktop_menu_width - 5px;
-  z-index: 200;
-  background-color: #f3f4f7;
-  padding: rem(40px) 0 0 0;
-  margin-bottom: rem(40px);
+  margin: rem(40px) 0 rem(60px) 0;
+  padding-left: rem(30px);
 }
 
 .pytorch-left-menu-search input[type=text] {
-  width: $desktop_menu_width - 40px;
   border-radius: 0;
   padding: rem(8px) rem(12px);
   border-color: $orange;
   color: $orange;
   border-style: solid;
   font-size: rem(16px);
+  width: 100%;
 }
 
 .pytorch-left-menu {
@@ -127,7 +121,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     padding-bottom: 20px + 90px;
-    padding: 0 rem(20px) 0 rem(20px);
+    padding: 0 rem(60px) 0 rem(30px);
     position: fixed;
     top: 90px;
     width: $desktop_menu_width;
@@ -135,7 +129,7 @@
   }
 
   p.caption {
-    color: $orange;
+    color: $not_quite_black;
     display: block;
     display: inline-block;
     font-size: rem(18px);
@@ -144,6 +138,7 @@
     padding: 0;
     text-transform: none;
     white-space: nowrap;
+    padding-left: rem(30px);
   }
 }
 
@@ -152,9 +147,8 @@
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;
-  top: 190px;
+  top: 315px;
   width: $desktop_menu_width;
-  left: 1090px;
   z-index: 200;
   bottom: 0;
 
@@ -181,7 +175,7 @@
   a:link,
   a:visited,
   a:hover {
-    color: #4a4a4a;
+    color: $quick_start_grey;
     font-size: rem(16px);
     line-height: rem(25px);
     padding: 0;
@@ -244,6 +238,15 @@
 
   li.toctree-l1.current > a {
     color: $orange;
+    &:before {
+      content: "\2022";
+      display: inline-block;
+      position: absolute;
+      left: -20px;
+      top: 1px;
+      font-size: rem(22px);
+      color: $orange;
+    }
   }
 
   // This is the on state for pages beyond second level
@@ -331,19 +334,46 @@
   }
 }
 
+.pytorch-left-menu ul {
+  padding-left: rem(30px);
+}
+
 .pytorch-right-menu {
   a:link,
   a:visited,
   a:hover {
-    color: #4a4a4a;
+    color: $quick_start_grey;
+  }
 
-    &.active {
-      color: $orange;
-    }
+  li.active > a {
+    color: $orange;
   }
 
   ul ul {
-    padding-left: 20px;
+    padding-left: 0;
+
+    li a {
+      text-indent: 10px;
+    }
+
+    li {
+      text-indent: 5px;
+      li {
+        text-indent: 15px;
+        li {
+          text-indent: 25px;
+          li {
+            text-indent: 35px;
+            li {
+              text-indent: 45px;
+              li {
+                text-indent: 55px;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   li ul {
@@ -353,4 +383,129 @@
 
 .pytorch-right-menu .pytorch-side-scroll {
   width: $desktop_menu_width + 20px;
+  padding-top: 20px;
+
+  > ul {
+    padding-left: 25px;
+  }
+
+  ul li {
+    position: relative;
+  }
+
+  ul ul {
+    li {
+      &:before {
+        content: "";
+        background-color: $quick_start_grey;
+        height: 1px;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 13px;
+        width: 5px;
+      }
+
+      li {
+        &:before {
+          width: 15px;
+        }
+        li {
+          &:before {
+            width: 25px;
+          }
+          li {
+            &:before {
+              width: 35px;
+            }
+            li {
+              &:before {
+                width: 45px;
+              }
+              li {
+                &:before {
+                  width: 55px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.active {
+        &:before {
+          background-color: $orange;
+        }
+      }
+    }
+  }
+}
+
+.pytorch-right-menu-active-dot {
+  left: -20px;
+  position: absolute;
+  top: -2px;
+  &:before {
+    content: "\2022";
+    color: $orange;
+    display: inline-block;
+    font-size: rem(22px);
+    left: 0;
+    position: absolute;
+    text-indent: 0;
+    top: 0;
+  }
+}
+
+.header-container {
+  max-width: none;
+}
+
+.container-fluid.header-holder {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.header-holder .container {
+  max-width: none;
+  padding-right: rem(30px);
+  padding-left: rem(30px);
+
+  @include full-nav-menu-desktop {
+    padding-right: rem(60px);
+    padding-left: rem(60px);
+  }
+}
+
+.header-holder .main-menu {
+  justify-content: unset;
+  position: relative;
+  left: 380px;
+}
+
+.pytorch-page-level-bar {
+  display: none;
+
+  @include full-nav-menu-desktop {
+    align-items: center;
+    background-color: $white;
+    border-bottom: 1px solid #e2e2e2;
+    display: flex;
+    height: $desktop_header_height;
+    left: 420px;
+    padding-left: 60px;
+    position: fixed;
+    top: 90px;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  ul, li {
+    margin: 0;
+  }
+}
+
+.pytorch-shortcuts-wrapper {
+  position: absolute;
+  left: 60px + 675px + 50px + 25px;
 }
