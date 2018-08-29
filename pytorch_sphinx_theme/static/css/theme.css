@@ -8881,10 +8881,10 @@ pre {
   padding: 0;
 }
 .mobile-main-menu.open ul li a {
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #ffffff;
   letter-spacing: 0;
-  line-height: 3rem;
+  line-height: 4rem;
   text-decoration: none;
 }
 .mobile-main-menu.open ul li.active a {
