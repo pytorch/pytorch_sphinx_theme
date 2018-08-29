@@ -8584,6 +8584,22 @@ a:hover {
   color: #e44c2c;
 }
 
+a.with-right-arrow, .btn.with-right-arrow {
+  padding-right: 1.375rem;
+  position: relative;
+  background-image: url("../images/chevron-right-orange.svg");
+  background-size: 6px 13px;
+  background-position: center right 5px;
+  background-repeat: no-repeat;
+}
+@media screen and (min-width: 768px) {
+  a.with-right-arrow, .btn.with-right-arrow {
+    background-size: 8px 14px;
+    background-position: center right 12px;
+    padding-right: 2rem;
+  }
+}
+
 ::-webkit-input-placeholder {
   color: #e44c2c;
 }
@@ -8979,6 +8995,12 @@ pre {
     margin-bottom: 0;
   }
 }
+.docs-tutorials-resources .with-right-arrow {
+  margin-left: 12px;
+}
+.docs-tutorials-resources .with-right-arrow:hover {
+  background-image: url("../images/chevron-right-white.svg");
+}
 .docs-tutorials-resources p {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -8994,6 +9016,9 @@ pre {
 .docs-tutorials-resources a {
   font-size: 1.125rem;
   color: #e44c2c;
+}
+.docs-tutorials-resources a:hover {
+  color: #ffffff;
 }
 
 .footer-container {
@@ -9062,7 +9087,7 @@ pre {
 }
 
 .footer-social-icons {
-  margin: 0.625rem 0 2.5rem 0;
+  margin: 8.5625rem 0 2.5rem 0;
 }
 .footer-social-icons a {
   height: 32px;
@@ -9083,6 +9108,10 @@ pre {
   background-position: center center;
   background-size: 17px 17px;
   background-repeat: no-repeat;
+}
+
+.site-footer .mc-field-group {
+  margin-top: -2px;
 }
 
 article.pytorch-article {

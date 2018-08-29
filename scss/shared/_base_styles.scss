@@ -21,6 +21,22 @@ a:hover {
   color: $orange;
 }
 
+a, .btn {
+  &.with-right-arrow {
+    padding-right: rem(22px);
+    position: relative;
+    background-image: url("../images/chevron-right-orange.svg");
+    background-size: 6px 13px;
+    background-position: center right 5px;
+    background-repeat: no-repeat;
+    @include desktop {
+      background-size: 8px 14px;
+      background-position: center right 12px;
+      padding-right: rem(32px);
+    }
+  }
+}
+
 ::-webkit-input-placeholder {
   color: $orange;
 }
