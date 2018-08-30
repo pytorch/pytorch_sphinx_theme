@@ -238,3 +238,5 @@ if (typeof(window) != 'undefined') {
             clearTimeout(id);
         };
 }());
+
+$(".sphx-glr-thumbcontainer").removeAttr("tooltip");

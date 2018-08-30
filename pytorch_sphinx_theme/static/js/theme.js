@@ -535,4 +535,6 @@ if (typeof(window) != 'undefined') {
         };
 }());
 
+$(".sphx-glr-thumbcontainer").removeAttr("tooltip");
+
 },{"jquery":"jquery"}]},{},[1,2,3,4,5,"pytorch-sphinx-theme"]);

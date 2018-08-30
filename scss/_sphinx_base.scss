@@ -154,3 +154,39 @@ article.pytorch-article {
     background: #f5a623;
   }
 }
+
+.sphx-glr-thumbcontainer {
+  border: 1px solid #d6d7d8 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+  .caption-text {
+    a {
+      font-size: rem(16px);
+      color: $quick_start_grey;
+      letter-spacing: 0;
+      line-height: rem(24px);
+      &:hover {
+        color: $not_quite_black;
+        text-decoration: none;
+      }
+    }
+  }
+  &:hover {
+    .figure:before {
+      bottom: 100%;
+    }
+    box-shadow: none !important;
+    border-bottom-color: $white !important;
+  }
+  .figure:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 35%;
+    left: 0;
+    right: 0;
+    background: rgba(151, 155, 151, 0.2);
+  }
+  @include animated_border_hover_state;
+}

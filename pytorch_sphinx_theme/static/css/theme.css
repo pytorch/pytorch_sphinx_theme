@@ -9381,6 +9381,55 @@ article.pytorch-article p.caption {
   background: #f5a623;
 }
 
+.sphx-glr-thumbcontainer {
+  border: 1px solid #d6d7d8 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.sphx-glr-thumbcontainer .caption-text a {
+  font-size: 1rem;
+  color: #8c8c8c;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+}
+.sphx-glr-thumbcontainer .caption-text a:hover {
+  color: #262626;
+  text-decoration: none;
+}
+.sphx-glr-thumbcontainer:hover {
+  box-shadow: none !important;
+  border-bottom-color: #ffffff !important;
+}
+.sphx-glr-thumbcontainer:hover .figure:before {
+  bottom: 100%;
+}
+.sphx-glr-thumbcontainer .figure:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 35%;
+  left: 0;
+  right: 0;
+  background: rgba(151, 155, 151, 0.2);
+}
+@media screen and (min-width: 768px) {
+  .sphx-glr-thumbcontainer:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #e44c2c;
+    transition: width .250s ease-in-out;
+  }
+  .sphx-glr-thumbcontainer:hover:after {
+    width: 100%;
+  }
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 30px;
