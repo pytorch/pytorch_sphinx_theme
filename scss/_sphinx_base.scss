@@ -1,6 +1,3 @@
-
-
-
 body {
   background: $white;
   height: 100%;
@@ -269,5 +266,12 @@ article.pytorch-article {
     code, kbd, pre, samp, span.pre {
       font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
     }
+  }
+}
+
+.attribute {
+  @extend .function;
+   .has-code {
+    float: none;
   }
 }

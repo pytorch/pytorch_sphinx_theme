@@ -9430,23 +9430,23 @@ article.pytorch-article p.caption {
   }
 }
 
-.function dt {
+.function dt, .attribute dt {
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
   border-left: 3px solid #e44c2c;
   word-wrap: break-word;
 }
-.function .anchorjs-link {
+.function .anchorjs-link, .attribute .anchorjs-link {
   display: inline;
   position: absolute;
   left: 100%;
   font-size: 1.5625rem !important;
 }
-.function code {
+.function code, .attribute code {
   color: #262626;
 }
-.function .reference {
+.function .reference, .attribute .reference {
   font-size: 1rem;
   color: #979797;
   letter-spacing: 0;
@@ -9454,7 +9454,7 @@ article.pytorch-article p.caption {
   text-transform: uppercase;
   float: right;
 }
-.function:hover a {
+.function:hover a, .attribute:hover a {
   color: #e44c2c;
 }
 
@@ -9511,6 +9511,10 @@ article.pytorch-article p.caption {
 }
 .pytorch-article div.sphx-glr-download a code, .pytorch-article div.sphx-glr-download a kbd, .pytorch-article div.sphx-glr-download a pre, .pytorch-article div.sphx-glr-download a samp, .pytorch-article div.sphx-glr-download a span.pre {
   font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.attribute .has-code {
+  float: none;
 }
 
 .pytorch-container {
