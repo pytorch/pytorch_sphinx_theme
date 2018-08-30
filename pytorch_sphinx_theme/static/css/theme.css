@@ -9430,6 +9430,34 @@ article.pytorch-article p.caption {
   }
 }
 
+.function dt {
+  position: relative;
+  background: #f3f4f7;
+  padding: 1.125rem;
+  border-left: 3px solid #e44c2c;
+  word-wrap: break-word;
+}
+.function .anchorjs-link {
+  display: inline;
+  position: absolute;
+  left: 100%;
+  font-size: 1.5625rem !important;
+}
+.function code {
+  color: #262626;
+}
+.function .reference {
+  font-size: 1rem;
+  color: #979797;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  float: right;
+}
+.function:hover a {
+  color: #e44c2c;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

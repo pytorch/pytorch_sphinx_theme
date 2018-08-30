@@ -193,3 +193,35 @@ article.pytorch-article {
   }
   @include animated_border_hover_state;
 }
+
+.function {
+  dt {
+    position: relative;
+    background: $light_grey;
+    padding: rem(18px);
+    border-left: 3px solid $orange;
+    word-wrap: break-word;
+  }
+  .anchorjs-link {
+    display: inline;
+    position: absolute;
+    left: 100%;
+    font-size: rem(25px) !important;
+  }
+  code {
+    color: $not_quite_black;
+  }
+  .reference {
+    font-size: rem(16px);
+    color: #979797;
+    letter-spacing: 0;
+    line-height: rem(24px);
+    text-transform: uppercase;
+    float: right;
+  }
+  &:hover {
+    a {
+      color: $orange;
+    }
+  }
+}
