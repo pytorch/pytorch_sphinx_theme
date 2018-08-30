@@ -225,3 +225,49 @@ article.pytorch-article {
     }
   }
 }
+
+.pytorch-article {
+  div.sphx-glr-download a {
+    background-color: $light_grey;
+    background-image: url("../images/arrow-down-orange.svg");
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    background-size: 15px 15px;
+    border-radius: 0;
+    border: none;
+    display: block;
+    text-align: left;
+    padding: rem(15px) rem(50px);
+    position: relative;
+    margin: rem(20px) auto;
+
+    @include animated_border_hover_state;
+
+    @include desktop {
+      background-position: left 20px center;
+    }
+
+    &:hover {
+      box-shadow: none;
+      text-decoration: none;
+      background-image: url("../images/arrow-down-orange.svg");
+      background-color: $light_grey;
+
+      span.pre {
+        color: $content_text_color;
+      }
+    }
+
+    span.pre {
+      background-color: transparent;
+      font-size: rem(18px);
+      padding: 0;
+      color: $quick_start_grey;
+      font-weight: 300;
+    }
+
+    code, kbd, pre, samp, span.pre {
+      font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    }
+  }
+}

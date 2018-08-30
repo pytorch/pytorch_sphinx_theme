@@ -9458,6 +9458,61 @@ article.pytorch-article p.caption {
   color: #e44c2c;
 }
 
+.pytorch-article div.sphx-glr-download a {
+  background-color: #f3f4f7;
+  background-image: url("../images/arrow-down-orange.svg");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 15px 15px;
+  border-radius: 0;
+  border: none;
+  display: block;
+  text-align: left;
+  padding: 0.9375rem 3.125rem;
+  position: relative;
+  margin: 1.25rem auto;
+}
+@media screen and (min-width: 768px) {
+  .pytorch-article div.sphx-glr-download a:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #e44c2c;
+    transition: width .250s ease-in-out;
+  }
+  .pytorch-article div.sphx-glr-download a:hover:after {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pytorch-article div.sphx-glr-download a {
+    background-position: left 20px center;
+  }
+}
+.pytorch-article div.sphx-glr-download a:hover {
+  box-shadow: none;
+  text-decoration: none;
+  background-image: url("../images/arrow-down-orange.svg");
+  background-color: #f3f4f7;
+}
+.pytorch-article div.sphx-glr-download a:hover span.pre {
+  color: #545454;
+}
+.pytorch-article div.sphx-glr-download a span.pre {
+  background-color: transparent;
+  font-size: 1.125rem;
+  padding: 0;
+  color: #8c8c8c;
+  font-weight: 300;
+}
+.pytorch-article div.sphx-glr-download a code, .pytorch-article div.sphx-glr-download a kbd, .pytorch-article div.sphx-glr-download a pre, .pytorch-article div.sphx-glr-download a samp, .pytorch-article div.sphx-glr-download a span.pre {
+  font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;
