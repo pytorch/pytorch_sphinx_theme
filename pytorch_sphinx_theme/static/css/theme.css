@@ -9336,25 +9336,29 @@ article.pytorch-article p.caption {
   margin-top: 1.25rem;
 }
 
-.note {
+.note,
+.warning {
   background: #f3f4f7;
   margin-top: 1.125rem;
   margin-bottom: 1.125rem;
   padding-bottom: 1.125rem;
 }
-.note .first {
+.note .first,
+.warning .first {
   font-size: 1rem;
   color: #ffffff;
   letter-spacing: 0;
   text-transform: uppercase;
 }
-.note .first:before {
+.note .first:before,
+.warning .first:before {
   content: "\2022";
   position: relative;
   padding-left: 10px;
   padding-right: 15px;
 }
-.note .last {
+.note .last,
+.warning .last {
   padding-left: 32px;
   padding-right: 32px;
   font-size: 1.125rem;
@@ -9363,8 +9367,18 @@ article.pytorch-article p.caption {
   line-height: 1.75rem;
   margin-bottom: 0;
 }
+.note .pre,
+.warning .pre {
+  background: #ffffff;
+  outline: 1px solid #e9e9e9;
+}
+
 .note .admonition-title {
   background: #ee4c2c;
+}
+
+.warning .admonition-title {
+  background: #f5a623;
 }
 
 .pytorch-container {
