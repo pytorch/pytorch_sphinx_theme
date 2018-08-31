@@ -298,3 +298,25 @@ article.pytorch-article {
     float: none;
   }
 }
+
+.pytorch-article p.sphx-glr-script-out {
+  margin-bottom: rem(18px);
+}
+
+.pytorch-article div.sphx-glr-script-out {
+  margin-bottom: rem(40px);
+  .highlight {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .highlight pre {
+    background-color: #fdede9;
+    padding: rem(18px);
+    color: #837b79;
+  }
+
+  + p {
+    margin-top: unset;
+  }
+}

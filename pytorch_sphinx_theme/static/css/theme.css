@@ -9534,6 +9534,26 @@ article.pytorch-article p.last {
   float: none;
 }
 
+.pytorch-article p.sphx-glr-script-out {
+  margin-bottom: 1.125rem;
+}
+
+.pytorch-article div.sphx-glr-script-out {
+  margin-bottom: 2.5rem;
+}
+.pytorch-article div.sphx-glr-script-out .highlight {
+  margin-left: 0;
+  margin-top: 0;
+}
+.pytorch-article div.sphx-glr-script-out .highlight pre {
+  background-color: #fdede9;
+  padding: 1.125rem;
+  color: #837b79;
+}
+.pytorch-article div.sphx-glr-script-out + p {
+  margin-top: unset;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;
