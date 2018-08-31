@@ -9603,6 +9603,40 @@ article.pytorch-article .class .attribute dt {
   margin-top: unset;
 }
 
+article.pytorch-article .wy-table-responsive table {
+  border: none;
+  border-color: #ffffff !important;
+  table-layout: fixed;
+}
+article.pytorch-article .wy-table-responsive table thead {
+  border-bottom: 2px solid #8c8c8c;
+}
+article.pytorch-article .wy-table-responsive table thead th {
+  font-weight: 400;
+  line-height: 1.75rem;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+}
+article.pytorch-article .wy-table-responsive table tbody .row-odd {
+  background-color: #f3f4f7;
+}
+article.pytorch-article .wy-table-responsive table tbody td {
+  color: #8c8c8c;
+  white-space: normal;
+  padding: 0.9375rem;
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+article.pytorch-article .wy-table-responsive table tbody td .pre {
+  background: #ffffff;
+  outline: 1px solid #e9e9e9;
+  color: #ee4c2c;
+  font-size: 87.5%;
+}
+article.pytorch-article .wy-table-responsive table tbody td code {
+  font-size: 87.5%;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

@@ -240,3 +240,4 @@ if (typeof(window) != 'undefined') {
 }());
 
 $(".sphx-glr-thumbcontainer").removeAttr("tooltip");
+$("table").removeAttr("border");
