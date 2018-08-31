@@ -128,7 +128,7 @@ article.pytorch-article {
         padding-right: 15px;
       }
     }
-    p:nth-child(n+2) {
+    p:nth-child(n + 2) {
       padding: 0 rem(32px);
       font-size: rem(18px);
       color: $not_quite_black;
@@ -221,6 +221,11 @@ article.pytorch-article {
     padding: rem(18px);
     border-left: 3px solid $orange;
     word-wrap: break-word;
+    &:hover {
+      .viewcode-link {
+        color: $orange;
+      }
+    }
   }
   .anchorjs-link {
     display: inline;
@@ -231,18 +236,13 @@ article.pytorch-article {
   code {
     color: $not_quite_black;
   }
-  .reference {
+  .viewcode-link {
     font-size: rem(16px);
     color: #979797;
     letter-spacing: 0;
     line-height: rem(24px);
     text-transform: uppercase;
     float: right;
-  }
-  &:hover {
-    a {
-      color: $orange;
-    }
   }
 }
 
@@ -294,8 +294,48 @@ article.pytorch-article {
 
 .attribute {
   @extend .function;
-   .has-code {
+  .has-code {
     float: none;
+  }
+}
+
+.class {
+  @extend .function;
+  dt {
+    border-left: none;
+    border-top: 3px solid $orange;
+  }
+
+  em.property {
+    text-transform: uppercase;
+    font-style: normal;
+    color: $orange;
+    font-size: rem(16px);
+    letter-spacing: 0;
+    line-height: rem(24px);
+    font-weight: 400;
+    padding-right: 12px;
+  }
+
+  dd {
+    p {
+      color: $quick_start_grey;
+      letter-spacing: 0;
+      line-height: 28px;
+    }
+  }
+  .method,
+  .staticmethod {
+    dt {
+      border-left: 3px solid $orange;
+      border-top: none;
+    }
+  }
+  .attribute {
+    @extend .attribute;
+    dt {
+      border-top: none;
+    }
   }
 }
 

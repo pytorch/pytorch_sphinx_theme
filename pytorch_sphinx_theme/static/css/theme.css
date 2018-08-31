@@ -9356,8 +9356,8 @@ article.pytorch-article .warning .first:before {
   padding-left: 10px;
   padding-right: 15px;
 }
-article.pytorch-article .note p:nth-child(n+2),
-article.pytorch-article .warning p:nth-child(n+2) {
+article.pytorch-article .note p:nth-child(n + 2),
+article.pytorch-article .warning p:nth-child(n + 2) {
   padding: 0 2rem;
   font-size: 1.125rem;
   color: #262626;
@@ -9447,32 +9447,32 @@ article.pytorch-article p.last {
   }
 }
 
-.function dt, .attribute dt {
+.function dt, .attribute dt, .class .attribute dt, .class dt {
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
   border-left: 3px solid #e44c2c;
   word-wrap: break-word;
 }
-.function .anchorjs-link, .attribute .anchorjs-link {
+.function dt:hover .viewcode-link, .attribute dt:hover .viewcode-link, .class dt:hover .viewcode-link {
+  color: #e44c2c;
+}
+.function .anchorjs-link, .attribute .anchorjs-link, .class .anchorjs-link {
   display: inline;
   position: absolute;
   left: 100%;
   font-size: 1.5625rem !important;
 }
-.function code, .attribute code {
+.function code, .attribute code, .class .attribute code, .class code {
   color: #262626;
 }
-.function .reference, .attribute .reference {
+.function .viewcode-link, .attribute .viewcode-link, .class .viewcode-link {
   font-size: 1rem;
   color: #979797;
   letter-spacing: 0;
   line-height: 1.5rem;
   text-transform: uppercase;
   float: right;
-}
-.function:hover a, .attribute:hover a {
-  color: #e44c2c;
 }
 
 .pytorch-article div.sphx-glr-download a {
@@ -9532,6 +9532,34 @@ article.pytorch-article p.last {
 
 .attribute .has-code {
   float: none;
+}
+
+.class dt {
+  border-left: none;
+  border-top: 3px solid #e44c2c;
+}
+.class em.property {
+  text-transform: uppercase;
+  font-style: normal;
+  color: #e44c2c;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  font-weight: 400;
+  padding-right: 12px;
+}
+.class dd p {
+  color: #8c8c8c;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+.class .method dt,
+.class .staticmethod dt {
+  border-left: 3px solid #e44c2c;
+  border-top: none;
+}
+.class .attribute dt {
+  border-top: none;
 }
 
 .pytorch-article p.sphx-glr-script-out {
