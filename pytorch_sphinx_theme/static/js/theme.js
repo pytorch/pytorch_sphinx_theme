@@ -280,31 +280,37 @@ window.sideMenus = {
   },
 
   handleRightMenu: function() {
-    var windowHeight = $(window).height();
-    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
-
-    var bottom = $(".pytorch-right-menu ul:first").offset().top + $(".pytorch-right-menu ul:first").height();
-    var footerTop = $(".docs-tutorials-resources").offset().top;
-    var headersHeight = $(".header-holder").height() + $(".pytorch-page-level-bar").height();
-    var top = $(window).scrollTop();
+    var scrollPos = $(window).scrollTop();
+    var $rightMenu = $(".pytorch-right-menu");
     var initialTop = sideMenus.rightMenuInitialTop;
 
-    if (top === 0) {
-      $(".pytorch-right-menu").css({top: initialTop});
-    } else {
-      var stoppingPoint = headersHeight;
-
-      if (top >= (initialTop - stoppingPoint)) {
-        $(".pytorch-right-menu").css({top: stoppingPoint});
-      } else {
-        $(".pytorch-right-menu").css({top: initialTop - top});
-      }
+    if (scrollPos === 0) {
+      $rightMenu.css({top: initialTop});
+      return;
     }
 
-    if (topOfFooterRelativeToWindow >= windowHeight) {
-      $(".pytorch-right-menu").removeClass("fixed-to-bottom");
-    } else if (bottom >= -40 + footerTop) {
-      $(".pytorch-right-menu").addClass("fixed-to-bottom");
+    var $rightMenuList = $(".pytorch-right-menu ul:first");
+    var windowHeight = $(window).height();
+    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+    var bottom = $rightMenuList.offset().top + $rightMenuList.height();
+    var footerTop = $(".docs-tutorials-resources").offset().top;
+    var stoppingPoint = $(".header-holder").height() + $(".pytorch-page-level-bar").height();
+    var PADDING_BETWEEN_MENU_AND_FOOTER = 40;
+
+    // if: the right menu is fixed to the bottom and the site footer is not in the window
+    // else if: the bottom position of the right menu matches or is past the top position
+    //          of the footer minus padding
+
+    if ($rightMenu.hasClass("fixed-to-bottom") && topOfFooterRelativeToWindow >= windowHeight) {
+      $rightMenu.removeClass("fixed-to-bottom").css({top: stoppingPoint, left: ""});
+    } else if (bottom >= -PADDING_BETWEEN_MENU_AND_FOOTER + footerTop) {
+      $rightMenu.addClass("fixed-to-bottom").css({top: "auto", left: 0});
+    } else {
+      var top = scrollPos >= (initialTop - stoppingPoint)
+                  ? stoppingPoint
+                  : initialTop - scrollPos;
+
+      $rightMenu.css({top: top});
     }
   }
 };
