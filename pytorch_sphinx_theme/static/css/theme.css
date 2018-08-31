@@ -9898,26 +9898,26 @@ article.pytorch-article p.last {
 .pytorch-right-menu ul ul {
   padding-left: 0;
 }
-.pytorch-right-menu ul ul li a {
-  text-indent: 10px;
-}
 .pytorch-right-menu ul ul li {
-  text-indent: 5px;
+  text-indent: 0px;
 }
 .pytorch-right-menu ul ul li li {
+  text-indent: 5px;
+}
+.pytorch-right-menu ul ul li li a {
   text-indent: 15px;
 }
 .pytorch-right-menu ul ul li li li {
-  text-indent: 25px;
+  text-indent: 10px;
 }
 .pytorch-right-menu ul ul li li li li {
-  text-indent: 35px;
+  text-indent: 15px;
 }
 .pytorch-right-menu ul ul li li li li li {
-  text-indent: 45px;
+  text-indent: 20px;
 }
 .pytorch-right-menu ul ul li li li li li li {
-  text-indent: 55px;
+  text-indent: 25px;
 }
 .pytorch-right-menu li ul {
   display: block;
@@ -9930,6 +9930,9 @@ article.pytorch-article p.last {
 .pytorch-right-menu .pytorch-side-scroll > ul {
   padding-left: 25px;
 }
+.pytorch-right-menu .pytorch-side-scroll > ul > li > a {
+  display: none;
+}
 .pytorch-right-menu .pytorch-side-scroll ul li {
   position: relative;
 }
@@ -9939,24 +9942,24 @@ article.pytorch-article p.last {
   height: 1px;
   display: inline-block;
   position: absolute;
-  left: 0;
+  left: 5px;
   top: 13px;
-  width: 5px;
+  width: 0;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li:before {
-  width: 15px;
+  width: 5px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li li:before {
-  width: 25px;
+  width: 10px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li li li:before {
-  width: 35px;
+  width: 15px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li li li li:before {
-  width: 45px;
+  width: 20px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li li li li li:before {
-  width: 55px;
+  width: 25px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li.active:before {
   background-color: #e44c2c;
@@ -10028,6 +10031,7 @@ article.pytorch-article p.last {
 }
 
 .pytorch-shortcuts-wrapper {
+  display: none;
   position: absolute;
   left: 810px;
 }

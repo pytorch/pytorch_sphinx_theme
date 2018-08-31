@@ -352,22 +352,21 @@
   ul ul {
     padding-left: 0;
 
-    li a {
-      text-indent: 10px;
-    }
-
     li {
-      text-indent: 5px;
+      text-indent: 0px;
       li {
-        text-indent: 15px;
+        text-indent: 5px;
+        a {
+          text-indent: 15px;
+        }
         li {
-          text-indent: 25px;
+          text-indent: 10px;
           li {
-            text-indent: 35px;
+            text-indent: 15px;
             li {
-              text-indent: 45px;
+              text-indent: 20px;
               li {
-                text-indent: 55px;
+                text-indent: 25px;
               }
             }
           }
@@ -387,6 +386,10 @@
 
   > ul {
     padding-left: 25px;
+    // Hide the first level (title) of the article
+    > li > a {
+      display: none;
+    }
   }
 
   ul li {
@@ -401,30 +404,30 @@
         height: 1px;
         display: inline-block;
         position: absolute;
-        left: 0;
+        left: 5px;
         top: 13px;
-        width: 5px;
+        width: 0;
       }
 
       li {
         &:before {
-          width: 15px;
+          width: 5px;
         }
         li {
           &:before {
-            width: 25px;
+            width: 10px;
           }
           li {
             &:before {
-              width: 35px;
+              width: 15px;
             }
             li {
               &:before {
-                width: 45px;
+                width: 20px;
               }
               li {
                 &:before {
-                  width: 55px;
+                  width: 25px;
                 }
               }
             }
@@ -506,6 +509,7 @@
 }
 
 .pytorch-shortcuts-wrapper {
+  display: none;
   position: absolute;
   left: 60px + 675px + 50px + 25px;
 }

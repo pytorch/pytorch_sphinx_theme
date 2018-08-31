@@ -11,16 +11,9 @@ window.highlightNavigation = {
   sectionIdTonavigationLink: {},
 
   bind: function() {
-    // Sphinx automatically tags the first menu item with just a "#" href, which brings
-    // you to the top of the page. We want to instead give this an href of the first content
-    // section so that it highlights like every other menu item.
-    var $firstNavItem = $(".pytorch-right-menu li a:first");
-
-    if ($firstNavItem.attr("href") === "#") {
-      var firstSectionId = $(".pytorch-article .section")
-        .first()
-        .attr("id");
-      $firstNavItem.attr("href", "#" + firstSectionId);
+    // Don't show the "Shortcuts" text unless there are menu items
+    if (highlightNavigation.navigationListItems.length > 1) {
+      $(".pytorch-shortcuts-wrapper").show();
     }
 
     highlightNavigation.sections.each(function() {
@@ -67,8 +60,11 @@ window.highlightNavigation = {
         if (!$navigationListItem.hasClass("active")) {
           highlightNavigation.navigationListItems.removeClass("active");
           $(".pytorch-right-menu-active-dot").remove();
-          $navigationListItem.addClass("active");
-          $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
+
+          if ($navigationLink.is(":visible")) {
+            $navigationListItem.addClass("active");
+            $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
+          }
         }
 
         return false;
