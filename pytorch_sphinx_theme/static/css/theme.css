@@ -9348,6 +9348,7 @@ article.pytorch-article .warning .first {
   letter-spacing: 0;
   text-transform: uppercase;
   margin-bottom: 1.125rem;
+  padding-left: 0px;
 }
 article.pytorch-article .note .first:before,
 article.pytorch-article .warning .first:before {
@@ -9447,32 +9448,86 @@ article.pytorch-article p.last {
   }
 }
 
-.function dt, .attribute dt, .class .attribute dt, .class dt {
+article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
   border-left: 3px solid #e44c2c;
   word-wrap: break-word;
 }
-.function dt:hover .viewcode-link, .attribute dt:hover .viewcode-link, .class dt:hover .viewcode-link {
+article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
   color: #e44c2c;
 }
-.function .anchorjs-link, .attribute .anchorjs-link, .class .anchorjs-link {
+article.pytorch-article .function .anchorjs-link, article.pytorch-article .attribute .anchorjs-link, article.pytorch-article .class .anchorjs-link {
   display: inline;
   position: absolute;
   left: 100%;
   font-size: 1.5625rem !important;
 }
-.function code, .attribute code, .class .attribute code, .class code {
+article.pytorch-article .function code, article.pytorch-article .attribute code, article.pytorch-article .class .attribute code, article.pytorch-article .class code {
   color: #262626;
 }
-.function .viewcode-link, .attribute .viewcode-link, .class .viewcode-link {
+article.pytorch-article .function .viewcode-link, article.pytorch-article .attribute .viewcode-link, article.pytorch-article .class .viewcode-link {
   font-size: 1rem;
   color: #979797;
   letter-spacing: 0;
   line-height: 1.5rem;
   text-transform: uppercase;
   float: right;
+}
+article.pytorch-article .function dd p, article.pytorch-article .attribute dd p, article.pytorch-article .class .attribute dd p, article.pytorch-article .class dd p {
+  padding-left: 60px;
+  color: #262626;
+}
+article.pytorch-article .function table, article.pytorch-article .attribute table, article.pytorch-article .class .attribute table, article.pytorch-article .class table {
+  width: 0%;
+}
+article.pytorch-article .function table tbody tr th.field-name, article.pytorch-article .attribute table tbody tr th.field-name, article.pytorch-article .class table tbody tr th.field-name {
+  font-size: 1.125rem;
+  padding-left: 7.5rem;
+  white-space: nowrap;
+  line-height: 1.75rem;
+  color: #262626;
+}
+article.pytorch-article .function table tbody tr td.field-body, article.pytorch-article .attribute table tbody tr td.field-body, article.pytorch-article .class table tbody tr td.field-body {
+  font-size: 1.125rem;
+  padding: 0.625rem;
+  padding-left: 1.25rem;
+  line-height: 1.75rem;
+  color: #262626;
+}
+article.pytorch-article .function table tbody tr td.field-body p, article.pytorch-article .attribute table tbody tr td.field-body p, article.pytorch-article .class table tbody tr td.field-body p {
+  padding-left: 0px;
+}
+article.pytorch-article .attribute .has-code {
+  float: none;
+}
+article.pytorch-article .class dt {
+  border-left: none;
+  border-top: 3px solid #e44c2c;
+}
+article.pytorch-article .class em.property {
+  text-transform: uppercase;
+  font-style: normal;
+  color: #e44c2c;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  font-weight: 400;
+  padding-right: 0.75rem;
+}
+article.pytorch-article .class dd p {
+  color: #8c8c8c;
+  letter-spacing: 0;
+  line-height: 28px;
+}
+article.pytorch-article .class .method dt,
+article.pytorch-article .class .staticmethod dt {
+  border-left: 3px solid #e44c2c;
+  border-top: none;
+}
+article.pytorch-article .class .attribute dt {
+  border-top: none;
 }
 
 .pytorch-article div.sphx-glr-download a {
@@ -9528,38 +9583,6 @@ article.pytorch-article p.last {
 }
 .pytorch-article div.sphx-glr-download a code, .pytorch-article div.sphx-glr-download a kbd, .pytorch-article div.sphx-glr-download a pre, .pytorch-article div.sphx-glr-download a samp, .pytorch-article div.sphx-glr-download a span.pre {
   font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
-}
-
-.attribute .has-code {
-  float: none;
-}
-
-.class dt {
-  border-left: none;
-  border-top: 3px solid #e44c2c;
-}
-.class em.property {
-  text-transform: uppercase;
-  font-style: normal;
-  color: #e44c2c;
-  font-size: 1rem;
-  letter-spacing: 0;
-  line-height: 1.5rem;
-  font-weight: 400;
-  padding-right: 12px;
-}
-.class dd p {
-  color: #8c8c8c;
-  letter-spacing: 0;
-  line-height: 28px;
-}
-.class .method dt,
-.class .staticmethod dt {
-  border-left: 3px solid #e44c2c;
-  border-top: none;
-}
-.class .attribute dt {
-  border-top: none;
 }
 
 .pytorch-article p.sphx-glr-script-out {
