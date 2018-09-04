@@ -9491,8 +9491,10 @@ article.pytorch-article .function .viewcode-link, article.pytorch-article .attri
   line-height: 1.5rem;
   text-transform: uppercase;
 }
+article.pytorch-article .function dd, article.pytorch-article .attribute dd, article.pytorch-article .class .attribute dd, article.pytorch-article .class dd {
+  padding-left: 3.75rem;
+}
 article.pytorch-article .function dd p, article.pytorch-article .attribute dd p, article.pytorch-article .class .attribute dd p, article.pytorch-article .class dd p {
-  padding-left: 60px;
   color: #262626;
 }
 article.pytorch-article .function table, article.pytorch-article .attribute table, article.pytorch-article .class .attribute table, article.pytorch-article .class table {

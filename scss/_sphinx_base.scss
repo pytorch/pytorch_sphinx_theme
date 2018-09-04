@@ -294,8 +294,8 @@ article.pytorch-article {
       text-transform: uppercase;
     }
     dd {
+      padding-left: rem(60px);
       p {
-        padding-left: 60px;
         color: $not_quite_black;
       }
     }
