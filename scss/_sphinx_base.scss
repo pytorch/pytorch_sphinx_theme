@@ -263,8 +263,14 @@ article.pytorch-article {
       position: relative;
       background: $light_grey;
       padding: rem(18px);
+      padding-right: rem(85px);
       border-left: 3px solid $orange;
       word-wrap: break-word;
+      a {
+        position: absolute;
+        right: 0;
+        padding-right: rem(10px);
+      }
       &:hover {
         .viewcode-link {
           color: $orange;
@@ -286,7 +292,6 @@ article.pytorch-article {
       letter-spacing: 0;
       line-height: rem(24px);
       text-transform: uppercase;
-      float: right;
     }
     dd {
       p {
@@ -346,6 +351,8 @@ article.pytorch-article {
 
     dd {
       p {
+        color: $quick_start_grey;
+        letter-spacing: 0;
         line-height: rem(28px);
       }
     }

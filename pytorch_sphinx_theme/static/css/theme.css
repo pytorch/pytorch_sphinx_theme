@@ -9463,8 +9463,14 @@ article.pytorch-article .function dt, article.pytorch-article .attribute dt, art
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
+  padding-right: 5.3125rem;
   border-left: 3px solid #e44c2c;
   word-wrap: break-word;
+}
+article.pytorch-article .function dt a, article.pytorch-article .attribute dt a, article.pytorch-article .class .attribute dt a, article.pytorch-article .class dt a {
+  position: absolute;
+  right: 0;
+  padding-right: 0.625rem;
 }
 article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
   color: #e44c2c;
@@ -9484,7 +9490,6 @@ article.pytorch-article .function .viewcode-link, article.pytorch-article .attri
   letter-spacing: 0;
   line-height: 1.5rem;
   text-transform: uppercase;
-  float: right;
 }
 article.pytorch-article .function dd p, article.pytorch-article .attribute dd p, article.pytorch-article .class .attribute dd p, article.pytorch-article .class dd p {
   padding-left: 60px;
@@ -9528,6 +9533,8 @@ article.pytorch-article .class em.property {
   padding-right: 0.75rem;
 }
 article.pytorch-article .class dd p {
+  color: #8c8c8c;
+  letter-spacing: 0;
   line-height: 1.75rem;
 }
 article.pytorch-article .class .method dt,
