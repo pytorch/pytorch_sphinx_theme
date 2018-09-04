@@ -293,6 +293,9 @@ article.pytorch-article {
         padding-left: 60px;
         color: $not_quite_black;
       }
+      pre {
+        padding-left: rem(60px);
+      }
     }
     table {
       width: 0%;
