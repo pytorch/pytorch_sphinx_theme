@@ -247,20 +247,15 @@ window.scrollToAnchor = {
 
 },{}],6:[function(require,module,exports){
 window.sideMenus = {
-  rightMenuInitialTop: parseInt($(".pytorch-right-menu").css("top"), 10),
+  rightMenuInitialTop: $(".pytorch-article h1:first").offset().top,
 
   bind: function() {
+    // Start the Shortcuts menu at the article's H1 position
+    $(".pytorch-right-menu").css({top: sideMenus.rightMenuInitialTop});
+
     $(window).on('load resize scroll', function(e) {
       sideMenus.handleLeftMenu();
       sideMenus.handleRightMenu();
-    });
-
-    $(window).on("load resize", function() {
-      var leftMenuWidth = $(".pytorch-left-menu").width();
-      var contentRightLeftOffset = $(".pytorch-content-right").offset().left;
-      var pageLevelPaddingLeft = parseInt($(".pytorch-page-level-bar").css("padding-left"), 10);
-      $(".pytorch-right-menu").css({left: contentRightLeftOffset});
-      $(".pytorch-shortcuts-wrapper").css({left: contentRightLeftOffset - leftMenuWidth - pageLevelPaddingLeft});
     });
   },
 
@@ -302,9 +297,9 @@ window.sideMenus = {
     //          of the footer minus padding
 
     if ($rightMenu.hasClass("fixed-to-bottom") && topOfFooterRelativeToWindow >= windowHeight) {
-      $rightMenu.removeClass("fixed-to-bottom").css({top: stoppingPoint, left: ""});
+      $rightMenu.removeClass("fixed-to-bottom").css({top: stoppingPoint});
     } else if (bottom >= -PADDING_BETWEEN_MENU_AND_FOOTER + footerTop) {
-      $rightMenu.addClass("fixed-to-bottom").css({top: "auto", left: 0});
+      $rightMenu.addClass("fixed-to-bottom").css({top: "auto"});
     } else {
       var top = scrollPos >= (initialTop - stoppingPoint)
                   ? stoppingPoint

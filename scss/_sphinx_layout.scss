@@ -13,38 +13,56 @@
   position: relative;
   @include clearfix;
 
-  @include full-nav-menu-desktop {
+  @include sphinx-medium-size {
+    left: $sphinx_content_wrap_left_margin;
+    padding-top: 160px;
+    width: $sphinx_content_wrap_width;
+  }
+
+  @include sphinx-full-size {
+    left: auto;
     margin-left: $desktop_menu_width + 60px;
     padding-top: 220px;
+    width: auto;
   }
 }
 
 .pytorch-content {
   background: #ffffff;
   width: 100%;
-  max-width: 675px;
+  max-width: $sphinx_full_width_content_width;
   position: relative;
 }
 
 .pytorch-content-left {
   width: 100%;
-  @include full-nav-menu-desktop {
-    width: 675px;
+
+  @include sphinx-medium-size {
+    width: $sphinx_article_width;
+  }
+
+  @include sphinx-full-size {
+    width: $sphinx_full_width_content_width;
   }
 }
 
 .pytorch-content-right {
   display: none;
-  @include full-nav-menu-desktop {
+  position: relative;
+
+  @include sphinx-medium-size {
     display: block;
+    left: $sphinx_right_menu_wrap_left_margin;
+    width: $sphinx_right_menu_wrap_width;
+  }
+
+  @include sphinx-full-size {
     width: $desktop_menu_width - 70px;
-    position: relative;
-    left: 50px;
+    left: 0;
   }
 }
 
 .pytorch-side-scroll {
-  width: 410px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -52,23 +70,16 @@
 }
 
 .pytorch-menu-vertical {
-  padding-bottom: 90px;
-  padding-right: rem(30px);
-}
+  padding: rem(70px) rem(30px) rem(90px) 0;
 
-.pytorch-left-menu-search {
-  margin: rem(40px) 0 rem(60px) 0;
-  padding-left: rem(30px);
-}
+  @include sphinx-medium-size {
+    padding-top: 0;
+    padding-right: $sphinx_left_menu_wrapper_padding_right;
+  }
 
-.pytorch-left-menu-search input[type=text] {
-  border-radius: 0;
-  padding: rem(8px) rem(12px);
-  border-color: $orange;
-  color: $orange;
-  border-style: solid;
-  font-size: rem(16px);
-  width: 100%;
+  @include sphinx-full-size {
+    padding-right: rem(30px);
+  }
 }
 
 .pytorch-left-menu {
@@ -104,15 +115,7 @@
     }
   }
 
-  a.close-table-of-contents {
-    display: block;
-
-    @include full-nav-menu-desktop {
-      display: none;
-    }
-  }
-
-  @include full-nav-menu-desktop {
+  @include sphinx-medium-size {
     background: #f3f4f7;
     bottom: 0;
     color: #252627;
@@ -121,24 +124,74 @@
     overflow-x: hidden;
     overflow-y: hidden;
     padding-bottom: 20px + 90px;
-    padding: 0 rem(60px) 0 rem(30px);
+    padding: 0 rem(30px) 0 0;
     position: fixed;
     top: 90px;
-    width: $desktop_menu_width;
+    min-width: 280px;
+    width: $sphinx_left_menu_width;
     z-index: 200;
   }
 
-  p.caption {
-    color: $not_quite_black;
-    display: block;
-    display: inline-block;
-    font-size: rem(18px);
-    line-height: rem(34px);
-    margin-bottom: rem(16px);
-    padding: 0;
-    text-transform: none;
-    white-space: nowrap;
+  @include sphinx-full-size {
+    padding: 0 rem(60px) 0 rem(30px);
+    width: $desktop_menu_width;
+  }
+}
+
+.pytorch-left-menu p.caption {
+  color: $not_quite_black;
+  display: block;
+  display: inline-block;
+  font-size: rem(18px);
+  line-height: rem(34px);
+  margin-bottom: rem(16px);
+  padding: 0;
+  text-transform: none;
+  white-space: nowrap;
+
+  @include sphinx-medium-size {
     padding-left: rem(30px);
+  }
+}
+
+.pytorch-left-menu a.close-table-of-contents {
+  display: block;
+
+  @include full-nav-menu-desktop {
+    display: none;
+  }
+}
+
+.pytorch-left-menu-search {
+  margin-bottom: rem(40px);
+
+  @include sphinx-medium-size {
+    margin: rem(20px) 0 rem(30px) 0;
+    padding-left: rem(30px);
+  }
+
+  @include sphinx-full-size {
+    margin: rem(40px) 0 rem(60px) 0;
+  }
+}
+
+.pytorch-left-menu-search input[type=text] {
+  border-radius: 0;
+  padding: rem(8px) rem(12px);
+  border-color: $orange;
+  color: $orange;
+  border-style: solid;
+  font-size: rem(16px);
+  width: 100%;
+}
+
+.pytorch-left-menu .pytorch-side-scroll {
+  @include sphinx-medium-size {
+    width: $sphinx_left_menu_scroll_wrapper_width;
+  }
+
+  @include sphinx-full-size {
+    width: 410px;
   }
 }
 
@@ -147,16 +200,26 @@
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;
-  top: 315px;
-  width: $desktop_menu_width;
+  top: auto;
   z-index: 200;
   bottom: 0;
+
+  @include sphinx-medium-size {
+    left: $sphinx_right_menu_left_margin;
+    width: $sphinx_right_menu_width;
+  }
+
+  @include sphinx-full-size {
+    left: 1200px;
+    width: 380px;
+  }
 
   &.fixed-to-bottom {
     top: auto;
     bottom: 20px;
     position: absolute;
     left: 0;
+    width: 100%;
   }
 }
 
@@ -335,7 +398,10 @@
 }
 
 .pytorch-left-menu ul {
-  padding-left: rem(30px);
+  padding-left: 0;
+  @include sphinx-medium-size {
+    padding-left: rem(30px);
+  }
 }
 
 .pytorch-right-menu {
@@ -353,20 +419,22 @@
     padding-left: 0;
 
     li {
-      text-indent: 0px;
+      padding-left: 0px;
       li {
-        text-indent: 5px;
-        a {
-          text-indent: 15px;
+        padding-left: 5px;
+        a:link,
+        a:visited,
+        a:hover {
+          padding-left: 5px;
         }
         li {
-          text-indent: 10px;
+          padding-left: 10px;
           li {
-            text-indent: 15px;
+            padding-left: 15px;
             li {
-              text-indent: 20px;
+              padding-left: 20px;
               li {
-                text-indent: 25px;
+                padding-left: 25px;
               }
             }
           }
@@ -381,11 +449,19 @@
 }
 
 .pytorch-right-menu .pytorch-side-scroll {
-  width: $desktop_menu_width + 20px;
+  @include sphinx-medium-size {
+    width: $sphinx_right_menu_scroll_wrapper_width;
+  }
+
+  @include sphinx-full-size {
+    width: $desktop_menu_width + 20px;
+  }
+
   padding-top: 20px;
 
   > ul {
-    padding-left: 25px;
+    padding-left: 10%;
+    padding-right: 10%;
     // Hide the first level (title) of the article
     > li > a {
       display: none;
@@ -404,9 +480,13 @@
         height: 1px;
         display: inline-block;
         position: absolute;
-        left: 5px;
-        top: 13px;
+        left: 0;
+        top: 10px;
         width: 0;
+
+        @include sphinx-full-size {
+          top: 13px;
+        }
       }
 
       li {
@@ -474,7 +554,12 @@
   padding-right: rem(30px);
   padding-left: rem(30px);
 
-  @include full-nav-menu-desktop {
+  @include sphinx-medium-size {
+    padding-right: rem(30px);
+    padding-left: rem(30px);
+  }
+
+  @include sphinx-full-size {
     padding-right: rem(60px);
     padding-left: rem(60px);
   }
@@ -483,24 +568,46 @@
 .header-holder .main-menu {
   justify-content: unset;
   position: relative;
-  left: 380px;
+
+  @include sphinx-medium-size {
+    left: 26%;
+    ul {
+      padding-left: 0;
+    }
+  }
+
+  @include sphinx-full-size {
+    left: 380px;
+    ul {
+      padding-left: 38px;
+    }
+  }
 }
 
 .pytorch-page-level-bar {
   display: none;
+  align-items: center;
+  background-color: $white;
+  border-bottom: 1px solid #e2e2e2;
+  top: 90px;
+  width: 100%;
+  z-index: 9999;
 
-  @include full-nav-menu-desktop {
-    align-items: center;
-    background-color: $white;
-    border-bottom: 1px solid #e2e2e2;
+  @include sphinx-medium-size {
+    left: $sphinx_page_bar_left_margin;
     display: flex;
-    height: $desktop_header_height;
-    left: 420px;
-    padding-left: 60px;
     position: fixed;
-    top: 90px;
+    height: $desktop_header_height / 2;
+    padding-left: $sphinx_page_bar_left_padding;
+    width: 100% - $sphinx_page_bar_left_margin;
+  }
+
+  @include sphinx-full-size {
+    left: 420px;
+    height: $desktop_header_height;
+    padding-left: 60px;
+    right: 0;
     width: 100%;
-    z-index: 9999;
   }
 
   ul, li {
@@ -511,5 +618,12 @@
 .pytorch-shortcuts-wrapper {
   display: none;
   position: absolute;
-  left: 60px + 675px + 50px + 25px;
+
+  @include sphinx-medium-size {
+    left: $sphinx_shortcuts_left_margin;
+  }
+
+  @include sphinx-full-size {
+    left: 820px;
+  }
 }

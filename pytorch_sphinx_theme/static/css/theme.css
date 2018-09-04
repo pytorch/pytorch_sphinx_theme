@@ -9224,6 +9224,17 @@ article.pytorch-article img {
   width: 100%;
 }
 
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 body {
   background: #ffffff;
   height: 100%;
@@ -9672,43 +9683,62 @@ a[rel~="prev"], a[rel~="next"] {
 .pytorch-content-wrap {
   *zoom: 1;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
   .pytorch-content-wrap {
+    left: 27%;
+    padding-top: 160px;
+    width: 71%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-content-wrap {
+    left: auto;
     margin-left: 480px;
     padding-top: 220px;
+    width: auto;
   }
 }
 
 .pytorch-content {
   background: #ffffff;
   width: 100%;
-  max-width: 675px;
+  max-width: 700px;
   position: relative;
 }
 
 .pytorch-content-left {
   width: 100%;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
   .pytorch-content-left {
-    width: 675px;
+    width: 75%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-content-left {
+    width: 700px;
   }
 }
 
 .pytorch-content-right {
   display: none;
+  position: relative;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
   .pytorch-content-right {
     display: block;
+    left: 2%;
+    width: 24%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-content-right {
     width: 350px;
-    position: relative;
-    left: 50px;
+    left: 0;
   }
 }
 
 .pytorch-side-scroll {
-  width: 410px;
   position: relative;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -9716,23 +9746,18 @@ a[rel~="prev"], a[rel~="next"] {
 }
 
 .pytorch-menu-vertical {
-  padding-bottom: 90px;
-  padding-right: 1.875rem;
+  padding: 4.375rem 1.875rem 5.625rem 0;
 }
-
-.pytorch-left-menu-search {
-  margin: 2.5rem 0 3.75rem 0;
-  padding-left: 1.875rem;
+@media screen and (min-width: 1101px) {
+  .pytorch-menu-vertical {
+    padding-top: 0;
+    padding-right: 15%;
+  }
 }
-
-.pytorch-left-menu-search input[type=text] {
-  border-radius: 0;
-  padding: 0.5rem 0.75rem;
-  border-color: #e44c2c;
-  color: #e44c2c;
-  border-style: solid;
-  font-size: 1rem;
-  width: 100%;
+@media screen and (min-width: 1600px) {
+  .pytorch-menu-vertical {
+    padding-right: 1.875rem;
+  }
 }
 
 .pytorch-left-menu {
@@ -9765,15 +9790,7 @@ a[rel~="prev"], a[rel~="next"] {
   top: 15px;
   z-index: 100;
 }
-.pytorch-left-menu a.close-table-of-contents {
-  display: block;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-left-menu a.close-table-of-contents {
-    display: none;
-  }
-}
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
   .pytorch-left-menu {
     background: #f3f4f7;
     bottom: 0;
@@ -9783,13 +9800,21 @@ a[rel~="prev"], a[rel~="next"] {
     overflow-x: hidden;
     overflow-y: hidden;
     padding-bottom: 110px;
-    padding: 0 3.75rem 0 1.875rem;
+    padding: 0 1.875rem 0 0;
     position: fixed;
     top: 90px;
-    width: 420px;
+    min-width: 280px;
+    width: 25%;
     z-index: 200;
   }
 }
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu {
+    padding: 0 3.75rem 0 1.875rem;
+    width: 420px;
+  }
+}
+
 .pytorch-left-menu p.caption {
   color: #262626;
   display: block;
@@ -9800,7 +9825,56 @@ a[rel~="prev"], a[rel~="next"] {
   padding: 0;
   text-transform: none;
   white-space: nowrap;
-  padding-left: 1.875rem;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-left-menu p.caption {
+    padding-left: 1.875rem;
+  }
+}
+
+.pytorch-left-menu a.close-table-of-contents {
+  display: block;
+}
+@media screen and (min-width: 1100px) {
+  .pytorch-left-menu a.close-table-of-contents {
+    display: none;
+  }
+}
+
+.pytorch-left-menu-search {
+  margin-bottom: 2.5rem;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-left-menu-search {
+    margin: 1.25rem 0 1.875rem 0;
+    padding-left: 1.875rem;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu-search {
+    margin: 2.5rem 0 3.75rem 0;
+  }
+}
+
+.pytorch-left-menu-search input[type=text] {
+  border-radius: 0;
+  padding: 0.5rem 0.75rem;
+  border-color: #e44c2c;
+  color: #e44c2c;
+  border-style: solid;
+  font-size: 1rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 1101px) {
+  .pytorch-left-menu .pytorch-side-scroll {
+    width: 120%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu .pytorch-side-scroll {
+    width: 410px;
+  }
 }
 
 .pytorch-right-menu {
@@ -9808,16 +9882,28 @@ a[rel~="prev"], a[rel~="next"] {
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;
-  top: 315px;
-  width: 420px;
+  top: auto;
   z-index: 200;
   bottom: 0;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-right-menu {
+    left: 81.5%;
+    width: 17%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-right-menu {
+    left: 1200px;
+    width: 380px;
+  }
 }
 .pytorch-right-menu.fixed-to-bottom {
   top: auto;
   bottom: 20px;
   position: absolute;
   left: 0;
+  width: 100%;
 }
 
 .pytorch-left-menu ul,
@@ -9948,7 +10034,12 @@ a[rel~="prev"], a[rel~="next"] {
 }
 
 .pytorch-left-menu ul {
-  padding-left: 1.875rem;
+  padding-left: 0;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-left-menu ul {
+    padding-left: 1.875rem;
+  }
 }
 
 .pytorch-right-menu a:link,
@@ -9963,36 +10054,48 @@ a[rel~="prev"], a[rel~="next"] {
   padding-left: 0;
 }
 .pytorch-right-menu ul ul li {
-  text-indent: 0px;
+  padding-left: 0px;
 }
 .pytorch-right-menu ul ul li li {
-  text-indent: 5px;
+  padding-left: 5px;
 }
-.pytorch-right-menu ul ul li li a {
-  text-indent: 15px;
+.pytorch-right-menu ul ul li li a:link,
+.pytorch-right-menu ul ul li li a:visited,
+.pytorch-right-menu ul ul li li a:hover {
+  padding-left: 5px;
 }
 .pytorch-right-menu ul ul li li li {
-  text-indent: 10px;
+  padding-left: 10px;
 }
 .pytorch-right-menu ul ul li li li li {
-  text-indent: 15px;
+  padding-left: 15px;
 }
 .pytorch-right-menu ul ul li li li li li {
-  text-indent: 20px;
+  padding-left: 20px;
 }
 .pytorch-right-menu ul ul li li li li li li {
-  text-indent: 25px;
+  padding-left: 25px;
 }
 .pytorch-right-menu li ul {
   display: block;
 }
 
 .pytorch-right-menu .pytorch-side-scroll {
-  width: 440px;
   padding-top: 20px;
 }
+@media screen and (min-width: 1101px) {
+  .pytorch-right-menu .pytorch-side-scroll {
+    width: 120%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-right-menu .pytorch-side-scroll {
+    width: 440px;
+  }
+}
 .pytorch-right-menu .pytorch-side-scroll > ul {
-  padding-left: 25px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 .pytorch-right-menu .pytorch-side-scroll > ul > li > a {
   display: none;
@@ -10006,9 +10109,14 @@ a[rel~="prev"], a[rel~="next"] {
   height: 1px;
   display: inline-block;
   position: absolute;
-  left: 5px;
-  top: 13px;
+  left: 0;
+  top: 10px;
   width: 0;
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-right-menu .pytorch-side-scroll ul ul li:before {
+    top: 13px;
+  }
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li:before {
   width: 5px;
@@ -10059,7 +10167,13 @@ a[rel~="prev"], a[rel~="next"] {
   padding-right: 1.875rem;
   padding-left: 1.875rem;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
+  .header-holder .container {
+    padding-right: 1.875rem;
+    padding-left: 1.875rem;
+  }
+}
+@media screen and (min-width: 1600px) {
   .header-holder .container {
     padding-right: 3.75rem;
     padding-left: 3.75rem;
@@ -10069,25 +10183,50 @@ a[rel~="prev"], a[rel~="next"] {
 .header-holder .main-menu {
   justify-content: unset;
   position: relative;
-  left: 380px;
+}
+@media screen and (min-width: 1101px) {
+  .header-holder .main-menu {
+    left: 26%;
+  }
+  .header-holder .main-menu ul {
+    padding-left: 0;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .header-holder .main-menu {
+    left: 380px;
+  }
+  .header-holder .main-menu ul {
+    padding-left: 38px;
+  }
 }
 
 .pytorch-page-level-bar {
   display: none;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e2e2;
+  top: 90px;
+  width: 100%;
+  z-index: 9999;
 }
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1101px) {
   .pytorch-page-level-bar {
-    align-items: center;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e2e2e2;
+    left: 25%;
     display: flex;
-    height: 90px;
-    left: 420px;
-    padding-left: 60px;
     position: fixed;
-    top: 90px;
+    height: 45px;
+    padding-left: 2%;
+    width: 75%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-page-level-bar {
+    left: 420px;
+    height: 90px;
+    padding-left: 60px;
+    right: 0;
     width: 100%;
-    z-index: 9999;
   }
 }
 .pytorch-page-level-bar ul, .pytorch-page-level-bar li {
@@ -10097,7 +10236,16 @@ a[rel~="prev"], a[rel~="next"] {
 .pytorch-shortcuts-wrapper {
   display: none;
   position: absolute;
-  left: 810px;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-shortcuts-wrapper {
+    left: 78%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-shortcuts-wrapper {
+    left: 820px;
+  }
 }
 
 /*# sourceMappingURL=theme.css.map */
