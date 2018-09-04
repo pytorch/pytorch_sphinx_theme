@@ -9637,6 +9637,15 @@ article.pytorch-article .wy-table-responsive table tbody td code {
   font-size: 87.5%;
 }
 
+a[rel~="prev"], a[rel~="next"] {
+  padding: 0.375rem 0 0 0;
+}
+
+.rst-footer-buttons .btn:focus,
+.rst-footer-buttons .btn.focus {
+  box-shadow: none;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

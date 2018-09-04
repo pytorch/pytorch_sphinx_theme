@@ -430,3 +430,14 @@ article.pytorch-article {
     }
   }
 }
+
+a[rel~="prev"], a[rel~="next"] {
+  padding: 0.375rem 0 0 0;
+}
+
+.rst-footer-buttons {
+  .btn:focus,
+  .btn.focus {
+    box-shadow: none;
+  }
+}
