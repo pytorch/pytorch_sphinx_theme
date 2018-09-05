@@ -10304,6 +10304,12 @@ article.pytorch-article ol p {
   line-height: 1.75rem;
   margin-bottom: 0;
 }
+article.pytorch-article ul ul,
+article.pytorch-article ul ol,
+article.pytorch-article ol ul,
+article.pytorch-article ol ol {
+  margin: 0;
+}
 
 article.pytorch-article p.caption {
   margin-top: 1.25rem;
@@ -10435,7 +10441,8 @@ article.pytorch-article .function dt a, article.pytorch-article .attribute dt a,
   right: 30px;
   padding-right: 0;
   top: 50%;
-  transform: perspective(1px) translateY(-50%);
+  -webkit-transform: perspective(1px) translateY(-50%);
+          transform: perspective(1px) translateY(-50%);
 }
 article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
   color: #e44c2c;
@@ -10489,14 +10496,6 @@ article.pytorch-article .attribute .has-code {
 article.pytorch-article .class dt {
   border-left: none;
   border-top: 3px solid #e44c2c;
-}
-article.pytorch-article .class dt:after {
-  content: "";
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  right: -50px;
-  top: 0;
 }
 article.pytorch-article .class em.property {
   text-transform: uppercase;
