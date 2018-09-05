@@ -202,6 +202,15 @@ article.pytorch-article {
     .highlight {
       margin: 0 rem(32px) rem(18px) rem(32px);
     }
+
+    ul,
+    ol {
+      padding-left: rem(52px);
+    }
+
+    p {
+      margin-top: rem(18px);
+    }
   }
 
   .note {

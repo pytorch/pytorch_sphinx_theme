@@ -10360,6 +10360,16 @@ article.pytorch-article .note .highlight,
 article.pytorch-article .warning .highlight {
   margin: 0 2rem 1.125rem 2rem;
 }
+article.pytorch-article .note ul,
+article.pytorch-article .note ol,
+article.pytorch-article .warning ul,
+article.pytorch-article .warning ol {
+  padding-left: 3.25rem;
+}
+article.pytorch-article .note p,
+article.pytorch-article .warning p {
+  margin-top: 1.125rem;
+}
 article.pytorch-article .note .admonition-title {
   background: #ee4c2c;
 }
