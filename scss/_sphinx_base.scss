@@ -137,11 +137,19 @@ a:visited {
 article.pytorch-article {
   ul,
   ol {
-    padding-left: rem(20px);
+    padding-left: rem(30px);
     margin: 0;
+    color: $quick_start_grey;
 
     li {
       margin: 0;
+      color: $quick_start_grey;
+      line-height: rem(28px);
+    }
+    p {
+      color: $quick_start_grey;
+      line-height: rem(28px);
+      margin-bottom: 0;
     }
   }
 }

@@ -9335,12 +9335,21 @@ a:visited.has-code span {
 
 article.pytorch-article ul,
 article.pytorch-article ol {
-  padding-left: 1.25rem;
+  padding-left: 1.875rem;
   margin: 0;
+  color: #8c8c8c;
 }
 article.pytorch-article ul li,
 article.pytorch-article ol li {
   margin: 0;
+  color: #8c8c8c;
+  line-height: 1.75rem;
+}
+article.pytorch-article ul p,
+article.pytorch-article ol p {
+  color: #8c8c8c;
+  line-height: 1.75rem;
+  margin-bottom: 0;
 }
 
 article.pytorch-article p.caption {
