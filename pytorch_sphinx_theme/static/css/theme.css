@@ -9535,8 +9535,6 @@ article.pytorch-article .class em.property {
   padding-right: 0.75rem;
 }
 article.pytorch-article .class dd p {
-  color: #8c8c8c;
-  letter-spacing: 0;
   line-height: 1.75rem;
 }
 article.pytorch-article .class .method dt,
