@@ -10655,6 +10655,13 @@ article.pytorch-article .caption {
   line-height: 2.125rem;
 }
 
+article.pytorch-article .math {
+  color: #262626;
+}
+article.pytorch-article .math .MathJax_Display {
+  font-size: 1.0625rem;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

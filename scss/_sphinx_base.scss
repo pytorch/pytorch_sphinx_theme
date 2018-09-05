@@ -512,3 +512,12 @@ article.pytorch-article .caption {
   letter-spacing: 0.25px;
   line-height: rem(34px);
 }
+
+article.pytorch-article {
+  .math {
+    color: $not_quite_black;
+    .MathJax_Display {
+      font-size: rem(17px);
+    }
+  }
+}

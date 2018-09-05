@@ -88,6 +88,21 @@ window.highlightNavigation = {
 };
 
 },{}],2:[function(require,module,exports){
+MathJax.Hub.Config({
+    messageStyle: "none",
+    scale: 100,
+    "HTML-CSS": {
+        showMathMenu: false,
+        linebreaks: { automatic: true, width: "container" } ,
+        preferredFont: "STIX",
+        availableFonts: ["STIX","TeX"]
+    },
+    SVG: { linebreaks: { automatic: true, width: "container" } }
+ });
+
+ MathJax.Hub.Configured();
+
+},{}],3:[function(require,module,exports){
 window.mobileMenu = {
   bind: function() {
     $("[data-behavior='open-mobile-menu']").on('click', function(e) {
@@ -119,7 +134,7 @@ window.mobileMenu = {
   }
 };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 window.mobileTOC = {
   bind: function() {
     $("[data-behavior='open-table-of-contents']").on("click", function(e) {
@@ -151,7 +166,7 @@ window.mobileTOC = {
   }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 window.pytorchAnchors = {
   bind: function() {
     // Replace Sphinx-generated anchors with anchorjs ones
@@ -171,7 +186,7 @@ window.pytorchAnchors = {
   }
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // Modified from https://stackoverflow.com/a/13067009
 // Going for a JS solution to scrolling to an anchor so we can benefit from
 // less hacky css and smooth scrolling.
@@ -259,7 +274,7 @@ window.scrollToAnchor = {
   }
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 window.sideMenus = {
   rightMenuInitialTop: $(".pytorch-article h1:first").offset().top,
 
@@ -569,4 +584,4 @@ if (typeof(window) != 'undefined') {
 $(".sphx-glr-thumbcontainer").removeAttr("tooltip");
 $("table").removeAttr("border");
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,"pytorch-sphinx-theme"]);
