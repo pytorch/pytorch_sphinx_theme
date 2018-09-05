@@ -9526,6 +9526,27 @@ article.pytorch-article .function table tbody tr td.field-body, article.pytorch-
 article.pytorch-article .function table tbody tr td.field-body p, article.pytorch-article .attribute table tbody tr td.field-body p, article.pytorch-article .class table tbody tr td.field-body p {
   padding-left: 0px;
 }
+article.pytorch-article .function ul, article.pytorch-article .attribute ul, article.pytorch-article .class .attribute ul, article.pytorch-article .class ul,
+article.pytorch-article .function ol,
+article.pytorch-article .attribute ol,
+article.pytorch-article .class .attribute ol,
+article.pytorch-article .class ol {
+  color: #262626;
+}
+article.pytorch-article .function ul li, article.pytorch-article .attribute ul li, article.pytorch-article .class .attribute ul li, article.pytorch-article .class ul li,
+article.pytorch-article .function ol li,
+article.pytorch-article .attribute ol li,
+article.pytorch-article .class .attribute ol li,
+article.pytorch-article .class ol li {
+  color: #262626;
+}
+article.pytorch-article .function ul p, article.pytorch-article .attribute ul p, article.pytorch-article .class .attribute ul p, article.pytorch-article .class ul p,
+article.pytorch-article .function ol p,
+article.pytorch-article .attribute ol p,
+article.pytorch-article .class .attribute ol p,
+article.pytorch-article .class ol p {
+  color: #262626;
+}
 article.pytorch-article .attribute .has-code {
   float: none;
 }

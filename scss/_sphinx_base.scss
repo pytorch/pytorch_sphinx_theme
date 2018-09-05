@@ -331,6 +331,17 @@ article.pytorch-article {
         }
       }
     }
+    ul,
+    ol {
+      color: $not_quite_black;
+
+      li {
+        color: $not_quite_black;
+      }
+      p {
+        color: $not_quite_black;
+      }
+    }
   }
   .attribute {
     @extend .function;
