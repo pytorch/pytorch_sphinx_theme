@@ -1,5 +1,37 @@
-// Modified from https://stackoverflow.com/a/32396543
+// Modified from https://stackoverflow.com/a/27078401
+window.pyTorchThrottle = function(func, wait, options) {
+  var context, args, result;
+  var timeout = null;
+  var previous = 0;
+  if (!options) options = {};
+  var later = function() {
+    previous = options.leading === false ? 0 : Date.now();
+    timeout = null;
+    result = func.apply(context, args);
+    if (!timeout) context = args = null;
+  };
+  return function() {
+    var now = Date.now();
+    if (!previous && options.leading === false) previous = now;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0 || remaining > wait) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      previous = now;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    } else if (!timeout && options.trailing !== false) {
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+};
 
+// Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
   navigationListItems: $(".pytorch-right-menu li"),
   sections: $(
@@ -22,25 +54,7 @@ window.highlightNavigation = {
       );
     });
 
-    $(window).on("scroll", function() {
-      highlightNavigation.throttle(highlightNavigation.highlight, 100);
-    });
-  },
-
-  throttle: function(fn, interval) {
-    var lastCall, timeoutId;
-    var now = new Date().getTime();
-
-    if (lastCall && now < lastCall + interval) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(function() {
-        lastCall = now;
-        fn();
-      }, interval - (now - lastCall));
-    } else {
-      lastCall = now;
-      fn();
-    }
+    $(window).scroll(pyTorchThrottle(highlightNavigation.highlight, 500));
   },
 
   highlight: function() {
