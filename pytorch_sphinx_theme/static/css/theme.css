@@ -9681,6 +9681,12 @@ article.pytorch-article blockquote p, article.pytorch-article blockquote .attrib
   line-height: 1.75rem;
 }
 
+article.pytorch-article .caption {
+  color: #8c8c8c;
+  letter-spacing: 0.25px;
+  line-height: 2.125rem;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

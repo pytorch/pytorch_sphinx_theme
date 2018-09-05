@@ -506,3 +506,9 @@ article.pytorch-article {
     }
   }
 }
+
+article.pytorch-article .caption {
+  color: $quick_start_grey;
+  letter-spacing: 0.25px;
+  line-height: rem(34px);
+}
