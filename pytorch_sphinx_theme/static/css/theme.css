@@ -9472,14 +9472,16 @@ article.pytorch-article .function dt, article.pytorch-article .attribute dt, art
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
-  padding-right: 5.3125rem;
+  padding-right: 110px;
   border-left: 3px solid #e44c2c;
   word-wrap: break-word;
 }
 article.pytorch-article .function dt a, article.pytorch-article .attribute dt a, article.pytorch-article .class .attribute dt a, article.pytorch-article .class dt a {
   position: absolute;
-  right: 0;
-  padding-right: 0.625rem;
+  right: 30px;
+  padding-right: 0;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
 }
 article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
   color: #e44c2c;
@@ -9487,8 +9489,9 @@ article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-artic
 article.pytorch-article .function .anchorjs-link, article.pytorch-article .attribute .anchorjs-link, article.pytorch-article .class .anchorjs-link {
   display: inline;
   position: absolute;
-  left: 100%;
+  right: 8px;
   font-size: 1.5625rem !important;
+  padding-left: 0;
 }
 article.pytorch-article .function code, article.pytorch-article .attribute code, article.pytorch-article .class .attribute code, article.pytorch-article .class code {
   color: #262626;
@@ -9553,6 +9556,14 @@ article.pytorch-article .attribute .has-code {
 article.pytorch-article .class dt {
   border-left: none;
   border-top: 3px solid #e44c2c;
+}
+article.pytorch-article .class dt:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  right: -50px;
+  top: 0;
 }
 article.pytorch-article .class em.property {
   text-transform: uppercase;
