@@ -119,6 +119,21 @@ module.exports = function(grunt) {
       }
     },
 
+    postcss: {
+      options: {
+        map: true,
+        processors: [
+          require("autoprefixer")({browsers: ["last 2 versions"]}),
+        ]
+      },
+
+      dist: {
+        files: {
+          "pytorch_sphinx_theme/static/css/theme.css": "pytorch_sphinx_theme/static/css/theme.css"
+        }
+      }
+    },
+
     browserify: {
       dev: {
         options: {
@@ -208,6 +223,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev','browserify:dev','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build','browserify:build','uglify','exec:build_sphinx']);
+  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev', 'postcss:dist', 'browserify:dev','exec:build_sphinx','connect','open','watch']);
+  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build', 'postcss:dist', 'browserify:build','uglify','exec:build_sphinx']);
 }

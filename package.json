@@ -19,6 +19,8 @@
     "grunt-exec": "~1.0.1",
     "grunt-open": "0.2.3",
     "matchdep": "~1.0.1",
-    "popper.js": "^1.14.3"
+    "popper.js": "^1.14.3",
+    "autoprefixer": "^9.1.5",
+    "grunt-postcss": "^0.9.0"
   }
 }
