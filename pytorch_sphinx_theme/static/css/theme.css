@@ -9664,6 +9664,14 @@ a[rel~="prev"], a[rel~="next"] {
   box-shadow: none;
 }
 
+article.pytorch-article blockquote {
+  margin-left: 3.75rem;
+  color: #8c8c8c;
+}
+article.pytorch-article blockquote p, article.pytorch-article blockquote .attribution, article.pytorch-article blockquote .line {
+  line-height: 1.75rem;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;
