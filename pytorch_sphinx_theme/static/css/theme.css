@@ -11072,25 +11072,20 @@ article.pytorch-article .math .MathJax_Display {
 .pytorch-right-menu ul ul li {
   padding-left: 0px;
 }
-.pytorch-right-menu ul ul li li {
-  padding-left: 5px;
-}
-.pytorch-right-menu ul ul li li a:link,
-.pytorch-right-menu ul ul li li a:visited,
-.pytorch-right-menu ul ul li li a:hover {
-  padding-left: 5px;
-}
-.pytorch-right-menu ul ul li li li {
+.pytorch-right-menu ul ul li li a.reference.internal {
   padding-left: 10px;
 }
-.pytorch-right-menu ul ul li li li li {
+.pytorch-right-menu ul ul li li li a.reference.internal {
   padding-left: 15px;
 }
-.pytorch-right-menu ul ul li li li li li {
+.pytorch-right-menu ul ul li li li li a.reference.internal {
   padding-left: 20px;
 }
-.pytorch-right-menu ul ul li li li li li li {
+.pytorch-right-menu ul ul li li li li li a.reference.internal {
   padding-left: 25px;
+}
+.pytorch-right-menu ul ul li li li li li li a.reference.internal {
+  padding-left: 30px;
 }
 .pytorch-right-menu li ul {
   display: block;
