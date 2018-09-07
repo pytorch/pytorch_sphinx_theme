@@ -10679,6 +10679,23 @@ article.pytorch-article .math .MathJax_Display {
   font-size: 1.0625rem;
 }
 
+.pytorch-breadcrumbs-wrapper {
+  width: 100%;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-breadcrumbs-wrapper {
+    width: 73%;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-breadcrumbs-wrapper {
+    width: 698px;
+  }
+}
+.pytorch-breadcrumbs-wrapper .pytorch-breadcrumbs-aside {
+  float: right;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

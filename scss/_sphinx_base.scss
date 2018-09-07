@@ -539,3 +539,19 @@ article.pytorch-article {
     }
   }
 }
+
+.pytorch-breadcrumbs-wrapper {
+  width: 100%;
+
+  @include sphinx-medium-size {
+    width: $sphinx_article_width - 2;
+  }
+
+  @include sphinx-full-size {
+    width: $sphinx_full_width_content_width - 2;
+  }
+
+  .pytorch-breadcrumbs-aside {
+    float: right;
+  }
+}
