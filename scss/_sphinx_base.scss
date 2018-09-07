@@ -422,18 +422,14 @@ article.pytorch-article {
       text-decoration: none;
       background-image: url("../images/arrow-down-orange.svg");
       background-color: $light_grey;
-
-      span.pre {
-        color: $content_text_color;
-      }
     }
 
     span.pre {
       background-color: transparent;
       font-size: rem(18px);
       padding: 0;
-      color: $quick_start_grey;
-      font-weight: 300;
+      color: $not_quite_black;
+      font-weight: 400;
     }
 
     code, kbd, pre, samp, span.pre {
@@ -554,4 +550,10 @@ article.pytorch-article {
   .pytorch-breadcrumbs-aside {
     float: right;
   }
+}
+
+.pytorch-article .container {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
 }

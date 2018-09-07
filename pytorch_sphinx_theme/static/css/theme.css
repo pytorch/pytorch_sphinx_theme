@@ -10580,15 +10580,12 @@ article.pytorch-article .class .attribute dt {
   background-image: url("../images/arrow-down-orange.svg");
   background-color: #f3f4f7;
 }
-.pytorch-article div.sphx-glr-download a:hover span.pre {
-  color: #545454;
-}
 .pytorch-article div.sphx-glr-download a span.pre {
   background-color: transparent;
   font-size: 1.125rem;
   padding: 0;
-  color: #8c8c8c;
-  font-weight: 300;
+  color: #262626;
+  font-weight: 400;
 }
 .pytorch-article div.sphx-glr-download a code, .pytorch-article div.sphx-glr-download a kbd, .pytorch-article div.sphx-glr-download a pre, .pytorch-article div.sphx-glr-download a samp, .pytorch-article div.sphx-glr-download a span.pre {
   font-family: FreightSans, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -10694,6 +10691,12 @@ article.pytorch-article .math .MathJax_Display {
 }
 .pytorch-breadcrumbs-wrapper .pytorch-breadcrumbs-aside {
   float: right;
+}
+
+.pytorch-article .container {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
 }
 
 .pytorch-container {
