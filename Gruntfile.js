@@ -193,7 +193,7 @@ module.exports = function(grunt) {
       /* Compile scss changes into theme directory */
       sass: {
         files: ['scss/**/*.scss'],
-        tasks: ['sass:dev']
+        tasks: ['sass:dev', 'postcss:dist']
       },
       /* Changes in theme dir rebuild sphinx */
       sphinx: {
