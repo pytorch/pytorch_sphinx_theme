@@ -10323,11 +10323,12 @@ article.pytorch-article .warning {
 article.pytorch-article .note .first,
 article.pytorch-article .warning .first {
   font-size: 1rem;
-  color: #ffffff;
+  color: #262626;
   letter-spacing: 0;
   text-transform: uppercase;
   margin-bottom: 1.125rem;
   padding-left: 0px;
+  font-weight: 500;
 }
 article.pytorch-article .note .first:before,
 article.pytorch-article .warning .first:before {
@@ -10335,6 +10336,7 @@ article.pytorch-article .warning .first:before {
   position: relative;
   padding-left: 10px;
   padding-right: 15px;
+  color: #ffffff;
 }
 article.pytorch-article .note p:nth-child(n + 2),
 article.pytorch-article .warning p:nth-child(n + 2) {

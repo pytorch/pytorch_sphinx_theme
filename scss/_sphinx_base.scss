@@ -169,16 +169,18 @@ article.pytorch-article {
 
     .first {
       font-size: rem(16px);
-      color: $white;
+      color: $not_quite_black;
       letter-spacing: 0;
       text-transform: uppercase;
       margin-bottom: rem(18px);
       padding-left: 0px;
+      font-weight: 500;
       &:before {
         content: "\2022";
         position: relative;
         padding-left: 10px;
         padding-right: 15px;
+        color: $white;
       }
     }
     p:nth-child(n + 2) {
