@@ -600,7 +600,7 @@
   border-bottom: 1px solid #e2e2e2;
   top: 90px;
   width: 100%;
-  z-index: 9999;
+  z-index: 201;
 
   @include sphinx-medium-size {
     left: $sphinx_page_bar_left_margin;

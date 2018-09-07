@@ -11257,7 +11257,7 @@ article.pytorch-article .math .MathJax_Display {
   border-bottom: 1px solid #e2e2e2;
   top: 90px;
   width: 100%;
-  z-index: 9999;
+  z-index: 201;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-page-level-bar {
