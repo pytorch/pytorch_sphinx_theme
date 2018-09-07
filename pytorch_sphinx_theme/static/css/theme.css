@@ -10854,7 +10854,7 @@ article.pytorch-article .math .MathJax_Display {
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu {
-    padding: 0 3.75rem 0 1.875rem;
+    padding: 0 60px 0 30px;
     width: 420px;
   }
 }
@@ -10873,6 +10873,11 @@ article.pytorch-article .math .MathJax_Display {
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu p.caption {
     padding-left: 1.875rem;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu p.caption {
+    padding-left: 30px;
   }
 }
 
@@ -10896,7 +10901,7 @@ article.pytorch-article .math .MathJax_Display {
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu-search {
-    margin: 2.5rem 0 3.75rem 0;
+    margin: 40px 0 60px 0;
   }
 }
 
@@ -10954,7 +10959,7 @@ article.pytorch-article .math .MathJax_Display {
 .pytorch-right-menu ul {
   list-style-type: none;
   padding-left: 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 .pytorch-left-menu > ul,
 .pytorch-right-menu > ul {

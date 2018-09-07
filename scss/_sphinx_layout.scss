@@ -133,7 +133,7 @@
   }
 
   @include sphinx-full-size {
-    padding: 0 rem(60px) 0 rem(30px);
+    padding: 0 60px 0 30px;
     width: $desktop_menu_width;
   }
 }
@@ -151,6 +151,10 @@
 
   @include sphinx-medium-size {
     padding-left: rem(30px);
+  }
+
+  @include sphinx-full-size {
+    padding-left: 30px;
   }
 }
 
@@ -171,7 +175,7 @@
   }
 
   @include sphinx-full-size {
-    margin: rem(40px) 0 rem(60px) 0;
+    margin: 40px 0 60px 0;
   }
 }
 
@@ -228,7 +232,7 @@
   ul {
     list-style-type: none;
     padding-left: 0;
-    margin-bottom: rem(20px);
+    margin-bottom: rem(40px);
   }
 
   > ul {
