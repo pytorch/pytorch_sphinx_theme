@@ -9582,6 +9582,10 @@ a.with-right-arrow, .btn.with-right-arrow {
   }
 }
 
+.pytorch-article #table-of-contents {
+  display: none;
+}
+
 code, kbd, pre, samp {
   font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }
