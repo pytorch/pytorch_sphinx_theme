@@ -10314,6 +10314,14 @@ article.pytorch-article ol ul,
 article.pytorch-article ol ol {
   margin: 0;
 }
+article.pytorch-article h1 a,
+article.pytorch-article h2 a,
+article.pytorch-article h3 a,
+article.pytorch-article h4 a,
+article.pytorch-article h5 a,
+article.pytorch-article h6 a {
+  color: #262626;
+}
 
 article.pytorch-article p.caption {
   margin-top: 1.25rem;
@@ -11298,5 +11306,4 @@ article.pytorch-article .math .MathJax_Display {
     left: 820px;
   }
 }
-
 /*# sourceMappingURL=theme.css.map */
