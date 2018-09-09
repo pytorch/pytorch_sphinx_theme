@@ -10239,16 +10239,34 @@ ul.pytorch-breadcrumbs a {
 
 .table-of-contents-link-wrapper {
   display: block;
-  margin-top: 80px;
-  margin-bottom: 1.25rem;
+  margin-top: 68px;
+  padding: 1.25rem 1.875rem;
+  background-color: #f3f4f7;
+  position: relative;
+  color: #252627;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+.table-of-contents-link-wrapper.is-open .toggle-table-of-contents {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 @media screen and (min-width: 1100px) {
   .table-of-contents-link-wrapper {
     display: none;
   }
 }
-.table-of-contents-link-wrapper a {
-  font-size: 1.375rem;
+
+.toggle-table-of-contents {
+  background-image: url("../images/chevron-down-grey.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  height: 100%;
+  position: absolute;
+  right: 21px;
+  width: 30px;
+  top: 0;
 }
 
 .tutorials-header .header-logo {
@@ -10790,10 +10808,12 @@ article.pytorch-article .math .MathJax_Display {
 }
 
 .pytorch-content-left {
+  margin-top: 2.5rem;
   width: 100%;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-content-left {
+    margin-top: 0;
     width: 75%;
   }
 }
@@ -10821,20 +10841,24 @@ article.pytorch-article .math .MathJax_Display {
   }
 }
 
-.pytorch-side-scroll {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100%;
+@media screen and (min-width: 1101px) {
+  .pytorch-side-scroll {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
 }
 
 .pytorch-menu-vertical {
-  padding: 4.375rem 1.875rem 5.625rem 0;
+  padding: 1.25rem 1.875rem 2.5rem 1.875rem;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-menu-vertical {
+    display: block;
     padding-top: 0;
     padding-right: 13.5%;
+    padding-bottom: 5.625rem;
   }
 }
 @media screen and (min-width: 1600px) {
@@ -10846,38 +10870,11 @@ article.pytorch-article .math .MathJax_Display {
 .pytorch-left-menu {
   display: none;
   background-color: #f3f4f7;
-}
-.pytorch-left-menu.open-mobile {
-  position: fixed;
-  height: 100%;
-  top: 0;
-  display: block;
-  left: 0;
-  z-index: 99999;
-  width: 100%;
-  padding: 0 0 0 1.875rem;
-}
-.pytorch-left-menu.open-mobile .pytorch-side-scroll {
-  width: 100%;
-  z-index: 99;
-}
-.pytorch-left-menu.open-mobile .close-table-of-contents {
-  background-image: url("../images/icon-close.svg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-  height: 24px;
-  position: absolute;
-  right: 30px;
-  width: 24px;
-  top: 15px;
-  z-index: 100;
+  color: #252627;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu {
-    background: #f3f4f7;
     bottom: 0;
-    color: #252627;
     left: 0;
     display: block;
     overflow-x: hidden;
@@ -10908,20 +10905,6 @@ article.pytorch-article .math .MathJax_Display {
   text-transform: none;
   white-space: nowrap;
 }
-@media screen and (min-width: 1101px) {
-  .pytorch-left-menu p.caption {
-    padding-left: 1.875rem;
-  }
-}
-
-.pytorch-left-menu a.close-table-of-contents {
-  display: block;
-}
-@media screen and (min-width: 1100px) {
-  .pytorch-left-menu a.close-table-of-contents {
-    display: none;
-  }
-}
 
 .pytorch-left-menu-search {
   margin-bottom: 2.5rem;
@@ -10929,7 +10912,6 @@ article.pytorch-article .math .MathJax_Display {
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu-search {
     margin: 1.25rem 0 1.875rem 0;
-    padding-left: 1.875rem;
   }
 }
 @media screen and (min-width: 1600px) {
@@ -11075,10 +11057,16 @@ article.pytorch-article .math .MathJax_Display {
   content: "\2022";
   display: inline-block;
   position: absolute;
-  left: -20px;
+  left: -15px;
   top: 1px;
   font-size: 1.375rem;
   color: #e44c2c;
+}
+@media screen and (min-width: 1101px) {
+  .pytorch-left-menu li.toctree-l1.current > a:before,
+  .pytorch-right-menu li.toctree-l1.current > a:before {
+    left: -20px;
+  }
 }
 .pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul,
 .pytorch-right-menu li.toctree-l1.current li.toctree-l2 > ul,
@@ -11135,11 +11123,6 @@ article.pytorch-article .math .MathJax_Display {
 
 .pytorch-left-menu ul {
   padding-left: 0;
-}
-@media screen and (min-width: 1101px) {
-  .pytorch-left-menu ul {
-    padding-left: 1.875rem;
-  }
 }
 
 .pytorch-right-menu a:link,

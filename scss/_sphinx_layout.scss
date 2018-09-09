@@ -35,9 +35,11 @@
 }
 
 .pytorch-content-left {
+  margin-top: rem(40px);
   width: 100%;
 
   @include sphinx-medium-size {
+    margin-top: 0;
     width: $sphinx_article_width;
   }
 
@@ -63,18 +65,22 @@
 }
 
 .pytorch-side-scroll {
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100%;
+  @include sphinx-medium-size {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100%;
+  }
 }
 
 .pytorch-menu-vertical {
-  padding: rem(70px) rem(30px) rem(90px) 0;
+  padding: rem(20px) rem(30px) rem(40px) rem(30px);
 
   @include sphinx-medium-size {
+    display: block;
     padding-top: 0;
     padding-right: $sphinx_left_menu_wrapper_padding_right;
+    padding-bottom: rem(90px);
   }
 
   @include sphinx-full-size {
@@ -84,41 +90,11 @@
 
 .pytorch-left-menu {
   display: none;
-  background-color: #f3f4f7;
-
-  &.open-mobile {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    display: block;
-    left: 0;
-    z-index: 99999;
-    width: 100%;
-    padding: 0 0 0 rem(30px);
-
-    .pytorch-side-scroll {
-      width: 100%;
-      z-index: 99;
-    }
-
-    .close-table-of-contents {
-      background-image: url("../images/icon-close.svg");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: 24px 24px;
-      height: 24px;
-      position: absolute;
-      right: 30px;
-      width: 24px;
-      top: 15px;
-      z-index: 100;
-    }
-  }
+  background-color: $light_grey;
+  color: $slate;
 
   @include sphinx-medium-size {
-    background: #f3f4f7;
     bottom: 0;
-    color: #252627;
     left: 0;
     display: block;
     overflow-x: hidden;
@@ -147,18 +123,6 @@
   padding: 0;
   text-transform: none;
   white-space: nowrap;
-
-  @include sphinx-medium-size {
-    padding-left: rem(30px);
-  }
-}
-
-.pytorch-left-menu a.close-table-of-contents {
-  display: block;
-
-  @include full-nav-menu-desktop {
-    display: none;
-  }
 }
 
 .pytorch-left-menu-search {
@@ -166,7 +130,6 @@
 
   @include sphinx-medium-size {
     margin: rem(20px) 0 rem(30px) 0;
-    padding-left: rem(30px);
   }
 
   @include sphinx-full-size {
@@ -332,10 +295,14 @@
       content: "\2022";
       display: inline-block;
       position: absolute;
-      left: -20px;
+      left: -15px;
       top: 1px;
       font-size: rem(22px);
       color: $orange;
+
+      @include sphinx-medium-size {
+        left: -20px;
+      }
     }
   }
 
@@ -426,9 +393,6 @@
 
 .pytorch-left-menu ul {
   padding-left: 0;
-  @include sphinx-medium-size {
-    padding-left: rem(30px);
-  }
 }
 
 .pytorch-right-menu {

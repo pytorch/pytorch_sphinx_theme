@@ -76,16 +76,35 @@ ul.pytorch-breadcrumbs {
 
 .table-of-contents-link-wrapper {
   display: block;
-  margin-top: 80px;
-  margin-bottom: rem(20px);
+  margin-top: 68px;
+  padding: rem(20px) rem(30px);
+  background-color: $light_grey;
+  position: relative;
+  color: $slate;
+  font-size: rem(20px);
+  font-weight: 400;
+
+  &.is-open {
+    .toggle-table-of-contents {
+      transform: rotate(180deg);
+    }
+  }
 
   @include full-nav-menu-desktop {
     display: none;
   }
+}
 
-  a {
-    font-size: rem(22px);
-  }
+.toggle-table-of-contents {
+  background-image: url("../images/chevron-down-grey.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  height: 100%;
+  position: absolute;
+  right: 21px;
+  width: 30px;
+  top: 0;
 }
 
 .tutorials-header {

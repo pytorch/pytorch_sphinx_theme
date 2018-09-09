@@ -134,9 +134,13 @@
   <div>
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
-    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
-      <a href="#" class="close-table-of-contents" data-behavior="close-table-of-contents"></a>
 
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu">
       <div class="pytorch-side-scroll">
         <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           <div class="pytorch-left-menu-search">
@@ -182,9 +186,6 @@
     </nav>
 
     <div class="pytorch-container">
-      <div class="table-of-contents-link-wrapper">
-        <a href="#" data-behavior="open-table-of-contents">Table of Contents</a>
-      </div>
 
       <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
         <div class="pytorch-page-level-bar">
