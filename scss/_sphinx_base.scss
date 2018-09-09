@@ -567,7 +567,21 @@ a[rel~="prev"], a[rel~="next"] {
   padding: 0.375rem 0 0 0;
 }
 
+img.next-page,
+img.previous-page {
+  width: 8px;
+  height: 10px;
+  position: relative;
+  top: -1px;
+}
+
+img.previous-page {
+  transform: scaleX(-1);
+}
+
 .rst-footer-buttons {
+  margin-top: rem(30px);
+  margin-bottom: rem(30px);
   .btn:focus,
   .btn.focus {
     box-shadow: none;

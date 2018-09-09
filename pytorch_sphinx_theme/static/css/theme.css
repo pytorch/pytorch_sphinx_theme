@@ -10706,6 +10706,23 @@ a[rel~="prev"], a[rel~="next"] {
   padding: 0.375rem 0 0 0;
 }
 
+img.next-page,
+img.previous-page {
+  width: 8px;
+  height: 10px;
+  position: relative;
+  top: -1px;
+}
+
+img.previous-page {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.rst-footer-buttons {
+  margin-top: 1.875rem;
+  margin-bottom: 1.875rem;
+}
 .rst-footer-buttons .btn:focus,
 .rst-footer-buttons .btn.focus {
   -webkit-box-shadow: none;
