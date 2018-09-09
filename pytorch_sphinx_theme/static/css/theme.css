@@ -10834,12 +10834,12 @@ article.pytorch-article .math .MathJax_Display {
 @media screen and (min-width: 1101px) {
   .pytorch-menu-vertical {
     padding-top: 0;
-    padding-right: 15%;
+    padding-right: 13.5%;
   }
 }
 @media screen and (min-width: 1600px) {
   .pytorch-menu-vertical {
-    padding-right: 1.875rem;
+    padding-right: 4.0625rem;
   }
 }
 
@@ -10886,14 +10886,13 @@ article.pytorch-article .math .MathJax_Display {
     padding: 0 1.875rem 0 0;
     position: fixed;
     top: 90px;
-    min-width: 280px;
     width: 25%;
     z-index: 200;
   }
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu {
-    padding: 0 3.75rem 0 1.875rem;
+    padding: 0 0 0 1.875rem;
     width: 420px;
   }
 }
@@ -10935,18 +10934,36 @@ article.pytorch-article .math .MathJax_Display {
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu-search {
-    margin: 2.5rem 0 3.75rem 0;
+    margin: 2.5rem 0;
   }
+}
+
+.pytorch-left-menu-search ::-webkit-input-placeholder {
+  color: #262626;
+}
+.pytorch-left-menu-search :-ms-input-placeholder {
+  color: #262626;
+}
+.pytorch-left-menu-search ::-ms-input-placeholder {
+  color: #262626;
+}
+.pytorch-left-menu-search ::placeholder {
+  color: #262626;
 }
 
 .pytorch-left-menu-search input[type=text] {
   border-radius: 0;
   padding: 0.5rem 0.75rem;
   border-color: #e44c2c;
-  color: #e44c2c;
+  color: #262626;
   border-style: solid;
   font-size: 1rem;
   width: 100%;
+  background-color: #f3f4f7;
+  text-align: center;
+}
+.pytorch-left-menu-search input[type=text]:focus {
+  outline: 0;
 }
 
 @media screen and (min-width: 1101px) {
@@ -10993,7 +11010,7 @@ article.pytorch-article .math .MathJax_Display {
 .pytorch-right-menu ul {
   list-style-type: none;
   padding-left: 0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 .pytorch-left-menu > ul,
 .pytorch-right-menu > ul {
