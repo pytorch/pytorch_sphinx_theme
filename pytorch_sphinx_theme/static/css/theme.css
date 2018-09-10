@@ -10773,6 +10773,13 @@ article.pytorch-article .math .MathJax_Display {
   max-width: none;
 }
 
+article.pytorch-article #pytorch-documentation {
+  margin-bottom: 1.25rem;
+}
+article.pytorch-article #pytorch-documentation .caption {
+  color: #262626;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;

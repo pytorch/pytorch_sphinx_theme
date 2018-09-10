@@ -48,6 +48,10 @@ window.highlightNavigation = {
       $(".pytorch-shortcuts-wrapper").show();
     }
 
+    if ($("#pytorch-documentation").length == 1 ) {
+      $(".pytorch-shortcuts-wrapper").hide();
+    }
+
     highlightNavigation.sections.each(function() {
       var id = $(this).attr("id");
       highlightNavigation.sectionIdTonavigationLink[id] = $(

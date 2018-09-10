@@ -634,3 +634,12 @@ article.pytorch-article {
   padding-right: 0;
   max-width: none;
 }
+
+article.pytorch-article {
+  #pytorch-documentation {
+    margin-bottom: rem(20px);
+    .caption {
+      color: $not_quite_black;
+    }
+  }
+}
