@@ -54,10 +54,15 @@ p {
   margin-top: 0;
   margin-bottom: rem(18px);
   @include default_link_styles;
+  a:link,
+  a:visited,
+  a:hover {
+    color: $red_orange;
+  }
 }
 
 .wy-breadcrumbs li a {
-  color: $orange;
+  color: $red_orange;
 }
 
 ul.pytorch-breadcrumbs {
@@ -69,7 +74,7 @@ ul.pytorch-breadcrumbs {
   }
 
   a {
-    color: $orange;
+    color: $red_orange;
     text-decoration: none;
   }
 }
@@ -346,6 +351,11 @@ article.pytorch-article .sphx-glr-thumbcontainer {
   }
 
   @include animated_border_hover_state;
+  @include desktop {
+    &:after {
+      background-color: $red_orange;
+    }
+  }
 }
 
 article.pytorch-article {
@@ -355,7 +365,7 @@ article.pytorch-article {
       background: $light_grey;
       padding: rem(18px);
       padding-right: 110px;
-      border-left: 3px solid $orange;
+      border-left: 3px solid $red_orange;
       word-wrap: break-word;
       a {
         position: absolute;
@@ -366,7 +376,7 @@ article.pytorch-article {
       }
       &:hover {
         .viewcode-link {
-          color: $orange;
+          color: $red_orange;
         }
       }
     }
@@ -433,13 +443,13 @@ article.pytorch-article {
     @extend .function;
     dt {
       border-left: none;
-      border-top: 3px solid $orange;
+      border-top: 3px solid $red_orange;
     }
 
     em.property {
       text-transform: uppercase;
       font-style: normal;
-      color: $orange;
+      color: $red_orange;
       font-size: rem(16px);
       letter-spacing: 0;
       line-height: rem(24px);
@@ -455,7 +465,7 @@ article.pytorch-article {
     .method,
     .staticmethod {
       dt {
-        border-left: 3px solid $orange;
+        border-left: 3px solid $red_orange;
         border-top: none;
       }
     }
@@ -484,6 +494,11 @@ article.pytorch-article {
     margin: rem(20px) auto;
 
     @include animated_border_hover_state;
+    @include desktop {
+      &:after {
+        background-color: $red_orange;
+      }
+    }
 
     @include desktop {
       background-position: left 20px center;
@@ -642,4 +657,68 @@ article.pytorch-article {
   padding-left: 0;
   padding-right: 0;
   max-width: none;
+}
+
+a:link,
+a:visited,
+a:hover {
+  color: $red_orange;
+}
+
+::-webkit-input-placeholder {
+  color: $red_orange;
+}
+
+::-moz-placeholder {
+  color: $red_orange;
+}
+
+:-ms-input-placeholder {
+  color: $red_orange;
+}
+
+:-moz-placeholder {
+  color: $red_orange;
+}
+
+.site-footer {
+  @include desktop {
+    a:hover {
+      color: $red_orange;
+    }
+  }
+}
+
+.docs-tutorials-resources {
+  a {
+    color: $red_orange;
+  }
+}
+
+.header-holder .main-menu {
+  ul li {
+    &.active {
+      &:after {
+        color: $red_orange;
+      }
+
+      a {
+        color: $red_orange;
+      }
+    }
+  }
+
+  ul li a {
+    @include full-nav-menu-desktop {
+      &:hover {
+        color: $red_orange;
+      }
+    }
+  }
+}
+
+.mobile-main-menu.open {
+  ul li.active a {
+    color: $red_orange;
+  }
 }

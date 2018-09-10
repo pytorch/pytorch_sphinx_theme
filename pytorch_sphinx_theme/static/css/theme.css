@@ -10220,9 +10220,14 @@ p a:hover {
     text-decoration: underline;
   }
 }
+p a:link,
+p a:visited,
+p a:hover {
+  color: #ee4c2c;
+}
 
 .wy-breadcrumbs li a {
-  color: #e44c2c;
+  color: #ee4c2c;
 }
 
 ul.pytorch-breadcrumbs {
@@ -10233,7 +10238,7 @@ ul.pytorch-breadcrumbs li {
   display: inline-block;
 }
 ul.pytorch-breadcrumbs a {
-  color: #e44c2c;
+  color: #ee4c2c;
   text-decoration: none;
 }
 
@@ -10503,13 +10508,18 @@ article.pytorch-article .sphx-glr-thumbcontainer .figure a.reference.internal {
     width: 100%;
   }
 }
+@media screen and (min-width: 768px) {
+  article.pytorch-article .sphx-glr-thumbcontainer:after {
+    background-color: #ee4c2c;
+  }
+}
 
 article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
   position: relative;
   background: #f3f4f7;
   padding: 1.125rem;
   padding-right: 110px;
-  border-left: 3px solid #e44c2c;
+  border-left: 3px solid #ee4c2c;
   word-wrap: break-word;
 }
 article.pytorch-article .function dt a, article.pytorch-article .attribute dt a, article.pytorch-article .class .attribute dt a, article.pytorch-article .class dt a {
@@ -10521,7 +10531,7 @@ article.pytorch-article .function dt a, article.pytorch-article .attribute dt a,
           transform: perspective(1px) translateY(-50%);
 }
 article.pytorch-article .function dt:hover .viewcode-link, article.pytorch-article .attribute dt:hover .viewcode-link, article.pytorch-article .class dt:hover .viewcode-link {
-  color: #e44c2c;
+  color: #ee4c2c;
 }
 article.pytorch-article .function .anchorjs-link, article.pytorch-article .attribute .anchorjs-link, article.pytorch-article .class .anchorjs-link {
   display: inline;
@@ -10579,12 +10589,12 @@ article.pytorch-article .attribute .has-code {
 }
 article.pytorch-article .class dt {
   border-left: none;
-  border-top: 3px solid #e44c2c;
+  border-top: 3px solid #ee4c2c;
 }
 article.pytorch-article .class em.property {
   text-transform: uppercase;
   font-style: normal;
-  color: #e44c2c;
+  color: #ee4c2c;
   font-size: 1rem;
   letter-spacing: 0;
   line-height: 1.5rem;
@@ -10596,7 +10606,7 @@ article.pytorch-article .class dd p {
 }
 article.pytorch-article .class .method dt,
 article.pytorch-article .class .staticmethod dt {
-  border-left: 3px solid #e44c2c;
+  border-left: 3px solid #ee4c2c;
   border-top: none;
 }
 article.pytorch-article .class .attribute dt {
@@ -10632,6 +10642,11 @@ article.pytorch-article .class .attribute dt {
   }
   .pytorch-article div.sphx-glr-download a:hover:after {
     width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .pytorch-article div.sphx-glr-download a:after {
+    background-color: #ee4c2c;
   }
 }
 @media screen and (min-width: 768px) {
@@ -10780,6 +10795,54 @@ article.pytorch-article .math .MathJax_Display {
   padding-left: 0;
   padding-right: 0;
   max-width: none;
+}
+
+a:link,
+a:visited,
+a:hover {
+  color: #ee4c2c;
+}
+
+::-webkit-input-placeholder {
+  color: #ee4c2c;
+}
+
+::-moz-placeholder {
+  color: #ee4c2c;
+}
+
+:-ms-input-placeholder {
+  color: #ee4c2c;
+}
+
+:-moz-placeholder {
+  color: #ee4c2c;
+}
+
+@media screen and (min-width: 768px) {
+  .site-footer a:hover {
+    color: #ee4c2c;
+  }
+}
+
+.docs-tutorials-resources a {
+  color: #ee4c2c;
+}
+
+.header-holder .main-menu ul li.active:after {
+  color: #ee4c2c;
+}
+.header-holder .main-menu ul li.active a {
+  color: #ee4c2c;
+}
+@media screen and (min-width: 1100px) {
+  .header-holder .main-menu ul li a:hover {
+    color: #ee4c2c;
+  }
+}
+
+.mobile-main-menu.open ul li.active a {
+  color: #ee4c2c;
 }
 
 .pytorch-container {
@@ -10962,7 +11025,7 @@ article.pytorch-article .math .MathJax_Display {
 .pytorch-left-menu-search input[type=text] {
   border-radius: 0;
   padding: 0.5rem 0.75rem;
-  border-color: #e44c2c;
+  border-color: #ee4c2c;
   color: #262626;
   border-style: solid;
   font-size: 1rem;
@@ -11076,7 +11139,7 @@ article.pytorch-article .math .MathJax_Display {
 }
 .pytorch-left-menu li.toctree-l1.current > a,
 .pytorch-right-menu li.toctree-l1.current > a {
-  color: #e44c2c;
+  color: #ee4c2c;
 }
 .pytorch-left-menu li.toctree-l1.current > a:before,
 .pytorch-right-menu li.toctree-l1.current > a:before {
@@ -11086,7 +11149,7 @@ article.pytorch-article .math .MathJax_Display {
   left: -15px;
   top: 1px;
   font-size: 1.375rem;
-  color: #e44c2c;
+  color: #ee4c2c;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu li.toctree-l1.current > a:before,
@@ -11157,7 +11220,7 @@ article.pytorch-article .math .MathJax_Display {
   color: #8c8c8c;
 }
 .pytorch-right-menu li.active > a {
-  color: #e44c2c;
+  color: #ee4c2c;
 }
 .pytorch-right-menu ul ul {
   padding-left: 0;
@@ -11238,7 +11301,7 @@ article.pytorch-article .math .MathJax_Display {
   width: 25px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li.active:before {
-  background-color: #e44c2c;
+  background-color: #ee4c2c;
 }
 
 .pytorch-right-menu-active-dot {
@@ -11248,7 +11311,7 @@ article.pytorch-article .math .MathJax_Display {
 }
 .pytorch-right-menu-active-dot:before {
   content: "\2022";
-  color: #e44c2c;
+  color: #ee4c2c;
   display: inline-block;
   font-size: 1.375rem;
   left: 0;
