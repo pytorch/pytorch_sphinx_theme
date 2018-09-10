@@ -10296,6 +10296,15 @@ span.pre {
   padding: 2px 6px;
 }
 
+pre {
+  background-color: #f3f4f7;
+  padding: 1.5625rem;
+}
+
+.highlight .c1 {
+  color: #8c8c8c;
+}
+
 .headerlink {
   display: none !important;
 }
@@ -10661,7 +10670,7 @@ article.pytorch-article .class .attribute dt {
 }
 .pytorch-article div.sphx-glr-script-out .highlight pre {
   background-color: #fdede9;
-  padding: 1.125rem;
+  padding: 1.5625rem;
   color: #837b79;
 }
 .pytorch-article div.sphx-glr-script-out + p {

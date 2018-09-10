@@ -138,6 +138,15 @@ span.pre {
   padding: 2px 6px;
 }
 
+pre {
+  background-color: $light_grey;
+  padding: rem(25px);
+}
+
+.highlight .c1 {
+  color: $quick_start_grey;
+}
+
 .headerlink {
   display: none !important;
 }
@@ -514,7 +523,7 @@ article.pytorch-article {
 
   .highlight pre {
     background-color: #fdede9;
-    padding: rem(18px);
+    padding: rem(25px);
     color: #837b79;
   }
 
