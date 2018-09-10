@@ -542,6 +542,13 @@
 
 .header-container {
   max-width: none;
+  margin-top: 4px;
+  @include sphinx-medium-size {
+    margin-top: 0;
+  }
+  @include sphinx-full-size {
+    margin-top: 0;
+  }
 }
 
 .container-fluid.header-holder {
