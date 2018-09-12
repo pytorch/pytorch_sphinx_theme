@@ -1,93 +1,171 @@
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// Modified from https://stackoverflow.com/a/27078401
-window.pyTorchThrottle = function(func, wait, options) {
-  var context, args, result;
-  var timeout = null;
-  var previous = 0;
-  if (!options) options = {};
-  var later = function() {
-    previous = options.leading === false ? 0 : Date.now();
-    timeout = null;
-    result = func.apply(context, args);
-    if (!timeout) context = args = null;
-  };
-  return function() {
-    var now = Date.now();
-    if (!previous && options.leading === false) previous = now;
-    var remaining = wait - (now - previous);
-    context = this;
-    args = arguments;
-    if (remaining <= 0 || remaining > wait) {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      previous = now;
+window.utilities = {
+  scrollTop: function() {
+    var supportPageOffset = window.pageXOffset !== undefined;
+    var isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+    var scrollLeft = supportPageOffset ? window.pageXOffset : isCSS1Compat ? document.documentElement.scrollLeft : document.body.scrollLeft;
+    return supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+  },
+
+  // Modified from https://stackoverflow.com/a/27078401
+  throttle: function(func, wait, options) {
+    var context, args, result;
+    var timeout = null;
+    var previous = 0;
+    if (!options) options = {};
+    var later = function() {
+      previous = options.leading === false ? 0 : Date.now();
+      timeout = null;
       result = func.apply(context, args);
       if (!timeout) context = args = null;
-    } else if (!timeout && options.trailing !== false) {
-      timeout = setTimeout(later, remaining);
-    }
-    return result;
-  };
-};
+    };
+    return function() {
+      var now = Date.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+  },
 
+  closest: function (el, selector) {
+    var matchesFn;
+
+    // find vendor prefix
+    ['matches','webkitMatchesSelector','mozMatchesSelector','msMatchesSelector','oMatchesSelector'].some(function(fn) {
+      if (typeof document.body[fn] == 'function') {
+        matchesFn = fn;
+        return true;
+      }
+      return false;
+    });
+
+    var parent;
+
+    // traverse parents
+    while (el) {
+      parent = el.parentElement;
+      if (parent && parent[matchesFn](selector)) {
+        return parent;
+      }
+      el = parent;
+    }
+
+    return null;
+  },
+
+  // Modified from https://stackoverflow.com/a/18953277
+  offset: function(elem) {
+    if (!elem) {
+      return;
+    }
+
+    rect = elem.getBoundingClientRect();
+
+    // Make sure element is not hidden (display: none) or disconnected
+    if (rect.width || rect.height || elem.getClientRects().length) {
+      var doc = elem.ownerDocument;
+      var docElem = doc.documentElement;
+
+      return {
+        top: rect.top + window.pageYOffset - docElem.clientTop,
+        left: rect.left + window.pageXOffset - docElem.clientLeft
+      };
+    }
+  },
+
+  headersHeight: function() {
+    return document.getElementById("header-holder").offsetHeight +
+           document.getElementById("pytorch-page-level-bar").offsetHeight;
+  }
+}
+
+},{}],2:[function(require,module,exports){
 // Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
-  navigationListItems: $(".pytorch-right-menu li"),
-  sections: $(
-    $(".pytorch-article .section")
-      .get()
-      .reverse()
-  ),
+  navigationListItems: document.querySelectorAll("#pytorch-right-menu li"),
+  sections: document.querySelectorAll(".pytorch-article .section"),
   sectionIdTonavigationLink: {},
 
   bind: function() {
-    // Don't show the "Shortcuts" text unless there are menu items
-    if (highlightNavigation.navigationListItems.length > 1) {
-      $(".pytorch-shortcuts-wrapper").show();
+    if (!sideMenus.displayRightMenu) {
+      return;
+    };
+
+    for (var i = 0; i < highlightNavigation.sections.length; i++) {
+      var id = highlightNavigation.sections[i].id;
+      highlightNavigation.sectionIdTonavigationLink[id] =
+        document.querySelectorAll('#pytorch-right-menu li a[href="#' + id + '"]')[0];
     }
 
-    highlightNavigation.sections.each(function() {
-      var id = $(this).attr("id");
-      highlightNavigation.sectionIdTonavigationLink[id] = $(
-        ".pytorch-right-menu li a[href='#" + id + "']"
-      );
-    });
-
-    $(window).scroll(pyTorchThrottle(highlightNavigation.highlight, 500));
+    $(window).scroll(utilities.throttle(highlightNavigation.highlight, 100));
   },
 
   highlight: function() {
-    var scrollPosition = $(window).scrollTop();
-    var offset = $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 25;
+    var rightMenu = document.getElementById("pytorch-right-menu");
 
-    highlightNavigation.sections.each(function() {
-      var currentSection = $(this);
-      var sectionTop = currentSection.offset().top;
+    // If right menu is not on the screen don't bother
+    if (rightMenu.offsetWidth === 0 && rightMenu.offsetHeight === 0) {
+      return;
+    }
+
+    var scrollPosition = utilities.scrollTop();
+    var OFFSET_TOP_PADDING = 25;
+    var offset = document.getElementById("header-holder").offsetHeight +
+                 document.getElementById("pytorch-page-level-bar").offsetHeight +
+                 OFFSET_TOP_PADDING;
+
+    var sections = highlightNavigation.sections;
+
+    for (var i = (sections.length - 1); i >= 0; i--) {
+      var currentSection = sections[i];
+      var sectionTop = utilities.offset(currentSection).top;
 
       if (scrollPosition >= sectionTop - offset) {
-        var id = currentSection.attr("id");
-        var $navigationLink = highlightNavigation.sectionIdTonavigationLink[id];
-        var $navigationListItem = $navigationLink.closest("li");
+        var navigationLink = highlightNavigation.sectionIdTonavigationLink[currentSection.id];
+        var navigationListItem = utilities.closest(navigationLink, "li");
 
-        if (!$navigationListItem.hasClass("active")) {
-          highlightNavigation.navigationListItems.removeClass("active");
-          $(".pytorch-right-menu-active-dot").remove();
-
-          if ($navigationLink.is(":visible")) {
-            $navigationListItem.addClass("active");
-            $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
+        if (navigationListItem && !navigationListItem.classList.contains("active")) {
+          for (var i = 0; i < highlightNavigation.navigationListItems.length; i++) {
+            var el = highlightNavigation.navigationListItems[i];
+            if (el.classList.contains("active")) {
+              el.classList.remove("active");
+            }
           }
+
+          navigationListItem.classList.add("active");
+
+          // Scroll to active item. Not a requested feature but we could revive it. Needs work.
+
+          // var menuTop = $("#pytorch-right-menu").position().top;
+          // var itemTop = navigationListItem.getBoundingClientRect().top;
+          // var TOP_PADDING = 20
+          // var newActiveTop = $("#pytorch-side-scroll-right").scrollTop() + itemTop - menuTop - TOP_PADDING;
+
+          // $("#pytorch-side-scroll-right").animate({
+          //   scrollTop: newActiveTop
+          // }, 100);
         }
 
-        return false;
+        break;
       }
-    });
+    }
   }
 };
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 MathJax.Hub.Config({
     messageStyle: "none",
     scale: 100,
@@ -102,7 +180,7 @@ MathJax.Hub.Config({
 
  MathJax.Hub.Configured();
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 window.mobileMenu = {
   bind: function() {
     $("[data-behavior='open-mobile-menu']").on('click', function(e) {
@@ -134,7 +212,7 @@ window.mobileMenu = {
   }
 };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 window.mobileTOC = {
   bind: function() {
     $("[data-behavior='toggle-table-of-contents']").on("click", function(e) {
@@ -155,7 +233,7 @@ window.mobileTOC = {
   }
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 window.pytorchAnchors = {
   bind: function() {
     // Replace Sphinx-generated anchors with anchorjs ones
@@ -175,7 +253,7 @@ window.pytorchAnchors = {
   }
 };
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Modified from https://stackoverflow.com/a/13067009
 // Going for a JS solution to scrolling to an anchor so we can benefit from
 // less hacky css and smooth scrolling.
@@ -190,7 +268,10 @@ window.scrollToAnchor = {
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function() {
-        return $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 20;
+        var OFFSET_HEIGHT_PADDING = 20;
+        return document.getElementById("header-holder").offsetHeight +
+               document.getElementById("pytorch-page-level-bar").offsetHeight +
+               OFFSET_HEIGHT_PADDING;
       },
 
       /**
@@ -198,8 +279,10 @@ window.scrollToAnchor = {
        */
       init: function() {
         this.scrollToCurrent();
-        $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
+        // This interferes with clicks below it, causing a double fire
+        // $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
         $('body').on('click', 'a', $.proxy(this, 'delegateAnchors'));
+        $('body').on('click', '#pytorch-right-menu li span', $.proxy(this, 'delegateSpans'));
       },
 
       /**
@@ -226,7 +309,8 @@ window.scrollToAnchor = {
         match = document.getElementById(href.slice(1));
 
         if(match) {
-          anchorOffset = $(match).offset().top - this.getFixedOffset();
+          var anchorOffset = $(match).offset().top - this.getFixedOffset();
+
           $('html, body').scrollTop(anchorOffset);
 
           // Add the state to history as-per normal anchor links
@@ -247,6 +331,14 @@ window.scrollToAnchor = {
         }
       },
 
+      delegateSpans: function(e) {
+        var elem = utilities.closest(e.target, "a");
+
+        if(this.scrollIfAnchor(elem.getAttribute('href'), true)) {
+          e.preventDefault();
+        }
+      },
+
       /**
        * If the click event's target was an anchor, fix the scroll position.
        */
@@ -263,70 +355,126 @@ window.scrollToAnchor = {
   }
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 window.sideMenus = {
-  rightMenuInitialTop: $(".pytorch-article h1:first").offset().top,
+  displayRightMenu: document.querySelectorAll("#pytorch-right-menu li").length > 1,
+
+  isFixedToBottom: false,
 
   bind: function() {
-    // Start the Shortcuts menu at the article's H1 position
-    $(".pytorch-right-menu").css({top: sideMenus.rightMenuInitialTop});
+    sideMenus.handleLeftMenu();
 
-    $(window).on('load resize scroll', function(e) {
-      sideMenus.handleLeftMenu();
+    if (sideMenus.displayRightMenu) {
+      // Show the right menu container
+      document.getElementById("pytorch-content-right").classList.add("show");
+
+      // Don't show the Shortcuts menu title text unless there are menu items
+      document.getElementById("pytorch-shortcuts-wrapper").style.display = "block";
+
+      // Start the Shortcuts menu at the article's H1 position
+      document.getElementById("pytorch-right-menu").style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
+
       sideMenus.handleRightMenu();
+    }
+
+    $(window).on('resize scroll', function(e) {
+      sideMenus.handleLeftMenu();
+
+      if (sideMenus.displayRightMenu) {
+        sideMenus.handleRightMenu();
+      }
     });
   },
 
+  rightMenuInitialTop: function() {
+    return utilities.headersHeight();
+  },
+
   handleLeftMenu: function () {
-    var windowHeight = $(window).height();
-    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
+    var windowHeight = window.innerHeight;
+    var topOfFooterRelativeToWindow = document.getElementById("docs-tutorials-resources").getBoundingClientRect().top;
 
     if (topOfFooterRelativeToWindow >= windowHeight) {
-      $(".pytorch-left-menu").css({height: "100%"});
+      document.getElementById("pytorch-left-menu").style.height = "100%";
     } else {
       var howManyPixelsOfTheFooterAreInTheWindow = windowHeight - topOfFooterRelativeToWindow;
-      var headerHeight = $('.header-holder').height();
+      var headerHeight = document.getElementById('header-holder').offsetHeight;
       var leftMenuDifference = howManyPixelsOfTheFooterAreInTheWindow + headerHeight;
 
-      $(".pytorch-left-menu").css({height: windowHeight - leftMenuDifference});
+      document.getElementById("pytorch-left-menu").style.height = (windowHeight - leftMenuDifference) + "px";
     }
   },
 
   handleRightMenu: function() {
-    var scrollPos = $(window).scrollTop();
-    var $rightMenu = $(".pytorch-right-menu");
-    var initialTop = sideMenus.rightMenuInitialTop;
+    var rightMenu = document.getElementById("pytorch-right-menu");
+    var scrollPos = utilities.scrollTop();
 
     if (scrollPos === 0) {
-      $rightMenu.css({top: initialTop});
+      rightMenu.style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
       return;
     }
 
-    var $rightMenuList = $(".pytorch-right-menu ul:first");
-    var windowHeight = $(window).height();
-    var topOfFooterRelativeToWindow = document.getElementsByClassName("docs-tutorials-resources")[0].getBoundingClientRect().top;
-    var bottom = $rightMenuList.offset().top + $rightMenuList.height();
-    var footerTop = $(".docs-tutorials-resources").offset().top;
-    var stoppingPoint = $(".header-holder").height() + $(".pytorch-page-level-bar").height();
-    var PADDING_BETWEEN_MENU_AND_FOOTER = 40;
+    var rightMenuList = rightMenu.getElementsByTagName("ul")[0];
+    var rightMenuBottom = utilities.offset(rightMenuList).top + rightMenuList.offsetHeight;
+    var footerTop = utilities.offset(document.getElementById("docs-tutorials-resources")).top;
+    var isBottomOfMenuPastOrCloseToFooter = rightMenuBottom >= footerTop  || footerTop - rightMenuBottom <= 40
+    var heightOfFooterOnScreen = $(window).height() - document.getElementById("docs-tutorials-resources").getBoundingClientRect().top;
 
-    // if: the right menu is fixed to the bottom and the site footer is not in the window
-    // else if: the bottom position of the right menu matches or is past the top position
-    //          of the footer minus padding
+    if (heightOfFooterOnScreen < 0) {
+      heightOfFooterOnScreen = 0;
+    }
 
-    if ($rightMenu.hasClass("fixed-to-bottom") && topOfFooterRelativeToWindow >= windowHeight) {
-      $rightMenu.removeClass("fixed-to-bottom").css({top: stoppingPoint});
-    } else if (bottom >= -PADDING_BETWEEN_MENU_AND_FOOTER + footerTop) {
-      $rightMenu.addClass("fixed-to-bottom").css({top: "auto"});
+    // If the right menu is already fixed to the bottom
+    if (this.isFixedToBottom) {
+      var isFooterOnScreen = isElementInViewport(document.getElementById("docs-tutorials-resources"));
+
+      // If the footer is still on the screen, we want to keep the menu where it is
+      if (isFooterOnScreen) {
+        bottom = heightOfFooterOnScreen;
+        rightMenu.style["margin-top"] = "auto";
+        rightMenu.style.bottom = bottom + "px";
+      } else {
+        // If the footer is not on the screen, we want to break the side menu out of the bottom
+        this.isFixedToBottom = false;
+        rightMenu.style.height = (window.innerHeight - heightOfFooterOnScreen - utilities.headersHeight()) + "px";
+        rightMenu.style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
+        rightMenu.style.bottom = bottom;
+      }
+
+    // If the side menu is past the footer's top or close to it (by 40 pixels)
+    // we fix the menu to the bottom
+    } else if (isBottomOfMenuPastOrCloseToFooter) {
+      var isFooterOnScreen = isElementInViewport(document.getElementById("docs-tutorials-resources"));
+      var bottom = 0;
+
+      this.isFixedToBottom = true;
+
+      if (isFooterOnScreen) {
+        bottom = heightOfFooterOnScreen;
+        rightMenu.style["margin-top"] = "auto";
+        rightMenu.style.bottom = bottom + "px";
+      } else {
+        rightMenu.style.height = (window.innerHeight - heightOfFooterOnScreen - utilities.headersHeight()) + "px";
+        rightMenu.style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
+        rightMenu.style.bottom = bottom;
+      }
     } else {
-      var top = scrollPos >= (initialTop - stoppingPoint)
-                  ? stoppingPoint
-                  : initialTop - scrollPos;
-
-      $rightMenu.css({top: top});
+      this.isFixedToBottom = false;
+      rightMenu.style.height = (window.innerHeight - heightOfFooterOnScreen - utilities.headersHeight()) + "px";
+      rightMenu.style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
+      rightMenu.style.bottom = bottom;
     }
   }
 };
+
+function isElementInViewport(el) {
+  var rect = el.getBoundingClientRect();
+
+  return rect.bottom > 0 &&
+    rect.right > 0 &&
+    rect.left < (window.innerWidth || document.documentElement.clientWidth) &&
+    rect.top < (window.innerHeight || document.documentElement.clientHeight);
+}
 
 },{}],"pytorch-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
@@ -573,4 +721,4 @@ if (typeof(window) != 'undefined') {
 $(".sphx-glr-thumbcontainer").removeAttr("tooltip");
 $("table").removeAttr("border");
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,"pytorch-sphinx-theme"]);

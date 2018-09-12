@@ -5,6 +5,8 @@
   background-size: 100%;
   margin-left: 0;
   margin-right: 0;
+  position: relative;
+  z-index: 201;
 
   @include desktop {
     padding: rem(80px) 0;

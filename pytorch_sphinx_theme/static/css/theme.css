@@ -9877,6 +9877,8 @@ pre {
   background-size: 100%;
   margin-left: 0;
   margin-right: 0;
+  position: relative;
+  z-index: 201;
 }
 @media screen and (min-width: 768px) {
   .site-footer {
@@ -10915,18 +10917,26 @@ a:hover {
 .pytorch-content-right {
   display: none;
   position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.pytorch-content-right.show {
+  display: none;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-content-right {
-    display: block;
     left: 2%;
     width: 24%;
+  }
+  .pytorch-content-right.show {
+    display: block;
   }
 }
 @media screen and (min-width: 1600px) {
   .pytorch-content-right {
     width: 350px;
     left: 0;
+    top: 0;
   }
 }
 
@@ -11053,9 +11063,12 @@ a:hover {
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;
-  top: auto;
+  top: 0;
+  left: 0;
   z-index: 200;
-  bottom: 0;
+  padding-top: 0;
+  bottom: auto;
+  will-change: bottom;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-right-menu {
@@ -11068,13 +11081,6 @@ a:hover {
     left: 1200px;
     width: 380px;
   }
-}
-.pytorch-right-menu.fixed-to-bottom {
-  top: auto;
-  bottom: 20px;
-  position: absolute;
-  left: 0;
-  width: 100%;
 }
 
 .pytorch-left-menu ul,
@@ -11222,26 +11228,44 @@ a:hover {
 .pytorch-right-menu li.active > a {
   color: #ee4c2c;
 }
+.pytorch-right-menu li.active > a:before {
+  content: "\2022";
+  color: #e44c2c;
+  display: inline-block;
+  font-size: 1.375rem;
+  left: -15px;
+  position: absolute;
+  top: 1px;
+}
+.pytorch-right-menu .pytorch-side-scroll > ul > li > ul > li {
+  margin-bottom: 0.625rem;
+}
 .pytorch-right-menu ul ul {
   padding-left: 0;
 }
 .pytorch-right-menu ul ul li {
   padding-left: 0px;
 }
-.pytorch-right-menu ul ul li li a.reference.internal {
+.pytorch-right-menu ul ul li a.reference.internal {
   padding-left: 10px;
 }
-.pytorch-right-menu ul ul li li li a.reference.internal {
+.pytorch-right-menu ul ul li li a.reference.internal {
   padding-left: 15px;
 }
-.pytorch-right-menu ul ul li li li li a.reference.internal {
+.pytorch-right-menu ul ul li li li a.reference.internal {
   padding-left: 20px;
 }
-.pytorch-right-menu ul ul li li li li li a.reference.internal {
+.pytorch-right-menu ul ul li li li li a.reference.internal {
   padding-left: 25px;
 }
-.pytorch-right-menu ul ul li li li li li li a.reference.internal {
+.pytorch-right-menu ul ul li li li li li a.reference.internal {
   padding-left: 30px;
+}
+.pytorch-right-menu ul ul li li li li li a.reference.internal.active a:before {
+  left: -40px;
+}
+.pytorch-right-menu ul ul li li li li li li a.reference.internal {
+  padding-left: 35px;
 }
 .pytorch-right-menu li ul {
   display: block;
@@ -11263,9 +11287,7 @@ a:hover {
 .pytorch-right-menu .pytorch-side-scroll > ul {
   padding-left: 10%;
   padding-right: 10%;
-}
-.pytorch-right-menu .pytorch-side-scroll > ul > li > a {
-  display: none;
+  margin-bottom: 0;
 }
 .pytorch-right-menu .pytorch-side-scroll ul li {
   position: relative;
@@ -11278,7 +11300,7 @@ a:hover {
   position: absolute;
   left: 0;
   top: 10px;
-  width: 0;
+  width: 5px;
 }
 @media screen and (min-width: 1600px) {
   .pytorch-right-menu .pytorch-side-scroll ul ul li:before {
@@ -11286,38 +11308,22 @@ a:hover {
   }
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li li:before {
-  width: 5px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li:before {
   width: 10px;
 }
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li:before {
+.pytorch-right-menu .pytorch-side-scroll ul ul li li li:before {
   width: 15px;
 }
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li:before {
+.pytorch-right-menu .pytorch-side-scroll ul ul li li li li:before {
   width: 20px;
 }
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li li:before {
+.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li:before {
   width: 25px;
+}
+.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li li:before {
+  width: 30px;
 }
 .pytorch-right-menu .pytorch-side-scroll ul ul li.active:before {
   background-color: #ee4c2c;
-}
-
-.pytorch-right-menu-active-dot {
-  left: -20px;
-  position: absolute;
-  top: -2px;
-}
-.pytorch-right-menu-active-dot:before {
-  content: "\2022";
-  color: #ee4c2c;
-  display: inline-block;
-  font-size: 1.375rem;
-  left: 0;
-  position: absolute;
-  text-indent: 0;
-  top: 0;
 }
 
 .header-container {

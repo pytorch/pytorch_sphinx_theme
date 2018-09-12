@@ -12,7 +12,10 @@ window.scrollToAnchor = {
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function() {
-        return $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 20;
+        var OFFSET_HEIGHT_PADDING = 20;
+        return document.getElementById("header-holder").offsetHeight +
+               document.getElementById("pytorch-page-level-bar").offsetHeight +
+               OFFSET_HEIGHT_PADDING;
       },
 
       /**
@@ -20,8 +23,10 @@ window.scrollToAnchor = {
        */
       init: function() {
         this.scrollToCurrent();
-        $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
+        // This interferes with clicks below it, causing a double fire
+        // $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
         $('body').on('click', 'a', $.proxy(this, 'delegateAnchors'));
+        $('body').on('click', '#pytorch-right-menu li span', $.proxy(this, 'delegateSpans'));
       },
 
       /**
@@ -48,7 +53,8 @@ window.scrollToAnchor = {
         match = document.getElementById(href.slice(1));
 
         if(match) {
-          anchorOffset = $(match).offset().top - this.getFixedOffset();
+          var anchorOffset = $(match).offset().top - this.getFixedOffset();
+
           $('html, body').scrollTop(anchorOffset);
 
           // Add the state to history as-per normal anchor links
@@ -65,6 +71,14 @@ window.scrollToAnchor = {
        */
       scrollToCurrent: function(e) {
         if(this.scrollIfAnchor(window.location.hash) && e) {
+          e.preventDefault();
+        }
+      },
+
+      delegateSpans: function(e) {
+        var elem = utilities.closest(e.target, "a");
+
+        if(this.scrollIfAnchor(elem.getAttribute('href'), true)) {
           e.preventDefault();
         }
       },

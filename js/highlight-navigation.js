@@ -1,87 +1,71 @@
-// Modified from https://stackoverflow.com/a/27078401
-window.pyTorchThrottle = function(func, wait, options) {
-  var context, args, result;
-  var timeout = null;
-  var previous = 0;
-  if (!options) options = {};
-  var later = function() {
-    previous = options.leading === false ? 0 : Date.now();
-    timeout = null;
-    result = func.apply(context, args);
-    if (!timeout) context = args = null;
-  };
-  return function() {
-    var now = Date.now();
-    if (!previous && options.leading === false) previous = now;
-    var remaining = wait - (now - previous);
-    context = this;
-    args = arguments;
-    if (remaining <= 0 || remaining > wait) {
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      previous = now;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
-    } else if (!timeout && options.trailing !== false) {
-      timeout = setTimeout(later, remaining);
-    }
-    return result;
-  };
-};
-
 // Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
-  navigationListItems: $(".pytorch-right-menu li"),
-  sections: $(
-    $(".pytorch-article .section")
-      .get()
-      .reverse()
-  ),
+  navigationListItems: document.querySelectorAll("#pytorch-right-menu li"),
+  sections: document.querySelectorAll(".pytorch-article .section"),
   sectionIdTonavigationLink: {},
 
   bind: function() {
-    // Don't show the "Shortcuts" text unless there are menu items
-    if (highlightNavigation.navigationListItems.length > 1) {
-      $(".pytorch-shortcuts-wrapper").show();
+    if (!sideMenus.displayRightMenu) {
+      return;
+    };
+
+    for (var i = 0; i < highlightNavigation.sections.length; i++) {
+      var id = highlightNavigation.sections[i].id;
+      highlightNavigation.sectionIdTonavigationLink[id] =
+        document.querySelectorAll('#pytorch-right-menu li a[href="#' + id + '"]')[0];
     }
 
-    highlightNavigation.sections.each(function() {
-      var id = $(this).attr("id");
-      highlightNavigation.sectionIdTonavigationLink[id] = $(
-        ".pytorch-right-menu li a[href='#" + id + "']"
-      );
-    });
-
-    $(window).scroll(pyTorchThrottle(highlightNavigation.highlight, 500));
+    $(window).scroll(utilities.throttle(highlightNavigation.highlight, 100));
   },
 
   highlight: function() {
-    var scrollPosition = $(window).scrollTop();
-    var offset = $(".header-holder").height() + $(".pytorch-page-level-bar").height() + 25;
+    var rightMenu = document.getElementById("pytorch-right-menu");
 
-    highlightNavigation.sections.each(function() {
-      var currentSection = $(this);
-      var sectionTop = currentSection.offset().top;
+    // If right menu is not on the screen don't bother
+    if (rightMenu.offsetWidth === 0 && rightMenu.offsetHeight === 0) {
+      return;
+    }
+
+    var scrollPosition = utilities.scrollTop();
+    var OFFSET_TOP_PADDING = 25;
+    var offset = document.getElementById("header-holder").offsetHeight +
+                 document.getElementById("pytorch-page-level-bar").offsetHeight +
+                 OFFSET_TOP_PADDING;
+
+    var sections = highlightNavigation.sections;
+
+    for (var i = (sections.length - 1); i >= 0; i--) {
+      var currentSection = sections[i];
+      var sectionTop = utilities.offset(currentSection).top;
 
       if (scrollPosition >= sectionTop - offset) {
-        var id = currentSection.attr("id");
-        var $navigationLink = highlightNavigation.sectionIdTonavigationLink[id];
-        var $navigationListItem = $navigationLink.closest("li");
+        var navigationLink = highlightNavigation.sectionIdTonavigationLink[currentSection.id];
+        var navigationListItem = utilities.closest(navigationLink, "li");
 
-        if (!$navigationListItem.hasClass("active")) {
-          highlightNavigation.navigationListItems.removeClass("active");
-          $(".pytorch-right-menu-active-dot").remove();
-
-          if ($navigationLink.is(":visible")) {
-            $navigationListItem.addClass("active");
-            $navigationListItem.prepend("<div class=\"pytorch-right-menu-active-dot\"></div>");
+        if (navigationListItem && !navigationListItem.classList.contains("active")) {
+          for (var i = 0; i < highlightNavigation.navigationListItems.length; i++) {
+            var el = highlightNavigation.navigationListItems[i];
+            if (el.classList.contains("active")) {
+              el.classList.remove("active");
+            }
           }
+
+          navigationListItem.classList.add("active");
+
+          // Scroll to active item. Not a requested feature but we could revive it. Needs work.
+
+          // var menuTop = $("#pytorch-right-menu").position().top;
+          // var itemTop = navigationListItem.getBoundingClientRect().top;
+          // var TOP_PADDING = 20
+          // var newActiveTop = $("#pytorch-side-scroll-right").scrollTop() + itemTop - menuTop - TOP_PADDING;
+
+          // $("#pytorch-side-scroll-right").animate({
+          //   scrollTop: newActiveTop
+          // }, 100);
         }
 
-        return false;
+        break;
       }
-    });
+    }
   }
 };

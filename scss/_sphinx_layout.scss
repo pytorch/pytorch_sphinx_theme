@@ -51,16 +51,26 @@
 .pytorch-content-right {
   display: none;
   position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+
+  &.show {
+    display: none;
+  }
 
   @include sphinx-medium-size {
-    display: block;
     left: $sphinx_right_menu_wrap_left_margin;
     width: $sphinx_right_menu_wrap_width;
+
+    &.show {
+      display: block;
+    }
   }
 
   @include sphinx-full-size {
     width: $desktop_menu_width - 70px;
     left: 0;
+    top: 0;
   }
 }
 
@@ -190,9 +200,12 @@
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;
-  top: auto;
+  top: 0;
+  left: 0;
   z-index: 200;
-  bottom: 0;
+  padding-top: 0;
+  bottom: auto;
+  will-change: bottom;
 
   @include sphinx-medium-size {
     left: $sphinx_right_menu_left_margin;
@@ -202,14 +215,6 @@
   @include sphinx-full-size {
     left: 1200px;
     width: 380px;
-  }
-
-  &.fixed-to-bottom {
-    top: auto;
-    bottom: 20px;
-    position: absolute;
-    left: 0;
-    width: 100%;
   }
 }
 
@@ -404,6 +409,20 @@
 
   li.active > a {
     color: $red_orange;
+
+    &:before {
+      content: "\2022";
+      color: $orange;
+      display: inline-block;
+      font-size: rem(22px);
+      left: -15px;
+      position: absolute;
+      top: 1px;
+    }
+  }
+
+  .pytorch-side-scroll > ul > li > ul > li {
+    margin-bottom: rem(10px);
   }
 
   ul ul {
@@ -411,29 +430,38 @@
 
     li {
       padding-left: 0px;
-      li {
-          a.reference.internal {
-            padding-left: 10px;
-          }
 
-        li {
+      a.reference.internal {
+        padding-left: 10px;
+      }
+
+      li {
           a.reference.internal {
             padding-left: 15px;
           }
 
+        li {
+          a.reference.internal {
+            padding-left: 20px;
+          }
+
           li {
             a.reference.internal {
-              padding-left: 20px;
+              padding-left: 25px;
             }
 
             li {
               a.reference.internal {
-                padding-left: 25px;
+                padding-left: 30px;
+
+                &.active a:before {
+                  left: -40px;
+                }
               }
 
               li {
                 a.reference.internal {
-                  padding-left: 30px;
+                  padding-left: 35px;
                 }
               }
             }
@@ -462,10 +490,7 @@
   > ul {
     padding-left: 10%;
     padding-right: 10%;
-    // Hide the first level (title) of the article
-    > li > a {
-      display: none;
-    }
+    margin-bottom: 0;
   }
 
   ul li {
@@ -482,7 +507,7 @@
         position: absolute;
         left: 0;
         top: 10px;
-        width: 0;
+        width: 5px;
 
         @include sphinx-full-size {
           top: 13px;
@@ -491,23 +516,23 @@
 
       li {
         &:before {
-          width: 5px;
+          width: 10px;
         }
         li {
           &:before {
-            width: 10px;
+            width: 15px;
           }
           li {
             &:before {
-              width: 15px;
+              width: 20px;
             }
             li {
               &:before {
-                width: 20px;
+                width: 25px;
               }
               li {
                 &:before {
-                  width: 25px;
+                  width: 30px;
                 }
               }
             }
@@ -521,22 +546,6 @@
         }
       }
     }
-  }
-}
-
-.pytorch-right-menu-active-dot {
-  left: -20px;
-  position: absolute;
-  top: -2px;
-  &:before {
-    content: "\2022";
-    color: $red_orange;
-    display: inline-block;
-    font-size: rem(22px);
-    left: 0;
-    position: absolute;
-    text-indent: 0;
-    top: 0;
   }
 }
 
