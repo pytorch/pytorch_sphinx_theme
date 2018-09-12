@@ -405,10 +405,18 @@
   a:visited,
   a:hover {
     color: $quick_start_grey;
+
+    span.pre {
+      color: $quick_start_grey;
+    }
   }
 
   li.active > a {
     color: $red_orange;
+
+    span.pre {
+      color: $red_orange;
+    }
 
     &:before {
       content: "\2022";

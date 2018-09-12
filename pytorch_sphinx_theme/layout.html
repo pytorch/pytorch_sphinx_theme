@@ -435,7 +435,7 @@
     })
 
     // Add class to links that have code blocks, since we cannot create links in code blocks
-    $("a span.pre").each(function(e) {
+    $("article.pytorch-article a span.pre").each(function(e) {
       $(this).closest("a").addClass("has-code");
     });
   </script>

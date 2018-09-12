@@ -11225,7 +11225,15 @@ a:hover {
 .pytorch-right-menu a:hover {
   color: #8c8c8c;
 }
+.pytorch-right-menu a:link span.pre,
+.pytorch-right-menu a:visited span.pre,
+.pytorch-right-menu a:hover span.pre {
+  color: #8c8c8c;
+}
 .pytorch-right-menu li.active > a {
+  color: #ee4c2c;
+}
+.pytorch-right-menu li.active > a span.pre {
   color: #ee4c2c;
 }
 .pytorch-right-menu li.active > a:before {
