@@ -11,4 +11,3 @@ __pycache__
 dist/
 *.egg-info/
 scss/vendor/*
-pytorch_sphinx_theme/static/js/vendor/*
