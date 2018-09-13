@@ -1,11 +1,11 @@
-"""Sphinx ReadTheDocs theme.
+"""Pytorch Sphinx theme.
 
-From https://github.com/ryan-roemer/sphinx-bootstrap-theme.
+From https://github.com/shiftlab/pytorch_sphinx_theme.
 
 """
 from os import path
 
-__version__ = '0.4.1'
+__version__ = '0.0.18'
 __version_full__ = __version__
 
 
@@ -16,4 +16,4 @@ def get_html_theme_path():
 
 # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
 def setup(app):
-    app.add_html_theme('sphinx_rtd_theme', path.abspath(path.dirname(__file__)))
+    app.add_html_theme('pytorch_sphinx_theme', path.abspath(path.dirname(__file__)))
