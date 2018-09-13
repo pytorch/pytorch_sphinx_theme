@@ -10363,7 +10363,7 @@ article.pytorch-article p.caption {
 article.pytorch-article .note,
 article.pytorch-article .warning {
   background: #f3f4f7;
-  margin-top: 1.125rem;
+  margin-top: 1.875rem;
   margin-bottom: 1.125rem;
 }
 article.pytorch-article .note .first,
@@ -10912,6 +10912,15 @@ a:hover {
   .pytorch-content-left {
     width: 700px;
   }
+}
+.pytorch-content-left .main-content {
+  padding-top: 0.9375rem;
+}
+.pytorch-content-left .main-content ul.simple {
+  padding-bottom: 1.25rem;
+}
+.pytorch-content-left .main-content .note:nth-child(1), .pytorch-content-left .main-content .warning:nth-child(1) {
+  margin-top: 0;
 }
 
 .pytorch-content-right {

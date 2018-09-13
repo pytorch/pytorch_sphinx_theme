@@ -46,6 +46,18 @@
   @include sphinx-full-size {
     width: $sphinx_full_width_content_width;
   }
+
+  .main-content {
+    padding-top: rem(15px);
+    ul.simple {
+      padding-bottom: rem(20px);
+    }
+    .note, .warning {
+      &:nth-child(1) {
+        margin-top: 0;
+      }
+    }
+  }
 }
 
 .pytorch-content-right {
