@@ -11242,20 +11242,20 @@ a:hover {
 .pytorch-right-menu li.active > a {
   color: #ee4c2c;
 }
-.pytorch-right-menu li.active > a span.pre {
+.pytorch-right-menu li.active > a span.pre, .pytorch-right-menu li.active > a:before {
   color: #ee4c2c;
 }
-.pytorch-right-menu li.active > a:before {
+.pytorch-right-menu li.active > a:after {
   content: "\2022";
   color: #e44c2c;
   display: inline-block;
   font-size: 1.375rem;
-  left: -15px;
+  left: -17px;
   position: absolute;
   top: 1px;
 }
 .pytorch-right-menu .pytorch-side-scroll > ul > li > ul > li {
-  margin-bottom: 0.625rem;
+  margin-bottom: 1.375rem;
 }
 .pytorch-right-menu ul ul {
   padding-left: 0;
@@ -11264,25 +11264,25 @@ a:hover {
   padding-left: 0px;
 }
 .pytorch-right-menu ul ul li a.reference.internal {
-  padding-left: 10px;
+  padding-left: 0;
 }
 .pytorch-right-menu ul ul li li a.reference.internal {
-  padding-left: 15px;
+  padding-left: 0;
+}
+.pytorch-right-menu ul ul li li a.reference.internal:before {
+  content: "\2014";
 }
 .pytorch-right-menu ul ul li li li a.reference.internal {
-  padding-left: 20px;
+  padding-left: 15px;
 }
 .pytorch-right-menu ul ul li li li li a.reference.internal {
-  padding-left: 25px;
+  padding-left: 20px;
 }
 .pytorch-right-menu ul ul li li li li li a.reference.internal {
-  padding-left: 30px;
-}
-.pytorch-right-menu ul ul li li li li li a.reference.internal.active a:before {
-  left: -40px;
+  padding-left: 25px;
 }
 .pytorch-right-menu ul ul li li li li li li a.reference.internal {
-  padding-left: 35px;
+  padding-left: 30px;
 }
 .pytorch-right-menu li ul {
   display: block;
@@ -11306,41 +11306,11 @@ a:hover {
   padding-right: 10%;
   margin-bottom: 0;
 }
+.pytorch-right-menu .pytorch-side-scroll > ul > li > a.reference.internal {
+  color: #252627;
+}
 .pytorch-right-menu .pytorch-side-scroll ul li {
   position: relative;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li:before {
-  content: "";
-  background-color: #8c8c8c;
-  height: 1px;
-  display: inline-block;
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 5px;
-}
-@media screen and (min-width: 1600px) {
-  .pytorch-right-menu .pytorch-side-scroll ul ul li:before {
-    top: 13px;
-  }
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li:before {
-  width: 10px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li:before {
-  width: 15px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li:before {
-  width: 20px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li:before {
-  width: 25px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li li li li li li:before {
-  width: 30px;
-}
-.pytorch-right-menu .pytorch-side-scroll ul ul li.active:before {
-  background-color: #ee4c2c;
 }
 
 .header-container {

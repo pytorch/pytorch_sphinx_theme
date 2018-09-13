@@ -371,6 +371,13 @@ window.sideMenus = {
       // Don't show the Shortcuts menu title text unless there are menu items
       document.getElementById("pytorch-shortcuts-wrapper").style.display = "block";
 
+      // Remove superfluous titles unless there are more than one
+      var titles = document.querySelectorAll("#pytorch-side-scroll-right > ul > li");
+
+      if (titles.length === 1) {
+        titles[0].querySelector("a.reference.internal").style.display = "none";
+      }
+
       // Start the Shortcuts menu at the article's H1 position
       document.getElementById("pytorch-right-menu").style["margin-top"] = sideMenus.rightMenuInitialTop() + "px";
 

@@ -426,23 +426,24 @@
   li.active > a {
     color: $red_orange;
 
-    span.pre {
+    span.pre,
+    &:before {
       color: $red_orange;
     }
 
-    &:before {
+    &:after {
       content: "\2022";
       color: $orange;
       display: inline-block;
       font-size: rem(22px);
-      left: -15px;
+      left: -17px;
       position: absolute;
       top: 1px;
     }
   }
 
   .pytorch-side-scroll > ul > li > ul > li {
-    margin-bottom: rem(10px);
+    margin-bottom: rem(22px);
   }
 
   ul ul {
@@ -452,36 +453,36 @@
       padding-left: 0px;
 
       a.reference.internal {
-        padding-left: 10px;
+        padding-left: 0;
       }
 
       li {
           a.reference.internal {
-            padding-left: 15px;
+            padding-left: 0;
+
+            &:before {
+              content: "\2014";
+            }
           }
 
         li {
           a.reference.internal {
-            padding-left: 20px;
+            padding-left: 15px;
           }
 
           li {
             a.reference.internal {
-              padding-left: 25px;
+              padding-left: 20px;
             }
 
             li {
               a.reference.internal {
-                padding-left: 30px;
-
-                &.active a:before {
-                  left: -40px;
-                }
+                padding-left: 25px;
               }
 
               li {
                 a.reference.internal {
-                  padding-left: 35px;
+                  padding-left: 30px;
                 }
               }
             }
@@ -511,61 +512,13 @@
     padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 0;
+    > li > a.reference.internal {
+      color: $slate;
+    }
   }
 
   ul li {
     position: relative;
-  }
-
-  ul ul {
-    li {
-      &:before {
-        content: "";
-        background-color: $quick_start_grey;
-        height: 1px;
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        top: 10px;
-        width: 5px;
-
-        @include sphinx-full-size {
-          top: 13px;
-        }
-      }
-
-      li {
-        &:before {
-          width: 10px;
-        }
-        li {
-          &:before {
-            width: 15px;
-          }
-          li {
-            &:before {
-              width: 20px;
-            }
-            li {
-              &:before {
-                width: 25px;
-              }
-              li {
-                &:before {
-                  width: 30px;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      &.active {
-        &:before {
-          background-color: $red_orange;
-        }
-      }
-    }
   }
 }
 
