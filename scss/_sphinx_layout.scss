@@ -105,6 +105,19 @@
     padding-bottom: rem(90px);
   }
 
+  @media screen and (max-width: 1500px)  {
+    padding-right: 13.3%;
+  }
+  @media screen and (max-width: 1400px)  {
+    padding-right: 13%;
+  }
+  @media screen and (max-width: 1280px)  {
+    padding-right: 12.5%;
+  }
+  @media screen and (max-width: 1200px)  {
+    padding-right: 12%;
+  }
+
   @include sphinx-full-size {
     padding-right: rem(65px);
   }
