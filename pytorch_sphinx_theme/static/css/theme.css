@@ -10969,6 +10969,26 @@ a:hover {
     padding-bottom: 5.625rem;
   }
 }
+@media screen and (max-width: 1500px) {
+  .pytorch-menu-vertical {
+    padding-right: 13.3%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .pytorch-menu-vertical {
+    padding-right: 13%;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .pytorch-menu-vertical {
+    padding-right: 12.5%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .pytorch-menu-vertical {
+    padding-right: 12%;
+  }
+}
 @media screen and (min-width: 1600px) {
   .pytorch-menu-vertical {
     padding-right: 4.0625rem;
