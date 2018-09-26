@@ -1,27 +1,37 @@
 @font-face {
   font-family: FreightSans;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
-  unicode-range: u+0020-007f;
-  src: local("FreightSansLFPro-Regular"),
-    url("../fonts/FreightSans/freight-sans-regular.woff2")
-      format("woff2"),
-    url("../fonts/FreightSans/freight-sans-regular.woff")
-      format("woff");
+  src: url("../fonts/FreightSans/freight-sans-light.woff2") format("woff2"),
+      url("../fonts/FreightSans/freight-sans-light.woff") format("woff");
 }
 
 @font-face {
   font-family: FreightSans;
   font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+  src: url("../fonts/FreightSans/freight-sans-light-italic.woff2") format("woff2"),
+      url("../fonts/FreightSans/freight-sans-light-italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: FreightSans;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
-  unicode-range: u+0020-007f;
-  src: local("FreightSansLFPro-Light"),
-    url("../fonts/FreightSans/freight-sans-light.woff2")
-      format("woff2"),
-    url("../fonts/FreightSans/freight-sans-light.woff")
-      format("woff");
+  src: url("../fonts/FreightSans/freight-sans-regular.woff2") format("woff2"),
+       url("../fonts/FreightSans/freight-sans-regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: FreightSans;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("../fonts/FreightSans/freight-sans-regular-italic.woff2")format("woff2"),
+       url("../fonts/FreightSans/freight-sans-regular-italic.woff") format("woff");
 }
 
 @font-face {

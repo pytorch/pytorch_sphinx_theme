@@ -224,5 +224,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev', 'postcss:dist', 'browserify:dev','exec:build_sphinx','connect','open','watch']);
-  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build', 'postcss:dist', 'browserify:build','uglify','exec:build_sphinx']);
+  grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build', 'postcss:dist', 'browserify:build', 'uglify']);
 }
