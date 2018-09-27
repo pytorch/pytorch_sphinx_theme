@@ -87,7 +87,6 @@ ul.pytorch-breadcrumbs {
   position: relative;
   color: $slate;
   font-size: rem(20px);
-  font-weight: 400;
 
   &.is-open {
     .toggle-table-of-contents {
@@ -217,7 +216,7 @@ article.pytorch-article {
       text-transform: uppercase;
       margin-bottom: rem(18px);
       padding-left: 0px;
-      font-weight: 500;
+      font-weight: bold;
       &:before {
         content: "\2022";
         position: relative;
@@ -453,7 +452,6 @@ article.pytorch-article {
       font-size: rem(16px);
       letter-spacing: 0;
       line-height: rem(24px);
-      font-weight: 400;
       padding-right: rem(12px);
     }
 
@@ -516,7 +514,6 @@ article.pytorch-article {
       font-size: rem(18px);
       padding: 0;
       color: $not_quite_black;
-      font-weight: 400;
     }
 
     code, kbd, pre, samp, span.pre {
@@ -556,7 +553,6 @@ article.pytorch-article {
       thead {
         border-bottom: 2px solid $quick_start_grey;
         th {
-          font-weight: 400;
           line-height: rem(28px);
           padding-left: rem(15px);
           padding-right: rem(15px);
