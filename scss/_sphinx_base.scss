@@ -554,7 +554,9 @@ article.pytorch-article {
       border-color: $white !important;
       table-layout: fixed;
       thead {
-        border-bottom: 2px solid $quick_start_grey;
+        tr {
+          border-bottom: 2px solid $quick_start_grey;
+        }
         th {
           font-weight: 400;
           line-height: rem(28px);
