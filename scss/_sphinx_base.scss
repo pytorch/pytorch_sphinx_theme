@@ -205,25 +205,34 @@ article.pytorch-article {
   }
 
   .note,
-  .warning {
+  .warning,
+  .tip,
+  .hint,
+  .important,
+  .caution,
+  .danger,
+  .attention,
+  .error {
     background: $light_grey;
     margin-top: rem(30px);
     margin-bottom: rem(18px);
 
     .first {
       font-size: rem(16px);
-      color: $not_quite_black;
-      letter-spacing: 0;
+      color: $white;
+      letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: rem(18px);
-      padding-left: 0px;
-      font-weight: 500;
+      padding: 3px 0 3px rem(32px);
+      font-weight: bold;
+      position: relative;
       &:before {
         content: "\2022";
-        position: relative;
-        padding-left: 10px;
-        padding-right: 15px;
+        font-size: rem(18px);
+        position: absolute;
+        left: 12px;
         color: $white;
+        top: 2px;
       }
     }
     p:nth-child(n + 2) {
@@ -233,6 +242,10 @@ article.pytorch-article {
       letter-spacing: 0;
       line-height: rem(28px);
       margin-bottom: rem(18px);
+    }
+    table {
+      margin: 0 rem(32px);
+      width: auto;
     }
     .pre,
     pre {
@@ -251,6 +264,9 @@ article.pytorch-article {
     ul,
     ol {
       padding-left: rem(52px);
+      li {
+        color: $not_quite_black;
+      }
     }
 
     p {
@@ -258,16 +274,40 @@ article.pytorch-article {
     }
   }
 
-  .note {
-    .admonition-title {
-      background: $red_orange;
-    }
+  .note .admonition-title {
+    background: #54c7ec;
   }
 
-  .warning {
-    .admonition-title {
-      background: #f5a623;
-    }
+  .warning .admonition-title {
+    background: #e94f3b;
+  }
+
+  .tip .admonition-title {
+    background: #6bcebb;
+  }
+
+  .hint .admonition-title {
+    background: #a2cdde;
+  }
+
+  .important .admonition-title {
+    background: #5890ff;
+  }
+
+  .caution .admonition-title {
+    background: #f7923a;
+  }
+
+  .danger .admonition-title {
+    background: #db2c49;
+  }
+
+  .attention .admonition-title {
+    background: #f5a623;
+  }
+
+  .error .admonition-title {
+    background: #cc2f90;
   }
 
   div.last {
