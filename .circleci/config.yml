@@ -20,10 +20,16 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: cp .circleci/mock.env.json .env.json
-      - run: sudo npm install -g grunt sass
-      - run: grunt build
-
+      - command: |
+        cp .circleci/mock.env.json .env.json
+        sudo npm install -g grunt sass
+        grunt build
+        git config credential.helper 'cache --timeout=120'
+        git config user.email "ericnakagawa@gmail.com"
+        git config user.name "CircleCI Bot"
+        git add .
+        git commit -m "Deploying theme build via CircleCI"
+        git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/pytorch/pytorch-sphinx-theme.git master
 
 workflows:
   version: 2
