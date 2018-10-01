@@ -87,7 +87,6 @@ ul.pytorch-breadcrumbs {
   position: relative;
   color: $slate;
   font-size: rem(20px);
-  font-weight: 400;
 
   &.is-open {
     .toggle-table-of-contents {
@@ -444,21 +443,25 @@ article.pytorch-article {
       }
     }
     table {
-      width: 0%;
       tbody {
         tr {
           th.field-name {
             font-size: rem(18px);
-            @include sphinx-full-size {
-              padding-left: rem(120px);
-            }
             white-space: nowrap;
             line-height: 1.75rem;
             color: $not_quite_black;
+            width: 20%;
+            @include desktop {
+              width: 15%;
+            }
           }
           td.field-body {
             font-size: rem(18px);
             padding: 0.625rem;
+            width: 80%;
+            @include desktop {
+              width: 85%;
+            }
             @include sphinx-full-size {
               padding-left: rem(20px);
             }
@@ -466,6 +469,9 @@ article.pytorch-article {
             color: $not_quite_black;
             p {
               padding-left: 0px;
+            }
+            ol, ul {
+              padding-left: rem(16px);
             }
           }
         }
@@ -493,7 +499,6 @@ article.pytorch-article {
       font-size: rem(16px);
       letter-spacing: 0;
       line-height: rem(24px);
-      font-weight: 400;
       padding-right: rem(12px);
     }
 
@@ -556,7 +561,6 @@ article.pytorch-article {
       font-size: rem(18px);
       padding: 0;
       color: $not_quite_black;
-      font-weight: 400;
     }
 
     code, kbd, pre, samp, span.pre {
@@ -594,9 +598,10 @@ article.pytorch-article {
       border-color: $white !important;
       table-layout: fixed;
       thead {
-        border-bottom: 2px solid $quick_start_grey;
+        tr {
+          border-bottom: 2px solid $quick_start_grey;
+        }
         th {
-          font-weight: 400;
           line-height: rem(28px);
           padding-left: rem(15px);
           padding-right: rem(15px);

@@ -1,12 +1,16 @@
 window.sideMenus = {
-  displayRightMenu: document.querySelectorAll("#pytorch-right-menu li").length > 1,
+  rightMenuIsOnScreen: function() {
+    return document.getElementById("pytorch-content-right").offsetParent !== null;
+  },
 
   isFixedToBottom: false,
 
   bind: function() {
     sideMenus.handleLeftMenu();
 
-    if (sideMenus.displayRightMenu) {
+    var rightMenuHasLinks = document.querySelectorAll("#pytorch-right-menu li").length > 1;
+
+    if (rightMenuHasLinks) {
       // Show the right menu container
       document.getElementById("pytorch-content-right").classList.add("show");
 
@@ -29,7 +33,7 @@ window.sideMenus = {
     $(window).on('resize scroll', function(e) {
       sideMenus.handleLeftMenu();
 
-      if (sideMenus.displayRightMenu) {
+      if (sideMenus.rightMenuIsOnScreen()) {
         sideMenus.handleRightMenu();
       }
     });
