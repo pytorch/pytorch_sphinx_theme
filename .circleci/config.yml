@@ -7,6 +7,9 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "e0:f1:7b:8c:b1:4c:49:6f:b9:bd:af:84:6d:dd:93:cb"      
       - checkout
 
       - restore_cache:
@@ -28,7 +31,7 @@ jobs:
       - run: git config user.name "CircleCI Bot"
       - run: git add .
       - run: git commit -m "Deploying theme build via CircleCI"
-      - run: git push -q https://${GITHUB_PERSONAL_TOKEN}@github.com/pytorch/pytorch_sphinx_theme.git master
+      - run: git push -q git@github.com:pytorch/pytorch_sphinx_theme.git master
 
 workflows:
   version: 2
