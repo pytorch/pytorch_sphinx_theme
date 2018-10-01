@@ -408,9 +408,6 @@ article.pytorch-article {
         tr {
           th.field-name {
             font-size: rem(18px);
-            @include sphinx-full-size {
-              padding-left: rem(120px);
-            }
             white-space: nowrap;
             line-height: 1.75rem;
             color: $not_quite_black;
