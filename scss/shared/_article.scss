@@ -46,8 +46,9 @@ article.pytorch-article {
   dl dd,
   blockquote {
     font-size: rem(18px);
-    line-height: rem(30px);
+    line-height: rem(24px);
     color: $content_text_color;
+    letter-spacing: 0.01px;
   }
 
   table {
@@ -102,7 +103,6 @@ article.pytorch-article {
 
   dl dt {
     margin-bottom: rem(12px);
-    font-weight: 400;
   }
 
   pre {
