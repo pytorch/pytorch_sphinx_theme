@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7.10
+      
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: cp .circleci/mock.env.json .env.json
+      - run: sudo npm install -g grunt sass
+      - run: grunt build
+
+
+workflows:
+  version: 2
+  commit-and-build:
+      jobs:
+        - build
