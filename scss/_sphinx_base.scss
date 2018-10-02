@@ -342,6 +342,10 @@ article.pytorch-article .sphx-glr-thumbcontainer {
       margin-right: 0;
       margin-left: 2.5%;
     }
+
+    .figure {
+      width: 40%;
+    }
   }
 
   @include sphinx-medium-size {
