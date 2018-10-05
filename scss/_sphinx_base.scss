@@ -34,10 +34,6 @@ html {
   @include desktop {
     font-size: 14px;
   }
-
-  @include sphinx-full-size {
-    font-size: 16px;
-  }
 }
 
 body {
@@ -694,7 +690,7 @@ article.pytorch-article {
   }
 
   @include sphinx-full-size {
-    width: $sphinx_full_width_content_width - 2;
+    width: 850px;
   }
 
   .pytorch-breadcrumbs-aside {
