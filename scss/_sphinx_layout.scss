@@ -441,6 +441,22 @@
     }
   }
 
+  a.reference.internal {
+    &.expanded:before {
+      content: "-";
+      font-family: monospace;
+      position: absolute;
+      left: -12px;
+    }
+
+    &.not-expanded:before {
+      content: "+";
+      font-family: monospace;
+      position: absolute;
+      left: -12px;
+    }
+  }
+
   li.active > a {
     color: $red_orange;
 
@@ -474,38 +490,13 @@
         padding-left: 0;
       }
 
-      li {
-          a.reference.internal {
-            padding-left: 0;
+      ul {
+        display: none;
+        padding-left: 10px;
+      }
 
-            &:before {
-              content: "\2014";
-            }
-          }
-
-        li {
-          a.reference.internal {
-            padding-left: 15px;
-          }
-
-          li {
-            a.reference.internal {
-              padding-left: 20px;
-            }
-
-            li {
-              a.reference.internal {
-                padding-left: 25px;
-              }
-
-              li {
-                a.reference.internal {
-                  padding-left: 30px;
-                }
-              }
-            }
-          }
-        }
+      li a.reference.internal {
+        padding-left: 0;
       }
     }
   }
@@ -530,8 +521,9 @@
     padding-left: 0;
     padding-right: 10%;
     margin-bottom: 0;
-    > li > a.reference.internal {
+    > li > a.title-link.has-children {
       color: $slate;
+      font-weight: bold;
     }
   }
 

@@ -11,6 +11,77 @@ window.sideMenus = {
     var rightMenuHasLinks = document.querySelectorAll("#pytorch-right-menu li").length > 1;
 
     if (rightMenuHasLinks) {
+      // We are hiding the titles of the pages in the right side menu but there are a few
+      // pages that include other pages in the right side menu (see 'torch.nn' in the docs)
+      // so if we exclude those it looks confusing. Here we add a 'title-link' class to these
+      // links so we can exclude them from normal right side menu link operations
+      var titleLinks = document.querySelectorAll(
+        "#pytorch-right-menu #pytorch-side-scroll-right \
+         > ul > li > a.reference.internal"
+      );
+
+      for (var i = 0; i < titleLinks.length; i++) {
+        var link = titleLinks[i];
+
+        link.classList.add("title-link");
+
+        if (
+          link.nextElementSibling &&
+          link.nextElementSibling.tagName === "UL" &&
+          link.nextElementSibling.children.length > 0
+        ) {
+          link.classList.add("has-children");
+        }
+      }
+
+      // Add + expansion signifiers to normal right menu links that have sub menus
+      var menuLinks = document.querySelectorAll(
+        "#pytorch-right-menu ul li ul li a.reference.internal"
+      );
+
+      for (var i = 0; i < menuLinks.length; i++) {
+        if (
+          menuLinks[i].nextElementSibling &&
+          menuLinks[i].nextElementSibling.tagName === "UL"
+        ) {
+          menuLinks[i].classList.add("not-expanded");
+        }
+      }
+
+      // If a hash is present on page load recursively expand menu items leading to selected item
+      var linkWithHash =
+        document.querySelector(
+          "#pytorch-right-menu a[href=\"" + window.location.hash + "\"]"
+        );
+
+      if (linkWithHash) {
+        // Expand immediate sibling list if present
+        if (
+          linkWithHash.nextElementSibling &&
+          linkWithHash.nextElementSibling.tagName === "UL" &&
+          linkWithHash.nextElementSibling.children.length > 0
+        ) {
+          linkWithHash.nextElementSibling.style.display = "block";
+          linkWithHash.classList.add("expanded");
+        }
+
+        // Expand ancestor lists if any
+        sideMenus.expandClosestUnexpandedParentList(linkWithHash);
+      }
+
+      // Bind click events on right menu links
+      $("#pytorch-right-menu a.reference.internal").on("click", function() {
+        if (this.classList.contains("expanded")) {
+          this.nextElementSibling.style.display = "none";
+          this.classList.remove("expanded");
+          this.classList.add("not-expanded");
+        } else if (this.classList.contains("not-expanded")) {
+          this.nextElementSibling.style.display = "block";
+          this.classList.remove("not-expanded");
+          this.classList.add("expanded");
+        }
+      });
+
       // Don't show the Shortcuts menu title text unless there are menu items
       document.getElementById("pytorch-shortcuts-wrapper").style.display = "block";
 
@@ -49,6 +120,29 @@ window.sideMenus = {
     } else {
       document.getElementById("pytorch-left-menu").classList.remove("make-fixed");
       document.getElementById("pytorch-page-level-bar").classList.remove("left-menu-is-fixed");
+    }
+  },
+
+  expandClosestUnexpandedParentList: function (el) {
+    var closestParentList = utilities.closest(el, "ul");
+
+    if (closestParentList) {
+      var closestParentLink = closestParentList.previousElementSibling;
+      var closestParentLinkExists = closestParentLink &&
+                                    closestParentLink.tagName === "A" &&
+                                    closestParentLink.classList.contains("reference");
+
+      if (closestParentLinkExists) {
+        // Don't add expansion class to any title links
+         if (closestParentLink.classList.contains("title-link")) {
+           return;
+         }
+
+        closestParentList.style.display = "block";
+        closestParentLink.classList.remove("not-expanded");
+        closestParentLink.classList.add("expanded");
+        sideMenus.expandClosestUnexpandedParentList(closestParentLink);
+      }
     }
   },
 
