@@ -8,9 +8,19 @@ window.sideMenus = {
   bind: function() {
     sideMenus.handleLeftMenu();
 
-    var rightMenuHasLinks = document.querySelectorAll("#pytorch-right-menu li").length > 1;
+    var rightMenuLinks = document.querySelectorAll("#pytorch-right-menu li");
+    var rightMenuHasLinks = rightMenuLinks.length > 1;
+
+    if (!rightMenuHasLinks) {
+      for (var i = 0; i < rightMenuLinks.length; i++) {
+        rightMenuLinks[i].style.display = "none";
+      }
+    }
 
     if (rightMenuHasLinks) {
+      // Don't show the Shortcuts menu title text unless there are menu items
+      document.getElementById("pytorch-shortcuts-wrapper").style.display = "block";
+
       // We are hiding the titles of the pages in the right side menu but there are a few
       // pages that include other pages in the right side menu (see 'torch.nn' in the docs)
       // so if we exclude those it looks confusing. Here we add a 'title-link' class to these
@@ -81,16 +91,6 @@ window.sideMenus = {
           this.classList.add("expanded");
         }
       });
-
-      // Don't show the Shortcuts menu title text unless there are menu items
-      document.getElementById("pytorch-shortcuts-wrapper").style.display = "block";
-
-      // Remove superfluous titles unless there are more than one
-      var titles = document.querySelectorAll("#pytorch-side-scroll-right > ul > li");
-
-      // if (titles.length === 1) {
-      //   titles[0].querySelector("a.reference.internal").style.display = "none";
-      // }
 
       sideMenus.handleRightMenu();
     }
