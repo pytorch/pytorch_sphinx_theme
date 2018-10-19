@@ -80,7 +80,7 @@
   overflow-y: hidden;
 
   @include sphinx-medium-size {
-    margin-left: $sphinx_right_menu_wrap_left_margin;
+    margin-left: 0;
     width: 19%;
     display: block;
     float: left;
@@ -233,7 +233,7 @@
       position: fixed;
       top: rem(50px);
       width: 14%;
-      left: 85%;
+      left: 83.5%;
     }
   }
 
@@ -243,7 +243,7 @@
 
     &.make-fixed {
       width: 380px;
-      left: 1256px;
+      left: 1230px;
     }
   }
 }
@@ -518,9 +518,14 @@
   padding-top: 20px;
 
   > ul {
-    padding-left: 0;
+    padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 0;
+
+    @include sphinx-full-size {
+      padding-left: 25px;
+    }
+
     > li > a.title-link.has-children {
       color: $slate;
       font-weight: bold;
