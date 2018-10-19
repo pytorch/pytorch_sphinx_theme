@@ -80,9 +80,9 @@
   overflow-y: hidden;
 
   @include sphinx-medium-size {
+    display: block;
     margin-left: 0;
     width: 19%;
-    display: block;
     float: left;
     height: 100%;
   }
@@ -526,7 +526,7 @@
       padding-left: 25px;
     }
 
-    > li > a.title-link.has-children {
+    > li > a.reference.internal  {
       color: $slate;
       font-weight: bold;
     }

@@ -88,9 +88,9 @@ window.sideMenus = {
       // Remove superfluous titles unless there are more than one
       var titles = document.querySelectorAll("#pytorch-side-scroll-right > ul > li");
 
-      if (titles.length === 1) {
-        titles[0].querySelector("a.reference.internal").style.display = "none";
-      }
+      // if (titles.length === 1) {
+      //   titles[0].querySelector("a.reference.internal").style.display = "none";
+      // }
 
       sideMenus.handleRightMenu();
     }
