@@ -147,7 +147,7 @@ window.sideMenus = {
   },
 
   handleLeftMenu: function () {
-    var windowHeight = window.innerHeight;
+    var windowHeight = utilities.windowHeight();
     var topOfFooterRelativeToWindow = document.getElementById("docs-tutorials-resources").getBoundingClientRect().top;
 
     if (topOfFooterRelativeToWindow >= windowHeight) {
@@ -160,76 +160,48 @@ window.sideMenus = {
   },
 
   handleRightMenu: function() {
+    var rightMenuWrapper = document.getElementById("pytorch-content-right");
     var rightMenu = document.getElementById("pytorch-right-menu");
-
-    // If left menu is fixed, fix the right menu
-    if (sideMenus.leftMenuIsFixed()) {
-      rightMenu.classList.add("make-fixed");
-    } else {
-      rightMenu.classList.remove("make-fixed");
-    }
-
     var rightMenuList = rightMenu.getElementsByTagName("ul")[0];
-    var rightMenuBottom = utilities.offset(rightMenuList).top + rightMenuList.offsetHeight;
-    var footerTop = utilities.offset(document.getElementById("docs-tutorials-resources")).top;
-    var isBottomOfMenuPastOrCloseToFooter = rightMenuBottom >= footerTop  || footerTop - rightMenuBottom <= 40
-    var heightOfFooterOnScreen = $(window).height() - document.getElementById("docs-tutorials-resources").getBoundingClientRect().top;
+    var article = document.getElementById("pytorch-article");
+    var articleHeight = article.offsetHeight;
+    var articleBottom = utilities.offset(article).top + articleHeight;
+    var mainHeaderHeight = document.getElementById('header-holder').offsetHeight;
 
-    if (heightOfFooterOnScreen < 0) {
-      heightOfFooterOnScreen = 0;
-    }
-
-    // If the right menu is already fixed to the bottom
-    if (this.isFixedToBottom) {
-      var isFooterOnScreen = isElementInViewport(document.getElementById("docs-tutorials-resources"));
-
-      // If the footer is still on the screen, we want to keep the menu where it is
-      if (isFooterOnScreen) {
-        bottom = heightOfFooterOnScreen;
-        rightMenu.style.bottom = bottom + "px";
-      } else {
-        // If the footer is not on the screen, we want to break the side menu out of the bottom
-        this.isFixedToBottom = false;
-        rightMenu.style.height = getRightMenuHeight(heightOfFooterOnScreen);
-        rightMenu.style.bottom = bottom;
-      }
-
-    // If the side menu is past the footer's top or close to it (by 40 pixels)
-    // we fix the menu to the bottom
-    } else if (isBottomOfMenuPastOrCloseToFooter) {
-      var isFooterOnScreen = isElementInViewport(document.getElementById("docs-tutorials-resources"));
-      var bottom = 0;
-
-      this.isFixedToBottom = true;
-
-      if (isFooterOnScreen) {
-        bottom = heightOfFooterOnScreen;
-        rightMenu.style.bottom = bottom + "px";
-      } else {
-        rightMenu.style.height = getRightMenuHeight(heightOfFooterOnScreen);
-        rightMenu.style.bottom = bottom;
-      }
+    if (utilities.scrollTop() < mainHeaderHeight) {
+      rightMenuWrapper.style.height = "100%";
+      rightMenu.style.top = 0;
+      rightMenu.classList.remove("scrolling-fixed");
+      rightMenu.classList.remove("scrolling-absolute");
     } else {
-      this.isFixedToBottom = false;
-      rightMenu.style.height = getRightMenuHeight(heightOfFooterOnScreen);
-      rightMenu.style.bottom = bottom;
+      if (rightMenu.classList.contains("scrolling-fixed")) {
+        var rightMenuBottom =
+          utilities.offset(rightMenuList).top + rightMenuList.offsetHeight;
+
+        if (rightMenuBottom >= articleBottom) {
+          rightMenuWrapper.style.height = articleHeight + mainHeaderHeight + "px";
+          rightMenu.style.top = utilities.scrollTop() - mainHeaderHeight + "px";
+          rightMenu.classList.add("scrolling-absolute");
+          rightMenu.classList.remove("scrolling-fixed");
+        }
+      } else {
+        rightMenuWrapper.style.height = articleHeight + mainHeaderHeight + "px";
+        rightMenu.style.top =
+          articleBottom - mainHeaderHeight - rightMenuList.offsetHeight + "px";
+        rightMenu.classList.add("scrolling-absolute");
+      }
+
+      if (utilities.scrollTop() < articleBottom - rightMenuList.offsetHeight) {
+        rightMenuWrapper.style.height = "100%";
+        rightMenu.style.top = "";
+        rightMenu.classList.remove("scrolling-absolute");
+        rightMenu.classList.add("scrolling-fixed");
+      }
     }
+
+    var rightMenuSideScroll = document.getElementById("pytorch-side-scroll-right");
+    var sideScrollFromWindowTop = rightMenuSideScroll.getBoundingClientRect().top;
+
+    rightMenuSideScroll.style.height = utilities.windowHeight() - sideScrollFromWindowTop + "px";
   }
 };
-
-function getRightMenuHeight(heightOfFooterOnScreen) {
-  if (!sideMenus.leftMenuIsFixed()) {
-    return "100%";
-  }
-
-  return (window.innerHeight - heightOfFooterOnScreen - utilities.headersHeight()) + "px";
-}
-
-function isElementInViewport(el) {
-  var rect = el.getBoundingClientRect();
-
-  return rect.bottom > 0 &&
-    rect.right > 0 &&
-    rect.left < (window.innerWidth || document.documentElement.clientWidth) &&
-    rect.top < (window.innerHeight || document.documentElement.clientHeight);
-}

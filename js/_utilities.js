@@ -92,5 +92,11 @@ window.utilities = {
       return document.getElementById("header-holder").offsetHeight +
              document.getElementById("pytorch-page-level-bar").offsetHeight;
     }
+  },
+
+  windowHeight: function() {
+    return window.innerHeight ||
+           document.documentElement.clientHeight ||
+           document.body.clientHeight;
   }
 }

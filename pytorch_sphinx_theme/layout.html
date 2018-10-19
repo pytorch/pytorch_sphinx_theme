@@ -205,7 +205,7 @@
           {% endif %}
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
             {%- block document %}
-             <article itemprop="articleBody" class="pytorch-article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               {% block body %}{% endblock %}
              </article>
              {% if self.comments()|trim %}

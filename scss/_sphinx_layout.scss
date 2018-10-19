@@ -219,31 +219,40 @@
   min-height: 100px;
   overflow-x: hidden;
   overflow-y: hidden;
-  top: 0;
   left: 0;
   z-index: 200;
   padding-top: 0;
-  bottom: auto;
-  will-change: bottom;
+  position: relative;
 
   @include sphinx-medium-size {
     width: 100%;
 
-    &.make-fixed {
+    &.scrolling-fixed {
       position: fixed;
-      top: rem(50px);
-      width: 14%;
+      top: 45px;
       left: 83.5%;
+      width: 14%;
+    }
+
+    &.scrolling-absolute {
+      position: absolute;
+      left: 0;
     }
   }
 
   @include sphinx-full-size {
-    left: 1230px;
+    left: 0;
     width: 380px;
 
-    &.make-fixed {
-      width: 380px;
+    &.scrolling-fixed {
+      position: fixed;
+      top: 45px;
       left: 1230px;
+    }
+
+    &.scrolling-absolute {
+      position: absolute;
+      left: 0;
     }
   }
 }
