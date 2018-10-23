@@ -13,9 +13,8 @@ window.scrollToAnchor = {
       ANCHOR_REGEX: /^#[^ ]+$/,
       offsetHeightPx: function() {
         var OFFSET_HEIGHT_PADDING = 20;
-        return document.getElementById("header-holder").offsetHeight +
-               document.getElementById("pytorch-page-level-bar").offsetHeight +
-               OFFSET_HEIGHT_PADDING;
+        // TODO: this is a little janky. We should try to not rely on JS for this
+        return utilities.headersHeight() + OFFSET_HEIGHT_PADDING;
       },
 
       /**

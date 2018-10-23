@@ -1,28 +1,39 @@
 .pytorch-container {
   margin: 0 auto;
   padding: 0 rem(30px);
-  width: 100%;
+  width: auto;
+  position: relative;
   @include full-nav-menu-desktop {
     padding: 0;
   }
+
+  @include sphinx-medium-size {
+    margin-left: 25%;
+  }
+
+  @include sphinx-full-size {
+    margin-left: $desktop_menu_width;
+  }
+
+  @include clearfix;
 }
 
 .pytorch-content-wrap {
   background-color: #ffffff;
   display: flex;
   position: relative;
+  padding-top: 0;
   @include clearfix;
 
   @include sphinx-medium-size {
-    left: $sphinx_content_wrap_left_margin;
-    padding-top: 160px;
-    width: $sphinx_content_wrap_width;
+    padding-top: 45px;
+    float: left;
+    width: 100%;
+    display: block;
   }
 
   @include sphinx-full-size {
-    left: auto;
-    margin-left: $desktop_menu_width + 30px;
-    width: auto;
+    width: 100%;
   }
 }
 
@@ -39,11 +50,14 @@
 
   @include sphinx-medium-size {
     margin-top: 0;
+    margin-left: 3%;
     width: $sphinx_article_width;
+    float: left;
   }
 
   @include sphinx-full-size {
     width: 850px;
+    margin-left: 30px;
   }
 
   .main-content {
@@ -65,23 +79,16 @@
   overflow-x: hidden;
   overflow-y: hidden;
 
-  &.show {
-    display: none;
-  }
-
   @include sphinx-medium-size {
-    left: $sphinx_right_menu_wrap_left_margin;
-    width: $sphinx_right_menu_wrap_width;
-
-    &.show {
-      display: block;
-    }
+    display: block;
+    margin-left: 0;
+    width: 19%;
+    float: left;
+    height: 100%;
   }
 
   @include sphinx-full-size {
     width: $desktop_menu_width - 70px;
-    left: 50px;
-    top: 0;
   }
 }
 
@@ -116,17 +123,22 @@
   color: $slate;
 
   @include sphinx-medium-size {
-    bottom: 0;
-    left: 0;
     display: block;
     overflow-x: hidden;
     overflow-y: hidden;
     padding-bottom: 20px + 90px;
     padding: 0 rem(30px) 0 0;
-    position: fixed;
-    top: 90px;
     width: $sphinx_left_menu_width;
     z-index: 200;
+    float: left;
+
+    &.make-fixed {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      float: none;
+    }
   }
 
   @include sphinx-full-size {
@@ -207,22 +219,41 @@
   min-height: 100px;
   overflow-x: hidden;
   overflow-y: hidden;
-  position: fixed;
-  top: 0;
   left: 0;
   z-index: 200;
   padding-top: 0;
-  bottom: auto;
-  will-change: bottom;
+  position: relative;
 
   @include sphinx-medium-size {
-    left: $sphinx_right_menu_left_margin;
-    width: $sphinx_right_menu_width;
+    width: 100%;
+
+    &.scrolling-fixed {
+      position: fixed;
+      top: 45px;
+      left: 83.5%;
+      width: 14%;
+    }
+
+    &.scrolling-absolute {
+      position: absolute;
+      left: 0;
+    }
   }
 
   @include sphinx-full-size {
-    left: 1230px;
+    left: 0;
     width: 380px;
+
+    &.scrolling-fixed {
+      position: fixed;
+      top: 45px;
+      left: 1230px;
+    }
+
+    &.scrolling-absolute {
+      position: absolute;
+      left: 0;
+    }
   }
 }
 
@@ -419,6 +450,22 @@
     }
   }
 
+  a.reference.internal {
+    &.expanded:before {
+      content: "-";
+      font-family: monospace;
+      position: absolute;
+      left: -12px;
+    }
+
+    &.not-expanded:before {
+      content: "+";
+      font-family: monospace;
+      position: absolute;
+      left: -12px;
+    }
+  }
+
   li.active > a {
     color: $red_orange;
 
@@ -452,38 +499,13 @@
         padding-left: 0;
       }
 
-      li {
-          a.reference.internal {
-            padding-left: 0;
+      ul {
+        display: none;
+        padding-left: 10px;
+      }
 
-            &:before {
-              content: "\2014";
-            }
-          }
-
-        li {
-          a.reference.internal {
-            padding-left: 15px;
-          }
-
-          li {
-            a.reference.internal {
-              padding-left: 20px;
-            }
-
-            li {
-              a.reference.internal {
-                padding-left: 25px;
-              }
-
-              li {
-                a.reference.internal {
-                  padding-left: 30px;
-                }
-              }
-            }
-          }
-        }
+      li a.reference.internal {
+        padding-left: 0;
       }
     }
   }
@@ -508,8 +530,14 @@
     padding-left: 10%;
     padding-right: 10%;
     margin-bottom: 0;
-    > li > a.reference.internal {
+
+    @include sphinx-full-size {
+      padding-left: 25px;
+    }
+
+    > li > a.reference.internal  {
       color: $slate;
+      font-weight: bold;
     }
   }
 
@@ -550,16 +578,16 @@
   position: relative;
 
   @include sphinx-medium-size {
-    left: 26%;
     ul {
       padding-left: 0;
+      margin-left: 26%;
     }
   }
 
   @include sphinx-full-size {
-    left: 310px;
     ul {
       padding-left: 38px;
+      margin-left: 310px;
     }
   }
 }
@@ -569,24 +597,37 @@
   align-items: center;
   background-color: $white;
   border-bottom: 1px solid #e2e2e2;
-  top: 90px;
   width: 100%;
   z-index: 201;
 
   @include sphinx-medium-size {
-    left: $sphinx_page_bar_left_margin;
+    left: 0;
     display: flex;
-    position: fixed;
     height: $desktop_header_height / 2;
-    padding-left: $sphinx_page_bar_left_padding;
-    width: 100% - $sphinx_page_bar_left_margin;
+    padding-left: 0;
+    width: 100%;
+    position: absolute;
+
+    &.left-menu-is-fixed {
+      position: fixed;
+      top: 0;
+      left: 25%;
+      padding-left: 0;
+      right: 0;
+      width: 75%;
+    }
   }
 
   @include sphinx-full-size {
-    left: 350px;
-    padding-left: rem(30px);
+    left: 0;
     right: 0;
-    width: 100%;
+    width: auto;
+
+    &.left-menu-is-fixed {
+      left: $desktop_menu_width;
+      right: 0;
+      width: auto;
+    }
   }
 
   ul, li {
@@ -596,13 +637,13 @@
 
 .pytorch-shortcuts-wrapper {
   display: none;
-  position: absolute;
 
   @include sphinx-medium-size {
-    left: $sphinx_shortcuts_left_margin;
+    float: left;
+    margin-left: $sphinx_right_menu_wrap_left_margin;
   }
 
   @include sphinx-full-size {
-    left: 912px;
+    margin-left: rem(30px);
   }
 }

@@ -131,7 +131,6 @@
 <body class="pytorch-body">
 
   {% block extrabody %} {% endblock %}
-  <div>
 
     {# SIDE NAV, TOGGLES ON MOBILE #}
 
@@ -186,18 +185,17 @@
     </nav>
 
     <div class="pytorch-container">
-
-      <section data-toggle="wy-nav-shift" class="pytorch-content-wrap">
-        <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
-          <div class="pytorch-breadcrumbs-wrapper">
-            {% include "breadcrumbs.html" %}
-          </div>
-
-          <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
-            Shortcuts
-          </div>
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          {% include "breadcrumbs.html" %}
         </div>
 
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
         <div class="pytorch-content-left">
         {%- block content %}
           {% if theme_style_external_links|tobool %}
@@ -207,7 +205,7 @@
           {% endif %}
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
             {%- block document %}
-             <article itemprop="articleBody" class="pytorch-article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               {% block body %}{% endblock %}
              </article>
              {% if self.comments()|trim %}
@@ -231,7 +229,7 @@
         </div>
       </section>
     </div>
-  </div>
+
   {% include "versions.html" %}
 
   {% if not embedded %}
@@ -424,20 +422,19 @@
   <script type="text/javascript" src="{{ pathto('_static/js/vendor/anchor.min.js', 1) }}"></script>
 
   <script type="text/javascript">
-    mobileMenu.bind();
-    mobileTOC.bind();
-    pytorchAnchors.bind();
-
-    $(window).on("load", function() {
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
       sideMenus.bind();
       scrollToAnchor.bind();
       highlightNavigation.bind();
-    })
 
-    // Add class to links that have code blocks, since we cannot create links in code blocks
-    $("article.pytorch-article a span.pre").each(function(e) {
-      $(this).closest("a").addClass("has-code");
-    });
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
   </script>
 </body>
 </html>
