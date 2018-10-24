@@ -304,6 +304,21 @@ article.pytorch-article {
     background: #cc2f90;
   }
 
+  .admonition {
+    .last {
+      code {
+        border-top: solid 2px $white;
+        background-color: $white;
+        border-bottom: solid 2px $white;
+        outline: $white;
+        .pre {
+          outline: 0px solid $white;
+          padding: 2px 3px;
+        }
+      }
+    }
+  }
+
   div.last {
     margin-bottom: 0;
     padding-bottom: rem(18px);
@@ -427,6 +442,12 @@ article.pytorch-article {
     }
     code {
       color: $not_quite_black;
+      border-top: solid 2px $light_grey;
+      background-color: $light_grey;
+      border-bottom: solid 2px $light_grey;
+      .pre {
+        padding: 2px 3px;
+      }
     }
     .viewcode-link {
       font-size: rem(16px);
