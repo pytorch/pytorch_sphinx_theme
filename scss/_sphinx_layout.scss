@@ -151,8 +151,8 @@
   color: $not_quite_black;
   display: block;
   display: inline-block;
-  font-size: rem(18px);
-  line-height: rem(34px);
+  font-size: rem(16px);
+  line-height: rem(22px);
   margin-bottom: rem(16px);
   padding: 0;
   text-transform: none;
@@ -163,7 +163,7 @@
   margin-bottom: rem(40px);
 
   @include sphinx-medium-size {
-    margin: rem(20px) 0 rem(30px) 0;
+    margin: rem(20px) rem(10px) rem(30px) 0;
   }
 }
 
@@ -192,13 +192,18 @@
 .pytorch-left-menu-search input[type=text] {
   border-radius: 0;
   padding: rem(8px) rem(12px);
-  border-color: $red_orange;
+  border-color: $white;
   color: $not_quite_black;
   border-style: solid;
   font-size: rem(16px);
   width: 100%;
   background-color: $light_grey;
-  text-align: center;
+  background-image: url("../images/search-icon.svg");
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  background-position: 12px 10px;
+  padding-left: 40px;
+  background-color: $white;
 
   &:focus {
     outline: 0;
@@ -273,8 +278,8 @@
   a:visited,
   a:hover {
     color: $quick_start_grey;
-    font-size: rem(16px);
-    line-height: rem(25px);
+    font-size: rem(14px);
+    line-height: rem(16px);
     padding: 0;
     text-decoration: none;
     &.reference.internal {
@@ -537,7 +542,7 @@
 
     > li > a.reference.internal  {
       color: $slate;
-      font-weight: bold;
+      font-weight: 500;
     }
   }
 
@@ -639,6 +644,7 @@
   display: none;
 
   @include sphinx-medium-size {
+    font-size: rem(14px);
     float: left;
     margin-left: $sphinx_right_menu_wrap_left_margin;
   }

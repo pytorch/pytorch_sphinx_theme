@@ -7,8 +7,7 @@ article.pytorch-article {
   h4,
   h5,
   h6 {
-    margin-top: rem(30px);
-    margin-bottom: rem(24px);
+    margin: rem(22px) 0;
     color: $not_quite_black;
   }
 
@@ -16,7 +15,6 @@ article.pytorch-article {
     font-size: rem(24px);
     letter-spacing: 1.33px;
     line-height: rem(32px);
-    margin-top: rem(50px);
     text-transform: uppercase;
   }
 
@@ -45,10 +43,11 @@ article.pytorch-article {
   dl dt,
   dl dd,
   blockquote {
-    font-size: rem(18px);
-    line-height: rem(24px);
-    color: $content_text_color;
+    font-size: rem(16px);
+    line-height: rem(22px);
+    color: $slate;
     letter-spacing: 0.01px;
+    font-weight: 500;
   }
 
   table {
@@ -58,15 +57,6 @@ article.pytorch-article {
 
   table thead {
     border-bottom: 1px solid #cacaca;
-  }
-
-  table th,
-  table tr,
-  table td {
-    color: $content_text_color;
-    font-size: rem(16px);
-    line-height: rem(36px);
-    letter-spacing: -0.17px;
   }
 
   table th {
@@ -84,6 +74,20 @@ article.pytorch-article {
     padding-left: 0;
   }
 
+  table.docutils.field-list {
+    th.field-name {
+      padding: rem(5px);
+      padding-left: 0;
+    }
+
+    td.field-body {
+      padding: rem(5px);
+      p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
   ul,
   ol{
     margin: rem(24px) 0 rem(50px) 0;
@@ -98,7 +102,7 @@ article.pytorch-article {
   }
 
   dl {
-    margin-bottom: rem(40px);
+    margin-bottom: rem(24px);
   }
 
   dl dt {
@@ -115,7 +119,6 @@ article.pytorch-article {
   }
 
   blockquote {
-    font-size: rem(18px);
     margin: 0 auto;
     margin-bottom: rem(40px);
     width: 65%;
