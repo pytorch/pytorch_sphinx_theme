@@ -7,7 +7,7 @@ $sphinx_left_menu_width: 25%;
 $sphinx_left_menu_scroll_wrapper_width: 120%;
 
 $sphinx_content_wrap_width: 71%;
-$sphinx_content_wrap_left_margin: 27%;
+$sphinx_content_wrap_left_margin: 26.4%;
 
 $sphinx_article_width: 75%;
 
@@ -31,7 +31,7 @@ $sphinx_shortcuts_left_margin: 78%;
 html {
   height: 100%;
   @include desktop {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -66,6 +66,7 @@ ul.pytorch-breadcrumbs {
 
   li {
     display: inline-block;
+    font-size: rem(14px);
   }
 
   a {
@@ -129,6 +130,7 @@ h1 {
   letter-spacing: 1.78px;
   line-height: rem(40px);
   text-transform: uppercase;
+  margin: rem(22px) 0;
 }
 
 span.pre {
@@ -139,7 +141,7 @@ span.pre {
 
 pre {
   background-color: $light_grey;
-  padding: rem(25px);
+  padding: rem(22px);
 }
 
 .highlight .c1 {
@@ -187,10 +189,15 @@ article.pytorch-article {
   h4,
   h5,
   h6 {
+    font-weight: normal;
     a {
       color: $not_quite_black;
     }
   }
+}
+
+article.pytorch-article .section:first-of-type h1:first-of-type {
+  margin-top: 0;
 }
 
 article.pytorch-article {
@@ -212,30 +219,23 @@ article.pytorch-article {
     margin-bottom: rem(18px);
 
     .first {
-      font-size: rem(16px);
       color: $white;
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: rem(18px);
-      padding: 3px 0 3px rem(32px);
-      font-weight: bold;
+      padding: 3px 0 3px rem(22px);
       position: relative;
+      font-size: rem(14px);
       &:before {
         content: "\2022";
-        font-size: rem(18px);
         position: absolute;
-        left: 12px;
+        left: 9px;
         color: $white;
         top: 2px;
       }
     }
     p:nth-child(n + 2) {
-      padding: 0 rem(32px);
-      font-size: rem(18px);
-      color: $not_quite_black;
-      letter-spacing: 0;
-      line-height: rem(28px);
-      margin-bottom: rem(18px);
+      padding: 0 rem(22px);
     }
     table {
       margin: 0 rem(32px);
@@ -416,8 +416,7 @@ article.pytorch-article {
     dt {
       position: relative;
       background: $light_grey;
-      padding: rem(18px);
-      padding-right: 110px;
+      padding: rem(8px);
       border-left: 3px solid $red_orange;
       word-wrap: break-word;
       a {
@@ -450,7 +449,7 @@ article.pytorch-article {
       }
     }
     .viewcode-link {
-      font-size: rem(16px);
+      font-size: rem(14px);
       color: #979797;
       letter-spacing: 0;
       line-height: rem(24px);
@@ -466,9 +465,7 @@ article.pytorch-article {
       tbody {
         tr {
           th.field-name {
-            font-size: rem(18px);
             white-space: nowrap;
-            line-height: 1.75rem;
             color: $not_quite_black;
             width: 20%;
             @include desktop {
@@ -476,7 +473,6 @@ article.pytorch-article {
             }
           }
           td.field-body {
-            font-size: rem(18px);
             padding: 0.625rem;
             width: 80%;
             @include desktop {
@@ -485,17 +481,24 @@ article.pytorch-article {
             @include sphinx-full-size {
               padding-left: rem(20px);
             }
-            line-height: rem(28px);
             color: $not_quite_black;
             p {
               padding-left: 0px;
+              &:last-of-type {
+                margin-bottom: 0;
+              }
             }
             ol, ul {
               padding-left: rem(16px);
+              padding-bottom: 0;
             }
           }
         }
       }
+    }
+
+    table.docutils.field-list {
+      margin-bottom: rem(12px);
     }
   }
   .attribute {
@@ -518,15 +521,9 @@ article.pytorch-article {
       color: $red_orange;
       font-size: rem(16px);
       letter-spacing: 0;
-      line-height: rem(24px);
       padding-right: rem(12px);
     }
 
-    dd {
-      p {
-        line-height: rem(28px);
-      }
-    }
     .method,
     .staticmethod {
       dt {
@@ -681,9 +678,6 @@ article.pytorch-article {
   blockquote {
     margin-left: rem(60px);
     color: $quick_start_grey;
-    p, .attribution, .line {
-      line-height: rem(28px);
-    }
   }
 }
 
@@ -794,4 +788,8 @@ a:hover {
   ul li.active a {
     color: $red_orange;
   }
+}
+
+.version {
+  padding-bottom: rem(16px);
 }
