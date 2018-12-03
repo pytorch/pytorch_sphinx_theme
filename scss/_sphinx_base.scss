@@ -419,6 +419,7 @@ article.pytorch-article {
       padding: rem(8px);
       border-left: 3px solid $red_orange;
       word-wrap: break-word;
+      padding-right: 100px;
       a {
         position: absolute;
         right: 30px;
@@ -513,6 +514,19 @@ article.pytorch-article {
     dt {
       border-left: none;
       border-top: 3px solid $red_orange;
+      padding-left: 4em;
+      em.property {
+        position: absolute;
+        left: 0.5rem;
+      }
+    }
+
+    dd {
+      .docutils {
+        dt {
+          padding-left: 0.5rem;
+        }
+      }
     }
 
     em.property {
@@ -530,11 +544,18 @@ article.pytorch-article {
         border-left: 3px solid $red_orange;
         border-top: none;
       }
+      dt {
+        padding-left: 0.5rem;
+      }
     }
     .attribute {
       @extend .attribute;
       dt {
         border-top: none;
+        em.property {
+          position: relative;
+          left: 0;
+        }
       }
     }
   }
