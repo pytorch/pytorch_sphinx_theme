@@ -538,6 +538,12 @@ article.pytorch-article {
       padding-right: rem(12px);
     }
 
+    dl dt em.property {
+      position: static;
+      left: 0;
+      padding-right: 0;
+    }
+
     .method,
     .staticmethod {
       dt {
