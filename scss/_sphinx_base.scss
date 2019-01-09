@@ -420,6 +420,16 @@ article.pytorch-article {
       border-left: 3px solid $red_orange;
       word-wrap: break-word;
       padding-right: 100px;
+
+      em.property {
+        font-family: inherit;
+      }
+
+      em, .sig-paren {
+        @include code_font_family;
+        font-size: 87.5%;
+      }
+
       a {
         position: absolute;
         right: 30px;
