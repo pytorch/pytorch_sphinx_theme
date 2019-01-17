@@ -38,6 +38,7 @@
   background-size: 93px 23px;
   display: block;
   float: left;
+  z-index: 10;
 
   @include full-nav-menu-desktop {
     background-size: 108px 27px;
