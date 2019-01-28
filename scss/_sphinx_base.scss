@@ -356,6 +356,11 @@ article.pytorch-article {
     }
   }
 
+  .sphx-glr-download-link-note.admonition.note,
+  .reference.download.internal, .sphx-glr-signature {
+    display: none;
+  }
+
   div.last {
     margin-bottom: 0;
     padding-bottom: rem(18px);
@@ -867,4 +872,71 @@ a:hover {
 
 .version {
   padding-bottom: rem(16px);
+}
+
+.pytorch-call-to-action-links {
+  padding-top: 0;
+  display: flex;
+
+  @include desktop {
+    padding-top: rem(40px);
+  }
+
+  @include small-desktop {
+    padding-top: 0;
+  }
+
+  @media (min-width: 1100px) and (max-width: 1239px) {
+    padding-top: rem(40px);
+   }
+
+  #tutorial-type {
+    display: none;
+  }
+
+  .call-to-action-img, .call-to-action-notebook-img {
+    height: rem(22px);
+    width: rem(22px);
+    margin-right: 10px;
+  }
+
+  .call-to-action-notebook-img {
+    height: rem(16px);
+  }
+
+  a {
+    padding-right: rem(20px);
+    color: $black;
+    cursor: pointer;
+    &:hover {
+      color: $orange;
+    }
+
+    .call-to-action-desktop-view {
+      display: none;
+      @include desktop {
+        display: block;
+      }
+    }
+
+    .call-to-action-mobile-view {
+      display: block;
+      @include desktop {
+        display: none;
+      }
+    }
+
+    #google-colab-link, #download-notebook-link,
+    #github-view-link {
+      padding-bottom: rem(10px);
+      border-bottom: 1px solid $light_grey;
+      padding-right: rem(40px);
+      display: flex;
+      align-items: center;
+      &:hover {
+        border-bottom-color: $orange;
+        color: $orange;
+      }
+    }
+  }
 }
