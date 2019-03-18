@@ -122,7 +122,44 @@ ul.pytorch-breadcrumbs {
 }
 
 .rst-content footer {
-  padding-bottom: rem(40px);
+
+  .helpful-hr.hr-top {
+    margin-bottom: rem(-1px);
+  }
+
+  .helpful-hr.hr-bottom {
+    margin-top: rem(-1px);
+  }
+
+  .helpful-container {
+    display: inline-flex;
+    font-size: rem(18px);
+
+    .helpful-question, .was-helpful-thank-you {
+      padding: rem(10px) rem(20px) rem(10px) rem(20px);
+    }
+
+    .was-helpful-thank-you {
+      display: none;
+    }
+
+    .helpful-question.yes-link, .helpful-question.no-link {
+      color: $orange;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $orange;
+        color: $white;
+      }
+    }
+  }
+
+  div[role="contentinfo"] {
+    padding-top: rem(40px);
+    p {
+      margin-bottom: 0;
+    }
+  }
 }
 
 h1 {
