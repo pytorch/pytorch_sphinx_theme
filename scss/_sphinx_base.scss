@@ -28,6 +28,19 @@ $sphinx_shortcuts_left_margin: 78%;
   @media screen and (min-width: $sphinx_medium_width) { @content; }
 }
 
+@mixin format-code($background) {
+  border-top: solid 2px $background;
+  background-color: $background;
+  border-bottom: solid 2px $background;
+  .pre {
+    outline: 0px;
+    padding: 0px;  // remove extra spacing on children
+  }
+  padding: 0px 3px;  // the containing `code` does proper spacing
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 html {
   height: 100%;
   @include desktop {
@@ -255,7 +268,7 @@ article.pytorch-article {
     margin-top: rem(30px);
     margin-bottom: rem(18px);
 
-    .first {
+    .admonition-title {
       color: $white;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -281,6 +294,11 @@ article.pytorch-article {
     .pre,
     pre {
       background: $white;
+      outline: 1px solid #e9e9e9;
+    }
+
+    code {
+      @include format-code($white);
       outline: 1px solid #e9e9e9;
     }
 
@@ -341,27 +359,12 @@ article.pytorch-article {
     background: #cc2f90;
   }
 
-  .admonition {
-    .last {
-      code {
-        border-top: solid 2px $white;
-        background-color: $white;
-        border-bottom: solid 2px $white;
-        outline: $white;
-        .pre {
-          outline: 0px solid $white;
-          padding: 2px 3px;
-        }
-      }
-    }
-  }
-
   .sphx-glr-download-link-note.admonition.note,
   .reference.download.internal, .sphx-glr-signature {
     display: none;
   }
 
-  div.last {
+  div:last-child, div.last {
     margin-bottom: 0;
     padding-bottom: rem(18px);
 
@@ -370,7 +373,7 @@ article.pytorch-article {
     }
   }
 
-  p.last {
+  p:last-child, p.last {
     margin-bottom: 0;
     padding-bottom: rem(18px) !important;
   }
@@ -492,15 +495,17 @@ article.pytorch-article {
       font-size: rem(25px) !important;
       padding-left: 0;
     }
+
+    .admonition code{
+      @include format-code($white);
+      outline: 1px solid #e9e9e9;
+    }
+
     code {
       color: $not_quite_black;
-      border-top: solid 2px $light_grey;
-      background-color: $light_grey;
-      border-bottom: solid 2px $light_grey;
-      .pre {
-        padding: 2px 3px;
-      }
+      @include format-code($light_grey);
     }
+
     .viewcode-link {
       font-size: rem(14px);
       color: #979797;
