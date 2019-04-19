@@ -28,6 +28,21 @@ $sphinx_shortcuts_left_margin: 78%;
   @media screen and (min-width: $sphinx_medium_width) { @content; }
 }
 
+@mixin format-code($background, $pad: true) {
+  border-top: solid 2px $background;
+  background-color: $background;
+  border-bottom: solid 2px $background;
+  @if $pad {
+    padding: 0px 3px;  // the containing `code` does proper spacing
+    .pre {
+      outline: 0px;
+      padding: 0px;  // remove extra spacing on children
+    }
+  }
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 html {
   height: 100%;
   @include desktop {
@@ -231,149 +246,13 @@ article.pytorch-article {
       color: $not_quite_black;
     }
   }
+  p.caption {
+    margin-top: rem(20px);
+  }
 }
 
 article.pytorch-article .section:first-of-type h1:first-of-type {
   margin-top: 0;
-}
-
-article.pytorch-article {
-  p.caption {
-    margin-top: rem(20px);
-  }
-
-  .note,
-  .warning,
-  .tip,
-  .hint,
-  .important,
-  .caution,
-  .danger,
-  .attention,
-  .error {
-    background: $light_grey;
-    margin-top: rem(30px);
-    margin-bottom: rem(18px);
-
-    .first {
-      color: $white;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: rem(18px);
-      padding: 3px 0 3px rem(22px);
-      position: relative;
-      font-size: rem(14px);
-      &:before {
-        content: "\2022";
-        position: absolute;
-        left: 9px;
-        color: $white;
-        top: 2px;
-      }
-    }
-    p:nth-child(n + 2) {
-      padding: 0 rem(22px);
-    }
-    table {
-      margin: 0 rem(32px);
-      width: auto;
-    }
-    .pre,
-    pre {
-      background: $white;
-      outline: 1px solid #e9e9e9;
-    }
-
-    pre {
-      margin-bottom: 0;
-    }
-
-    .highlight {
-      margin: 0 rem(32px) rem(18px) rem(32px);
-    }
-
-    ul,
-    ol {
-      padding-left: rem(52px);
-      li {
-        color: $not_quite_black;
-      }
-    }
-
-    p {
-      margin-top: rem(18px);
-    }
-  }
-
-  .note .admonition-title {
-    background: #54c7ec;
-  }
-
-  .warning .admonition-title {
-    background: #e94f3b;
-  }
-
-  .tip .admonition-title {
-    background: #6bcebb;
-  }
-
-  .hint .admonition-title {
-    background: #a2cdde;
-  }
-
-  .important .admonition-title {
-    background: #5890ff;
-  }
-
-  .caution .admonition-title {
-    background: #f7923a;
-  }
-
-  .danger .admonition-title {
-    background: #db2c49;
-  }
-
-  .attention .admonition-title {
-    background: #f5a623;
-  }
-
-  .error .admonition-title {
-    background: #cc2f90;
-  }
-
-  .admonition {
-    .last {
-      code {
-        border-top: solid 2px $white;
-        background-color: $white;
-        border-bottom: solid 2px $white;
-        outline: $white;
-        .pre {
-          outline: 0px solid $white;
-          padding: 2px 3px;
-        }
-      }
-    }
-  }
-
-  .sphx-glr-download-link-note.admonition.note,
-  .reference.download.internal, .sphx-glr-signature {
-    display: none;
-  }
-
-  div.last {
-    margin-bottom: 0;
-    padding-bottom: rem(18px);
-
-    .highlight {
-      margin-bottom: 0;
-    }
-  }
-
-  p.last {
-    margin-bottom: 0;
-    padding-bottom: rem(18px) !important;
-  }
 }
 
 article.pytorch-article .sphx-glr-thumbcontainer {
@@ -492,15 +371,17 @@ article.pytorch-article {
       font-size: rem(25px) !important;
       padding-left: 0;
     }
-    code {
+
+    :not(dt) > code {
       color: $not_quite_black;
-      border-top: solid 2px $light_grey;
-      background-color: $light_grey;
-      border-bottom: solid 2px $light_grey;
-      .pre {
-        padding: 2px 3px;
-      }
+      @include format-code($light_grey);
     }
+
+    dt > code {
+      color: $not_quite_black;
+      @include format-code($light_grey, false);
+    }
+
     .viewcode-link {
       font-size: rem(14px);
       color: #979797;
@@ -620,6 +501,127 @@ article.pytorch-article {
 
   table {
     table-layout: fixed;
+  }
+}
+
+// Below defines css styles for admonitions, i.e., notes, warnings, etc.  Some
+// of these, e.g., formatting for <code/>, is supposed to over write the ones
+// defined above for entire sections, e.g, .function and .class.  So this is
+// placed later in this file, for higher precedence when both rules have same
+// specificities.
+article.pytorch-article {
+  .note,
+  .warning,
+  .tip,
+  .hint,
+  .important,
+  .caution,
+  .danger,
+  .attention,
+  .error {
+    background: $light_grey;
+    margin-top: rem(30px);
+    margin-bottom: rem(18px);
+
+    .admonition-title {
+      color: $white;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: rem(18px);
+      padding: 3px 0 3px rem(22px);
+      position: relative;
+      font-size: rem(14px);
+      &:before {
+        content: "\2022";
+        position: absolute;
+        left: 9px;
+        color: $white;
+        top: 2px;
+      }
+    }
+    p:nth-child(n + 2) {
+      padding: 0 rem(22px);
+    }
+    table {
+      margin: 0 rem(32px);
+      width: auto;
+    }
+    .pre,
+    pre {
+      background: $white;
+      outline: 1px solid #e9e9e9;
+    }
+
+    :not(dt) > code {
+      @include format-code($white);
+      outline: 1px solid #e9e9e9;
+    }
+
+    pre {
+      margin-bottom: 0;
+    }
+
+    .highlight {
+      margin: 0 rem(32px) rem(18px) rem(32px);
+    }
+
+    ul,
+    ol {
+      padding-left: rem(52px);
+      li {
+        color: $not_quite_black;
+      }
+    }
+
+    p {
+      margin-top: rem(18px);
+    }
+  }
+
+  .note .admonition-title {
+    background: #54c7ec;
+  }
+
+  .warning .admonition-title {
+    background: #e94f3b;
+  }
+
+  .tip .admonition-title {
+    background: #6bcebb;
+  }
+
+  .hint .admonition-title {
+    background: #a2cdde;
+  }
+
+  .important .admonition-title {
+    background: #5890ff;
+  }
+
+  .caution .admonition-title {
+    background: #f7923a;
+  }
+
+  .danger .admonition-title {
+    background: #db2c49;
+  }
+
+  .attention .admonition-title {
+    background: #f5a623;
+  }
+
+  .error .admonition-title {
+    background: #cc2f90;
+  }
+
+  .sphx-glr-download-link-note.admonition.note,
+  .reference.download.internal, .sphx-glr-signature {
+    display: none;
+  }
+
+  .admonition > p:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: rem(18px) !important;
   }
 }
 

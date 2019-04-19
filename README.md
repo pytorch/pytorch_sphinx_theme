@@ -1,6 +1,6 @@
 # PyTorch Sphinx Theme
 
-Sphinx theme for [PyTorch Docs](PyTorch documentation — PyTorch master documentation) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
+Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
 
 ## Local Development
 
