@@ -333,6 +333,13 @@ article.pytorch-article .sphx-glr-thumbcontainer {
 }
 
 article.pytorch-article {
+  .section {
+    :not(dt) > code {
+      color: $not_quite_black;
+      @include format-code($light_grey);
+    }
+  }
+
   .function {
     dt {
       position: relative;
@@ -370,11 +377,6 @@ article.pytorch-article {
       right: 8px;
       font-size: rem(25px) !important;
       padding-left: 0;
-    }
-
-    :not(dt) > code {
-      color: $not_quite_black;
-      @include format-code($light_grey);
     }
 
     dt > code {
