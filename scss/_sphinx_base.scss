@@ -777,6 +777,8 @@ article.pytorch-article .caption {
 article.pytorch-article {
   .math {
     color: $not_quite_black;
+    width: auto;
+    text-align: center;
     img {
       width: auto;
     }
