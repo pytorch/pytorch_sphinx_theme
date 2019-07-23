@@ -21,7 +21,6 @@ from pytorch_sphinx_theme import __version__
 extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autodoc',
-    'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
     'sphinxcontrib.httpdomain',
 ]
