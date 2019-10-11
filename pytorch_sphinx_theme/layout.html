@@ -94,25 +94,11 @@
           </li>
 
           <li>
-            <div class="ecosystem-dropdown">
-              <a id="dropdownMenuButton" data-toggle="ecosystem-dropdown">
-                Ecosystem
-              </a>
-              <div class="ecosystem-dropdown-menu">
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['hub'] }}"">
-                  <span class=dropdown-title>Models (Beta)</span>
-                  <p>Discover, publish, and reuse pre-trained models</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['ecosystem'] }}">
-                  <span class=dropdown-title>Tools & Libraries</span>
-                  <p>Explore the ecosystem of tools and libraries</p>
-                </a>
-              </div>
-            </div>
+            <a href="{{ theme_variables.external_urls['features'] }}">Features</a>
           </li>
 
           <li>
-            <a href="{{ theme_variables.external_urls['mobile'] }}">Mobile</a>
+            <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
           </li>
 
           <li>
@@ -128,21 +114,7 @@
           </li>
 
           <li>
-            <div class="resources-dropdown">
-              <a id="resourcesDropdownButton" data-toggle="resources-dropdown">
-                Resources
-              </a>
-              <div class="resources-dropdown-menu">
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['resources'] }}"">
-                  <span class=dropdown-title>Developer Resources</span>
-                  <p>Find resources and get questions answered</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['features'] }}">
-                  <span class=dropdown-title>About</span>
-                  <p>Learn about PyTorch’s features and capabilities</p>
-                </a>
-              </div>
-            </div>
+            <a href="{{ theme_variables.external_urls['resources'] }}">Resources</a>
           </li>
 
           <li>
@@ -446,23 +418,15 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
+            <a href="#">Get Started</a>
           </li>
 
           <li>
-            <a href="{{ theme_variables.external_urls['features'] }}">Features</a>
+            <a href="#">Features</a>
           </li>
 
           <li>
-            <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
-          </li>
-
-          <li>
-            <a href="{{ theme_variables.external_urls['mobile'] }}">Mobile</a>
-          </li>
-
-          <li>
-            <a href="{{ theme_variables.external_urls['hub'] }}">PyTorch Hub</a>
+            <a href="#">Ecosystem</a>
           </li>
 
           <li>
@@ -501,7 +465,6 @@
       sideMenus.bind();
       scrollToAnchor.bind();
       highlightNavigation.bind();
-      mainMenuDropdown.bind();
 
       // Add class to links that have code blocks, since we cannot create links in code blocks
       $("article.pytorch-article a span.pre").each(function(e) {
