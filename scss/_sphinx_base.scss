@@ -949,3 +949,29 @@ a:hover {
     }
   }
 }
+
+article.pytorch-article {
+  .tutorials-container {
+    .test-col {
+      padding-bottom: 10px;
+    }
+
+    .test-block {
+      text-align: center;
+      border: 1px solid #d6d7d8;
+      padding: 10px 20px 30px 20px;
+      padding-bottom: 10px;
+    }
+
+    .btn.index-button {
+      border-radius: 0;
+      border: none;
+      background-color: $light_grey;
+      color: $quick_start_grey;
+      font-weight: 400;
+      position: relative;
+      letter-spacing: 0.25px;
+      @include animated_border_hover_state;
+    }
+  }
+}
