@@ -1,4 +1,4 @@
-"""Pytorch Sphinx theme.
+"""Pytorch Lightning Sphinx theme.
 
 From https://github.com/shiftlab/lightning_sphinx_theme.
 

@@ -1,4 +1,4 @@
-# PyTorch Sphinx Theme
+# PyTorch-Lightning Sphinx Theme
 
 Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
 
