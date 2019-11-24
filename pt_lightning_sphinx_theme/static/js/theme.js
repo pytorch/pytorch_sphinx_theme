@@ -629,7 +629,7 @@ window.sideMenus = {
   }
 };
 
-},{}],"pytorch-sphinx-theme":[function(require,module,exports){
+},{}],"pt-lightning-sphinx-theme":[function(require,module,exports){
 var jQuery = (typeof(window) != 'undefined') ? window.jQuery : require('jquery');
 
 // Sphinx theme nav state
@@ -894,4 +894,4 @@ if (downloadNote.length >= 1) {
     $(".pytorch-call-to-action-links").hide();
 }
 
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,"pt-lightning-sphinx-theme"]);

@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath('..'))
 sys.path.append(os.path.abspath('./demo/'))
 
-from pytorch_sphinx_theme import __version__
+from pt_lightning_sphinx_theme import __version__
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -94,7 +94,7 @@ intersphinx_mapping = {'rtd': ('https://docs.readthedocs.io/en/latest/', None)}
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'pytorch_sphinx_theme'
+html_theme = 'pt_lightning_sphinx_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

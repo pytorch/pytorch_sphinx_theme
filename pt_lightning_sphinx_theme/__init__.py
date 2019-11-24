@@ -1,6 +1,6 @@
 """Pytorch Sphinx theme.
 
-From https://github.com/shiftlab/pytorch_sphinx_theme.
+From https://github.com/shiftlab/lightning_sphinx_theme.
 
 """
 from os import path
@@ -16,4 +16,4 @@ def get_html_theme_path():
 
 # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
 def setup(app):
-    app.add_html_theme('pytorch_sphinx_theme', path.abspath(path.dirname(__file__)))
+    app.add_html_theme('pt_lightning_sphinx_theme', path.abspath(path.dirname(__file__)))

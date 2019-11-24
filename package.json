@@ -1,5 +1,5 @@
 {
-  "name": "pytorch_sphinx_theme",
+  "name": "pt_lightning_sphinx_theme",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {

@@ -70,8 +70,8 @@ The resulting site is a demo.
 When you are ready to submit a PR with your changes you can first test that your changes have been applied correctly against either the PyTorch Docs or Tutorials repo:
 
 1. Run the `grunt build` task on your branch and commit the build to Github.
-2. In your local docs or tutorials repo, remove any existing `pytorch_sphinx_theme` packages in the `src` folder (there should be a `pip-delete-this-directory.txt` file there)
-3. In `requirements.txt` replace the existing git link with a link pointing to your commit or branch, e.g. `-e git+git://github.com/{ your repo }/pytorch_sphinx_theme.git@{ your commit hash }#egg=pytorch_sphinx_theme`
+2. In your local docs or tutorials repo, remove any existing `pt_lightning_sphinx_theme` packages in the `src` folder (there should be a `pip-delete-this-directory.txt` file there)
+3. In `requirements.txt` replace the existing git link with a link pointing to your commit or branch, e.g. `-e git+git://github.com/{ your repo }/lightning_sphinx_theme.git@{ your commit hash }#egg=pt_lightning_sphinx_theme`
 4. Install the requirements `pip install -r requirements.txt`
 5. Remove the current build. In the docs this is `make clean`, tutorials is `make clean-cache`
 6. Build the static site. In the docs this is `make html`, tutorials is `make html-noplot`
@@ -116,11 +116,11 @@ make html
 
 Once these are successful, navigate to the `conf.py` file in each project. In the Docs these are at `./docs/source`. The Tutorials one can be found in the root directory.
 
-In `conf.py` change the html theme to `pytorch_sphinx_theme` and point the html theme path to this repo's local folder, which will end up looking something like:
+In `conf.py` change the html theme to `pt_lightning_sphinx_theme` and point the html theme path to this repo's local folder, which will end up looking something like:
 
 ```
-html_theme = 'pytorch_sphinx_theme'
-html_theme_path = ["../../../pytorch_sphinx_theme"]
+html_theme = 'pt_lightning_sphinx_theme'
+html_theme_path = ["../../../lightning_sphinx_theme"]
 ```
 
 Next create a file `.env.json` in the root of this repo with some keys/values referencing the local folders of the Docs and Tutorials repos:

@@ -31,7 +31,7 @@ jobs:
       #- run: git config user.name "CircleCI Bot"
       #- run: git add .
       #- run: git commit -m "Deploying theme build via CircleCI"
-      #- run: git push -q git@github.com:pytorch/pytorch_sphinx_theme.git master
+      #- run: git push -q git@github.com:pytorch/lightning_sphinx_theme.git master
 
   build-python:
     docker:
