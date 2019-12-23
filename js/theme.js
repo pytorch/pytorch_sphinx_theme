@@ -261,3 +261,17 @@ if (downloadNote.length >= 1) {
 } else {
     $(".pytorch-call-to-action-links").hide();
 }
+
+//This code makes the Notes section of the Docs Left Nav collapsible
+
+if ($("p.caption:first").text() == "Notes") {
+
+    $("p.caption:first").addClass("left-nav-top-caption");
+    $("span.caption-text:first").addClass("pytorch-left-nav-collapsed");
+    $("p.caption:first").next("ul").hide();
+
+    $("span.caption-text:first").on("click", function() {
+    $(this).toggleClass("pytorch-left-nav-collapsible pytorch-left-nav-collapsed");
+    $("p.caption:first").next("ul").toggle();
+    });
+}
