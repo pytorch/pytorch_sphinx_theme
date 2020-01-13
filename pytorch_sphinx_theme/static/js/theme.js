@@ -220,6 +220,33 @@ window.highlightNavigation = {
 };
 
 },{}],4:[function(require,module,exports){
+window.mainMenuDropdown = {
+  bind: function() {
+    $("[data-toggle='ecosystem-dropdown']").on("click", function() {
+      toggleDropdown($(this).attr("data-toggle"));
+    });
+
+    $("[data-toggle='resources-dropdown']").on("click", function() {
+      toggleDropdown($(this).attr("data-toggle"));
+    });
+
+    function toggleDropdown(menuToggle) {
+      var showMenuClass = "show-menu";
+      var menuClass = "." + menuToggle + "-menu";
+
+      if ($(menuClass).hasClass(showMenuClass)) {
+        $(menuClass).removeClass(showMenuClass);
+      } else {
+        $("[data-toggle=" + menuToggle + "].show-menu").removeClass(
+          showMenuClass
+        );
+        $(menuClass).addClass(showMenuClass);
+      }
+    }
+  }
+};
+
+},{}],5:[function(require,module,exports){
 window.mobileMenu = {
   bind: function() {
     $("[data-behavior='open-mobile-menu']").on('click', function(e) {
@@ -251,7 +278,7 @@ window.mobileMenu = {
   }
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 window.mobileTOC = {
   bind: function() {
     $("[data-behavior='toggle-table-of-contents']").on("click", function(e) {
@@ -272,7 +299,7 @@ window.mobileTOC = {
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 window.pytorchAnchors = {
   bind: function() {
     // Replace Sphinx-generated anchors with anchorjs ones
@@ -292,7 +319,7 @@ window.pytorchAnchors = {
   }
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Modified from https://stackoverflow.com/a/13067009
 // Going for a JS solution to scrolling to an anchor so we can benefit from
 // less hacky css and smooth scrolling.
@@ -393,7 +420,7 @@ window.scrollToAnchor = {
   }
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 window.sideMenus = {
   rightMenuIsOnScreen: function() {
     return document.getElementById("pytorch-content-right").offsetParent !== null;
@@ -880,5 +907,4 @@ if ($("p.caption:first").text() == "Notes") {
     $("p.caption:first").next("ul").toggle();
     });
 }
-
-},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,"pytorch-sphinx-theme"]);
+},{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,"pytorch-sphinx-theme"]);
