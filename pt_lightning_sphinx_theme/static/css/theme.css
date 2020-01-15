@@ -9732,10 +9732,10 @@ pre {
 }
 @media screen and (min-width: 1100px) {
   .header-logo {
-    background-size: 108px 27px;
+    background-size: 194px 27px;
     position: absolute;
     height: 27px;
-    width: 108px;
+    width: 194px;
     top: 4px;
     float: none;
   }
@@ -10306,7 +10306,7 @@ ul.pytorch-breadcrumbs a {
 }
 
 .tutorials-header .header-logo {
-  background-image: url("../images/logo-icon.svg");
+  background-image: url("../images/logo.svg");
 }
 .tutorials-header .main-menu ul li a {
   color: #262626;
