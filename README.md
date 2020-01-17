@@ -1,6 +1,6 @@
 # PyTorch-Lightning Sphinx Theme
 
-Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
+Sphinx theme for [PyTorch-Lightning Docs](https://pytorch-lightning.readthedocs.io/en/latest/) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
 
 ## Local Development
 
@@ -91,10 +91,10 @@ Once that is successful commit the change to Github.
 
 ### Developing locally against PyTorch Docs and Tutorials
 
-To be able to modify and preview the theme locally against the PyTorch Docs and/or the PyTorch Tutorials first clone the repositories:
+To be able to modify and preview the theme locally against the PyTorch Lightning Docs and/or the PyTorch Lightning Tutorials first clone the repositories:
 
-- [PyTorch (Docs)](https://github.com/pytorch/pytorch)
-- [PyTorch Tutorials](https://github.com/pytorch/tutorials)
+- [PyTorch Lightning (Docs)](https://github.com/pytorch/pytorch)
+- [PyTorch Lightning Tutorials](https://github.com/pytorch/tutorials)
 
 Then follow the instructions in each repository to make the docs.
 
@@ -128,7 +128,7 @@ Next create a file `.env.json` in the root of this repo with some keys/values re
 ```
 {
   "TUTORIALS_DIR": "../tutorials",
-  "DOCS_DIR": "../pytorch/docs/source"
+  "DOCS_DIR": "../pytorch_lightning/docs/source"
 }
 
 ```
