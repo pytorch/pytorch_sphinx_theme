@@ -1,6 +1,36 @@
+import os
+
 from setuptools import setup
 from io import open
 from pt_lightning_sphinx_theme import __version__
+
+
+def package_files(directory:str):
+    """
+    Traverses target directory recursivery adding file paths to a list.
+    Original solution found at:
+
+        * https://stackoverflow.com/questions/27664504/\
+            how-to-add-package-data-recursively-in-python-setup-py
+
+    Parameters
+    ----------
+    directory: str
+        Target directory to traverse.
+
+    Returns
+    -------
+    paths: list
+        List of file paths.
+    
+    """ 
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+
+    return paths
+
 
 setup(
     name = 'pt_lightning_sphinx_theme',
@@ -17,11 +47,8 @@ setup(
     package_data={'pt_lightning_sphinx_theme': [
         'theme.conf',
         '*.html',
-        'static/css/*.css',
-        'static/js/*.js',
-        'static/fonts/*.*',
-        'static/images/*.*',
-        'theme_variables.jinja'
+        'theme_variables.jinja',
+        *package_files('pt_lightning_sphinx_theme/static')
     ]},
     entry_points = {
         'sphinx.html_themes': [
