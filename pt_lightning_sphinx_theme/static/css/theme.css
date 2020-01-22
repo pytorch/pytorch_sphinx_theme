@@ -9732,10 +9732,10 @@ pre {
 }
 @media screen and (min-width: 1100px) {
   .header-logo {
-    background-size: 194px 27px;
+    background-size: 254px 27px;
     position: absolute;
     height: 27px;
-    width: 194px;
+    width: 254px;
     top: 4px;
     float: none;
   }
@@ -9950,7 +9950,7 @@ pre {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   position: relative;
-  z-index: 201;
+  z-index: 21;
 }
 @media screen and (min-width: 768px) {
   .docs-tutorials-resources {
