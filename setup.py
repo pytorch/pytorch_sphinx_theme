@@ -2,6 +2,14 @@ from setuptools import setup
 from io import open
 from autorch_sphinx_theme import __version__
 
+try:
+    from datetime import date
+    today = date.today()
+    day = today.strftime("b%Y%m%d")
+    __version__ += day
+except Exception:
+    pass
+
 setup(
     name = 'autorch_sphinx_theme',
     version =__version__,
