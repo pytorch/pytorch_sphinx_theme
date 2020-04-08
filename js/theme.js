@@ -286,3 +286,52 @@ if ($("p.caption:first").text() == "Notes") {
         $("p.caption:first").next("ul").toggle();
     }
 }
+
+// Get the card link from the card's link attribute
+
+$(".tutorials-card").on("click", function() {
+    window.location = $(this).attr("link");
+});
+
+// Build an array from each tag that's present
+
+var tagList = $(".tutorials-card-container").map(function() {
+    return $(this).data("tags").split(",").map(function(item) {
+        return item.trim();
+      });
+}).get();
+
+function unique(value, index, self) {
+      return self.indexOf(value) == index && value != ""
+    }
+
+// Only return unique tags
+
+var tags = tagList.filter(unique);
+
+// Add filter buttons to the top of the page for each tag
+
+function createTagMenu() {
+    tags.forEach(function(item){
+    $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>")
+  })
+};
+
+createTagMenu();
+
+// Remove hyphens if they are present in the filter buttons
+
+$(".tags").each(function(){
+    var tags = $(this).text().split(",");
+    tags.forEach(function(tag, i ) {
+       tags[i] = tags[i].replace(/-/, ' ')
+    })
+    $(this).html(tags.join(", "));
+});
+
+// Remove hyphens if they are present in the card body
+
+$(".tutorial-filter").each(function(){
+    var tag = $(this).text();
+    $(this).html(tag.replace(/-/, ' '))
+})
