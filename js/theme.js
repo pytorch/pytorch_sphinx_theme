@@ -307,7 +307,7 @@ function unique(value, index, self) {
 
 // Only return unique tags
 
-var tags = tagList.filter(unique);
+var tags = tagList.sort().filter(unique);
 
 // Add filter buttons to the top of the page for each tag
 
