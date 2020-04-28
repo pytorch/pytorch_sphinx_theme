@@ -2,7 +2,8 @@ window.filterTags = {
   bind: function() {
     var options = {
       valueNames: [{ data: ["tags"] }],
-      page: "18"
+      page: "6",
+      pagination: true
     };
 
     var tutorialList = new List("tutorial-cards", options);
@@ -37,7 +38,6 @@ window.filterTags = {
           return filterSelectedTags(cardTags, selectedTags);
         }
       });
-      $("[data-tags='null']").remove();
     }
 
     $(".filter-btn").on("click", function() {

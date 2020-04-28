@@ -335,3 +335,11 @@ $(".tutorial-filter").each(function(){
     var tag = $(this).text();
     $(this).html(tag.replace(/-/, ' '))
 })
+
+// Remove any empty p tags that Sphinx adds
+
+$("#tutorial-cards p").each(function(index, item) {
+    if(!$(item).text().trim()) {
+        $(item).remove();
+    }
+});
