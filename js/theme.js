@@ -307,7 +307,7 @@ function unique(value, index, self) {
 
 // Only return unique tags
 
-var tags = tagList.filter(unique);
+var tags = tagList.sort().filter(unique);
 
 // Add filter buttons to the top of the page for each tag
 
@@ -335,3 +335,11 @@ $(".tutorial-filter").each(function(){
     var tag = $(this).text();
     $(this).html(tag.replace(/-/, ' '))
 })
+
+// Remove any empty p tags that Sphinx adds
+
+$("#tutorial-cards p").each(function(index, item) {
+    if(!$(item).text().trim()) {
+        $(item).remove();
+    }
+});
