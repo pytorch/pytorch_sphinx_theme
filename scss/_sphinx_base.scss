@@ -970,7 +970,7 @@ a:hover {
   .card.tutorials-card {
     border-radius: 0;
     border-color: $light_grey;
-    height: 110px;
+    height: 98px;
     margin-bottom: rem(20px);
     margin-bottom: rem(30px);
     overflow: scroll;
@@ -984,20 +984,31 @@ a:hover {
 
     @include small-desktop {
       height: 200px;
-      overflow: inherit;
+      overflow: scroll;
     }
 
     .tutorials-image {
       position: absolute;
       top: 0px;
       right: 0px;
-      height: 100%;
-      width: 25%;
+      height: 96px;
+      width: 96px;
       opacity: 0.5;
       img {
         height: 100%;
         width: 100%;
       }
+
+      @include desktop {
+        height: 100%;
+        width: 25%;
+      }
+
+      @include small-desktop {
+        height: 100%;
+        width: 198px;
+      }
+
       &:before {
         content: '';
         position: absolute;
@@ -1012,7 +1023,13 @@ a:hover {
     }
 
     .card-title-container {
-      width: 75%;
+      width: 70%;
+      @include desktop {
+        width: 75%;
+      }
+      @include small-desktop {
+        width: 70%;
+      }
       display: inline-flex;
       h4 {
         margin-bottom: 1.125rem;
@@ -1027,7 +1044,13 @@ a:hover {
       margin-bottom: 0;
       color: $dark_grey;
       font-weight: 400;
-      width: 75%;
+      width: 70%;
+      @include desktop {
+        width: 75%;
+      }
+      @include small-desktop {
+        width: 70%;
+      }
     }
 
     p.tags {
