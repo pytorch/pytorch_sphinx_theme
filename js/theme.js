@@ -343,3 +343,12 @@ $("#tutorial-cards p").each(function(index, item) {
         $(item).remove();
     }
 });
+
+// Jump back to top on pagination click
+
+$(document).on("click", ".page", function() {
+    $('html, body').animate(
+      {scrollTop: $("#dropdown-filter-tags").position().top},
+      'slow'
+    );
+});
