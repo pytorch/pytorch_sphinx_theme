@@ -9732,9 +9732,9 @@ pre {
 }
 @media screen and (min-width: 1100px) {
   .header-logo {
-    background-size: 254px 27px;
+    background-size: 254px 43px;
     position: absolute;
-    height: 27px;
+    height: 43px;
     width: 254px;
     top: 4px;
     float: none;
