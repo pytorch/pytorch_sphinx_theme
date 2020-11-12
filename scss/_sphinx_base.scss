@@ -339,6 +339,9 @@ article.pytorch-article {
       @include format-code($light_grey);
     }
   }
+  .section:only-of-type {
+    min-height: 70vh;
+  }
 
   .function {
     dt {
