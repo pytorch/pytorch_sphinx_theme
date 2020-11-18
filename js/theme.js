@@ -352,3 +352,10 @@ $(document).on("click", ".page", function() {
       'slow'
     );
 });
+
+var link = $("a[href='intermediate/speech_command_recognition_with_torchaudio.html']");
+
+if (link.text() == "SyntaxError") {
+    console.log("There is an issue with the intermediate/speech_command_recognition_with_torchaudio.html menu item.");
+    link.text("Speech Command Recognition with torchaudio");
+}
