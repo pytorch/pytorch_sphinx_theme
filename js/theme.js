@@ -264,26 +264,29 @@ if (downloadNote.length >= 1) {
 
 //This code makes the Notes section of the Docs Left Nav collapsible
 
-if ($("p.caption:first").text() == "Notes") {
+var expandMenu = "#pytorch-left-menu p.caption";
 
-    $("p.caption:first").addClass("left-nav-top-caption");
-    $("span.caption-text:first").after("<span class='expand-menu'>[Expand]</span>");
-    $(".expand-menu").after("<span class='hide-menu'>[Hide]</span>");
-    $("p.caption:first").next("ul").hide();
+if ($(expandMenu)) {
+
+    $(expandMenu).addClass("left-nav-top-caption");
+    $("#pytorch-left-menu span.caption-text").after("<span class='expand-menu'>[Expand]</span>");
+    $("#pytorch-left-menu .expand-menu").after("<span class='hide-menu'>[Hide]</span>");
+    $(expandMenu).next("ul").hide();
 
     $(".expand-menu").on("click", function() {
-        $(".hide-menu").toggle();
+        $(this).next(".hide-menu").toggle();
+        $(this).parent().next("ul").toggle();
         toggleList(this);
     });
 
     $(".hide-menu").on("click", function() {
-        $(".expand-menu").toggle();
+        $(this).prev(".expand-menu").toggle();
+        $(this).parent().next("ul").toggle();
         toggleList(this);
     });
 
     function toggleList(menuCommand) {
         $(menuCommand).toggle();
-        $("p.caption:first").next("ul").toggle();
     }
 }
 
