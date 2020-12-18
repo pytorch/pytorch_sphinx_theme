@@ -269,8 +269,8 @@ var expandMenu = "#pytorch-left-menu p.caption";
 if ($(expandMenu)) {
 
     $(expandMenu).addClass("left-nav-top-caption");
-    $("#pytorch-left-menu span.caption-text").after("<span class='expand-menu'>[Expand]</span>");
-    $("#pytorch-left-menu .expand-menu").after("<span class='hide-menu'>[Hide]</span>");
+    $("#pytorch-left-menu span.caption-text").after("<span class='expand-menu'>[ + ]</span>");
+    $("#pytorch-left-menu .expand-menu").after("<span class='hide-menu'>[ - ]</span>");
     $(expandMenu).next("ul").hide();
 
     $(".expand-menu").on("click", function() {
