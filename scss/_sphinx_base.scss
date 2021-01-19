@@ -515,6 +515,7 @@ article.pytorch-article {
   .note,
   .warning,
   .tip,
+  .seealso,
   .hint,
   .important,
   .caution,
@@ -590,6 +591,10 @@ article.pytorch-article {
 
   .tip .admonition-title {
     background: #6bcebb;
+  }
+
+  .seealso .admonition-title {
+      background: #6bcebb;
   }
 
   .hint .admonition-title {
