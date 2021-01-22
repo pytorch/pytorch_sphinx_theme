@@ -138,19 +138,19 @@ ul.pytorch-breadcrumbs {
 
 .rst-content footer {
 
-  .helpful-hr.hr-top {
+  .rating-hr.hr-top {
     margin-bottom: rem(-1px);
   }
 
-  .helpful-hr.hr-bottom {
+  .rating-hr.hr-bottom {
     margin-top: rem(-1px);
   }
 
-  .helpful-container {
+  .rating-container {
     display: inline-flex;
     font-size: rem(18px);
 
-    .helpful-question, .was-helpful-thank-you {
+    .rating-prompt, .was-helpful-thank-you {
       padding: rem(10px) rem(20px) rem(10px) rem(20px);
     }
 
@@ -158,13 +158,28 @@ ul.pytorch-breadcrumbs {
       display: none;
     }
 
-    .helpful-question.yes-link, .helpful-question.no-link {
+    .rating-prompt.yes-link, .rating-prompt.no-link {
       color: $orange;
       cursor: pointer;
 
       &:hover {
         background-color: $orange;
         color: $white;
+      }
+    }
+
+    .stars-outer {
+      display: inline-block;
+      position: relative;
+      font-family: FontAwesome;
+      padding: rem(10px) rem(20px) rem(10px) rem(20px);
+
+      i {
+        cursor: pointer;
+      }
+
+      .star-fill {
+         color: $red_orange;
       }
     }
   }

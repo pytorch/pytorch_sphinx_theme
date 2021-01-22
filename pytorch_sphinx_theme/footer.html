@@ -12,14 +12,18 @@
 
   {% if theme_pytorch_project == 'tutorials' %}
 
-    <hr class="helpful-hr hr-top">
-      <div class="helpful-container">
-        <div class="helpful-question">Was this helpful?</div>
-        <div class="helpful-question yes-link" data-behavior="was-this-helpful-event" data-response="yes">Yes</div>
-        <div class="helpful-question no-link" data-behavior="was-this-helpful-event" data-response="no">No</div>
-        <div class="was-helpful-thank-you">Thank you</div>
+    <hr class="rating-hr hr-top">
+      <div class="rating-container">
+        <div class="rating-prompt">Rate this Tutorial</div>
+        <div class="stars-outer">
+          <i class="far fa-star" title="1 Star" data-behavior="tutorial-rating" data-count="1"></i>
+          <i class="far fa-star" title="2 Stars" data-behavior="tutorial-rating" data-count="2"></i>
+          <i class="far fa-star" title="3 Stars" data-behavior="tutorial-rating" data-count="3"></i>
+          <i class="far fa-star" title="4 Stars" data-behavior="tutorial-rating" data-count="4"></i>
+          <i class="far fa-star" title="5 Stars" data-behavior="tutorial-rating" data-count="5"></i>
+        </div>
       </div>
-    <hr class="helpful-hr hr-bottom"/>
+    <hr class="rating-hr hr-bottom"/>
 
   {% else %}
 
