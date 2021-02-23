@@ -264,34 +264,39 @@ if (downloadNote.length >= 1) {
 
 //This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
 
-$("#pytorch-left-menu p.caption").each(function(){
-  var collapsedSections = ['Notes'];
-  var menuName = this.innerText.replace(/[^\w\s]/gi, '').trim();
-  if (collapsedSections.includes(menuName) == true && $(this).children().not(".expand-menu")) {
-      $(this).children("span").after("<span class='expand-menu'>[ + ]</span>");
-      $(this).children("span").after("<span class='hide-menu collapse'>[ - ]</span>");
-      $(this).next("ul").hide();
-  }else{
-      $(this).children("span").after("<span class='hide-menu'>[ - ]</span>");
-      $(this).children("span").after("<span class='expand-menu collapse'>[ + ]</span>");
-  }
-  })
+$( document ).ready(function() {
+    var caption = "#pytorch-left-menu p.caption";
+    var collapseAdded = $(this).not('checked');
 
-$(".expand-menu").on("click", function() {
-  $(this).next(".hide-menu").toggle();
-  $(this).parent().next("ul").toggle();
-  toggleList(this);
+    $(caption).each(function(){
+      var menuName = this.innerText.replace(/[^\w\s]/gi, '').trim();
+      $(this).find("span").addClass('checked');
+      if (collapsedSections.includes(menuName) == true && collapseAdded) {
+        $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
+        $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+        $(this).next("ul").hide();
+      }else if (collapsedSections.includes(menuName) == false && collapseAdded){
+        $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
+        $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
+      }
+    })
+
+    $(".expand-menu").on("click", function() {
+      $(this).prev(".hide-menu").toggle();
+      $(this).parent().next("ul").toggle();
+      toggleList(this);
+    });
+
+    $(".hide-menu").on("click", function() {
+      $(this).next(".expand-menu").toggle();
+      $(this).parent().next("ul").toggle();
+      toggleList(this);
+    });
+
+    function toggleList(menuCommand) {
+      $(menuCommand).toggle();
+    }
 });
-
-$(".hide-menu").on("click", function() {
-  $(this).prev(".expand-menu").toggle();
-  $(this).parent().next("ul").toggle();
-  toggleList(this);
-});
-
-function toggleList(menuCommand) {
-  $(menuCommand).toggle();
-}
 
 // Get the card link from the card's link attribute
 
