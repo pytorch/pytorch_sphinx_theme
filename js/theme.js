@@ -262,29 +262,35 @@ if (downloadNote.length >= 1) {
     $(".pytorch-call-to-action-links").hide();
 }
 
-//This code makes the Notes section of the Docs Left Nav collapsible
+//This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
 
-if ($("p.caption:first").text() == "Notes") {
+$("#pytorch-left-menu p.caption").each(function(){
+  var collapsedSections = ['Notes'];
+  var menuName = this.innerText.replace(/[^\w\s]/gi, '').trim();
+  if (collapsedSections.includes(menuName) == true && $(this).children().not(".expand-menu")) {
+      $(this).children("span").after("<span class='expand-menu'>[ + ]</span>");
+      $(this).children("span").after("<span class='hide-menu collapse'>[ - ]</span>");
+      $(this).next("ul").hide();
+  }else{
+      $(this).children("span").after("<span class='hide-menu'>[ - ]</span>");
+      $(this).children("span").after("<span class='expand-menu collapse'>[ + ]</span>");
+  }
+  })
 
-    $("p.caption:first").addClass("left-nav-top-caption");
-    $("span.caption-text:first").after("<span class='expand-menu'>[Expand]</span>");
-    $(".expand-menu").after("<span class='hide-menu'>[Hide]</span>");
-    $("p.caption:first").next("ul").hide();
+$(".expand-menu").on("click", function() {
+  $(this).next(".hide-menu").toggle();
+  $(this).parent().next("ul").toggle();
+  toggleList(this);
+});
 
-    $(".expand-menu").on("click", function() {
-        $(".hide-menu").toggle();
-        toggleList(this);
-    });
+$(".hide-menu").on("click", function() {
+  $(this).prev(".expand-menu").toggle();
+  $(this).parent().next("ul").toggle();
+  toggleList(this);
+});
 
-    $(".hide-menu").on("click", function() {
-        $(".expand-menu").toggle();
-        toggleList(this);
-    });
-
-    function toggleList(menuCommand) {
-        $(menuCommand).toggle();
-        $("p.caption:first").next("ul").toggle();
-    }
+function toggleList(menuCommand) {
+  $(menuCommand).toggle();
 }
 
 // Get the card link from the card's link attribute
