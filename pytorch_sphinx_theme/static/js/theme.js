@@ -959,31 +959,39 @@ if (downloadNote.length >= 1) {
 
 //This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
 
-var expandMenu = "#pytorch-left-menu p.caption";
+$( document ).ready(function() {
+    var caption = "#pytorch-left-menu p.caption";
+    var collapseAdded = $(this).not('checked');
 
-if ($(expandMenu)) {
-
-    $(expandMenu).addClass("left-nav-top-caption");
-    $("#pytorch-left-menu span.caption-text").after("<span class='expand-menu'>[ + ]</span>");
-    $("#pytorch-left-menu .expand-menu").after("<span class='hide-menu'>[ - ]</span>");
-    $(expandMenu).next("ul").hide();
+    $(caption).each(function(){
+      var menuName = this.innerText.replace(/[^\w\s]/gi, '').trim();
+      $(this).find("span").addClass('checked');
+      if (collapsedSections.includes(menuName) == true && collapseAdded) {
+        $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
+        $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+        $(this).next("ul").hide();
+      }else if (collapsedSections.includes(menuName) == false && collapseAdded){
+        $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
+        $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
+      }
+    })
 
     $(".expand-menu").on("click", function() {
-        $(this).next(".hide-menu").toggle();
-        $(this).parent().next("ul").toggle();
-        toggleList(this);
+      $(this).prev(".hide-menu").toggle();
+      $(this).parent().next("ul").toggle();
+      toggleList(this);
     });
 
     $(".hide-menu").on("click", function() {
-        $(this).prev(".expand-menu").toggle();
-        $(this).parent().next("ul").toggle();
-        toggleList(this);
+      $(this).next(".expand-menu").toggle();
+      $(this).parent().next("ul").toggle();
+      toggleList(this);
     });
 
     function toggleList(menuCommand) {
-        $(menuCommand).toggle();
+      $(menuCommand).toggle();
     }
-}
+});
 
 // Get the card link from the card's link attribute
 
