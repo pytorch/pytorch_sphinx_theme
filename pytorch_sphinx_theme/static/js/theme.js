@@ -959,49 +959,48 @@ if (downloadNote.length >= 1) {
 
 //This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
 
-$( document ).ready(function() {
-    var caption = "#pytorch-left-menu p.caption";
-    var collapseAdded = $(this).not('checked');
-    $(caption).each(function(){
-      var collapsedSections = ["Package Reference"];
-      var menuName = this.innerText.replace(/[^\w\s]/gi, '').trim();
-      $(this).find("span").addClass('checked');
-      if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
-        $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
-        $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
-        $(this).next("ul").hide();
-      } else if (collapsedSections.includes(menuName) == false && collapseAdded || sessionStorage.getItem(menuName) == "expand") {
-        $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
-        $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
-      }
-    })
-
-    $(".expand-menu").on("click", function() {
-      $(this).prev(".hide-menu").toggle();
-      $(this).parent().next("ul").toggle();
-      var menuName = $(this).parent().text().replace(/[^\w\s]/gi, '').trim();
-      if (sessionStorage.getItem(menuName) == "collapse") {
-        sessionStorage.removeItem(menuName);
-      }
-      sessionStorage.setItem(menuName,"expand");
-      toggleList(this);
-    });
-
-    $(".hide-menu").on("click", function() {
-      $(this).next(".expand-menu").toggle();
-      $(this).parent().next("ul").toggle();
-      var menuName = $(this).parent().text().replace(/[^\w\s]/gi, '').trim();
-      if (sessionStorage.getItem(menuName) == "expand") {
-        sessionStorage.removeItem(menuName);
-      }
-      sessionStorage.setItem(menuName,"collapse");
-      toggleList(this);
-    });
-
-    function toggleList(menuCommand) {
-      $(menuCommand).toggle();
+$(document).ready(function() {
+  var caption = "#pytorch-left-menu p.caption";
+  var collapseAdded = $(this).not("checked");
+  $(caption).each(function () {
+    var menuName = this.innerText.replace(/[^\w\s]/gi, "").trim();
+    $(this).find("span").addClass("checked");
+    if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
+      $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
+      $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+      $(this).next("ul").hide();
+    } else if ((collapsedSections.includes(menuName) == false && collapseAdded) || sessionStorage.getItem(menuName) == "expand") {
+      $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
+      $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
     }
   });
+
+  $(".expand-menu").on("click", function () {
+    $(this).prev(".hide-menu").toggle();
+    $(this).parent().next("ul").toggle();
+    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+    if (sessionStorage.getItem(menuName) == "collapse") {
+      sessionStorage.removeItem(menuName);
+    }
+    sessionStorage.setItem(menuName, "expand");
+    toggleList(this);
+  });
+
+  $(".hide-menu").on("click", function () {
+    $(this).next(".expand-menu").toggle();
+    $(this).parent().next("ul").toggle();
+    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+    if (sessionStorage.getItem(menuName) == "expand") {
+      sessionStorage.removeItem(menuName);
+    }
+    sessionStorage.setItem(menuName, "collapse");
+    toggleList(this);
+  });
+
+  function toggleList(menuCommand) {
+    $(menuCommand).toggle();
+  }
+});
 
 // Get the card link from the card's link attribute
 
