@@ -731,11 +731,6 @@
 }
 
 .main-menu ul li {
-  &.active {
-    &:after {
-      display: none;
-    }
-  }
 
   .resources-dropdown a {
     cursor: pointer;
@@ -793,16 +788,15 @@
   border-radius: 0.25rem;
 }
 
-.resources-dropdown:hover {
-  .resources-dropdown-menu {
-    display: block;
-  }
-}
-
 .main-menu ul li {
   .resources-dropdown-menu {
     border-radius: 0;
     padding: 0;
+  }
+  &.active:hover {
+    .resources-dropdown-menu {
+      display: block;
+    }
   }
 }
 
