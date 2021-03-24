@@ -9805,6 +9805,16 @@ pre {
 .header-holder .main-menu ul li.active a {
   color: #e44c2c;
 }
+.header-holder .main-menu ul li.docs-active:after {
+  content: "•";
+  bottom: -24px;
+  color: #e44c2c;
+  font-size: 1.375rem;
+  left: -24px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
 .header-holder .main-menu ul li:last-of-type {
   margin-right: 0;
 }
@@ -10555,6 +10565,9 @@ article.pytorch-article .section :not(dt) > code {
 article.pytorch-article .section :not(dt) > code .pre {
   outline: 0px;
   padding: 0px;
+}
+article.pytorch-article .section:only-of-type {
+  min-height: 70vh;
 }
 article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
   position: relative;

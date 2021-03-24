@@ -102,6 +102,17 @@
       }
     }
 
+    &.docs-active:after {
+      content: "•";
+      bottom: -24px;
+      color: $orange;
+      font-size: rem(22px);
+      left: -24px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+    }
+
     &:last-of-type {
       margin-right: 0;
     }
