@@ -354,9 +354,6 @@ article.pytorch-article {
       @include format-code($white);
     }
   }
-  .section:only-of-type {
-    min-height: 70vh;
-  }
 
   .function {
     dt {
