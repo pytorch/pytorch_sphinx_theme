@@ -10566,7 +10566,6 @@ article.pytorch-article .section :not(dt) > code .pre {
   outline: 0px;
   padding: 0px;
 }
-
 article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
   position: relative;
   background: #f3f4f7;
@@ -12286,6 +12285,10 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
+}
+
+.resources-dropdown:hover .resources-dropdown-menu {
+  display: block;
 }
 
 .main-menu ul li .resources-dropdown-menu {

@@ -110,9 +110,7 @@
             <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
-          {% assign docs = "audio, text, vision, elastic, serve, xla" | split: ", " %}
-
-          <li {%- if docs contains current[1] %} class="active docs-active"{% endif %}>
+          <li {%- if theme_pytorch_project == 'docs' %} class="active docs-active"{% endif %}>
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
               <a class="resource-option with-down-orange-arrow">
                 Docs
