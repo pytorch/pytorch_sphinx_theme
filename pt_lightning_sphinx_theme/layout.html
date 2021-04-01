@@ -492,6 +492,10 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'UA-174005114-3');
+    ga('create', 'UA-174005114-3', 'auto', {'allowLinker': true});
+    ga('require', 'linker');
+    ga('linker:autoLink', ['www.pytorchlightning.ai'] );
+
   </script>
 
  </body>
