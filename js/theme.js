@@ -322,7 +322,7 @@ var tagList = $(".tutorials-card-container").map(function() {
 }).get();
 
 function unique(value, index, self) {
-      return self.indexOf(value) == index && value != ""
+      return self.indexOf(value) == index && value != ""
     }
 
 // Only return unique tags
