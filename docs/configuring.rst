@@ -19,7 +19,6 @@ file of this repository, and can be defined in your project's ``conf.py`` via
 
     html_theme_options = {
         'canonical_url': '',
-        'analytics_id': '',
         'logo_only': False,
         'display_version': True,
         'prev_next_buttons_location': 'bottom',
@@ -41,7 +40,6 @@ Base options
 * ``canonical_url`` String. This will specify a `canonical url <https://en.wikipedia.org/wiki/Canonical_link_element>`__
   to let search engines know they should give higher ranking to latest version of the docs.
   The url points to the root of the documentation and requires a trailing slash.
-* ``analytics_id`` String. Change the Google Analytics ID that is included on pages.
 * ``display_version`` Bool. With this disabled, the version number isn't shown at the top of the sidebar.
 * ``prev_next_buttons_location`` String. can take the value ``bottom``, ``top``, ``both`` , or ``None``
   and will display the "Next" and "Previous" buttons accordingly.
