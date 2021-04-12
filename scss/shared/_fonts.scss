@@ -2,6 +2,7 @@
   font-family: FreightSans;
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-bold.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-bold.woff") format("woff");
 }
@@ -10,6 +11,7 @@
   font-family: FreightSans;
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-bold-italic.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-bold-italic.woff") format("woff");
 }
@@ -18,6 +20,7 @@
   font-family: FreightSans;
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-medium.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-medium.woff") format("woff");
 }
@@ -26,6 +29,7 @@
   font-family: FreightSans;
   font-weight: 500;
   font-style: italic;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-medium-italic.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-medium-italic.woff") format("woff");
 }
@@ -34,6 +38,7 @@
   font-family: FreightSans;
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-light.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-light.woff") format("woff");
 }
@@ -42,6 +47,7 @@
   font-family: FreightSans;
   font-weight: 100;
   font-style: italic;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-light-italic.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-light-italic.woff") format("woff");
 }
@@ -50,6 +56,7 @@
   font-family: FreightSans;
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-book-italic.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-book-italic.woff") format("woff");
 }
@@ -58,6 +65,7 @@
   font-family: FreightSans;
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
   src: url("../fonts/FreightSans/freight-sans-book.woff2") format("woff2"),
        url("../fonts/FreightSans/freight-sans-book.woff") format("woff");
 }
@@ -66,6 +74,7 @@
   font-family: IBMPlexMono;
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
   unicode-range: u+0020-007f;
   src: local("IBMPlexMono-SemiBold"),
     url("../fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2")
@@ -78,6 +87,7 @@
   font-family: IBMPlexMono;
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
   unicode-range: u+0020-007f;
   src: local("IBMPlexMono-Medium"),
     url("../fonts/IBMPlexMono/IBMPlexMono-Medium.woff2")
@@ -90,6 +100,7 @@
   font-family: IBMPlexMono;
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
   unicode-range: u+0020-007f;
   src: local("IBMPlexMono-Regular"),
     url("../fonts/IBMPlexMono/IBMPlexMono-Regular.woff2")
@@ -102,6 +113,7 @@
   font-family: IBMPlexMono;
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
   unicode-range: u+0020-007f;
   src: local("IBMPlexMono-Light"),
     url("../fonts/IBMPlexMono/IBMPlexMono-Light.woff2")
