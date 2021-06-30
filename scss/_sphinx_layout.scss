@@ -45,6 +45,7 @@
 }
 
 .pytorch-content-left {
+  min-height: 100vh;
   margin-top: rem(40px);
   width: 100%;
 
@@ -121,6 +122,7 @@
   display: none;
   background-color: $light_grey;
   color: $slate;
+  overflow: scroll;
 
   @include sphinx-medium-size {
     display: block;
@@ -147,16 +149,28 @@
   }
 }
 
+.expand-menu, .hide-menu {
+  color: $dark_grey;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.collapse {
+  display: none;
+}
+
+.left-nav-top-caption {
+  padding-top: 1rem;
+}
+
 .pytorch-left-menu p.caption {
   color: $not_quite_black;
   display: block;
-  display: inline-block;
   font-size: rem(16px);
   line-height: rem(22px);
   margin-bottom: rem(16px);
-  padding: 0;
   text-transform: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .pytorch-left-menu-search {
@@ -345,7 +359,7 @@
       display: inline-block;
       position: absolute;
       left: -15px;
-      top: 1px;
+      top: -10%;
       font-size: rem(22px);
       color: $red_orange;
 
@@ -551,6 +565,10 @@
   }
 }
 
+#pytorch-right-menu .side-scroll-highlight {
+  color: $red_orange;
+}
+
 .header-container {
   max-width: none;
   margin-top: 4px;
@@ -717,7 +735,7 @@
 }
 
 .main-menu ul li {
-  .ecosystem-dropdown, .resources-dropdown a {
+  .resources-dropdown a {
     cursor: pointer;
   }
 
@@ -753,18 +771,16 @@
   }
 }
 
-.ecosystem-dropdown-menu, .resources-dropdown-menu {
+.resources-dropdown-menu {
   left: -75px;
   width: 226px;
   display: none;
   position: absolute;
-  top: rem(50px);
   z-index: 1000;
   display: none;
   float: left;
   min-width: 10rem;
   padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
   text-align: left;
@@ -775,24 +791,59 @@
   border-radius: 0.25rem;
 }
 
-.ecosystem-dropdown-menu.show-menu, .resources-dropdown-menu.show-menu {
-  display: block;
-}
-
-.main-menu ul li {
-  .ecosystem-dropdown-menu, .resources-dropdown-menu {
-    border-radius: 0;
-    padding: 0;
+.resources-dropdown:hover {
+  .resources-dropdown-menu {
+    display: block;
   }
 }
 
 .main-menu ul li {
-  .ecosystem-dropdown-menu, .resources-dropdown-menu {
+  .resources-dropdown-menu {
+    border-radius: 0;
+    padding: 0;
+  }
+  &.active:hover {
+    .resources-dropdown-menu {
+      display: block;
+    }
+  }
+}
+
+.main-menu ul li {
+  .resources-dropdown-menu {
     .dropdown-item {
       color: #6c6c6d;
       border-bottom: 1px solid #e2e2e2;
     }
   }
+}
+
+.resources-dropdown {
+  .with-down-orange-arrow {
+    padding-right: rem(32px);
+    position: relative;
+    background: url("../images/chevron-down-orange.svg");
+    background-size: 14px 18px;
+    background-position: top 7px right 10px;
+    background-repeat: no-repeat;
+  }
+}
+
+.with-down-arrow {
+  padding-right: rem(32px);
+  position: relative;
+  background-image: url("../images/chevron-down-black.svg");
+  background-size: 14px 18px;
+  background-position: top 7px right 10px;
+  background-repeat: no-repeat;
+  &:hover {
+    background-image: url("../images/chevron-down-orange.svg");
+    background-repeat: no-repeat;
+  }
+}
+
+.header-holder .main-menu ul li .resources-dropdown .doc-dropdown-option {
+  padding-top: 1rem;
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item {

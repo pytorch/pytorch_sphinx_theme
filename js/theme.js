@@ -252,8 +252,8 @@ if (downloadNote.length >= 1) {
 
     var githubLink = "https://github.com/pytorch/tutorials/blob/master/" + tutorialUrlArray.join("/") + ".py",
         notebookLink = $(".reference.download")[1].href,
-        notebookDownloadPath = notebookLink.split('_downloads')[1].split('/').pop(),
-        colabLink = "https://colab.research.google.com/github/pytorch/tutorials/blob/gh-pages/_downloads/" + notebookDownloadPath;
+        notebookDownloadPath = notebookLink.split('_downloads')[1],
+        colabLink = "https://colab.research.google.com/github/pytorch/tutorials/blob/gh-pages/_downloads" + notebookDownloadPath;
 
     $("#google-colab-link").wrap("<a href=" + colabLink + " data-behavior='call-to-action-event' data-response='Run in Google Colab' target='_blank'/>");
     $("#download-notebook-link").wrap("<a href=" + notebookLink + " data-behavior='call-to-action-event' data-response='Download Notebook'/>");
@@ -261,3 +261,171 @@ if (downloadNote.length >= 1) {
 } else {
     $(".pytorch-call-to-action-links").hide();
 }
+
+//This code handles the Expand/Hide toggle for the Docs/Tutorials left nav items
+
+$(document).ready(function() {
+  var caption = "#pytorch-left-menu p.caption";
+  var collapseAdded = $(this).not("checked");
+  $(caption).each(function () {
+    var menuName = this.innerText.replace(/[^\w\s]/gi, "").trim();
+    $(this).find("span").addClass("checked");
+    if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
+      $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
+      $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+      $(this).next("ul").hide();
+    } else if (collapsedSections.includes(menuName) == false && collapseAdded || sessionStorage.getItem(menuName) == "expand") {
+      $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
+      $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
+    }
+  });
+
+  $(".expand-menu").on("click", function () {
+    $(this).prev(".hide-menu").toggle();
+    $(this).parent().next("ul").toggle();
+    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+    if (sessionStorage.getItem(menuName) == "collapse") {
+      sessionStorage.removeItem(menuName);
+    }
+    sessionStorage.setItem(menuName, "expand");
+    toggleList(this);
+  });
+
+  $(".hide-menu").on("click", function () {
+    $(this).next(".expand-menu").toggle();
+    $(this).parent().next("ul").toggle();
+    var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
+    if (sessionStorage.getItem(menuName) == "expand") {
+      sessionStorage.removeItem(menuName);
+    }
+    sessionStorage.setItem(menuName, "collapse");
+    toggleList(this);
+  });
+
+  function toggleList(menuCommand) {
+    $(menuCommand).toggle();
+  }
+});
+
+// Build an array from each tag that's present
+
+var tagList = $(".tutorials-card-container").map(function() {
+    return $(this).data("tags").split(",").map(function(item) {
+        return item.trim();
+      });
+}).get();
+
+function unique(value, index, self) {
+      return self.indexOf(value) == index && value != ""
+    }
+
+// Only return unique tags
+
+var tags = tagList.sort().filter(unique);
+
+// Add filter buttons to the top of the page for each tag
+
+function createTagMenu() {
+    tags.forEach(function(item){
+    $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>")
+  })
+};
+
+createTagMenu();
+
+// Remove hyphens if they are present in the filter buttons
+
+$(".tags").each(function(){
+    var tags = $(this).text().split(",");
+    tags.forEach(function(tag, i ) {
+       tags[i] = tags[i].replace(/-/, ' ')
+    })
+    $(this).html(tags.join(", "));
+});
+
+// Remove hyphens if they are present in the card body
+
+$(".tutorial-filter").each(function(){
+    var tag = $(this).text();
+    $(this).html(tag.replace(/-/, ' '))
+})
+
+// Remove any empty p tags that Sphinx adds
+
+$("#tutorial-cards p").each(function(index, item) {
+    if(!$(item).text().trim()) {
+        $(item).remove();
+    }
+});
+
+// Jump back to top on pagination click
+
+$(document).on("click", ".page", function() {
+    $('html, body').animate(
+      {scrollTop: $("#dropdown-filter-tags").position().top},
+      'slow'
+    );
+});
+
+var link = $("a[href='intermediate/speech_command_recognition_with_torchaudio.html']");
+
+if (link.text() == "SyntaxError") {
+    console.log("There is an issue with the intermediate/speech_command_recognition_with_torchaudio.html menu item.");
+    link.text("Speech Command Recognition with torchaudio");
+}
+
+$(".stars-outer > i").hover(function() {
+    $(this).prevAll().addBack().toggleClass("fas star-fill");
+});
+
+$(".stars-outer > i").on("click", function() {
+    $(this).prevAll().each(function() {
+        $(this).addBack().addClass("fas star-fill");
+    });
+
+    $(".stars-outer > i").each(function() {
+        $(this).unbind("mouseenter mouseleave").css({
+            "pointer-events": "none"
+        });
+    });
+})
+
+$("#pytorch-side-scroll-right li a").on("click", function (e) {
+  var href = $(this).attr("href");
+  $('html, body').stop().animate({
+    scrollTop: $(href).offset().top - 100
+  }, 850);
+  e.preventDefault;
+});
+
+var lastId,
+  topMenu = $("#pytorch-side-scroll-right"),
+  topMenuHeight = topMenu.outerHeight() + 1,
+  // All sidenav items
+  menuItems = topMenu.find("a"),
+  // Anchors for menu items
+  scrollItems = menuItems.map(function () {
+    var item = $(this).attr("href");
+    if (item.length) {
+      return item;
+    }
+  });
+
+$(window).scroll(function () {
+  var fromTop = $(this).scrollTop() + topMenuHeight;
+  var article = ".section";
+
+  $(article).each(function (i) {
+    var offsetScroll = $(this).offset().top - $(window).scrollTop();
+    if (
+      offsetScroll <= topMenuHeight + 200 &&
+      offsetScroll >= topMenuHeight - 200 &&
+      scrollItems[i] == "#" + $(this).attr("id") &&
+      $(".hidden:visible")
+    ) {
+      $(menuItems).removeClass("side-scroll-highlight");
+      $(menuItems[i]).addClass("side-scroll-highlight");
+    }
+  });
+});
+

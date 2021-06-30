@@ -2107,6 +2107,10 @@ pre code {
   color: #6c757d;
   opacity: 1;
 }
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
 .form-control:-ms-input-placeholder {
   color: #6c757d;
   opacity: 1;
@@ -4553,8 +4557,10 @@ tbody.collapse.show {
 @media (min-width: 576px) {
   .card-columns {
     -webkit-column-count: 3;
+       -moz-column-count: 3;
             column-count: 3;
     -webkit-column-gap: 1.25rem;
+       -moz-column-gap: 1.25rem;
             column-gap: 1.25rem;
   }
   .card-columns .card {
@@ -5670,7 +5676,7 @@ button.close {
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
-@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+@supports (transform-style: preserve-3d) {
   .carousel-item-next.carousel-item-left,
   .carousel-item-prev.carousel-item-right {
     -webkit-transform: translate3d(0, 0, 0);
@@ -5683,7 +5689,7 @@ button.close {
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
 }
-@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+@supports (transform-style: preserve-3d) {
   .carousel-item-next,
   .active.carousel-item-right {
     -webkit-transform: translate3d(100%, 0, 0);
@@ -5696,7 +5702,7 @@ button.close {
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
 }
-@supports ((-webkit-transform-style: preserve-3d) or (transform-style: preserve-3d)) {
+@supports (transform-style: preserve-3d) {
   .carousel-item-prev,
   .active.carousel-item-left {
     -webkit-transform: translate3d(-100%, 0, 0);
@@ -7227,7 +7233,6 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7247,9 +7252,8 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sticky-top {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -9353,7 +9357,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .highlight .bp {
-  color: #999999;
+  color: #525252;
 }
 
 .highlight .nb {
@@ -9423,6 +9427,16 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .highlight .o {
+  color: #000000;
+  font-weight: bold;
+}
+
+.highlight .n {
+  color: #000000;
+  font-weight: bold;
+}
+
+.highlight .p {
   color: #000000;
   font-weight: bold;
 }
@@ -9801,12 +9815,22 @@ pre {
 .header-holder .main-menu ul li.active a {
   color: #792ee5;
 }
+.header-holder .main-menu ul li.docs-active:after {
+  content: "•";
+  bottom: -24px;
+  color: #e44c2c;
+  font-size: 1.375rem;
+  left: -24px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
 .header-holder .main-menu ul li:last-of-type {
   margin-right: 0;
 }
 .header-holder .main-menu ul li a {
   color: #ffffff;
-  font-size: 1.125rem;
+  font-size: 1.3rem;
   letter-spacing: 0;
   line-height: 2.125rem;
   text-align: center;
@@ -9861,7 +9885,7 @@ pre {
   list-style-type: none;
   padding: 0;
 }
-.mobile-main-menu.open ul li a {
+.mobile-main-menu.open ul li a, .mobile-main-menu.open .resources-mobile-menu-title {
   font-size: 2rem;
   color: #ffffff;
   letter-spacing: 0;
@@ -9896,15 +9920,23 @@ pre {
       -ms-flex-align: center;
           align-items: center;
   padding-left: 2.8125rem;
-  height: 100%;
-  min-height: 100%;
-  margin-top: -68px;
+  height: 90vh;
+  margin-top: -25px;
+  padding-top: 50%;
+  overflow-y: scroll;
+}
+.mobile-main-menu-links-container .main-menu {
+  height: 100vh;
+}
+
+.mobile-main-menu-links-container ul.resources-mobile-menu-items li {
+  padding-left: 15px;
 }
 
 .site-footer {
   padding: 2.5rem 0;
   width: 100%;
-  background-image: url("../images/home-footer-background.jpg");
+  background: #000000;
   background-size: 100%;
   margin-left: 0;
   margin-right: 0;
@@ -9927,7 +9959,7 @@ pre {
 .site-footer ul li {
   font-size: 1.125rem;
   line-height: 2rem;
-  color: #6c6c6d;
+  color: #A0A0A1;
   padding-bottom: 0.375rem;
 }
 .site-footer ul li.list-title {
@@ -10100,6 +10132,11 @@ pre {
   background-image: url("../images/logo-twitter-dark.svg");
   background-position: center center;
   background-size: 17px 17px;
+  background-repeat: no-repeat;
+}
+.footer-social-icons a.youtube {
+  background-image: url("../images/logo-youtube-dark.svg");
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
@@ -10315,31 +10352,43 @@ ul.pytorch-breadcrumbs a {
   background-image: url("../images/icon-menu-dots-dark.svg");
 }
 
-.rst-content footer .helpful-hr.hr-top {
+.rst-content footer .rating-hr.hr-top {
   margin-bottom: -0.0625rem;
 }
-.rst-content footer .helpful-hr.hr-bottom {
+.rst-content footer .rating-hr.hr-bottom {
   margin-top: -0.0625rem;
 }
-.rst-content footer .helpful-container {
+.rst-content footer .rating-container {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   font-size: 1.125rem;
 }
-.rst-content footer .helpful-container .helpful-question, .rst-content footer .helpful-container .was-helpful-thank-you {
+.rst-content footer .rating-container .rating-prompt, .rst-content footer .rating-container .was-helpful-thank-you {
   padding: 0.625rem 1.25rem 0.625rem 1.25rem;
 }
-.rst-content footer .helpful-container .was-helpful-thank-you {
+.rst-content footer .rating-container .was-helpful-thank-you {
   display: none;
 }
-.rst-content footer .helpful-container .helpful-question.yes-link, .rst-content footer .helpful-container .helpful-question.no-link {
+.rst-content footer .rating-container .rating-prompt.yes-link, .rst-content footer .rating-container .rating-prompt.no-link {
   color: #792ee5;
   cursor: pointer;
 }
-.rst-content footer .helpful-container .helpful-question.yes-link:hover, .rst-content footer .helpful-container .helpful-question.no-link:hover {
+.rst-content footer .rating-container .rating-prompt.yes-link:hover, .rst-content footer .rating-container .rating-prompt.no-link:hover {
   background-color: #792ee5;
   color: #ffffff;
+}
+.rst-content footer .rating-container .stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+  padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+}
+.rst-content footer .rating-container .stars-outer i {
+  cursor: pointer;
+}
+.rst-content footer .rating-container .stars-outer .star-fill {
+  color: #ee4c2c;
 }
 .rst-content footer div[role="contentinfo"] {
   padding-top: 2.5rem;
@@ -10516,9 +10565,9 @@ article.pytorch-article .sphx-glr-thumbcontainer .figure a.reference.internal {
 
 article.pytorch-article .section :not(dt) > code {
   color: #262626;
-  border-top: solid 2px #f3f4f7;
-  background-color: #f3f4f7;
-  border-bottom: solid 2px #f3f4f7;
+  border-top: solid 2px #ffffff;
+  background-color: #ffffff;
+  border-bottom: solid 2px #ffffff;
   padding: 0px 3px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -10670,6 +10719,7 @@ article.pytorch-article table {
 article.pytorch-article .note,
 article.pytorch-article .warning,
 article.pytorch-article .tip,
+article.pytorch-article .seealso,
 article.pytorch-article .hint,
 article.pytorch-article .important,
 article.pytorch-article .caution,
@@ -10683,6 +10733,7 @@ article.pytorch-article .error {
 article.pytorch-article .note .admonition-title,
 article.pytorch-article .warning .admonition-title,
 article.pytorch-article .tip .admonition-title,
+article.pytorch-article .seealso .admonition-title,
 article.pytorch-article .hint .admonition-title,
 article.pytorch-article .important .admonition-title,
 article.pytorch-article .caution .admonition-title,
@@ -10700,6 +10751,7 @@ article.pytorch-article .error .admonition-title {
 article.pytorch-article .note .admonition-title:before,
 article.pytorch-article .warning .admonition-title:before,
 article.pytorch-article .tip .admonition-title:before,
+article.pytorch-article .seealso .admonition-title:before,
 article.pytorch-article .hint .admonition-title:before,
 article.pytorch-article .important .admonition-title:before,
 article.pytorch-article .caution .admonition-title:before,
@@ -10715,6 +10767,7 @@ article.pytorch-article .error .admonition-title:before {
 article.pytorch-article .note p:nth-child(n + 2),
 article.pytorch-article .warning p:nth-child(n + 2),
 article.pytorch-article .tip p:nth-child(n + 2),
+article.pytorch-article .seealso p:nth-child(n + 2),
 article.pytorch-article .hint p:nth-child(n + 2),
 article.pytorch-article .important p:nth-child(n + 2),
 article.pytorch-article .caution p:nth-child(n + 2),
@@ -10726,6 +10779,7 @@ article.pytorch-article .error p:nth-child(n + 2) {
 article.pytorch-article .note table,
 article.pytorch-article .warning table,
 article.pytorch-article .tip table,
+article.pytorch-article .seealso table,
 article.pytorch-article .hint table,
 article.pytorch-article .important table,
 article.pytorch-article .caution table,
@@ -10741,6 +10795,8 @@ article.pytorch-article .warning .pre,
 article.pytorch-article .warning pre,
 article.pytorch-article .tip .pre,
 article.pytorch-article .tip pre,
+article.pytorch-article .seealso .pre,
+article.pytorch-article .seealso pre,
 article.pytorch-article .hint .pre,
 article.pytorch-article .hint pre,
 article.pytorch-article .important .pre,
@@ -10759,6 +10815,7 @@ article.pytorch-article .error pre {
 article.pytorch-article .note :not(dt) > code,
 article.pytorch-article .warning :not(dt) > code,
 article.pytorch-article .tip :not(dt) > code,
+article.pytorch-article .seealso :not(dt) > code,
 article.pytorch-article .hint :not(dt) > code,
 article.pytorch-article .important :not(dt) > code,
 article.pytorch-article .caution :not(dt) > code,
@@ -10776,6 +10833,7 @@ article.pytorch-article .error :not(dt) > code {
 article.pytorch-article .note :not(dt) > code .pre,
 article.pytorch-article .warning :not(dt) > code .pre,
 article.pytorch-article .tip :not(dt) > code .pre,
+article.pytorch-article .seealso :not(dt) > code .pre,
 article.pytorch-article .hint :not(dt) > code .pre,
 article.pytorch-article .important :not(dt) > code .pre,
 article.pytorch-article .caution :not(dt) > code .pre,
@@ -10788,6 +10846,7 @@ article.pytorch-article .error :not(dt) > code .pre {
 article.pytorch-article .note pre,
 article.pytorch-article .warning pre,
 article.pytorch-article .tip pre,
+article.pytorch-article .seealso pre,
 article.pytorch-article .hint pre,
 article.pytorch-article .important pre,
 article.pytorch-article .caution pre,
@@ -10799,6 +10858,7 @@ article.pytorch-article .error pre {
 article.pytorch-article .note .highlight,
 article.pytorch-article .warning .highlight,
 article.pytorch-article .tip .highlight,
+article.pytorch-article .seealso .highlight,
 article.pytorch-article .hint .highlight,
 article.pytorch-article .important .highlight,
 article.pytorch-article .caution .highlight,
@@ -10813,6 +10873,8 @@ article.pytorch-article .warning ul,
 article.pytorch-article .warning ol,
 article.pytorch-article .tip ul,
 article.pytorch-article .tip ol,
+article.pytorch-article .seealso ul,
+article.pytorch-article .seealso ol,
 article.pytorch-article .hint ul,
 article.pytorch-article .hint ol,
 article.pytorch-article .important ul,
@@ -10833,6 +10895,8 @@ article.pytorch-article .warning ul li,
 article.pytorch-article .warning ol li,
 article.pytorch-article .tip ul li,
 article.pytorch-article .tip ol li,
+article.pytorch-article .seealso ul li,
+article.pytorch-article .seealso ol li,
 article.pytorch-article .hint ul li,
 article.pytorch-article .hint ol li,
 article.pytorch-article .important ul li,
@@ -10850,6 +10914,7 @@ article.pytorch-article .error ol li {
 article.pytorch-article .note p,
 article.pytorch-article .warning p,
 article.pytorch-article .tip p,
+article.pytorch-article .seealso p,
 article.pytorch-article .hint p,
 article.pytorch-article .important p,
 article.pytorch-article .caution p,
@@ -10865,6 +10930,9 @@ article.pytorch-article .warning .admonition-title {
   background: #e94f3b;
 }
 article.pytorch-article .tip .admonition-title {
+  background: #6bcebb;
+}
+article.pytorch-article .seealso .admonition-title {
   background: #6bcebb;
 }
 article.pytorch-article .hint .admonition-title {
@@ -11071,6 +11139,10 @@ article.pytorch-article .math img {
 .pytorch-breadcrumbs-wrapper .pytorch-breadcrumbs-aside {
   float: right;
 }
+.pytorch-breadcrumbs-wrapper .pytorch-breadcrumbs-aside .fa.fa-github {
+  margin-top: 5px;
+  display: block;
+}
 
 .pytorch-article .container {
   padding-left: 0;
@@ -11209,6 +11281,272 @@ a:hover {
   color: #792ee5;
 }
 
+#tutorial-cards-container #tutorial-cards {
+  width: 100%;
+}
+#tutorial-cards-container .tutorials-nav {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+#tutorial-cards-container .tutorials-hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+#tutorial-cards-container .card.tutorials-card {
+  border-radius: 0;
+  border-color: #f3f4f7;
+  height: 98px;
+  margin-bottom: 1.25rem;
+  margin-bottom: 1.875rem;
+  overflow: scroll;
+  background-color: #f3f4f7;
+  cursor: pointer;
+}
+@media screen and (min-width: 1240px) {
+  #tutorial-cards-container .card.tutorials-card {
+    height: 200px;
+    overflow: inherit;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card {
+    height: 200px;
+    overflow: scroll;
+  }
+}
+#tutorial-cards-container .card.tutorials-card .tutorials-image {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 96px;
+  width: 96px;
+  opacity: 0.5;
+}
+#tutorial-cards-container .card.tutorials-card .tutorials-image img {
+  height: 100%;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card .tutorials-image {
+    height: 100%;
+    width: 25%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card .tutorials-image {
+    height: 100%;
+    width: 198px;
+  }
+}
+#tutorial-cards-container .card.tutorials-card .tutorials-image:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  background: #000000;
+  opacity: .075;
+}
+#tutorial-cards-container .card.tutorials-card .card-title-container {
+  width: 70%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card .card-title-container {
+    width: 75%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card .card-title-container {
+    width: 70%;
+  }
+}
+#tutorial-cards-container .card.tutorials-card .card-title-container h4 {
+  margin-bottom: 1.125rem;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  margin-bottom: 0;
+  color: #6c6c6d;
+  font-weight: 400;
+  width: 70%;
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
+    width: 75%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
+    width: 70%;
+  }
+}
+#tutorial-cards-container .card.tutorials-card p.tags {
+  margin-top: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#tutorial-cards-container .card.tutorials-card h4 {
+  color: #262626;
+  margin-bottom: 1.125rem;
+}
+#tutorial-cards-container .card.tutorials-card a {
+  height: 100%;
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card a {
+    min-height: 190px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card a {
+    min-height: 234px;
+  }
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #e44c2c;
+    -webkit-transition: width .250s ease-in-out;
+    transition: width .250s ease-in-out;
+  }
+  #tutorial-cards-container .card.tutorials-card:hover:after {
+    width: 100%;
+  }
+}
+#tutorial-cards-container .card.tutorials-card:hover {
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-bottom: none;
+}
+#tutorial-cards-container .card.tutorials-card:hover p.card-summary {
+  color: #262626;
+}
+#tutorial-cards-container .card.tutorials-card:hover .tutorials-image {
+  opacity: unset;
+}
+#tutorial-cards-container .tutorial-tags-container {
+  width: 75%;
+}
+#tutorial-cards-container .tutorial-tags-container.active {
+  width: 0;
+}
+#tutorial-cards-container .tutorial-filter-menu ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+}
+#tutorial-cards-container .tutorial-filter-menu ul li {
+  padding-right: 1.25rem;
+  word-break: break-all;
+}
+#tutorial-cards-container .tutorial-filter-menu ul li a {
+  color: #979797;
+}
+#tutorial-cards-container .tutorial-filter-menu ul li a:hover {
+  color: #e44c2c;
+}
+#tutorial-cards-container .tutorial-filter {
+  cursor: pointer;
+}
+#tutorial-cards-container .filter-btn {
+  color: #979797;
+  border: 1px solid #979797;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+#tutorial-cards-container .filter-btn:hover {
+  border: 1px solid #e44c2c;
+  color: #e44c2c;
+}
+#tutorial-cards-container .filter-btn.selected {
+  background-color: #e44c2c;
+  border: 1px solid #e44c2c;
+  color: #ffffff;
+}
+#tutorial-cards-container .all-tag-selected {
+  background-color: #979797;
+  color: #ffffff;
+}
+#tutorial-cards-container .all-tag-selected:hover {
+  border-color: #979797;
+  color: #ffffff;
+}
+#tutorial-cards-container .pagination .page {
+  border: 1px solid #dee2e6;
+  padding: 0.5rem 0.75rem;
+}
+#tutorial-cards-container .pagination .active .page {
+  background-color: #dee2e6;
+}
+
+article.pytorch-article .tutorials-callout-container {
+  padding-bottom: 50px;
+}
+article.pytorch-article .tutorials-callout-container .col-md-6 {
+  padding-bottom: 10px;
+}
+article.pytorch-article .tutorials-callout-container .text-container {
+  padding: 10px 0px 30px 0px;
+  padding-bottom: 10px;
+}
+article.pytorch-article .tutorials-callout-container .text-container .body-paragraph {
+  color: #666666;
+  font-weight: 300;
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+}
+article.pytorch-article .tutorials-callout-container .btn.callout-button {
+  font-size: 1.125rem;
+  border-radius: 0;
+  border: none;
+  background-color: #f3f4f7;
+  color: #6c6c6d;
+  font-weight: 400;
+  position: relative;
+  letter-spacing: 0.25px;
+}
+@media screen and (min-width: 768px) {
+  article.pytorch-article .tutorials-callout-container .btn.callout-button:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #e44c2c;
+    -webkit-transition: width .250s ease-in-out;
+    transition: width .250s ease-in-out;
+  }
+  article.pytorch-article .tutorials-callout-container .btn.callout-button:hover:after {
+    width: 100%;
+  }
+}
+article.pytorch-article .tutorials-callout-container .btn.callout-button a {
+  color: inherit;
+}
+
 .pytorch-container {
   margin: 0 auto;
   padding: 0 1.875rem;
@@ -11281,6 +11619,7 @@ a:hover {
 }
 
 .pytorch-content-left {
+  min-height: 100vh;
   margin-top: 2.5rem;
   width: 100%;
 }
@@ -11360,6 +11699,7 @@ a:hover {
   display: none;
   background-color: #f3f4f7;
   color: #262626;
+  overflow: scroll;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu {
@@ -11387,16 +11727,28 @@ a:hover {
   }
 }
 
+.expand-menu, .hide-menu {
+  color: #6c6c6d;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.collapse {
+  display: none;
+}
+
+.left-nav-top-caption {
+  padding-top: 1rem;
+}
+
 .pytorch-left-menu p.caption {
   color: #262626;
   display: block;
-  display: inline-block;
   font-size: 1rem;
   line-height: 1.375rem;
   margin-bottom: 1rem;
-  padding: 0;
   text-transform: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .pytorch-left-menu-search {
@@ -11409,6 +11761,9 @@ a:hover {
 }
 
 .pytorch-left-menu-search ::-webkit-input-placeholder {
+  color: #262626;
+}
+.pytorch-left-menu-search ::-moz-placeholder {
   color: #262626;
 }
 .pytorch-left-menu-search :-ms-input-placeholder {
@@ -11562,7 +11917,7 @@ a:hover {
   display: inline-block;
   position: absolute;
   left: -15px;
-  top: 1px;
+  top: -10%;
   font-size: 1.375rem;
   color: #792ee5;
 }
@@ -11718,6 +12073,10 @@ a:hover {
 }
 .pytorch-right-menu .pytorch-side-scroll ul li {
   position: relative;
+}
+
+#pytorch-right-menu .side-scroll-highlight {
+  color: #ee4c2c;
 }
 
 .header-container {
@@ -11899,7 +12258,7 @@ a:hover {
   }
 }
 
-.main-menu ul li .ecosystem-dropdown, .main-menu ul li .resources-dropdown a {
+.main-menu ul li .resources-dropdown a {
   cursor: pointer;
 }
 .main-menu ul li .dropdown-menu {
@@ -11927,18 +12286,16 @@ a:hover {
   color: #ffffff;
 }
 
-.ecosystem-dropdown-menu, .resources-dropdown-menu {
+.resources-dropdown-menu {
   left: -75px;
   width: 226px;
   display: none;
   position: absolute;
-  top: 3.125rem;
   z-index: 1000;
   display: none;
   float: left;
   min-width: 10rem;
   padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
   text-align: left;
@@ -11949,18 +12306,47 @@ a:hover {
   border-radius: 0.25rem;
 }
 
-.ecosystem-dropdown-menu.show-menu, .resources-dropdown-menu.show-menu {
+.resources-dropdown:hover .resources-dropdown-menu {
   display: block;
 }
 
-.main-menu ul li .ecosystem-dropdown-menu, .main-menu ul li .resources-dropdown-menu {
+.main-menu ul li .resources-dropdown-menu {
   border-radius: 0;
   padding: 0;
 }
+.main-menu ul li.active:hover .resources-dropdown-menu {
+  display: block;
+}
 
-.main-menu ul li .ecosystem-dropdown-menu .dropdown-item, .main-menu ul li .resources-dropdown-menu .dropdown-item {
+.main-menu ul li .resources-dropdown-menu .dropdown-item {
   color: #6c6c6d;
   border-bottom: 1px solid #e2e2e2;
+}
+
+.resources-dropdown .with-down-orange-arrow {
+  padding-right: 2rem;
+  position: relative;
+  background: url("../images/chevron-down-orange.svg");
+  background-size: 14px 18px;
+  background-position: top 7px right 10px;
+  background-repeat: no-repeat;
+}
+
+.with-down-arrow {
+  padding-right: 2rem;
+  position: relative;
+  background-image: url("../images/chevron-down-black.svg");
+  background-size: 14px 18px;
+  background-position: top 7px right 10px;
+  background-repeat: no-repeat;
+}
+.with-down-arrow:hover {
+  background-image: url("../images/chevron-down-orange.svg");
+  background-repeat: no-repeat;
+}
+
+.header-holder .main-menu ul li .resources-dropdown .doc-dropdown-option {
+  padding-top: 1rem;
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item {

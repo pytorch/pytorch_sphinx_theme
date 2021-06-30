@@ -102,6 +102,17 @@
       }
     }
 
+    &.docs-active:after {
+      content: "•";
+      bottom: -24px;
+      color: $orange;
+      font-size: rem(22px);
+      left: -24px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+    }
+
     &:last-of-type {
       margin-right: 0;
     }
@@ -109,7 +120,7 @@
 
   ul li a {
     color: $white;
-    font-size: rem(18px);
+    font-size: 1.3rem;
     letter-spacing: 0;
     line-height: rem(34px);
     text-align: center;
@@ -155,7 +166,7 @@
     padding: 0;
   }
 
-  ul li a {
+  ul li a, .resources-mobile-menu-title {
     font-size: rem(32px);
     color: $white;
     letter-spacing: 0;
@@ -188,7 +199,19 @@
   display: flex;
   align-items: center;
   padding-left: rem(45px);
-  height: 100%;
-  min-height: 100%;
-  margin-top: -$mobile_header_height;
+  height: 90vh;
+  margin-top: -25px;
+  padding-top: 50%;
+  overflow-y: scroll;
+  .main-menu {
+    height: 100vh;
+  }
+}
+
+.mobile-main-menu-links-container {
+  ul.resources-mobile-menu-items {
+    li {
+      padding-left: 15px;
+    }
+  }
 }
