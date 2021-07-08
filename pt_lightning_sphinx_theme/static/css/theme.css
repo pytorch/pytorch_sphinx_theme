@@ -9922,13 +9922,13 @@ pre {
       -ms-flex-align: center;
           align-items: center;
   padding-left: 2.8125rem;
-  height: 90vh;
-  margin-top: -25px;
-  padding-top: 50%;
+  height: -moz-calc(100% - 68px);
+  height: -webkit-calc(100% - 68px);
+  height: calc(100% - 68px);
   overflow-y: scroll;
 }
 .mobile-main-menu-links-container .main-menu {
-  height: 100vh;
+  height: 100%;
 }
 
 .mobile-main-menu-links-container ul.resources-mobile-menu-items li {
