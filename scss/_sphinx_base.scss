@@ -540,6 +540,7 @@ article.pytorch-article {
     background: $light_grey;
     margin-top: rem(30px);
     margin-bottom: rem(18px);
+    padding-bottom: 1px; // needed for nested directives (code inside note)
 
     .admonition-title {
       color: $white;
