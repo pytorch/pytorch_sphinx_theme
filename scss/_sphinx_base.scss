@@ -207,7 +207,6 @@ span.pre {
 }
 
 pre {
-  background-color: $light_grey;
   padding: rem(22px);
 }
 
@@ -564,11 +563,6 @@ article.pytorch-article {
     table {
       margin: 0 rem(32px);
       width: auto;
-    }
-    .pre,
-    pre {
-      background: $white;
-      outline: 1px solid #e9e9e9;
     }
 
     :not(dt) > code {
