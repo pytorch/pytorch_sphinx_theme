@@ -106,7 +106,7 @@ module.exports = function(grunt) {
       },
       build: {
         options: {
-          style: 'compressed'
+          style: 'expanded'
         },
         files: [{
           expand: true,
