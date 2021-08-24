@@ -373,7 +373,6 @@ article.pytorch-article {
       }
 
       a {
-        position: absolute;
         right: 30px;
         padding-right: 0;
         top: 50%;
@@ -399,6 +398,8 @@ article.pytorch-article {
     }
 
     .viewcode-link {
+      padding-left: rem(10px);
+      position: absolute;
       font-size: rem(14px);
       color: #979797;
       letter-spacing: 0;
