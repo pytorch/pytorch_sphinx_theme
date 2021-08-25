@@ -11423,7 +11423,7 @@ a:hover {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #e44c2c;
+    background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
@@ -11460,7 +11460,7 @@ a:hover {
   color: #979797;
 }
 #tutorial-cards-container .tutorial-filter-menu ul li a:hover {
-  color: #e44c2c;
+  color: #792ee5;
 }
 #tutorial-cards-container .tutorial-filter {
   cursor: pointer;
@@ -11478,12 +11478,12 @@ a:hover {
   margin-bottom: 5px;
 }
 #tutorial-cards-container .filter-btn:hover {
-  border: 1px solid #e44c2c;
-  color: #e44c2c;
+  border: 1px solid #792ee5;
+  color: #792ee5;
 }
 #tutorial-cards-container .filter-btn.selected {
-  background-color: #e44c2c;
-  border: 1px solid #e44c2c;
+  background-color: #792ee5;
+  border: 1px solid #792ee5;
   color: #ffffff;
 }
 #tutorial-cards-container .all-tag-selected {
@@ -11537,7 +11537,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #e44c2c;
+    background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
