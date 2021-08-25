@@ -10390,7 +10390,7 @@ ul.pytorch-breadcrumbs a {
   cursor: pointer;
 }
 .rst-content footer .rating-container .stars-outer .star-fill {
-  color: #ee4c2c;
+  color: #792ee5;
 }
 .rst-content footer div[role="contentinfo"] {
   padding-top: 2.5rem;
@@ -12078,7 +12078,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 
 #pytorch-right-menu .side-scroll-highlight {
-  color: #ee4c2c;
+  color: #792ee5;
 }
 
 .header-container {
