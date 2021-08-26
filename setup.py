@@ -41,7 +41,7 @@ setup(
     docs_url="https://github.com/pytorch/lightning_sphinx_theme",
     description='PyTorch Sphinx Theme',
     py_modules = ['pt_lightning_sphinx_theme'],
-    packages = ['pt_lightning_sphinx_theme'],
+    packages = ['pt_lightning_sphinx_theme', 'pt_lightning_sphinx_theme.extensions'],
     include_package_data=True,
     zip_safe=False,
     package_data={'pt_lightning_sphinx_theme': [
