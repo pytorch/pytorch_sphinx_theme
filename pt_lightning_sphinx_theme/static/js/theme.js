@@ -158,10 +158,8 @@ window.filterTags = {
     var tutorialList = new List("tutorial-cards", options);
 
     function filterSelectedTags(cardTags, selectedTags) {
-      return cardTags.some(function(tag) {
-        return selectedTags.some(function(selectedTag) {
-          return selectedTag == tag;
-        });
+      return selectedTags.every(function(selectedTag) {
+        return cardTags.indexOf(selectedTag) > -1
       });
     }
 
@@ -1123,5 +1121,6 @@ $(window).scroll(function () {
     }
   });
 });
+
 
 },{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,10,"pt-lightning-sphinx-theme"]);

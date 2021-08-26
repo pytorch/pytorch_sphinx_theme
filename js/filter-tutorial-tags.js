@@ -9,10 +9,8 @@ window.filterTags = {
     var tutorialList = new List("tutorial-cards", options);
 
     function filterSelectedTags(cardTags, selectedTags) {
-      return cardTags.some(function(tag) {
-        return selectedTags.some(function(selectedTag) {
-          return selectedTag == tag;
-        });
+      return selectedTags.every(function(selectedTag) {
+        return cardTags.indexOf(selectedTag) > -1
       });
     }
 
