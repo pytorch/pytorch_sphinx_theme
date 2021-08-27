@@ -1,5 +1,3 @@
-$sphinx_full_width: 1600px;
-$sphinx_medium_width: 1101px;
 $sphinx_full_width_content_width: 700px;
 
 $sphinx_left_menu_wrapper_padding_right: 13.5%;
@@ -19,14 +17,6 @@ $sphinx_page_bar_left_margin: 25%;
 $sphinx_page_bar_left_padding: 2%;
 
 $sphinx_shortcuts_left_margin: 78%;
-
-@mixin sphinx-full-size {
-  @media screen and (min-width: $sphinx_full_width) { @content; }
-}
-
-@mixin sphinx-medium-size {
-  @media screen and (min-width: $sphinx_medium_width) { @content; }
-}
 
 @mixin format-code($background, $pad: true) {
   border-top: solid 2px $background;

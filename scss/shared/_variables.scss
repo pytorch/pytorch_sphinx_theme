@@ -20,6 +20,8 @@ $medium_smoky_grey: #CCCDD1;
 $code_link_color: #fe6162;
 
 $desktop_menu_width: 350px;
+$sphinx_full_width: 1600px;
+$sphinx_medium_width: 1101px;
 
 $desktop_header_height: 90px;
 $mobile_header_height: 68px;
@@ -46,6 +48,14 @@ $baseurl: "";
 
 @mixin small-desktop {
   @media (min-width: 768px) and (max-width: 1239px) { @content; }
+}
+
+@mixin sphinx-full-size {
+  @media screen and (min-width: $sphinx_full_width) { @content; }
+}
+
+@mixin sphinx-medium-size {
+  @media screen and (min-width: $sphinx_medium_width) { @content; }
 }
 
 @function rem($px) {
