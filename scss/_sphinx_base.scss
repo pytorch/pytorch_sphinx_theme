@@ -442,6 +442,11 @@ article.pytorch-article {
       margin-bottom: rem(12px);
     }
   }
+
+  .method {
+    @extend .function;
+  }
+
   .attribute {
     @extend .function;
     .has-code {
