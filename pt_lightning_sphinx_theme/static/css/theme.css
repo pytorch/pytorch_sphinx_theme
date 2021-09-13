@@ -11296,13 +11296,12 @@ a:hover {
   margin-bottom: 1rem;
 }
 #tutorial-cards-container .card.tutorials-card {
-  border-radius: 0;
-  border-color: #f3f4f7;
+  border-radius: 5px;
+  border-color: #cfcfcf;
   height: 98px;
   margin-bottom: 1.25rem;
   margin-bottom: 1.875rem;
   overflow: scroll;
-  background-color: #f3f4f7;
   cursor: pointer;
 }
 @media screen and (min-width: 1240px) {
@@ -11322,8 +11321,7 @@ a:hover {
   top: 0px;
   right: 0px;
   height: 96px;
-  width: 96px;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image img {
   height: 100%;
@@ -11332,7 +11330,6 @@ a:hover {
 @media screen and (min-width: 768px) {
   #tutorial-cards-container .card.tutorials-card .tutorials-image {
     height: 100%;
-    width: 25%;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
@@ -11349,7 +11346,6 @@ a:hover {
   bottom: 0;
   right: 0;
   z-index: 1;
-  background: #000000;
   opacity: .075;
 }
 #tutorial-cards-container .card.tutorials-card .card-title-container {
