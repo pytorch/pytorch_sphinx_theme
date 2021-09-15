@@ -3,6 +3,11 @@
 
 .. demo.rst from: http://docutils.sourceforge.net/docs/user/rst/demo.txt
 
+.. customcarditem::
+   :header: Demo
+   :card_description: A demo with a description
+   :tags: Demo,Card-Item
+
 .. |EXAMPLE| image:: static/yi_jing_01_chien.jpg
    :width: 1em
 

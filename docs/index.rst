@@ -1,4 +1,11 @@
-.. include:: ../README.rst
+Lightning Example Documentation
+===============================
+
+.. tutoriallist::
+
+.. raw:: html
+
+   <div style="display:none">
 
 .. toctree::
    :caption: Theme Documentation
@@ -25,3 +32,14 @@
     :caption: This is an incredibly long caption for a long menu
 
     demo/long
+
+.. raw:: html
+
+   </div>
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

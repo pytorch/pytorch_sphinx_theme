@@ -2,6 +2,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath('..'))
+sys.path.append(os.path.abspath('../pt_lightning_sphinx_theme/extensions'))
 sys.path.append(os.path.abspath('./demo/'))
 
 from pt_lightning_sphinx_theme import __version__
@@ -23,6 +24,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinxcontrib.httpdomain',
+    'lightning_tutorials',
 ]
 
 # Do not warn about external images (status badges in README.rst)

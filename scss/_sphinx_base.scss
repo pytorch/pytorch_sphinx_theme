@@ -987,22 +987,19 @@ a:hover {
   }
 
   .card.tutorials-card {
+    border: 1px solid #cfcfcf;
     border-radius: 5px;
-    border-color: #cfcfcf;
     height: 98px;
     margin-bottom: rem(20px);
     margin-bottom: rem(30px);
-    overflow: scroll;
     cursor: pointer;
 
     @include max-width-desktop {
       height: 200px;
-      overflow: inherit;
     }
 
     @include small-desktop {
       height: 200px;
-      overflow: scroll;
     }
 
     .tutorials-image {
@@ -1038,13 +1035,6 @@ a:hover {
     }
 
     .card-title-container {
-      width: 70%;
-      @include desktop {
-        width: 75%;
-      }
-      @include small-desktop {
-        width: 70%;
-      }
       display: inline-flex;
       h4 {
         margin-bottom: 1.125rem;
@@ -1053,26 +1043,58 @@ a:hover {
       }
     }
 
-    p.card-summary, p.tags {
-      font-size: rem(15px);
-      line-height: rem(24px);
-      margin-bottom: 0;
-      color: $dark_grey;
-      font-weight: 400;
-      width: 70%;
+    p.card-summary, .card-title-container, p.tags {
+      white-space: nowrap;
+      overflow-y: hidden;
+      overflow-x: scroll;
       @include desktop {
-        width: 75%;
+        overflow: hidden;
       }
       @include small-desktop {
-        width: 70%;
+        overflow: hidden;
+      }
+    }
+
+    p.card-summary, p.tags {
+      color: $dark_grey;
+      font-weight: 400;
+      margin-bottom: 0;
+      line-height: rem(24px);
+      font-size: rem(15px);
+    }
+
+    p.card-summary {
+      height: rem(24px);
+      @include desktop {
+        white-space: normal;
+        height: rem(72px);
+      }
+      @include small-desktop {
+        white-space: normal;
+        height: rem(72px);
+      }
+    }
+
+    p.card-summary, .card-title-container {
+      width: calc(100% - 96px);
+      @include desktop {
+        width: calc(100% - 200px);
+      }
+      @include small-desktop {
+        width: calc(100% - 200px);
       }
     }
 
     p.tags {
-      margin-top: 30px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+      position: absolute;
+      bottom: rem(12px);
+      width: calc(100% - 96px - #{$card-spacer-x} - #{$card-spacer-x});
+      @include desktop {
+        width: calc(100% - 200px - #{$card-spacer-x} - #{$card-spacer-x});
+      }
+      @include small-desktop {
+        width: calc(100% - 200px - #{$card-spacer-x} - #{$card-spacer-x});
+      }
     }
 
     h4 {
@@ -1096,7 +1118,6 @@ a:hover {
     &:hover {
       background-color: $white;
       border: 1px solid #e2e2e2;
-      border-bottom: none;
 
       p.card-summary {
         color: $not_quite_black;
@@ -1141,6 +1162,7 @@ a:hover {
   .filter-btn {
     color: #979797;
     border: 1px solid #979797;
+    border-radius: 3px;
     display: inline-block;
     text-align: center;
     white-space: nowrap;

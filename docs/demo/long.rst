@@ -1,4 +1,9 @@
 
+.. customcarditem::
+   :header: Demo with really long name and really long descripion
+   :card_description: A demo with a description that's really really long. This is designed to test what happens when descriptions overflow so it has to be really long. We limit descriptions to be 3 lines so that has to be at least 3.
+   :tags: Demo,Card-Item,Really-Really-Long-Tag
+
 ***************
 Long Sticky Nav
 ***************

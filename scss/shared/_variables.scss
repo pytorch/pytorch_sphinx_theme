@@ -99,14 +99,36 @@ $baseurl: "";
       width: 0;
       height: 1px;
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: -1px;
+      left: 5px;
       background-color: $orange;
       transition: width .250s ease-in-out;
     }
 
     &:hover:after {
+      width: calc(100% - 5px);
+    }
+  }
+}
+
+@mixin animated_radius_border_hover_state {
+  @include desktop {
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 50px;
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      border-bottom: 1px solid $orange;
+      border-bottom-left-radius: 5px;
+      transition: width .250s ease-in-out, border-bottom-right-radius .01s linear .250s;
+    }
+
+    &:hover:after {
       width: 100%;
+      border-bottom-right-radius: 5px;
     }
   }
 }

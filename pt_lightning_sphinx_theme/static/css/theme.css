@@ -10550,14 +10550,14 @@ article.pytorch-article .sphx-glr-thumbcontainer .figure a.reference.internal {
     width: 0;
     height: 1px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -1px;
+    left: 5px;
     background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
   article.pytorch-article .sphx-glr-thumbcontainer:hover:after {
-    width: 100%;
+    width: calc(100% - 5px);
   }
 }
 @media screen and (min-width: 768px) {
@@ -10986,14 +10986,14 @@ article.pytorch-article .admonition > p:last-of-type {
     width: 0;
     height: 1px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -1px;
+    left: 5px;
     background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
   .pytorch-article div.sphx-glr-download a:hover:after {
-    width: 100%;
+    width: calc(100% - 5px);
   }
 }
 @media screen and (min-width: 768px) {
@@ -11296,24 +11296,21 @@ a:hover {
   margin-bottom: 1rem;
 }
 #tutorial-cards-container .card.tutorials-card {
+  border: 1px solid #cfcfcf;
   border-radius: 5px;
-  border-color: #cfcfcf;
   height: 98px;
   margin-bottom: 1.25rem;
   margin-bottom: 1.875rem;
-  overflow: scroll;
   cursor: pointer;
 }
 @media screen and (min-width: 1240px) {
   #tutorial-cards-container .card.tutorials-card {
     height: 200px;
-    overflow: inherit;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
   #tutorial-cards-container .card.tutorials-card {
     height: 200px;
-    overflow: scroll;
   }
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image {
@@ -11349,49 +11346,79 @@ a:hover {
   opacity: .075;
 }
 #tutorial-cards-container .card.tutorials-card .card-title-container {
-  width: 70%;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-}
-@media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card .card-title-container {
-    width: 75%;
-  }
-}
-@media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card .card-title-container {
-    width: 70%;
-  }
 }
 #tutorial-cards-container .card.tutorials-card .card-title-container h4 {
   margin-bottom: 1.125rem;
   margin-top: 0;
   font-size: 1.5rem;
 }
-#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-  font-size: 0.9375rem;
-  line-height: 1.5rem;
-  margin-bottom: 0;
-  color: #6c6c6d;
-  font-weight: 400;
-  width: 70%;
+#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container, #tutorial-cards-container .card.tutorials-card p.tags {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 @media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-    width: 75%;
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container, #tutorial-cards-container .card.tutorials-card p.tags {
+    overflow: hidden;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-    width: 70%;
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container, #tutorial-cards-container .card.tutorials-card p.tags {
+    overflow: hidden;
+  }
+}
+#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
+  color: #6c6c6d;
+  font-weight: 400;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+  font-size: 0.9375rem;
+}
+#tutorial-cards-container .card.tutorials-card p.card-summary {
+  height: 1.5rem;
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary {
+    white-space: normal;
+    height: 4.5rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary {
+    white-space: normal;
+    height: 4.5rem;
+  }
+}
+#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container {
+  width: calc(100% - 96px);
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container {
+    width: calc(100% - 200px);
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card .card-title-container {
+    width: calc(100% - 200px);
   }
 }
 #tutorial-cards-container .card.tutorials-card p.tags {
-  margin-top: 30px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  position: absolute;
+  bottom: 0.75rem;
+  width: calc(100% - 96px - 1.25rem - 1.25rem);
+}
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card p.tags {
+    width: calc(100% - 200px - 1.25rem - 1.25rem);
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card p.tags {
+    width: calc(100% - 200px - 1.25rem - 1.25rem);
+  }
 }
 #tutorial-cards-container .card.tutorials-card h4 {
   color: #262626;
@@ -11417,20 +11444,19 @@ a:hover {
     width: 0;
     height: 1px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -1px;
+    left: 5px;
     background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
   #tutorial-cards-container .card.tutorials-card:hover:after {
-    width: 100%;
+    width: calc(100% - 5px);
   }
 }
 #tutorial-cards-container .card.tutorials-card:hover {
   background-color: #ffffff;
   border: 1px solid #e2e2e2;
-  border-bottom: none;
 }
 #tutorial-cards-container .card.tutorials-card:hover p.card-summary {
   color: #262626;
@@ -11464,6 +11490,7 @@ a:hover {
 #tutorial-cards-container .filter-btn {
   color: #979797;
   border: 1px solid #979797;
+  border-radius: 3px;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -11531,14 +11558,14 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button {
     width: 0;
     height: 1px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: -1px;
+    left: 5px;
     background-color: #792ee5;
     -webkit-transition: width .250s ease-in-out;
     transition: width .250s ease-in-out;
   }
   article.pytorch-article .tutorials-callout-container .btn.callout-button:hover:after {
-    width: 100%;
+    width: calc(100% - 5px);
   }
 }
 article.pytorch-article .tutorials-callout-container .btn.callout-button a {
