@@ -1031,7 +1031,7 @@ createTagMenu();
 $(".tags").each(function(){
     var tags = $(this).text().split(",");
     tags.forEach(function(tag, i ) {
-       tags[i] = tags[i].replaceAll(/-/, ' ')
+       tags[i] = tags[i].replaceAll('-', ' ')
     })
     $(this).html(tags.join(", "));
 });
@@ -1040,7 +1040,7 @@ $(".tags").each(function(){
 
 $(".tutorial-filter").each(function(){
     var tag = $(this).text();
-    $(this).html(tag.replace(/-/, ' '))
+    $(this).html(tag.replaceAll('-', ' '))
 })
 
 // Remove any empty p tags that Sphinx adds
