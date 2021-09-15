@@ -338,7 +338,7 @@ createTagMenu();
 $(".tags").each(function(){
     var tags = $(this).text().split(",");
     tags.forEach(function(tag, i ) {
-       tags[i] = tags[i].replace(/-/, ' ')
+       tags[i] = tags[i].replaceAll(/-/, ' ')
     })
     $(this).html(tags.join(", "));
 });
