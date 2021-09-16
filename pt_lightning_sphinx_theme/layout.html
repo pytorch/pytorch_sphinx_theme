@@ -124,10 +124,6 @@
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{% endif %}>
-            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
-          </li>
-
           <li {%- if theme_pytorch_project == 'docs' %} class="active docs-active"{% endif %}>
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
               <a class="resource-option with-down-orange-arrow">
@@ -495,15 +491,7 @@
           </li>
 
           <li>
-            <a href="{{ theme_variables.external_urls['features'] }}">Features</a>
-          </li>
-
-          <li>
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
-          </li>
-
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{%- endif %}>
-            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
           <li class="resources-mobile-menu-title" {%- if theme_pytorch_project == 'docs' %} class="active"{%- endif %}>
