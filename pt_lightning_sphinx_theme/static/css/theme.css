@@ -11467,7 +11467,7 @@ a:hover {
   opacity: unset;
 }
 #tutorial-cards-container .tutorial-tags-container {
-  width: 75%;
+  width: 100%;
 }
 #tutorial-cards-container .tutorial-tags-container.active {
   width: 0;
