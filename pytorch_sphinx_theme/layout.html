@@ -374,28 +374,8 @@
 
   <!-- Begin Footer -->
 
-  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 text-center">
-          <h2>Docs</h2>
-          <p>Access comprehensive developer documentation for PyTorch</p>
-          <a class="with-right-arrow" href="{{ theme_variables.external_urls['docs'] }}">View Docs</a>
-        </div>
-
-        <div class="col-md-4 text-center">
-          <h2>Tutorials</h2>
-          <p>Get in-depth tutorials for beginners and advanced developers</p>
-          <a class="with-right-arrow" href="{{ theme_variables.external_urls['tutorials'] }}">View Tutorials</a>
-        </div>
-
-        <div class="col-md-4 text-center">
-          <h2>Resources</h2>
-          <p>Find development resources and get your questions answered</p>
-          <a class="with-right-arrow" href="{{ theme_variables.external_urls['resources'] }}">View Resources</a>
-        </div>
-      </div>
-    </div>
+  {# this element is necessary for the sidebar, but we want to hide it as much as possible #}
+  <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources" style="height: 1px; padding: 0px; overflow: hidden; visibility: hidden;">
   </div>
 
   {% include "cookie_banner.html" %}
