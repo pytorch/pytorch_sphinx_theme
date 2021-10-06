@@ -12392,4 +12392,16 @@ footer {
 	padding-bottom: 1.5rem;
 }
 
+.http-method {
+	color: #828282;
+	display: inline-block;
+	min-width: 3.2em;
+}
+
+.uri {
+	font-family: Courier, sans-serif;
+	color: black;
+	font-weight: bolder;
+}
+
 /*# sourceMappingURL=theme.css.map */
