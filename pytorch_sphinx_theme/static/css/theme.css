@@ -12404,4 +12404,8 @@ footer {
 	font-weight: bolder;
 }
 
+.header-holder .main-menu ul li a.active {
+	color: #ee4c2c;
+}
+
 /*# sourceMappingURL=theme.css.map */
