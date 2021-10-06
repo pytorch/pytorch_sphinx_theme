@@ -12409,4 +12409,23 @@ footer {
 	color: #ee4c2c;
 }
 
+/* right align and style default values and "mandatory" markers */
+.specification li {
+	position: relative;
+}
+
+.specification .param-mandatory {
+	position: absolute;
+	right: 0;
+	color: #ee4c2c;
+	font-style: italic;
+}
+
+.specification .param-default {
+	position: absolute;
+	right: 0;
+	color: #939393;
+	font-style: italic;
+}
+
 /*# sourceMappingURL=theme.css.map */
