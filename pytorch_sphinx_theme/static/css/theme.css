@@ -12415,17 +12415,22 @@ footer {
 }
 
 .specification .param-mandatory {
-	position: absolute;
-	right: 0;
+	display: inline-block;
 	color: #ee4c2c;
 	font-style: italic;
 }
 
 .specification .param-default {
-	position: absolute;
-	right: 0;
+	display: inline-block;
 	color: #939393;
 	font-style: italic;
+}
+
+@media screen and (min-width: 450px) {
+	.specification .param-default, .specification .param-mandatory {
+		position: absolute;
+		right: 0;
+	}
 }
 
 /*# sourceMappingURL=theme.css.map */
