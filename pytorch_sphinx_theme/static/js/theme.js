@@ -669,12 +669,14 @@ window.sideMenus = {
           rightMenu.style.top = utilities.scrollTop() - mainHeaderHeight + "px";
           rightMenu.classList.add("scrolling-absolute");
           rightMenu.classList.remove("scrolling-fixed");
+          document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
         }
       } else {
         rightMenuWrapper.style.height = articleHeight + mainHeaderHeight + "px";
         rightMenu.style.top =
           articleBottom - mainHeaderHeight - rightMenuList.offsetHeight + "px";
         rightMenu.classList.add("scrolling-absolute");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
       }
 
       if (utilities.scrollTop() < articleBottom - rightMenuList.offsetHeight) {
@@ -682,6 +684,7 @@ window.sideMenus = {
         rightMenu.style.top = "";
         rightMenu.classList.remove("scrolling-absolute");
         rightMenu.classList.add("scrolling-fixed");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "block";
       }
     }
 
