@@ -72,6 +72,7 @@ window.sideMenus = {
           linkWithHash.nextElementSibling.children.length > 0
         ) {
           linkWithHash.nextElementSibling.style.display = "block";
+          linkWithHash.classList.remove("not-expanded");
           linkWithHash.classList.add("expanded");
         }
 
