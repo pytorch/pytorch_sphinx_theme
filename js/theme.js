@@ -391,7 +391,7 @@ $(".stars-outer > i").on("click", function() {
 })
 
 $("#pytorch-side-scroll-right li a").on("click", function (e) {
-  var href = $(this).attr("href");
+  var href = $(this).attr("href").replaceAll('.', '\\.');
   $('html, body').stop().animate({
     scrollTop: $(href).offset().top - 100
   }, 850);
