@@ -213,7 +213,7 @@ window.filterTags = {
 // Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
   navigationListItems: document.querySelectorAll("#pytorch-right-menu li"),
-  sections: document.querySelectorAll(".pytorch-article .section"),
+  sections: document.querySelectorAll(".pytorch-article section section, .sig.sig-object"),
   sectionIdTonavigationLink: {},
 
   bind: function() {
@@ -833,7 +833,7 @@ function ThemeNav () {
                 // Find associated id element, then its closest section
                 // in the document and try with that one.
                 var id_elt = $('.document [id="' + anchor.substring(1) + '"]');
-                var closest_section = id_elt.closest('div.section');
+                var closest_section = id_elt.closest('section section');
                 link = vmenu.find('[href="#' + closest_section.attr("id") + '"]');
                 if (link.length === 0) {
                     // still not found in the sidebar. fall back to main section
@@ -1101,29 +1101,29 @@ var lastId,
   topMenu = $("#pytorch-side-scroll-right"),
   topMenuHeight = topMenu.outerHeight() + 1,
   // All sidenav items
-  menuItems = topMenu.find("a"),
+  menuItems = topMenu.find("a[href^='#']"),
   // Anchors for menu items
-  scrollItems = menuItems.map(function () {
-    var item = $(this).attr("href");
-    if (item.length) {
-      return item;
+  scrollItems = {};
+  for (var i = 0; i < menuItems.length; i++) {
+    var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
+    if (ref.length > 1 && $(ref).length) {
+      scrollItems[ref] = menuItems[i];
     }
-  });
+  }
 
 $(window).scroll(function () {
-  var fromTop = $(this).scrollTop() + topMenuHeight;
-  var article = ".section";
+  var article = Object.keys(scrollItems).join(', ');
 
-  $(article).each(function (i) {
+  $(article).each(function () {
     var offsetScroll = $(this).offset().top - $(window).scrollTop();
     if (
-      offsetScroll <= topMenuHeight + 200 &&
-      offsetScroll >= topMenuHeight - 200 &&
+      offsetScroll <= 120 &&
+      offsetScroll >= -120 &&
       scrollItems[i] == "#" + $(this).attr("id") &&
       $(".hidden:visible")
     ) {
       $(menuItems).removeClass("side-scroll-highlight");
-      $(menuItems[i]).addClass("side-scroll-highlight");
+      $(scrollItems['#' + this.id.replaceAll('.', '\\.')]).addClass("side-scroll-highlight");
     }
   });
 });
