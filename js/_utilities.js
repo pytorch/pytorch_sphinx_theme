@@ -109,4 +109,29 @@ window.utilities = {
     // TODO: this is a little janky. We should try to not rely on JS for this
     return document.getElementById("sphinx-template-page-level-bar").offsetHeight + OFFSET_HEIGHT_PADDING;
   },
+
+  findParent: function(item) {
+    return $(item).parent().parent().siblings("a.reference.internal")
+  },
+  makeHighlight: function(item) {
+    if ($(item).hasClass("title-link")) {
+      return
+    }
+    var parent = utilities.findParent(item);
+    if (parent.hasClass("title-link")) {
+      $(item).addClass("side-scroll-highlight");
+    }
+    else if (parent.hasClass("not-expanded")) {
+      utilities.makeHighlight(parent)
+    }
+    else if (parent.hasClass("expanded")) {
+      $(item).addClass("side-scroll-highlight");
+      utilities.makeHighlight($(item).parent().parent().siblings("a.reference.internal"))
+    }
+    else {
+      console.log(item)
+      console.log(parent)
+      throw "Unexpected Error";
+    }
+  }
 }

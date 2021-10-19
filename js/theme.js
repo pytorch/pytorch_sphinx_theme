@@ -423,7 +423,7 @@ $(window).scroll(function () {
       $(".hidden:visible")
     ) {
       $(menuItems).removeClass("side-scroll-highlight");
-      $(scrollItems['#' + this.id.replaceAll('.', '\\.')]).addClass("side-scroll-highlight");
+      utilities.makeHighlight(scrollItems['#' + this.id.replaceAll('.', '\\.')]);
     }
   });
 });
