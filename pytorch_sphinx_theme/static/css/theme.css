@@ -12433,4 +12433,28 @@ footer {
 	}
 }
 
+
+/* fixes for UI issues */
+table * {
+	overflow-wrap: break-word;
+}
+
+.highlight .s1, .highlight .s2 {
+	color: #197ACF;
+}
+
+.highlight-console .m, .highlight-console .nv {
+	color: #212529;
+}
+
+article.pytorch-article li blockquote {
+	margin: 0;
+	width: 100%;
+}
+
+li ul.simple {
+	display: none;
+}
+/* END: fixes for UI issues */
+
 /*# sourceMappingURL=theme.css.map */
