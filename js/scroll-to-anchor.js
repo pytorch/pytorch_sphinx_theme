@@ -11,11 +11,6 @@ window.scrollToAnchor = {
 
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
-      offsetHeightPx: function() {
-        var OFFSET_HEIGHT_PADDING = 20;
-        // TODO: this is a little janky. We should try to not rely on JS for this
-        return utilities.headersHeight() + OFFSET_HEIGHT_PADDING;
-      },
 
       /**
        * Establish events, and fix initial scroll position if a hash is provided.
@@ -26,14 +21,6 @@ window.scrollToAnchor = {
         $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
         $('body').on('click', 'a', $.proxy(this, 'delegateAnchors'));
         $('body').on('click', '#pytorch-right-menu li span', $.proxy(this, 'delegateSpans'));
-      },
-
-      /**
-       * Return the offset amount to deduct from the normal scroll position.
-       * Modify as appropriate to allow for dynamic calculations
-       */
-      getFixedOffset: function() {
-        return this.offsetHeightPx();
       },
 
       /**
@@ -52,7 +39,7 @@ window.scrollToAnchor = {
         match = document.getElementById(href.slice(1));
 
         if(match) {
-          var anchorOffset = $(match).offset().top - this.getFixedOffset();
+          var anchorOffset = $(match).offset().top - utilities.getFixedOffset();
 
           $('html, body').scrollTop(anchorOffset);
 

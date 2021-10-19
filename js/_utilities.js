@@ -98,5 +98,15 @@ window.utilities = {
     return window.innerHeight ||
            document.documentElement.clientHeight ||
            document.body.clientHeight;
-  }
+  },
+
+  /**
+   * Return the offset amount to deduct from the normal scroll position.
+   * Modify as appropriate to allow for dynamic calculations
+   */
+  getFixedOffset: function() {
+    var OFFSET_HEIGHT_PADDING = 20;
+    // TODO: this is a little janky. We should try to not rely on JS for this
+    return headersHeight() + OFFSET_HEIGHT_PADDING;
+  },
 }

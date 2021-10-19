@@ -393,7 +393,7 @@ $(".stars-outer > i").on("click", function() {
 $("#pytorch-side-scroll-right li a").on("click", function (e) {
   var href = $(this).attr("href").replaceAll('.', '\\.');
   $('html, body').stop().animate({
-    scrollTop: $(href).offset().top - 100
+    scrollTop: $(href).offset().top - utilities.getFixedOffset()
   }, 850);
   e.preventDefault;
 });
@@ -416,10 +416,10 @@ $(window).scroll(function () {
   var article = Object.keys(scrollItems).join(', ');
 
   $(article).each(function () {
-    var offsetScroll = $(this).offset().top - $(window).scrollTop();
+    var offsetScroll = $(this).offset().top - $(window).scrollTop() - utilities.getFixedOffset();
     if (
-      offsetScroll <= 120 &&
-      offsetScroll >= -120 &&
+      offsetScroll <= 50 &&
+      offsetScroll >= -50 &&
       $(".hidden:visible")
     ) {
       $(menuItems).removeClass("side-scroll-highlight");
