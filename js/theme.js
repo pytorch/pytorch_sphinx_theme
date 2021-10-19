@@ -398,21 +398,19 @@ $("#pytorch-side-scroll-right li a").on("click", function (e) {
   e.preventDefault;
 });
 
-var lastId,
-  topMenu = $("#pytorch-side-scroll-right"),
-  topMenuHeight = topMenu.outerHeight() + 1,
-  // All sidenav items
-  menuItems = topMenu.find("a[href^='#']"),
-  // Anchors for menu items
-  scrollItems = {};
-  for (var i = 0; i < menuItems.length; i++) {
-    var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
-    if (ref.length > 1 && $(ref).length) {
-      scrollItems[ref] = menuItems[i];
-    }
+topMenu = $("#sphinx-template-side-scroll-right"),
+// All sidenav items
+menuItems = topMenu.find("a[href^='#']"),
+// Anchors for menu items
+scrollItems = {};
+for (var i = 0; i < menuItems.length; i++) {
+  var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
+  if (ref.length > 1 && $(ref).length) {
+    scrollItems[ref] = menuItems[i];
   }
+}
 
-$(window).scroll(function () {
+highlightCurrent = function() {
   var article = Object.keys(scrollItems).join(', ');
 
   $(article).each(function () {
@@ -426,5 +424,6 @@ $(window).scroll(function () {
       utilities.makeHighlight(scrollItems['#' + this.id.replaceAll('.', '\\.')]);
     }
   });
-});
-
+}
+$(window).scroll(highlightCurrent);
+$(document).ready(highlightCurrent)

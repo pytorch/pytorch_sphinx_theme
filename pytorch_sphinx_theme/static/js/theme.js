@@ -118,21 +118,10 @@ window.utilities = {
     if ($(item).hasClass("title-link")) {
       return
     }
+    $(item).addClass("side-scroll-highlight");
     var parent = utilities.findParent(item);
-    if (parent.hasClass("title-link")) {
-      $(item).addClass("side-scroll-highlight");
-    }
-    else if (parent.hasClass("not-expanded")) {
+    if (~parent.hasClass("title-link")) {
       utilities.makeHighlight(parent)
-    }
-    else if (parent.hasClass("expanded")) {
-      $(item).addClass("side-scroll-highlight");
-      utilities.makeHighlight($(item).parent().parent().siblings("a.reference.internal"))
-    }
-    else {
-      console.log(item)
-      console.log(parent)
-      throw "Unexpected Error";
     }
   }
 }
@@ -1121,21 +1110,19 @@ $("#pytorch-side-scroll-right li a").on("click", function (e) {
   e.preventDefault;
 });
 
-var lastId,
-  topMenu = $("#pytorch-side-scroll-right"),
-  topMenuHeight = topMenu.outerHeight() + 1,
-  // All sidenav items
-  menuItems = topMenu.find("a[href^='#']"),
-  // Anchors for menu items
-  scrollItems = {};
-  for (var i = 0; i < menuItems.length; i++) {
-    var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
-    if (ref.length > 1 && $(ref).length) {
-      scrollItems[ref] = menuItems[i];
-    }
+topMenu = $("#sphinx-template-side-scroll-right"),
+// All sidenav items
+menuItems = topMenu.find("a[href^='#']"),
+// Anchors for menu items
+scrollItems = {};
+for (var i = 0; i < menuItems.length; i++) {
+  var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
+  if (ref.length > 1 && $(ref).length) {
+    scrollItems[ref] = menuItems[i];
   }
+}
 
-$(window).scroll(function () {
+highlightCurrent = function() {
   var article = Object.keys(scrollItems).join(', ');
 
   $(article).each(function () {
@@ -1149,6 +1136,8 @@ $(window).scroll(function () {
       utilities.makeHighlight(scrollItems['#' + this.id.replaceAll('.', '\\.')]);
     }
   });
-});
+}
+$(window).scroll(highlightCurrent);
+$(document).ready(highlightCurrent)
 
 },{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,10,"pytorch-sphinx-theme"]);

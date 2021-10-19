@@ -117,21 +117,10 @@ window.utilities = {
     if ($(item).hasClass("title-link")) {
       return
     }
+    $(item).addClass("side-scroll-highlight");
     var parent = utilities.findParent(item);
-    if (parent.hasClass("title-link")) {
-      $(item).addClass("side-scroll-highlight");
-    }
-    else if (parent.hasClass("not-expanded")) {
+    if (~parent.hasClass("title-link")) {
       utilities.makeHighlight(parent)
-    }
-    else if (parent.hasClass("expanded")) {
-      $(item).addClass("side-scroll-highlight");
-      utilities.makeHighlight($(item).parent().parent().siblings("a.reference.internal"))
-    }
-    else {
-      console.log(item)
-      console.log(parent)
-      throw "Unexpected Error";
     }
   }
 }
