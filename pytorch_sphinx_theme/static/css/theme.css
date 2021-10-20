@@ -11852,9 +11852,9 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-right-menu a:link,
 .pytorch-right-menu a:visited,
 .pytorch-right-menu a:hover {
-  color: #6c6c6d;
-  font-size: 0.875rem;
-  line-height: 1rem;
+  color: #515153;
+  font-size: 0.95rem;
+  line-height: 1.2rem;
   padding: 0;
   text-decoration: none;
 }
