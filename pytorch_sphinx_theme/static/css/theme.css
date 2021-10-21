@@ -12250,7 +12250,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 
 .pytorch-left-menu-search {
   margin-bottom: 2.5rem;
-  background-color: red;
+  background-color: blue;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu-search {
