@@ -840,7 +840,6 @@ function ThemeNav () {
             // otherwise retain the existing match
             if (link.length > 0) {
                 $('.pytorch-menu-vertical .current').removeClass('current');
-                
                 link.addClass('current');
                 link.closest('li.toctree-l1').addClass('current');
                 link.closest('li.toctree-l1').parent().addClass('current');
