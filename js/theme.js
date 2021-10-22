@@ -148,6 +148,7 @@ function ThemeNav () {
                 link.addClass('current');
                 link.closest('li.toctree-l1').addClass('current');
                 link.closest('li.toctree-l1').parent().addClass('current');
+                link.closest('li.toctree-l1').parent().prev().addClass('current');
                 link.closest('li.toctree-l1').addClass('current');
                 link.closest('li.toctree-l2').addClass('current');
                 link.closest('li.toctree-l3').addClass('current');
@@ -271,17 +272,19 @@ $(document).ready(function() {
     var menuName = this.innerText.replace(/[^\w\s]/gi, "").trim();
     $(this).find("span").addClass("checked");
     if (collapsedSections.includes(menuName) == true && collapseAdded && sessionStorage.getItem(menuName) !== "expand" || sessionStorage.getItem(menuName) == "collapse") {
-      $(this.firstChild).after("<span class='expand-menu'>[ + ]</span>");
-      $(this.firstChild).after("<span class='hide-menu collapse'>[ - ]</span>");
+      $(this.firstChild).after("<span class='expand-menu'></span>");
+      $(this.firstChild).after("<span class='hide-menu collapse'></span>");
       $(this).next("ul").hide();
     } else if (collapsedSections.includes(menuName) == false && collapseAdded || sessionStorage.getItem(menuName) == "expand") {
-      $(this.firstChild).after("<span class='expand-menu collapse'>[ + ]</span>");
-      $(this.firstChild).after("<span class='hide-menu'>[ - ]</span>");
+      $(this).addClass('active');
+      $(this.firstChild).after("<span class='expand-menu collapse'></span>");
+      $(this.firstChild).after("<span class='hide-menu'></span>");
     }
   });
 
   $(".expand-menu").on("click", function () {
     $(this).prev(".hide-menu").toggle();
+    $(this).parent().addClass('active');
     $(this).parent().next("ul").toggle();
     var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
     if (sessionStorage.getItem(menuName) == "collapse") {
@@ -293,6 +296,7 @@ $(document).ready(function() {
 
   $(".hide-menu").on("click", function () {
     $(this).next(".expand-menu").toggle();
+    $(this).parent().removeClass('active');
     $(this).parent().next("ul").toggle();
     var menuName = $(this).parent().text().replace(/[^\w\s]/gi, "").trim();
     if (sessionStorage.getItem(menuName) == "expand") {

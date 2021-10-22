@@ -9700,7 +9700,7 @@ pre {
   width: 100%;
   z-index: 9999;
   background-color: #ffffff;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid #e6e6e6;
 }
 @media screen and (min-width: 1100px) {
   .header-holder {
@@ -10313,11 +10313,16 @@ ul.pytorch-breadcrumbs a {
 .table-of-contents-link-wrapper {
   display: block;
   margin-top: 0;
-  padding: 1.25rem 1.875rem;
-  background-color: #f3f4f7;
+  background-color: #f6f6f6;
   position: relative;
   color: #262626;
   font-size: 1.25rem;
+  border-bottom: solid 1px #e6e6e6;
+  padding: 10px 0 10px 20px;
+}
+.table-of-contents-link-wrapper>span {
+  text-transform: uppercase;
+  font-weight: 500;
 }
 .table-of-contents-link-wrapper.is-open .toggle-table-of-contents {
   -webkit-transform: rotate(180deg);
@@ -10326,6 +10331,7 @@ ul.pytorch-breadcrumbs a {
 @media screen and (min-width: 1100px) {
   .table-of-contents-link-wrapper {
     display: none;
+    padding: 1.25rem 1.875rem;
   }
 }
 
@@ -10333,10 +10339,10 @@ ul.pytorch-breadcrumbs a {
   background-image: url("../images/chevron-down-grey.svg");
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 18px 18px;
+  background-size: 15px;
   height: 100%;
   position: absolute;
-  right: 21px;
+  right: 18px;
   width: 30px;
   top: 0;
 }
@@ -11178,11 +11184,7 @@ a:hover {
   color: #ee4c2c;
 }
 
-.version {
-  padding-bottom: 1rem;
-}
-
-.pytorch-call-to-action-links {
+  .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -11652,29 +11654,13 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   }
 }
 
-.pytorch-menu-vertical {
-  padding: 1.25rem 1.875rem 2.5rem 1.875rem;
-}
-@media screen and (min-width: 1101px) {
-  .pytorch-menu-vertical {
-    display: block;
-    padding-top: 0;
-    padding-right: 13.5%;
-    padding-bottom: 5.625rem;
-  }
-}
-@media screen and (min-width: 1600px) {
-  .pytorch-menu-vertical {
-    padding-left: 0;
-    padding-right: 1.5625rem;
-  }
-}
-
 .pytorch-left-menu {
+  padding: 10px 20px 0 20px;
   display: none;
-  background-color: #f3f4f7;
+  border-top: none;
   color: #262626;
   overflow: scroll;
+  background-color: #f6f6f6;
 }
 @media screen and (min-width: 1101px) {
   .pytorch-left-menu {
@@ -11682,7 +11668,6 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
     overflow-x: hidden;
     overflow-y: hidden;
     padding-bottom: 110px;
-    padding: 0 1.875rem 0 0;
     width: 25%;
     z-index: 200;
     float: left;
@@ -11697,15 +11682,52 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu {
-    padding: 0 0 0 1.875rem;
+    border: solid 1px #e6e6e6;
+    padding: 0;
     width: 350px;
+    background-color: #ffffff;
   }
 }
 
+.pytorch-left-menu .search {
+  display: none;
+}
+
+.pytorch-left-menu .unstable {
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #e2e2e2;
+}
+
 .expand-menu, .hide-menu {
-  color: #6c6c6d;
-  padding-left: 10px;
+  color: #666666;
   cursor: pointer;
+  display: block;
+  background-image: url("../images/chevron-down-grey.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  height: 20px;
+  width: 30px;
+  float: right;
+  transform: rotate(270deg);
+}
+.hide-menu {  
+  float: left;
+  transform: rotate(90deg);
+}
+@media screen and (min-width: 1600px) {
+  .expand-menu, .hide-menu {
+    background-image: none;
+    transform: none;
+    float: right;
+  }
+  .expand-menu:after {
+    content: "\002B";
+  }
+  .hide-menu:after {
+    content: "\002D";
+  }
 }
 
 .collapse {
@@ -11716,22 +11738,64 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   padding-top: 1rem;
 }
 
+.pytorch-left-menu .pytorch-left-menu-search {
+  border-bottom: solid 1px #e2e2e2;
+  color: #262626;
+  padding: 25px 0 25px 20px;
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu .pytorch-left-menu-search {
+    padding: 20px 17px 20px 100px;
+  }
+}
+
+.pytorch-left-menu ul li.toctree-l1,
 .pytorch-left-menu p.caption {
+  border-bottom: solid 1px #e2e2e2;
   color: #262626;
   display: block;
   font-size: 1rem;
-  line-height: 1.375rem;
-  margin-bottom: 1rem;
-  text-transform: none;
-  white-space: normal;
+  font-weight: 500;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 17px 10px 30px;
+}
+.pytorch-left-menu ul li.toctree-l1 {
+  font-weight: 400;
+}
+.pytorch-left-menu p.caption.active {
+  padding-left: 0;
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu ul li.toctree-l1,
+  .pytorch-left-menu p.caption {
+    border-left: solid 4px #bbbbbb;
+    padding: 10px 0 10px 96px;
+  }
+  .pytorch-left-menu p.caption.active {
+    padding-left: 96px;
+  }
 }
 
-.pytorch-left-menu-search {
-  margin-bottom: 2.5rem;
+.pytorch-left-menu p.caption {
+  text-transform: uppercase;
 }
-@media screen and (min-width: 1101px) {
-  .pytorch-left-menu-search {
-    margin: 1.25rem 0.625rem 1.875rem 0;
+
+.pytorch-left-menu p.caption.current {
+  border-left-color: none;
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu p.caption.current {
+    border-left-color: #de3412;
+  }
+}
+
+.pytorch-left-menu ul li.toctree-l1 {
+  padding-left: 70px;
+}
+@media screen and (min-width: 1600px) {
+  .pytorch-left-menu ul li.toctree-l1 {
+    padding-left: 116px;
   }
 }
 
@@ -11794,7 +11858,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 @media screen and (min-width: 1600px) {
   .pytorch-left-menu .pytorch-side-scroll {
-    width: 340px;
+    width: 100%;
   }
 }
 
@@ -11898,26 +11962,17 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   font-size: 0.8em;
   line-height: 1.6em;
 }
+
+.pytorch-left-menu li.toctree-l1.current {
+  background-color: #de3412;
+  border-color: #de3412;
+}
+
 .pytorch-left-menu li.toctree-l1.current > a,
 .pytorch-right-menu li.toctree-l1.current > a {
-  color: #ee4c2c;
+  color: #ffffff;
 }
-.pytorch-left-menu li.toctree-l1.current > a:before,
-.pytorch-right-menu li.toctree-l1.current > a:before {
-  content: "\2022";
-  display: inline-block;
-  position: absolute;
-  left: -15px;
-  top: -10%;
-  font-size: 1.375rem;
-  color: #ee4c2c;
-}
-@media screen and (min-width: 1101px) {
-  .pytorch-left-menu li.toctree-l1.current > a:before,
-  .pytorch-right-menu li.toctree-l1.current > a:before {
-    left: -20px;
-  }
-}
+
 .pytorch-left-menu li.toctree-l1.current li.toctree-l2 > ul, .pytorch-left-menu li.toctree-l2.current li.toctree-l3 > ul,
 .pytorch-right-menu li.toctree-l1.current li.toctree-l2 > ul,
 .pytorch-right-menu li.toctree-l2.current li.toctree-l3 > ul {
@@ -11972,7 +12027,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 
 .pytorch-left-menu ul {
-  padding-left: 0;
+  margin: 0;
 }
 
 .pytorch-right-menu a:link,
