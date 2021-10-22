@@ -11651,6 +11651,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-left-menu {
   display: none;
   border: solid 1px #e6e6e6;
+  border-top: none;
   color: #262626;
   overflow: scroll;
 }
@@ -11729,6 +11730,10 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 
 .pytorch-left-menu p.caption {
   font-weight: 600;
+}
+
+.pytorch-left-menu p.caption.current {
+  border-left-color: #de3412;
 }
 
 .pytorch-left-menu ul li.toctree-l1 {
@@ -11963,7 +11968,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 
 .pytorch-left-menu ul {
-  padding-left: 0;
+  margin: 0;
 }
 
 .pytorch-right-menu a:link,
