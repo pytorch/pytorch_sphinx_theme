@@ -2,16 +2,19 @@
 {%- set url_root = pathto('', 1) %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
-  {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+{%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
 {%- else %}
-  {%- set titlesuffix = "" %}
+{%- set titlesuffix = "" %}
 {%- endif %}
 {%- set lang_attr = 'en' if language == None else (language | replace('_', '-')) %}
 {% import 'theme_variables.jinja' as theme_variables %}
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="{{ lang_attr }}" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ lang_attr }}" > <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="{{ lang_attr }}">
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
   {{ metatags }}
@@ -22,70 +25,71 @@
 
   {# FAVICON #}
   {% if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+  <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}" />
   {% endif %}
   {# CANONICAL URL #}
   {% if theme_canonical_url %}
-    <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html"/>
+  <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html" />
   {% endif %}
 
   {# CSS #}
 
   {# OPENSEARCH #}
   {% if not embedded %}
-    {% if use_opensearch %}
-      <link rel="search" type="application/opensearchdescription+xml"
-            title="{% trans docstitle=docstitle|e %}Search within {{ docstitle }}{% endtrans %}"
-            href="{{ pathto('_static/opensearch.xml', 1) }}"/>
-    {% endif %}
+  {% if use_opensearch %}
+  <link rel="search" type="application/opensearchdescription+xml"
+    title="{% trans docstitle=docstitle|e %}Search within {{ docstitle }}{% endtrans %}"
+    href="{{ pathto('_static/opensearch.xml', 1) }}" />
+  {% endif %}
 
   {% endif %}
 
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
   <!-- <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" /> -->
   {%- for css in css_files %}
-    {%- if css|attr("rel") %}
-  <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
-    {%- else %}
+  {%- if css|attr("rel") %}
+  <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css" {% if css.title is not none %}
+    title="{{ css.title }}" {% endif %} />
+  {%- else %}
   <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
-    {%- endif %}
+  {%- endif %}
   {%- endfor %}
   {%- for cssfile in extra_css_files %}
-    <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+  <link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
   {%- endfor %}
 
   {%- block linktags %}
-    {%- if hasdoc('about') %}
-    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
-    {%- endif %}
-    {%- if hasdoc('genindex') %}
-    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
-    {%- endif %}
-    {%- if hasdoc('search') %}
-    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
-    {%- endif %}
-    {%- if hasdoc('copyright') %}
-    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
-    {%- endif %}
-    {%- if next %}
-    <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
-    {%- endif %}
-    {%- if prev %}
-    <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
-    {%- endif %}
+  {%- if hasdoc('about') %}
+  <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+  {%- endif %}
+  {%- if hasdoc('genindex') %}
+  <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+  {%- endif %}
+  {%- if hasdoc('search') %}
+  <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+  {%- endif %}
+  {%- if hasdoc('copyright') %}
+  <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+  {%- endif %}
+  {%- if next %}
+  <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+  {%- endif %}
+  {%- if prev %}
+  <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+  {%- endif %}
   {%- endblock %}
 
   {%- block extrahead %}
   <!-- Google Analytics -->
   {% if theme_analytics_id %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ theme_analytics_id }}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ theme_analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-      gtag('config', '{{ theme_analytics_id }}');
-    </script>
+    gtag('config', '{{ theme_analytics_id }}');
+  </script>
   {% endif %}
   <!-- End Google Analytics -->
   {% endblock %}
@@ -94,7 +98,8 @@
   <script src="{{ pathto('_static/js/modernizr.min.js', 1) }}"></script>
 
   {% include "fonts.html" %}
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 </head>
 
 <div class="container-fluid header-holder tutorials-header" id="header-holder">
@@ -120,11 +125,11 @@
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{% endif %}>
+          <li {%- if theme_pytorch_project=='tutorials' %} class="active" {% endif %}>
             <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
-          <li {%- if theme_pytorch_project == 'docs' %} class="active docs-active"{% endif %}>
+          <li {%- if theme_pytorch_project=='docs' %} class="active docs-active" {% endif %}>
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
               <a class="resource-option with-down-orange-arrow">
                 Docs
@@ -158,7 +163,7 @@
                   <span class="dropdown-title">PyTorch on XLA Devices</span>
                   <p></p>
                 </a>
-            </div>
+              </div>
           </li>
 
           <li>
@@ -206,115 +211,162 @@
 
   {% block extrabody %} {% endblock %}
 
-    {# SIDE NAV, TOGGLES ON MOBILE #}
+  {# SIDE NAV, TOGGLES ON MOBILE #}
 
-    <div class="table-of-contents-link-wrapper">
-      <span>Table of Contents</span>
-      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
-    </div>
+  <div class="table-of-contents-link-wrapper">
+    <span>Table of Contents</span>
+    <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+  </div>
 
-    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
-      <div class="pytorch-side-scroll">
-        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          <div class="pytorch-left-menu-search">
-            {% block sidebartitle %}
+  <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+    <div class="pytorch-side-scroll">
+      <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <div class="pytorch-left-menu-search">
+          {% block sidebartitle %}
 
-            {% if theme_display_version %}
-              {%- set nav_version = version %}
-              {% if READTHEDOCS and current_version %}
-                {%- set nav_version = current_version %}
-              {% endif %}
-              {% if nav_version %}
-                <div class="version">
-                  {{ nav_version }}
-                </div>
-              {% endif %}
-            {% endif %}
+          {% if theme_display_version %}
+          {%- set nav_version = version %}
+          {% if READTHEDOCS and current_version %}
+          {%- set nav_version = current_version %}
+          {% endif %}
+          {% if nav_version %}
+          <div class="version">
+            {{ nav_version }}
 
-            {% endblock %}
+            <ul class="versions">
+              {% for slug, url in versions %}
+              <li><a href="{{ url }}">{{ slug }}</a></li>
+              {% endfor %}
+            </ul>
+
+            <div class="html_theme">
+              {{ html_theme }}
+            </div>
+
+            <div class="environ">
+              {{ environ }}
+            </div>
+
+            <div class="versions">
+              {% include "versions.html" %}
+            </div>
+
+            {%- if versions.tags %}
+            <dl>
+              <dt>Tags</dt>
+              {%- for name, url, pdf_url in versions.tags %}
+              <dd><a href="{{ url }}">{{ name }}</a></dd>
+              {%- endfor %}
+            </dl>
+            {%- endif %}
+            {%- if versions.branches %}
+            <dl>
+              <dt>Branches</dt>
+              {%- for name, url, pdf_url in versions.branches %}
+              <dd><a href="{{ url }}">{{ name }}</a></dd>
+              {%- endfor %}
+            </dl>
+            {%- endif %}
+            {%- if versions.pdf_file %}
+            <dl>
+              <dt>PDF</dt>
+              {%- for name, url, pdf_url in versions.tags %}
+              <dd><a href="{{ pdf_url }}" download>{{ name }}</a></dd>
+              {%- endfor %}
+              {%- for name, url, pdf_url in versions.branches %}
+              <dd><a href="{{ pdf_url }}" download>{{ name }}</a></dd>
+              {%- endfor %}
+            </dl>
+            {%- endif %}
+
           </div>
+          {% endif %}
+          {% endif %}
 
-          {% block menu %}
-            {#
-              The singlehtml builder doesn't handle this toctree call when the
-              toctree is empty. Skip building this for now.
-            #}
-            {% if 'singlehtml' not in builder %}
-              {% set global_toc = toctree(maxdepth=1,
-                                          collapse=theme_collapse_navigation|tobool,
-                                          includehidden=theme_includehidden|tobool,
-                                          titles_only=theme_titles_only|tobool) %}
-            {% endif %}
-            {% if global_toc %}
-              {{ global_toc }}
-            {% else %}
-              <!-- Local TOC -->
-              <div class="local-toc">{{ toc }}</div>
-            {% endif %}
           {% endblock %}
         </div>
+
+        {% block menu %}
+        {#
+        The singlehtml builder doesn't handle this toctree call when the
+        toctree is empty. Skip building this for now.
+        #}
+        {% if 'singlehtml' not in builder %}
+        {% set global_toc = toctree(maxdepth=1,
+        collapse=theme_collapse_navigation|tobool,
+        includehidden=theme_includehidden|tobool,
+        titles_only=theme_titles_only|tobool) %}
+        {% endif %}
+        {% if global_toc %}
+        {{ global_toc }}
+        {% else %}
+        <!-- Local TOC -->
+        <div class="local-toc">{{ toc }}</div>
+        {% endif %}
+        {% endblock %}
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="pytorch-container">
-      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
-        <div class="pytorch-breadcrumbs-wrapper">
-          {% include "breadcrumbs.html" %}
-        </div>
-
-        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
-          Shortcuts
-        </div>
+  <div class="pytorch-container">
+    <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+      <div class="pytorch-breadcrumbs-wrapper">
+        {% include "breadcrumbs.html" %}
       </div>
 
-      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
-        <div class="pytorch-content-left">
+      <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+        Shortcuts
+      </div>
+    </div>
+
+    <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+      <div class="pytorch-content-left">
 
         {% if theme_pytorch_project == 'tutorials' %}
 
-          <div class="pytorch-call-to-action-links">
-            <div id="tutorial-type">{{ pagename }}</div>
+        <div class="pytorch-call-to-action-links">
+          <div id="tutorial-type">{{ pagename }}</div>
 
-            <div id="google-colab-link">
-              <img class="call-to-action-img" src="{{ pathto('_static/images/pytorch-colab.svg', 1) }}"/>
-              <div class="call-to-action-desktop-view">Run in Google Colab</div>
-              <div class="call-to-action-mobile-view">Colab</div>
-            </div>
-            <div id="download-notebook-link">
-              <img class="call-to-action-notebook-img" src="{{ pathto('_static/images/pytorch-download.svg', 1) }}"/>
-              <div class="call-to-action-desktop-view">Download Notebook</div>
-              <div class="call-to-action-mobile-view">Notebook</div>
-            </div>
-            <div id="github-view-link">
-              <img class="call-to-action-img" src="{{ pathto('_static/images/pytorch-github.svg', 1) }}"/>
-              <div class="call-to-action-desktop-view">View on GitHub</div>
-              <div class="call-to-action-mobile-view">GitHub</div>
-            </div>
+          <div id="google-colab-link">
+            <img class="call-to-action-img" src="{{ pathto('_static/images/pytorch-colab.svg', 1) }}" />
+            <div class="call-to-action-desktop-view">Run in Google Colab</div>
+            <div class="call-to-action-mobile-view">Colab</div>
           </div>
+          <div id="download-notebook-link">
+            <img class="call-to-action-notebook-img" src="{{ pathto('_static/images/pytorch-download.svg', 1) }}" />
+            <div class="call-to-action-desktop-view">Download Notebook</div>
+            <div class="call-to-action-mobile-view">Notebook</div>
+          </div>
+          <div id="github-view-link">
+            <img class="call-to-action-img" src="{{ pathto('_static/images/pytorch-github.svg', 1) }}" />
+            <div class="call-to-action-desktop-view">View on GitHub</div>
+            <div class="call-to-action-mobile-view">GitHub</div>
+          </div>
+        </div>
 
         {% endif %}
 
         {%- block content %}
-          {% if theme_style_external_links|tobool %}
-          <div class="rst-content style-external-links">
+        {% if theme_style_external_links|tobool %}
+        <div class="rst-content style-external-links">
           {% else %}
           <div class="rst-content">
-          {% endif %}
+            {% endif %}
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
-            {%- block document %}
-             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
-              {% block body %}{% endblock %}
-             </article>
-             {% if self.comments()|trim %}
-             <div class="articleComments">
-              {% block comments %}{% endblock %}
-             </div>
-             {% endif%}
+              {%- block document %}
+              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+                {% block body %}{% endblock %}
+              </article>
+              {% if self.comments()|trim %}
+              <div class="articleComments">
+                {% block comments %}{% endblock %}
+              </div>
+              {% endif%}
             </div>
             {%- endblock %}
             {% include "footer.html" %}
           </div>
-        {%- endblock %}
+          {%- endblock %}
         </div>
 
         <div class="pytorch-content-right" id="pytorch-content-right">
@@ -324,34 +376,33 @@
             </div>
           </div>
         </div>
-      </section>
-    </div>
-
-  {% include "versions.html" %}
+    </section>
+  </div>
 
   {% if not embedded %}
 
-     {% if sphinx_version >= "1.8.0" %}
-       <script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
-       {%- for scriptfile in script_files %}
-         {{ js_tag(scriptfile) }}
-       {%- endfor %}
-     {% else %}
-       <script type="text/javascript">
-           var DOCUMENTATION_OPTIONS = {
-               URL_ROOT:'{{ url_root }}',
-               VERSION:'{{ release|e }}',
-               LANGUAGE:'{{ language }}',
-               COLLAPSE_INDEX:false,
-               FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}',
-               HAS_SOURCE:  {{ has_source|lower }},
-               SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
+  {% if sphinx_version >= "1.8.0" %}
+  <script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}"
+    src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+  {%- for scriptfile in script_files %}
+  {{ js_tag(scriptfile) }}
+  {%- endfor %}
+  {% else %}
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT: '{{ url_root }}',
+      VERSION: '{{ release|e }}',
+      LANGUAGE: '{{ language }}',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
+      HAS_SOURCE: {{ has_source| lower }},
+    SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
            };
-       </script>
-       {%- for scriptfile in script_files %}
-         <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
-       {%- endfor %}
-     {% endif %}
+  </script>
+  {%- for scriptfile in script_files %}
+  <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+  {%- endfor %}
+  {% endif %}
 
   {% endif %}
 
@@ -361,8 +412,8 @@
   <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 
   <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable({{ 'true' if theme_sticky_navigation|tobool else 'false' }});
+    jQuery(function () {
+      SphinxRtdTheme.Navigation.enable({{ 'true' if theme_sticky_navigation | tobool else 'false' }});
       });
   </script>
 
@@ -419,7 +470,8 @@
             <li><a href="{{ theme_variables.external_urls['docs'] }}">Docs</a></li>
             <li><a href="{{ theme_variables.external_urls['discuss'] }}" target="_blank">Discuss</a></li>
             <li><a href="{{ theme_variables.external_urls['github_issues'] }}" target="_blank">Github Issues</a></li>
-            <li><a href="{{ theme_variables.external_urls['brand_guidelines'] }}" target="_blank">Brand Guidelines</a></li>
+            <li><a href="{{ theme_variables.external_urls['brand_guidelines'] }}" target="_blank">Brand Guidelines</a>
+            </li>
           </ul>
         </div>
 
@@ -430,27 +482,27 @@
               <div id="mc_embed_signup">
                 <form
                   action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
-                  method="post"
-                  id="mc-embedded-subscribe-form"
-                  name="mc-embedded-subscribe-form"
-                  class="email-subscribe-form validate"
-                  target="_blank"
-                  novalidate>
+                  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+                  class="email-subscribe-form validate" target="_blank" novalidate>
                   <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
                     <div class="mc-field-group">
                       <label for="mce-EMAIL" style="display:none;">Email Address</label>
-                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
+                      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"
+                        placeholder="Email Address">
                     </div>
 
                     <div id="mce-responses" class="clear">
                       <div class="response" id="mce-error-response" style="display:none"></div>
                       <div class="response" id="mce-success-response" style="display:none"></div>
-                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    </div>
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                        name="b_75419c71fe0a935e53dfa4a3f_91d0dccd39" tabindex="-1" value=""></div>
 
                     <div class="clear">
-                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe" class="button email-subscribe-button">
+                      <input type="submit" value="" name="subscribe" id="mc-embedded-subscribe"
+                        class="button email-subscribe-button">
                     </div>
                   </div>
                 </form>
@@ -508,11 +560,11 @@
             <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
           </li>
 
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{%- endif %}>
+          <li {%- if theme_pytorch_project=='tutorials' %} class="active" {%- endif %}>
             <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
           </li>
 
-          <li class="resources-mobile-menu-title" {%- if theme_pytorch_project == 'docs' %} class="active"{%- endif %}>
+          <li class="resources-mobile-menu-title" {%- if theme_pytorch_project=='docs' %} class="active" {%- endif %}>
             Docs
           </li>
 
@@ -585,7 +637,7 @@
   <script type="text/javascript" src="{{ pathto('_static/js/vendor/anchor.min.js', 1) }}"></script>
 
   <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
       mobileMenu.bind();
       mobileTOC.bind();
       pytorchAnchors.bind();
@@ -596,10 +648,11 @@
       filterTags.bind();
 
       // Add class to links that have code blocks, since we cannot create links in code blocks
-      $("article.pytorch-article a span.pre").each(function(e) {
+      $("article.pytorch-article a span.pre").each(function (e) {
         $(this).closest("a").addClass("has-code");
       });
     })
   </script>
 </body>
+
 </html>
