@@ -51,6 +51,7 @@ class CustomCardItemDirective(SphinxDirective):
         "image": directives.unchanged,
         "card_description": directives.unchanged,
         "tags": directives.unchanged,
+        "beta": directives.flag,
     }
 
     def run(self):
@@ -78,6 +79,11 @@ class CustomCardItemDirective(SphinxDirective):
             else:
                 tags = ""
 
+            if "beta" in self.options:
+                beta = "<span class='badge badge-secondary'>Beta</span>"
+            else:
+                beta = ""
+
         except FileNotFoundError as e:
             print(e)
             return []
@@ -87,7 +93,7 @@ class CustomCardItemDirective(SphinxDirective):
             return []
 
         card_rst = CARD_TEMPLATE.format(
-            header=header, image=image, link=link, card_description=card_description, tags=tags
+            header=header, image=image, link=link, card_description=card_description, tags=tags, beta=beta,
         )
         card_list = StringList(card_rst.split("\n"))
         node = cardnode()
@@ -107,7 +113,7 @@ CARD_TEMPLATE = """
     <a href="{link}">
     <div class="card-body">
     <div class="card-title-container">
-        <h4>{header}</h4>
+        <h4>{header} {beta}</h4>
     </div>
     <p class="card-summary">{card_description}</p>
     <p class="tags">{tags}</p>

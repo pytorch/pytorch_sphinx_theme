@@ -103,3 +103,16 @@ a, .btn {
 .pytorch-article #table-of-contents {
   display: none;
 }
+
+.badge {
+  font-weight: inherit;
+  border-radius: 3px;
+}
+
+.badge-primary {
+  background-color: $orange;
+}
+
+.badge-secondary {
+  background-color: $dark_grey_alt;
+}

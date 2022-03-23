@@ -9630,6 +9630,19 @@ a.with-right-arrow, .btn.with-right-arrow {
   display: none;
 }
 
+.badge {
+  font-weight: inherit;
+  border-radius: 3px;
+}
+
+.badge-primary {
+  background-color: #792ee5;
+}
+
+.badge-secondary {
+  background-color: #979797;
+}
+
 code, kbd, pre, samp {
   font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 }

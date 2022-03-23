@@ -391,7 +391,7 @@ article.pytorch-article {
 
     .viewcode-link {
       font-size: rem(14px);
-      color: #979797;
+      color: $dark_grey_alt;
       letter-spacing: 0;
       line-height: rem(24px);
       text-transform: uppercase;
@@ -1148,7 +1148,7 @@ a:hover {
         word-break: break-all;
 
         a {
-        color: #979797;
+        color: $dark_grey_alt;
         &:hover {
           color: $orange;
           }
@@ -1162,8 +1162,8 @@ a:hover {
   }
 
   .filter-btn {
-    color: #979797;
-    border: 1px solid #979797;
+    color: $dark_grey_alt;
+    border: 1px solid $dark_grey_alt;
     border-radius: 3px;
     display: inline-block;
     text-align: center;
@@ -1185,10 +1185,10 @@ a:hover {
   }
 
   .all-tag-selected {
-    background-color: #979797;
+    background-color: $dark_grey_alt;
     color: $white;
     &:hover {
-      border-color: #979797;
+      border-color: $dark_grey_alt;
       color: $white;
     }
   }

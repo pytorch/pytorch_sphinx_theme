@@ -756,7 +756,7 @@
 
       p {
         font-size: rem(16px);
-        color: #979797;
+        color: $dark_grey_alt;
       }
     }
 
@@ -854,7 +854,7 @@
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #979797;
+  color: $dark_grey_alt;
   text-align: center;
   background-color: transparent;
   border-bottom: 1px solid #e2e2e2;
