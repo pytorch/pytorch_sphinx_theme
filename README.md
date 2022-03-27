@@ -2,68 +2,144 @@
 
 Sphinx theme for [PyTorch-Lightning Docs](https://pytorch-lightning.readthedocs.io/en/latest/) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
 
-## Local Development
+## Setup the project for local development
+This theme requires running both python commands and javascript (npm) commands.
 
-Run python setup:
-
+### Step 0: Make sure you're on the conda environment you are using for pytorch-lightning
+```bash
+conda activate my-pl-env
 ```
+
+### Step 1: Python setup
+First, install all the docs deps for lightning
+```bash
+cd /path/to/pytorch-lightning
+
+# install the docs requirements
+git submodule update --init --recursive
+pip install -r requirements/docs.txt
+```
+
+Setup the lightning_sphinx_theme
+```
+cd /path/to/lightning_sphinx_theme
+
+# install project
 python setup.py install
+
+# install deps
+pip install -r docs/requirements.txt
 ```
 
-and install the dependencies using `pip install -r docs/requirements.txt`
-
-In the root directory install the `package.json`:
-
+If you're on a mac with conda, and you get this error:
 ```
-# node version 8.4.0
+>> Pandoc wasn't found.
+>> Please check that pandoc is installed:
+>> https://pandoc.org/installing.html
+>> Exited with code: 2.
+```
+
+then try the following command ([from this answer](https://stackoverflow.com/questions/62398231/building-docs-fails-due-to-missing-pandoc))
+```
+pip uninstall pandoc
+conda install pandoc
+```
+
+### Step 2: setup the javascript things 🤮 
+First, install the things in package.json
+```bash
+# run yarn install (uses `package.json`)
+# you need node version 8.4.0
 yarn install
-
 ```
 
-If you have `npm` installed then run:
+[Install NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) then run:
 
 ```
 npm install
 ```
 
-- If you want to see generated documentation for `docs/demo` then create
-`.env.json` file and make it empty json file. Means `.env.json file` will
-contain
+For good measure, make sure your npm and ruby paths are in your .bashrc or .zshrc 
+```bash
+# ruby
+export PATH="/usr/local/opt/ruby/bin:$PATH"
 
-```
-{}
+# add npm
+export PATH=/usr/local/share/npm/bin:$PATH
 ```
 
-Run grunt to build the html site and enable live reloading of the demo app at `localhost:1919`:
-
-```
+Make sure `grunt` works (we use grunt to see changes in real-time... ie: `hot-reload`)
+```bash
 grunt
 ```
 
-- If you want to specify the project folder (docs or tutorial for which
-you want to see docs generated) then you need to specify it into `.env.json`
-file:
+Install a few npm packages
+```bash
+# provides hot reload for dev
+sudo npm install -g grunt-cli 
 
+# ?
+sudo npm install -g sass
 ```
+
+## Link the theme to the Lightning docs
+Create an `.env.json` file that connects this theme to the lightning docs.
+
+```bash
+cd path/to/lightning_sphinx_theme
+touch .env.json
+```
+
+Now copy paste the following into the `.env.json`
+```json
 {
-    "DOCS_DIR": "docs/",
-    "TUTORIALS_DIR": "path/to/tutorial/directory"
+    "DOCS_DIR": "path/to/pytorch_lightning/docs/"
 }
 ```
 
-Run grunt to build the html site for docs:
+## Development
+Run the docs this way
 
 ```
 grunt --project=docs
 ```
 
-and to build the html site for tutorial:
+Building this will be slow at first... we recommend you disable the notebooks building (temporarily) to vastly speed up your docs development speed. To do this:
+```bash
+cd /path/to/pytorch-lightning/docs
+ls
+# (you'll see the conf.py file here). edit this document
+```
+
+In the conf.py file enable this flag
+```bash
+# default is false
+_FAST_DOCS_DEV = False
+
+# to build fast (not building the notebooks)
+_FAST_DOCS_DEV = True
+```
+
+
+### Optional: build the demo docs
+The lightning_sphinx_theme repo has a "demo" project (not lightning docs) that show you the styles very quickly.
+
+First add the following entry to `.env.json`. 
+
+```json
+{
+    "DOCS_DIR": "path/to/pytorch_lightning/docs/",
+    "TUTORIALS_DIR": "path/to/tutorial/directory/docs"
+}
+```
+
+and now build the "demo" docs with this command
 
 ```
 grunt --project=tutorials
 ```
 
-The resulting site is a demo.
+The resulting site is the lightning docs with the ability to change the styles.
 
 ## Testing your changes and submitting a PR
 
@@ -123,7 +199,7 @@ html_theme = 'pt_lightning_sphinx_theme'
 html_theme_path = ["../../../lightning_sphinx_theme"]
 ```
 
-Next create a file `.env.json` in the root of this repo with some keys/values referencing the local folders of the Docs and Tutorials repos:
+Next create a file `.env.json` in the root of the THEME repo with some keys/values referencing the local folders of the Docs and Tutorials repos:
 
 ```
 {
