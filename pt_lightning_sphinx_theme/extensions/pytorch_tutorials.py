@@ -109,18 +109,18 @@ CARD_TEMPLATE = """
 .. raw:: html
 
     <div class="col-md-12 tutorials-card-container" data-tags={tags}>
-    <div class="card tutorials-card">
-    <a href="{link}">
-    <div class="card-body">
-    <div class="card-title-container">
-        <h4>{header} {beta}</h4>
-    </div>
-    <p class="card-summary">{card_description}</p>
-    <p class="tags">{tags}</p>
-    <div class="tutorials-image">{image}</div>
-    </div>
-    </a>
-    </div>
+        <div class="card tutorials-card">
+            <a href="{link}">
+                <div class="card-body">
+                    <div class="card-title-container">
+                        <h4>{header} {beta}</h4>
+                    </div>
+                    <p class="card-summary">{card_description}</p>
+                    <p class="tags">{tags}</p>
+                    <div class="tutorials-image">{image}</div>
+                </div>
+            </a>
+        </div>
     </div>
 """
 
@@ -176,10 +176,11 @@ CALLOUT_TEMPLATE = """
 .. raw:: html
 
     <div class="col-md-6">
-        <div class="text-container">
-            <h3>{header}</h3>
-            <p class="body-paragraph">{description}</p>
-            <a class="btn with-right-arrow callout-button" href="{button_link}">{button_text}</a>
-        </div>
+        <a href="{button_link}">
+            <div class="text-container">
+                    <h3>{header}</h3>
+                    <p class="body-paragraph">{description}</p>
+            </div>
+        </a>
     </div>
 """

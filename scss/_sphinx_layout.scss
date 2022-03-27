@@ -353,7 +353,7 @@
   }
 
   li.toctree-l1.current > a {
-    color: $red_orange;
+    color: $color_primary;
     &:before {
       content: "\2022";
       display: inline-block;
@@ -361,7 +361,7 @@
       left: -15px;
       top: -10%;
       font-size: rem(22px);
-      color: $red_orange;
+      color: $color_primary;
 
       @include sphinx-medium-size {
         left: -20px;
@@ -486,16 +486,16 @@
   }
 
   li.active > a {
-    color: $red_orange;
+    color: $color_primary;
 
     span.pre,
     &:before {
-      color: $red_orange;
+      color: $color_primary;
     }
 
     &:after {
       content: "\2022";
-      color: $orange;
+      color: $color_primary;
       display: inline-block;
       font-size: rem(22px);
       left: -17px;
@@ -566,7 +566,7 @@
 }
 
 #pytorch-right-menu .side-scroll-highlight {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 .header-container {
@@ -751,7 +751,7 @@
       }
 
       &:hover {
-        background-color: $orange;
+        background-color: $color_primary;
       }
 
       p {
@@ -862,7 +862,7 @@
     border-bottom-color: transparent;
   }
   &:hover {
-    background-color: $orange;
+    background-color: $color_primary;
     color: white;
   }
   .dropdown-title {
@@ -874,6 +874,6 @@
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item:hover .dropdown-title {
-  background-color: $orange;
+  background-color: $color_primary;
   color: white;
 }

@@ -95,7 +95,7 @@
       &:after {
         content: "•";
         bottom: -24px;
-        color: $orange;
+        color: $color_primary;
         font-size: rem(22px);
         left: 0;
         position: absolute;
@@ -104,14 +104,14 @@
       }
 
       a {
-        color: $orange;
+        color: $color_primary;
       }
     }
 
     &.docs-active:after {
       content: "•";
       bottom: -24px;
-      color: $orange;
+      color: $color_primary;
       font-size: rem(22px);
       left: -24px;
       position: absolute;
@@ -134,7 +134,7 @@
 
     @include full-nav-menu-desktop {
       &:hover {
-        color: $orange;
+        color: $color_primary;
       }
     }
   }
@@ -181,7 +181,7 @@
   }
 
   ul li.active a {
-    color: $orange;
+    color: $color_primary;
   }
 }
 

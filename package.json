@@ -5,22 +5,26 @@
   "devDependencies": {
     "anchor-js": "^4.3.0",
     "autoprefixer": "^9.8.6",
-    "bootstrap": "4.0.0",
+    "bootstrap": "^4.6.1",
     "browserify": "^13.0.0",
     "connect-livereload": "~0.6.0",
-    "grunt": "~1.0.1",
+    "grunt": "^1.4.1",
     "grunt-banner": "^0.6.0",
-    "grunt-browserify": "^5.0.0",
+    "grunt-browserify": "^6.0.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "~1.0.0",
-    "grunt-contrib-sass": "~1.0.0",
     "grunt-contrib-uglify": "~3.3.0",
-    "grunt-contrib-watch": "~1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "~1.0.1",
-    "grunt-open": "0.2.3",
+    "grunt-open": "^0.2.4",
     "grunt-postcss": "^0.9.0",
-    "matchdep": "~1.0.1",
+    "matchdep": "^2.0.0",
     "popper.js": "^1.14.3"
+  },
+  "dependencies": {
+    "grunt-contrib-sass": "^2.0.0",
+    "grunt-sass": "^3.1.0",
+    "node-sass": "^7.0.1"
   }
 }
