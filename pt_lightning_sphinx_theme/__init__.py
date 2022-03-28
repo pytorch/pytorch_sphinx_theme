@@ -5,7 +5,7 @@ From https://github.com/shiftlab/lightning_sphinx_theme.
 """
 from os import path
 
-__version__ = '0.0.27'
+__version__ = '0.0.28'
 __version_full__ = __version__
 
 
