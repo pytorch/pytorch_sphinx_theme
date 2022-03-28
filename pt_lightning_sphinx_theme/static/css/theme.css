@@ -12096,9 +12096,9 @@ article.pytorch-article h2 {
   text-transform: none;
 }
 article.pytorch-article h3 {
-  font-size: 1.5rem;
-  letter-spacing: -0.25px;
-  line-height: 1.875rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
   text-transform: none;
 }
 article.pytorch-article h4,
@@ -13467,16 +13467,16 @@ article.pytorch-article .tutorials-callout-container .text-container {
   padding-bottom: 10px;
   border: 1px solid #cfcfcf;
   border-radius: 5px;
-  padding: 10px 10px 30px 10px;
+  padding: 10px;
 }
 @media screen and (min-width: 768px) {
   article.pytorch-article .tutorials-callout-container .text-container:after {
     content: "";
     display: block;
     width: 0;
-    height: 5px;
+    height: 2px;
     position: absolute;
-    top: calc(100% - 15px);
+    top: calc(100% - 12px);
     left: 15px;
     background-color: #792ee5;
     -webkit-transition: width 0.25s ease-in-out;
@@ -13488,14 +13488,49 @@ article.pytorch-article .tutorials-callout-container .text-container {
 }
 @media screen and (min-width: 768px) {
   article.pytorch-article .tutorials-callout-container .text-container {
-    height: 200px;
+    height: 160px;
   }
 }
 article.pytorch-article .tutorials-callout-container .text-container .body-paragraph {
   color: #666666;
-  font-weight: 300;
-  font-size: 1.125rem;
-  line-height: 1.875rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+article.pytorch-article .tutorials-callout-container .text-container-small {
+  padding-bottom: 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 768px) {
+  article.pytorch-article .tutorials-callout-container .text-container-small:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    position: absolute;
+    top: calc(100% - 22px);
+    left: 15px;
+    background-color: #792ee5;
+    -webkit-transition: width 0.25s ease-in-out;
+    transition: width 0.25s ease-in-out;
+  }
+  article.pytorch-article .tutorials-callout-container .text-container-small:hover:after {
+    width: calc(100% - 30px);
+  }
+}
+@media screen and (min-width: 768px) {
+  article.pytorch-article .tutorials-callout-container .text-container-small {
+    height: 130px;
+  }
+}
+article.pytorch-article .tutorials-callout-container .text-container-small .body-paragraph {
+  color: #666666;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 article.pytorch-article .tutorials-callout-container .btn.callout-button {
   font-size: 1.125rem;

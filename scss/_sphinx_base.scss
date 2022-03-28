@@ -1218,16 +1218,37 @@ article.pytorch-article {
       padding-bottom: 10px;
       border: 1px solid #cfcfcf;
       border-radius: 5px;
-      padding: 10px 10px 30px 10px;
+      padding: 10px;
       @include desktop {
-        height: 200px;
+        height: 160px;
       }
       
       .body-paragraph {
         color: #666666;
-        font-weight: 300;
-        font-size: rem(18px);
-        line-height: rem(30px);
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: rem(20px);
+      }
+    }
+
+
+    .text-container-small {
+      @include animated_card_hover_small;
+      padding-bottom: 10px;
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      
+      @include desktop {
+        height: 130px;
+      }
+      
+      .body-paragraph {
+        color: #666666;
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: rem(20px);
       }
     }
 

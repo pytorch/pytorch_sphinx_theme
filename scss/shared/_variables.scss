@@ -97,9 +97,29 @@ $baseurl: "";
       content: "";
       display: block;
       width: 0;
-      height: 5px;
+      height: 2px;
       position: absolute;
-      top: calc(100% - 15px);
+      top: calc(100% - 12px);
+      left: 15px;
+      background-color: $color_primary;
+      transition: width .25s ease-in-out;
+    }
+
+    &:hover:after {
+      width: calc(100% - 30px);
+    }
+  }
+}
+
+@mixin animated_card_hover_small {
+  @include desktop {
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      position: absolute;
+      top: calc(100% - 22px);
       left: 15px;
       background-color: $color_primary;
       transition: width .25s ease-in-out;
