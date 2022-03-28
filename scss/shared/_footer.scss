@@ -41,7 +41,7 @@
 
   @include desktop {
     a:hover {
-      color: $orange;
+      color: $color_primary;
     }
   }
 }
@@ -104,7 +104,7 @@
 
   a {
     font-size: rem(18px);
-    color: $orange;
+    color: $color_primary;
     &:hover {
       color: $white;
     }

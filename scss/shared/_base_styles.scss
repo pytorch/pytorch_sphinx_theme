@@ -20,7 +20,7 @@ a:link,
 a:visited,
 a:hover {
   text-decoration: none;
-  color: $orange;
+  color: $color_primary;
 }
 
 a, .btn {
@@ -40,24 +40,24 @@ a, .btn {
 }
 
 ::-webkit-input-placeholder {
-  color: $orange;
+  color: $color_primary;
 }
 
 ::-moz-placeholder {
-  color: $orange;
+  color: $color_primary;
 }
 
 :-ms-input-placeholder {
-  color: $orange;
+  color: $color_primary;
 }
 
 :-moz-placeholder {
-  color: $orange;
+  color: $color_primary;
 }
 
 .email-subscribe-form {
   input.email {
-    color: $orange;
+    color: $color_primary;
     border: none;
     border-bottom: 1px solid #939393;
     width: 100%;
@@ -110,7 +110,7 @@ a, .btn {
 }
 
 .badge-primary {
-  background-color: $orange;
+  background-color: $color_primary;
 }
 
 .badge-secondary {

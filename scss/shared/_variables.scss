@@ -4,8 +4,7 @@ $white: #ffffff;
 $dark_grey: #6c6c6d;
 $dark_grey_alt: #979797;
 $light_grey: #f3f4f7;
-$orange: #792ee5; // TODO maybe rename variable
-$red_orange: #792ee5; // TODO maybe rename variable
+$color_primary: #792ee5;
 $medium_grey: #f3f4f7;
 $not_quite_black: #262626;
 $slate: #262626;
@@ -81,13 +80,53 @@ $baseurl: "";
   a:link,
   a:visited,
   a:hover {
-    color: $orange;
+    color: $color_primary;
     text-decoration: none;
   }
 
   @include desktop {
     a:hover {
       text-decoration: underline;
+    }
+  }
+}
+
+@mixin animated_card_hover {
+  @include desktop {
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      position: absolute;
+      top: calc(100% - 12px);
+      left: 15px;
+      background-color: $color_primary;
+      transition: width .25s ease-in-out;
+    }
+
+    &:hover:after {
+      width: calc(100% - 30px);
+    }
+  }
+}
+
+@mixin animated_card_hover_small {
+  @include desktop {
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      position: absolute;
+      top: calc(100% - 22px);
+      left: 15px;
+      background-color: $color_primary;
+      transition: width .25s ease-in-out;
+    }
+
+    &:hover:after {
+      width: calc(100% - 30px);
     }
   }
 }
@@ -102,7 +141,7 @@ $baseurl: "";
       position: absolute;
       bottom: -1px;
       left: 5px;
-      background-color: $orange;
+      background-color: $color_primary;
       transition: width .250s ease-in-out;
     }
 
@@ -122,7 +161,7 @@ $baseurl: "";
       position: absolute;
       bottom: -1px;
       left: 0;
-      border-bottom: 1px solid $orange;
+      border-bottom: 1px solid $color_primary;
       border-bottom-left-radius: 5px;
       transition: width .250s ease-in-out, border-bottom-right-radius .01s linear .250s;
     }

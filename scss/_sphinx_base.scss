@@ -57,12 +57,12 @@ p {
   a:link,
   a:visited,
   a:hover {
-    color: $red_orange;
+    color: $color_primary;
   }
 }
 
 .wy-breadcrumbs li a {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 ul.pytorch-breadcrumbs {
@@ -75,7 +75,7 @@ ul.pytorch-breadcrumbs {
   }
 
   a {
-    color: $red_orange;
+    color: $color_primary;
     text-decoration: none;
   }
 }
@@ -149,11 +149,11 @@ ul.pytorch-breadcrumbs {
     }
 
     .rating-prompt.yes-link, .rating-prompt.no-link {
-      color: $orange;
+      color: $color_primary;
       cursor: pointer;
 
       &:hover {
-        background-color: $orange;
+        background-color: $color_primary;
         color: $white;
       }
     }
@@ -169,7 +169,7 @@ ul.pytorch-breadcrumbs {
       }
 
       .star-fill {
-         color: $red_orange;
+         color: $color_primary;
       }
     }
   }
@@ -332,7 +332,7 @@ article.pytorch-article .sphx-glr-thumbcontainer {
   @include animated_border_hover_state;
   @include desktop {
     &:after {
-      background-color: $red_orange;
+      background-color: $color_primary;
     }
   }
 }
@@ -350,7 +350,7 @@ article.pytorch-article {
       position: relative;
       background: $light_grey;
       padding: rem(8px);
-      border-left: 3px solid $red_orange;
+      border-left: 3px solid $color_primary;
       word-wrap: break-word;
       padding-right: 100px;
 
@@ -372,7 +372,7 @@ article.pytorch-article {
       }
       &:hover {
         .viewcode-link {
-          color: $red_orange;
+          color: $color_primary;
         }
       }
     }
@@ -458,7 +458,7 @@ article.pytorch-article {
     @extend .function;
     dt {
       border-left: none;
-      border-top: 3px solid $red_orange;
+      border-top: 3px solid $color_primary;
       padding-left: 4em;
       em.property {
         position: absolute;
@@ -477,7 +477,7 @@ article.pytorch-article {
     em.property {
       text-transform: uppercase;
       font-style: normal;
-      color: $red_orange;
+      color: $color_primary;
       font-size: rem(16px);
       letter-spacing: 0;
       padding-right: rem(12px);
@@ -492,7 +492,7 @@ article.pytorch-article {
     .method,
     .staticmethod {
       dt {
-        border-left: 3px solid $red_orange;
+        border-left: 3px solid $color_primary;
         border-top: none;
       }
       dt {
@@ -660,7 +660,7 @@ article.pytorch-article {
     @include animated_border_hover_state;
     @include desktop {
       &:after {
-        background-color: $red_orange;
+        background-color: $color_primary;
       }
     }
 
@@ -738,7 +738,7 @@ article.pytorch-article {
           line-height: rem(22px);
           .pre {
             background: $white;
-            color: $red_orange;
+            color: $color_primary;
             font-size: 87.5%;
           }
           code {
@@ -832,36 +832,36 @@ article.pytorch-article {
 a:link,
 a:visited,
 a:hover {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 ::-webkit-input-placeholder {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 ::-moz-placeholder {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 :-ms-input-placeholder {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 :-moz-placeholder {
-  color: $red_orange;
+  color: $color_primary;
 }
 
 .site-footer {
   @include desktop {
     a:hover {
-      color: $red_orange;
+      color: $color_primary;
     }
   }
 }
 
 .docs-tutorials-resources {
   a {
-    color: $red_orange;
+    color: $color_primary;
   }
 }
 
@@ -874,11 +874,11 @@ a:hover {
   ul li {
     &.active {
       &:after {
-        color: $red_orange;
+        color: $color_primary;
       }
 
       a {
-        color: $red_orange;
+        color: $color_primary;
       }
     }
   }
@@ -886,7 +886,7 @@ a:hover {
   ul li a {
     @include full-nav-menu-desktop {
       &:hover {
-        color: $red_orange;
+        color: $color_primary;
       }
     }
   }
@@ -894,7 +894,7 @@ a:hover {
 
 .mobile-main-menu.open {
   ul li.active a {
-    color: $red_orange;
+    color: $color_primary;
   }
 }
 
@@ -937,7 +937,7 @@ a:hover {
     color: $black;
     cursor: pointer;
     &:hover {
-      color: $orange;
+      color: $color_primary;
     }
 
     .call-to-action-desktop-view {
@@ -962,8 +962,8 @@ a:hover {
       display: flex;
       align-items: center;
       &:hover {
-        border-bottom-color: $orange;
-        color: $orange;
+        border-bottom-color: $color_primary;
+        color: $color_primary;
       }
     }
   }
@@ -1150,7 +1150,7 @@ a:hover {
         a {
         color: $dark_grey_alt;
         &:hover {
-          color: $orange;
+          color: $color_primary;
           }
         }
       }
@@ -1174,12 +1174,12 @@ a:hover {
     line-height: 1.5;
     margin-bottom: 5px;
     &:hover {
-      border: 1px solid $orange;
-      color: $orange;
+      border: 1px solid $color_primary;
+      color: $color_primary;
     }
     &.selected {
-      background-color: $orange;
-      border: 1px solid $orange;
+      background-color: $color_primary;
+      border: 1px solid $color_primary;
       color: $white;
     }
   }
@@ -1214,14 +1214,41 @@ article.pytorch-article {
     }
 
     .text-container {
-      padding: 10px 0px 30px 0px;
+      @include animated_card_hover;
       padding-bottom: 10px;
-
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      padding: 10px;
+      @include desktop {
+        height: 160px;
+      }
+      
       .body-paragraph {
         color: #666666;
-        font-weight: 300;
-        font-size: rem(18px);
-        line-height: rem(30px);
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: rem(20px);
+      }
+    }
+
+
+    .text-container-small {
+      @include animated_card_hover_small;
+      padding-bottom: 10px;
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      
+      @include desktop {
+        height: 130px;
+      }
+      
+      .body-paragraph {
+        color: #666666;
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: rem(20px);
       }
     }
 

@@ -109,18 +109,18 @@ CARD_TEMPLATE = """
 .. raw:: html
 
     <div class="col-md-12 tutorials-card-container" data-tags={tags}>
-    <div class="card tutorials-card">
-    <a href="{link}">
-    <div class="card-body">
-    <div class="card-title-container">
-        <h4>{header} {beta}</h4>
-    </div>
-    <p class="card-summary">{card_description}</p>
-    <p class="tags">{tags}</p>
-    <div class="tutorials-image">{image}</div>
-    </div>
-    </a>
-    </div>
+        <div class="card tutorials-card">
+            <a href="{link}">
+                <div class="card-body">
+                    <div class="card-title-container">
+                        <h4>{header} {beta}</h4>
+                    </div>
+                    <p class="card-summary">{card_description}</p>
+                    <p class="tags">{tags}</p>
+                    <div class="tutorials-image">{image}</div>
+                </div>
+            </a>
+        </div>
     </div>
 """
 
@@ -131,6 +131,8 @@ class CustomCalloutItemDirective(Directive):
         "description": directives.unchanged,
         "button_link": directives.unchanged,
         "button_text": directives.unchanged,
+        "col_css": directives.unchanged,
+        "card_style": directives.unchanged,
     }
 
     def run(self):
@@ -154,6 +156,16 @@ class CustomCalloutItemDirective(Directive):
                 button_text = self.options["button_text"]
             else:
                 button_text = ""
+            
+            if "col_css" in self.options:
+                col_css = self.options["col_css"]
+            else:
+                col_css = "col-md-6"
+            
+            if "card_style" in self.options:
+                card_style = self.options["card_style"]
+            else:
+                card_style = "text-container"
 
         except FileNotFoundError as e:
             print(e)
@@ -164,7 +176,7 @@ class CustomCalloutItemDirective(Directive):
             return []
 
         callout_rst = CALLOUT_TEMPLATE.format(
-            description=description, header=header, button_link=button_link, button_text=button_text
+            description=description, header=header, button_link=button_link, button_text=button_text, col_css=col_css, card_style=card_style
         )
         callout_list = StringList(callout_rst.split("\n"))
         callout = nodes.paragraph()
@@ -175,11 +187,12 @@ class CustomCalloutItemDirective(Directive):
 CALLOUT_TEMPLATE = """
 .. raw:: html
 
-    <div class="col-md-6">
-        <div class="text-container">
-            <h3>{header}</h3>
-            <p class="body-paragraph">{description}</p>
-            <a class="btn with-right-arrow callout-button" href="{button_link}">{button_text}</a>
-        </div>
+    <div class="{col_css}">
+        <a href="{button_link}">
+            <div class="{card_style}">
+                    <h3>{header}</h3>
+                    <p class="body-paragraph">{description}</p>
+            </div>
+        </a>
     </div>
 """
