@@ -1,3 +1,7 @@
+// new fonts
+$primary_text: #1C1C1C;
+
+// ------
 $custom-font-size: 16px;
 $black: #000000;
 $white: #ffffff;
@@ -130,6 +134,29 @@ $baseurl: "";
     }
   }
 }
+
+// @mixin animated_menu_hover {
+//   @include desktop {
+//     &:after {
+//       content: "";
+//       display: block;
+//       width: 2px;
+//       height: 20px;
+//       position: inherit;
+//       float: left;
+//       top: 0px;
+//       left: 0px;
+//       transition: background-color .3s ease-in-out;
+//       margin-right: 5px;
+//     }
+
+//     &:hover:after {
+//       background-color: $color_primary;
+//       margin-right: 5px;
+//     }
+//   }
+// }
+
 
 @mixin animated_border_hover_state {
   @include desktop {

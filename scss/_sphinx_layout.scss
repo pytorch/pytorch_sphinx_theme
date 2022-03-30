@@ -120,9 +120,10 @@
 
 .pytorch-left-menu {
   display: none;
-  background-color: $light_grey;
+  background-color: white;
   color: $slate;
   overflow: scroll;
+  border-right: 1px solid #e2e2e2;
 
   @include sphinx-medium-size {
     display: block;
@@ -152,7 +153,13 @@
 .expand-menu, .hide-menu {
   color: $dark_grey;
   padding-left: 10px;
-  cursor: pointer;
+  cursor: none;
+  float: right;
+  pointer-events: none;
+}
+
+.menu-item-decorator {
+  color: #848484;
 }
 
 .collapse {
@@ -164,13 +171,26 @@
 }
 
 .pytorch-left-menu p.caption {
-  color: $not_quite_black;
   display: block;
-  font-size: rem(16px);
-  line-height: rem(22px);
-  margin-bottom: rem(16px);
+  margin-bottom: 0px;
   text-transform: none;
   white-space: normal;
+  border-radius: 6px;
+  padding: rem(8px);
+
+  color: $primary_text;
+  font-family: UCity;
+  font-size: rem(14px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: rem(20px);
+  letter-spacing: 0px;
+  text-align: left;
+
+  &:hover {
+    background-color: #EFEEFF;
+    color: #4F00BA;
+  }
 }
 
 .pytorch-left-menu-search {
@@ -217,7 +237,7 @@
   background-size: 18px 18px;
   background-position: 12px 10px;
   padding-left: 40px;
-  background-color: $white;
+  background-color: #F6F8FB;
 
   &:focus {
     outline: 0;
@@ -352,6 +372,7 @@
     }
   }
 
+  // little ball next to name
   li.toctree-l1.current > a {
     color: $color_primary;
     &:before {
@@ -455,7 +476,7 @@
 }
 
 .pytorch-left-menu ul {
-  padding-left: 0;
+  padding-left: 8px;
 }
 
 .pytorch-right-menu {

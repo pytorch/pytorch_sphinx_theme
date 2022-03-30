@@ -1,7 +1,7 @@
 $sphinx_full_width_content_width: 700px;
 
 $sphinx_left_menu_wrapper_padding_right: 13.5%;
-$sphinx_left_menu_width: 25%;
+$sphinx_left_menu_width: 22%;
 $sphinx_left_menu_scroll_wrapper_width: 120%;
 
 $sphinx_content_wrap_width: 71%;
@@ -259,6 +259,15 @@ article.pytorch-article {
 article.pytorch-article .section:first-of-type h1:first-of-type {
   margin-top: 0;
 }
+  
+
+.left-menu-link {
+    background-color: green;
+    &:hover {
+      background-color: $color_primary;
+    }
+}
+
 
 article.pytorch-article .sphx-glr-thumbcontainer {
   margin: 0;
@@ -292,11 +301,15 @@ article.pytorch-article .sphx-glr-thumbcontainer {
 
   .caption-text {
     a {
-      font-size: rem(16px);
-      color: $not_quite_black;
-      letter-spacing: 0;
-      line-height: rem(24px);
+      color: $primary_text;
       text-decoration: none;
+      font-family: UCity;
+      font-size: rem(14px);
+      font-style: normal;
+      font-weight: 600;
+      line-height: rem(20px);
+      letter-spacing: 0px;
+      text-align: left;
     }
   }
 
