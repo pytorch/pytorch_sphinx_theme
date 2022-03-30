@@ -43,6 +43,13 @@ module.exports = function(grunt) {
               dest: 'pt_lightning_sphinx_theme/static/fonts/FreightSans',
               filter: 'isFile'
           },
+          {
+              expand: true,
+              flatten: true,
+              src: ['fonts/UCity/*'],
+              dest: 'pt_lightning_sphinx_theme/static/fonts/UCity',
+              filter: 'isFile'
+          },
 
           {
               expand: true,
