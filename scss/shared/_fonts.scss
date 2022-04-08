@@ -109,3 +109,30 @@
     url("../fonts/IBMPlexMono/IBMPlexMono-Light.woff")
       format("woff");
 }
+
+@font-face {
+  font-family: UCity;
+  font-weight: 600;
+  font-style: normal;
+  src: local("UCity-Semibold"),
+    url("../fonts/UCity/UCity-Semibold.woff2")
+      format("woff2");
+}
+
+@font-face {
+  font-family: UCity;
+  font-weight: 400;
+  font-style: normal;
+  src: local("UCity-Regular"),
+    url("../fonts/UCity/UCity-Regular.woff2")
+      format("woff2");
+}
+
+@font-face {
+  font-family: UCity;
+  font-weight: 300;
+  font-style: normal;
+  src: local("UCity-Light"),
+    url("../fonts/UCity/UCity-Light.woff2")
+      format("woff2");
+}
