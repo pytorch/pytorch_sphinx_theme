@@ -125,11 +125,13 @@
   }
 
   ul li a {
-    color: $white;
-    font-size: 1.3rem;
-    letter-spacing: 0;
-    line-height: rem(34px);
-    text-align: center;
+    color: #1C1C1C;
+    font-family: UCity;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: rem(20px);
+    letter-spacing: 0px;
+    text-align: left;
     text-decoration: none;
 
     @include full-nav-menu-desktop {

@@ -11,6 +11,7 @@ $light_grey: #f3f4f7;
 $color_primary: #792ee5;
 $medium_grey: #f3f4f7;
 $not_quite_black: #262626;
+$hover_background: #EFEEFF;
 $slate: #262626;
 $very_light_grey: #f3f4f7;
 $very_dark_grey: #CCCDD1;
@@ -35,7 +36,7 @@ $site_horizontal_padding: 30px;
 $baseurl: "";
 
 @mixin code_font_family {
-  font-family: IBMPlexMono,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-family: 'Inconsolata', 'IBMPlexMono', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'
 }
 
 @mixin desktop {
@@ -135,27 +136,27 @@ $baseurl: "";
   }
 }
 
-// @mixin animated_menu_hover {
-//   @include desktop {
-//     &:after {
-//       content: "";
-//       display: block;
-//       width: 2px;
-//       height: 20px;
-//       position: inherit;
-//       float: left;
-//       top: 0px;
-//       left: 0px;
-//       transition: background-color .3s ease-in-out;
-//       margin-right: 5px;
-//     }
+@mixin animated_menu_hover {
+  @include desktop {
+    &:after {
+      content: "";
+      display: block;
+      width: 2px;
+      height: 20px;
+      position: inherit;
+      float: left;
+      top: 0px;
+      left: 0px;
+      transition: background-color .3s ease-in-out;
+      margin-right: 5px;
+    }
 
-//     &:hover:after {
-//       background-color: $color_primary;
-//       margin-right: 5px;
-//     }
-//   }
-// }
+    &:hover:after {
+      background-color: $color_primary;
+      margin-right: 5px;
+    }
+  }
+}
 
 
 @mixin animated_border_hover_state {

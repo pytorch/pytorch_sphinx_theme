@@ -50,6 +50,13 @@ module.exports = function(grunt) {
               dest: 'pt_lightning_sphinx_theme/static/fonts/UCity',
               filter: 'isFile'
           },
+          {
+              expand: true,
+              flatten: true,
+              src: ['fonts/Inconsolata/*'],
+              dest: 'pt_lightning_sphinx_theme/static/fonts/Inconsolata',
+              filter: 'isFile'
+          },
 
           {
               expand: true,

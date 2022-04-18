@@ -7,11 +7,11 @@ $sphinx_left_menu_scroll_wrapper_width: 120%;
 $sphinx_content_wrap_width: 71%;
 $sphinx_content_wrap_left_margin: 26.4%;
 
-$sphinx_article_width: 75%;
+$sphinx_article_width: 73%;
 
 $sphinx_right_menu_wrap_left_margin: 2%;
 $sphinx_right_menu_left_margin: 81.5%;
-$sphinx_right_menu_scroll_wrapper_width: 120%;
+$sphinx_right_menu_scroll_wrapper_width: 100%;
 
 $sphinx_page_bar_left_margin: 25%;
 $sphinx_page_bar_left_padding: 2%;
@@ -65,6 +65,7 @@ p {
   color: $color_primary;
 }
 
+
 ul.pytorch-breadcrumbs {
   padding-left: 0;
   list-style-type: none;
@@ -115,6 +116,8 @@ ul.pytorch-breadcrumbs {
 .tutorials-header {
   .header-logo {
     background-image: url("../images/logo.svg");
+    height: 38px;
+    top: -10px;
   }
 
   .main-menu ul li a {
@@ -267,7 +270,6 @@ article.pytorch-article .section:first-of-type h1:first-of-type {
       background-color: $color_primary;
     }
 }
-
 
 article.pytorch-article .sphx-glr-thumbcontainer {
   margin: 0;
@@ -982,6 +984,53 @@ a:hover {
   }
 }
 
+.slack-container {
+  display: flex;
+  
+  .slack-button {
+    border: 1px solid transparent; 
+    background: linear-gradient(206.91deg, #792EE5 16.83%, #3EABB3 144.59%);
+    border-radius: 6px; 
+    height: 30px; 
+    width: 210px; 
+    justify-content:center;
+    font-size: 14px;
+  }
+
+  a {
+    display: flex; 
+    height: 100%; 
+    text-decoration: none;
+  }
+
+  .icon {
+    height: 100%; 
+    color: white; 
+    margin-left: 10px;
+    padding-top: 2px;
+  }
+  
+  .button-title {
+    margin: auto; 
+    margin-left: 5px; 
+    margin-right: 5px; 
+    color: white;
+  }
+}
+
+.slack-align-left {
+  justify-content: flex-start;
+}
+
+.slack-align-center {
+  justify-content: center;
+}
+
+.slack-align-right {
+  justify-content: flex-end;
+}
+
+
 #tutorial-cards-container {
 
   #tutorial-cards {
@@ -1218,13 +1267,97 @@ a:hover {
   }
 }
 
+
+
 article.pytorch-article {
+  .display-card-container {
+    
+    .col-md-2 {
+      padding: 5px;
+    }
+    
+    .col-md-3 {
+      padding: 5px;
+    }
+    
+    .col-md-4 {
+      padding: 5px;
+    }
+    
+    .col-md-6 {
+      padding: 5px;
+    }
+
+    .col-md-12 {
+      padding: 5px;
+    }
+
+    h3 {
+      margin: 5px 0 10px 0;
+    }
+
+    .display-card-hover {
+      @include animated_card_hover;
+    }
+    
+    .card-tag {
+      position: absolute;
+      bottom: 17px;
+      left: 15px;
+      padding: 2px 3px 2px 3px;
+      border: 1px solid $color_primary;
+      color: $color_primary;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    // the card for display items
+    .display-card {
+      padding-bottom: 10px;
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      padding: 10px;
+      
+      .body-paragraph {
+        color: #666666;
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: rem(20px);
+      }
+
+      .image-center {
+        display: flex;
+        margin: auto;
+  
+        img {
+          height: 125px;
+          margin: auto;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+      .image-right {
+        float: right;
+        height: 100%;
+  
+        img {
+          height: 100%;
+          width: auto;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+
   .tutorials-callout-container {
     padding-bottom: 50px;
 
     .col-md-6 {
-      padding-bottom: 10px;
+      padding: 5px;
     }
+
 
     .text-container {
       @include animated_card_hover;

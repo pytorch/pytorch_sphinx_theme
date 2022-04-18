@@ -51,13 +51,13 @@
 
   @include sphinx-medium-size {
     margin-top: 0;
-    margin-left: 3%;
+    margin-left: 20px;
     width: $sphinx_article_width;
     float: left;
   }
 
   @include sphinx-full-size {
-    width: 850px;
+    width: $sphinx_article_width;
     margin-left: 30px;
   }
 
@@ -83,13 +83,15 @@
   @include sphinx-medium-size {
     display: block;
     margin-left: 0;
-    width: 19%;
+    width: 25%;
     float: left;
     height: 100%;
+    padding-right: 5px;
   }
 
   @include sphinx-full-size {
-    width: $desktop_menu_width - 70px;
+    width: 24%;
+    padding-right: 5px;
   }
 }
 
@@ -269,8 +271,9 @@
     &.scrolling-fixed {
       position: fixed;
       top: 45px;
-      left: 83.5%;
-      width: 14%;
+      left: 81.1%;
+      width: 19%;
+      padding-right: 10px;
     }
 
     &.scrolling-absolute {
@@ -281,12 +284,12 @@
 
   @include sphinx-full-size {
     left: 0;
-    width: 380px;
+    width: 100%;
 
     &.scrolling-fixed {
       position: fixed;
       top: 45px;
-      left: 1230px;
+      left: 80%;
     }
 
     &.scrolling-absolute {
@@ -317,8 +320,30 @@
     padding: 0;
     text-decoration: none;
     &.reference.internal {
-      margin-bottom: rem(5px);
+      min-height: 25px;
+      height: auto;
+      padding: 5px;
+      border-radius: 6px;
       position: relative;
+      width: 100%;
+
+      &:hover {
+        background-color: #EFEEFF;
+        color: #4F00BA;
+      }
+    }
+    &.reference.external {
+      min-height: 25px;
+      height: auto;
+      padding: 5px;
+      border-radius: 6px;
+      position: relative;
+      width: 100%;
+
+      &:hover {
+        background-color: #EFEEFF;
+        color: #4F00BA;
+      }
     }
   }
 
@@ -372,21 +397,19 @@
     }
   }
 
-  // little ball next to name
+  // the toctree menu (currently selected)
   li.toctree-l1.current > a {
     color: $color_primary;
+ 
     &:before {
-      content: "\2022";
-      display: inline-block;
+      content: "";
+      display: block;
+      width: 2px;
+      height: 100%;
+      background: $color_primary;
+      left: -5px;
+      top: 0;
       position: absolute;
-      left: -15px;
-      top: -10%;
-      font-size: rem(22px);
-      color: $color_primary;
-
-      @include sphinx-medium-size {
-        left: -20px;
-      }
     }
   }
 
@@ -476,7 +499,12 @@
 }
 
 .pytorch-left-menu ul {
-  padding-left: 8px;
+  padding-left: 0;
+  margin-left: 5px;
+
+  a {
+    // TODO: hover square with color here
+  }
 }
 
 .pytorch-right-menu {
@@ -561,14 +589,14 @@
   }
 
   @include sphinx-full-size {
-    width: 400px;
+    width: 100%;
   }
 
   padding-top: 20px;
 
   > ul {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 20px;
+    padding-right: 0;
     margin-bottom: 0;
 
     @include sphinx-full-size {
@@ -793,8 +821,6 @@
 }
 
 .resources-dropdown-menu {
-  left: -58px;
-  width: 226px;
   display: none;
   position: absolute;
   z-index: 1000;
@@ -844,8 +870,8 @@
     padding-right: rem(32px);
     position: relative;
     background: url("../images/chevron-down-orange.svg");
-    background-size: 14px 18px;
-    background-position: top 7px right 10px;
+    background-size: 10px 15px;
+    background-position: top 0px right 12px;
     background-repeat: no-repeat;
   }
 }
@@ -863,38 +889,34 @@
   }
 }
 
-.header-holder .main-menu ul li .resources-dropdown .doc-dropdown-option {
-  padding-top: 1rem;
-}
-
 .header-holder .main-menu ul li a.nav-dropdown-item {
   display: block;
-  font-size: rem(16px);
-  line-height: rem(21px);
+
   width: 100%;
-  padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
   color: $dark_grey_alt;
-  text-align: center;
+  text-align: left;
+  padding: 5px;
   background-color: transparent;
   border-bottom: 1px solid #e2e2e2;
   &:last-of-type {
     border-bottom-color: transparent;
   }
   &:hover {
-    background-color: $color_primary;
-    color: white;
+    background-color: $hover_background;
+    color: $color_primary;
   }
   .dropdown-title {
-    font-size: rem(18px);
+    font-family: UCity;
+    font-size: rem(12px);
+    font-weight: 400;
+    line-height: rem(22px);
     color: $dark_grey;
-    letter-spacing: 0;
-    line-height: 34px;
   }
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item:hover .dropdown-title {
-  background-color: $color_primary;
-  color: white;
+  background-color: hover_background;
+  color: $color_primary;
 }
