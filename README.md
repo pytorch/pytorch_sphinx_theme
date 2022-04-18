@@ -7,7 +7,8 @@ Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and 
 Run python setup:
 
 ```
-python setup.py install
+git clone https://github.com/pytorch/pytorch_sphinx_theme
+pip install -e .
 ```
 
 and install the dependencies using `pip install -r docs/requirements.txt`
