@@ -24,7 +24,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinxcontrib.httpdomain',
-    'lightning_tutorials',
+    'lightning',
 ]
 
 # Do not warn about external images (status badges in README.rst)
