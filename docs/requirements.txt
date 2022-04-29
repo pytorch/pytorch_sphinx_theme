@@ -1,2 +1,3 @@
 sphinxcontrib-httpdomain
-sphinx
+Sphinx==4.2.0
+myst-parser==0.17.2
