@@ -93,7 +93,7 @@ touch .env.json
 Now copy paste the following into the `.env.json`
 ```json
 {
-    "DOCS_DIR": "path/to/pytorch_lightning/docs/"
+    "DOCS_DIR": "path/to/pytorch_lightning/docs/source/"
 }
 ```
 
@@ -104,20 +104,15 @@ Run the docs this way
 grunt --project=docs
 ```
 
-Building this will be slow at first... we recommend you disable the notebooks building (temporarily) to vastly speed up your docs development speed. To do this:
-```bash
-cd /path/to/pytorch-lightning/docs
-ls
-# (you'll see the conf.py file here). edit this document
-```
+When developing the docs, building docs can be VERY slow locally because of the notebook tutorials.
+To speed this up, enable this flag in before building docs:
 
-In the conf.py file enable this flag
 ```bash
-# default is false
-_FAST_DOCS_DEV = False
+# builds notebooks which is slow
+export PL_FAST_DOCS_DEV=0
 
-# to build fast (not building the notebooks)
-_FAST_DOCS_DEV = True
+# fast notebook build which is fast
+export PL_FAST_DOCS_DEV=1
 ```
 
 
@@ -128,7 +123,7 @@ First add the following entry to `.env.json`.
 
 ```json
 {
-    "DOCS_DIR": "path/to/pytorch_lightning/docs/",
+    "DOCS_DIR": "path/to/pytorch_lightning/docs/source/",
     "TUTORIALS_DIR": "path/to/tutorial/directory/docs"
 }
 ```
