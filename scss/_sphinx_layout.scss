@@ -675,7 +675,7 @@
   @include sphinx-medium-size {
     left: 0;
     display: flex;
-    height: $desktop_header_height / 2;
+    height: calc($desktop_header_height / 2);
     padding-left: 0;
     width: 100%;
     position: absolute;
