@@ -415,6 +415,9 @@ Admonitions
 .. WARNING:: Strong prose may provoke extreme mental exertion.
    Reader discretion is strongly advised.
 
+.. Deprecated:: This is a deprecation.
+   Please use other method instead.
+
 .. admonition:: And, by the way...
 
    You can make up your own admonition too.

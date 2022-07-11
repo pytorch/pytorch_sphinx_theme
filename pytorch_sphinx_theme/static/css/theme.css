@@ -10717,6 +10717,7 @@ article.pytorch-article table {
 
 article.pytorch-article .note,
 article.pytorch-article .warning,
+article.pytorch-article .deprecation,
 article.pytorch-article .tip,
 article.pytorch-article .seealso,
 article.pytorch-article .hint,
@@ -10731,6 +10732,7 @@ article.pytorch-article .error {
 }
 article.pytorch-article .note .admonition-title,
 article.pytorch-article .warning .admonition-title,
+article.pytorch-article .deprecation .admonition-title,
 article.pytorch-article .tip .admonition-title,
 article.pytorch-article .seealso .admonition-title,
 article.pytorch-article .hint .admonition-title,
@@ -10749,6 +10751,7 @@ article.pytorch-article .error .admonition-title {
 }
 article.pytorch-article .note .admonition-title:before,
 article.pytorch-article .warning .admonition-title:before,
+article.pytorch-article .deprecation .admonition-title:before,
 article.pytorch-article .tip .admonition-title:before,
 article.pytorch-article .seealso .admonition-title:before,
 article.pytorch-article .hint .admonition-title:before,
@@ -10765,6 +10768,7 @@ article.pytorch-article .error .admonition-title:before {
 }
 article.pytorch-article .note p:nth-child(n + 2),
 article.pytorch-article .warning p:nth-child(n + 2),
+article.pytorch-article .deprecation p:nth-child(n + 2),
 article.pytorch-article .tip p:nth-child(n + 2),
 article.pytorch-article .seealso p:nth-child(n + 2),
 article.pytorch-article .hint p:nth-child(n + 2),
@@ -10777,6 +10781,7 @@ article.pytorch-article .error p:nth-child(n + 2) {
 }
 article.pytorch-article .note table,
 article.pytorch-article .warning table,
+article.pytorch-article .deprecation table,
 article.pytorch-article .tip table,
 article.pytorch-article .seealso table,
 article.pytorch-article .hint table,
@@ -10790,6 +10795,7 @@ article.pytorch-article .error table {
 }
 article.pytorch-article .note :not(dt) > code,
 article.pytorch-article .warning :not(dt) > code,
+article.pytorch-article .deprecation :not(dt) > code,
 article.pytorch-article .tip :not(dt) > code,
 article.pytorch-article .seealso :not(dt) > code,
 article.pytorch-article .hint :not(dt) > code,
@@ -10808,6 +10814,7 @@ article.pytorch-article .error :not(dt) > code {
 }
 article.pytorch-article .note :not(dt) > code .pre,
 article.pytorch-article .warning :not(dt) > code .pre,
+article.pytorch-article .deprecation :not(dt) > code .pre,
 article.pytorch-article .tip :not(dt) > code .pre,
 article.pytorch-article .seealso :not(dt) > code .pre,
 article.pytorch-article .hint :not(dt) > code .pre,
@@ -10821,6 +10828,7 @@ article.pytorch-article .error :not(dt) > code .pre {
 }
 article.pytorch-article .note pre,
 article.pytorch-article .warning pre,
+article.pytorch-article .deprecation pre,
 article.pytorch-article .tip pre,
 article.pytorch-article .seealso pre,
 article.pytorch-article .hint pre,
@@ -10833,6 +10841,7 @@ article.pytorch-article .error pre {
 }
 article.pytorch-article .note .highlight,
 article.pytorch-article .warning .highlight,
+article.pytorch-article .deprecation .highlight,
 article.pytorch-article .tip .highlight,
 article.pytorch-article .seealso .highlight,
 article.pytorch-article .hint .highlight,
@@ -10847,6 +10856,8 @@ article.pytorch-article .note ul,
 article.pytorch-article .note ol,
 article.pytorch-article .warning ul,
 article.pytorch-article .warning ol,
+article.pytorch-article .deprecation ul,
+article.pytorch-article .deprecation ol,
 article.pytorch-article .tip ul,
 article.pytorch-article .tip ol,
 article.pytorch-article .seealso ul,
@@ -10869,6 +10880,8 @@ article.pytorch-article .note ul li,
 article.pytorch-article .note ol li,
 article.pytorch-article .warning ul li,
 article.pytorch-article .warning ol li,
+article.pytorch-article .deprecation ul li,
+article.pytorch-article .deprecation ol li,
 article.pytorch-article .tip ul li,
 article.pytorch-article .tip ol li,
 article.pytorch-article .seealso ul li,
@@ -10889,6 +10902,7 @@ article.pytorch-article .error ol li {
 }
 article.pytorch-article .note p,
 article.pytorch-article .warning p,
+article.pytorch-article .deprecation p,
 article.pytorch-article .tip p,
 article.pytorch-article .seealso p,
 article.pytorch-article .hint p,
@@ -10904,6 +10918,9 @@ article.pytorch-article .note .admonition-title {
 }
 article.pytorch-article .warning .admonition-title {
   background: #e94f3b;
+}
+article.pytorch-article .deprecation .admonition-title {
+  background: #792ee5;
 }
 article.pytorch-article .tip .admonition-title {
   background: #6bcebb;
