@@ -89,6 +89,7 @@ ul.pytorch-breadcrumbs {
   position: relative;
   color: $slate;
   font-size: rem(20px);
+  margin-top: 56px;
 
   &.is-open {
     .toggle-table-of-contents {

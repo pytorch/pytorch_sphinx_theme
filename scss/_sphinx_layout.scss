@@ -3,8 +3,10 @@
   padding: 0 rem(30px);
   width: auto;
   position: relative;
+  
   @include full-nav-menu-desktop {
     padding: 0;
+    margin-top: 56px;
   }
 
   @include sphinx-medium-size {
@@ -126,6 +128,7 @@
   color: $slate;
   overflow: scroll;
   border-right: 1px solid #e2e2e2;
+  margin-top: 56px;
 
   @include sphinx-medium-size {
     display: block;
