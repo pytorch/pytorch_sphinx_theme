@@ -53,12 +53,6 @@ First, install the things in package.json
 yarn install
 ```
 
-[Install NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) then run:
-
-```
-npm install
-```
-
 For good measure, make sure your npm and ruby paths are in your .bashrc or .zshrc 
 ```bash
 # ruby
