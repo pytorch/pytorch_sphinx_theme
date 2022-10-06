@@ -126,6 +126,7 @@
   color: $slate;
   overflow: scroll;
   border-right: 1px solid #e2e2e2;
+  height: 100%;
 
   @include sphinx-medium-size {
     display: block;
