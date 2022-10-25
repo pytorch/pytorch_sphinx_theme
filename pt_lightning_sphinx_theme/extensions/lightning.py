@@ -13,7 +13,8 @@
 # limitations under the License.
 from docutils import nodes
 from docutils.statemachine import StringList
-from pt_lightning_sphinx_theme.extensions.pytorch_tutorials import TwoColumns, cardnode, CustomCalloutItemDirective, CustomCardItemDirective, DisplayItemDirective, SlackButton
+from pt_lightning_sphinx_theme.extensions.pytorch_tutorials import TwoColumns, cardnode, CustomCalloutItemDirective, \
+    CustomCardItemDirective, DisplayItemDirective, SlackButton, LikeButtonWithTitle, ReactGreeter
 from sphinx.util.docutils import SphinxDirective
 
 
@@ -140,6 +141,8 @@ def setup(app):
     app.add_directive("customcarditem", CustomCardItemDirective)
     app.add_directive("displayitem", DisplayItemDirective)
     app.add_directive("join_slack", SlackButton)
+    app.add_directive("like_button_with_title", LikeButtonWithTitle)
+    app.add_directive("react_greeter", ReactGreeter)
     app.add_directive("twocolumns", TwoColumns)
     app.add_directive("customcalloutitem", CustomCalloutItemDirective)
     app.add_directive("tutoriallist", TutorialListDirective)

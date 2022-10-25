@@ -37,6 +37,8 @@ from docutils.parsers.rst import Directive, directives
 from docutils.statemachine import StringList
 from sphinx.util.docutils import SphinxDirective
 
+from pt_lightning_sphinx_theme.extensions.react import get_react_component_rst
+
 try:
     FileNotFoundError
 except NameError:
@@ -321,6 +323,59 @@ DISPLAY_ITEM_TEMPLATE = """
     </div>
 """
 
+
+class LikeButtonWithTitle(Directive):
+    option_spec = {
+        "padding": directives.unchanged,
+        "title": directives.unchanged,
+        "width": directives.unchanged,
+        "margin": directives.unchanged,
+    }
+
+
+    def run(self):
+        try:
+            # button width
+            width = '155';
+            if "width" in self.options:
+                width = self.options["width"]
+
+            # margin
+            margin = '40';
+            if "margin" in self.options:
+                margin = self.options["margin"]
+
+            # title on button
+            title = 'Join our community'
+            if "title" in self.options:
+                title = self.options["title"]
+
+            # button on left, center or right of screen
+            padding = '30'
+            if "padding" in self.options:
+                align = self.options["padding"]
+
+        except FileNotFoundError as e:
+            print(e)
+            return []
+        except ValueError as e:
+            print(e)
+            raise
+            return []
+        callout_rst = get_react_component_rst("LikeButtonWithTitle", width=width, margin=margin, title=title, padding=padding)
+        callout_list = StringList(callout_rst.split("\n"))
+        callout = nodes.paragraph()
+        self.state.nested_parse(callout_list, self.content_offset, callout)
+        return [callout]
+
+
+class ReactGreeter(Directive):
+    def run(self):
+        callout_rst = get_react_component_rst("ReactGreeter")
+        callout_list = StringList(callout_rst.split("\n"))
+        callout = nodes.paragraph()
+        self.state.nested_parse(callout_list, self.content_offset, callout)
+        return [callout]
 
 class SlackButton(Directive):
     option_spec = {

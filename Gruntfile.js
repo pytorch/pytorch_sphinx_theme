@@ -102,7 +102,19 @@ module.exports = function(grunt) {
             filter: 'isFile'
           }
         ]
-      }
+      },
+
+      react: {
+        files: [
+          {
+            expand: true,
+            cwd: 'react/',
+            src: '**/*',
+            dest: 'pt_lightning_sphinx_theme/static/js/react',
+            filter: 'isFile',
+          },
+        ],
+      },
     },
 
     sass: {
@@ -236,6 +248,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:dev', 'postcss:dist', 'browserify:dev','exec:build_sphinx','connect','open','watch']);
+  grunt.registerTask('default', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'copy:react', 'sass:dev', 'postcss:dist', 'browserify:dev','exec:build_sphinx','connect','open','watch']);
   grunt.registerTask('build', ['clean','copy:fonts', 'copy:images', 'copy:vendor', 'sass:build', 'postcss:dist', 'browserify:build', 'uglify']);
 }
