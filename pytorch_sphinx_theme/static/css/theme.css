@@ -8,7 +8,7 @@
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
-  --purple: #6f42c1;
+  --purple: #6f42c1;text-transform: uppercase
   --pink: #e83e8c;
   --red: #dc3545;
   --orange: #fd7e14;
@@ -10440,7 +10440,6 @@ h1 {
   font-size: 2rem;
   letter-spacing: 1.78px;
   line-height: 2.5rem;
-  text-transform: uppercase;
   margin: 1.375rem 0;
 }
 
