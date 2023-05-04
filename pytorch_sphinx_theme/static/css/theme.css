@@ -1,4 +1,4 @@
-euufbktejugblttnknjdcnhfitbd/charset "UTF-8";
+@charset "UTF-8";
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -10617,7 +10617,7 @@ article.pytorch-article .section :not(dt) > code .pre {
 article.pytorch-article .function dt, article.pytorch-article .attribute dt, article.pytorch-article .class .attribute dt, article.pytorch-article .class dt {
   position: relative;
   background: #f3f4f7;
-  padding: 0.8rem;
+  padding: 0.5rem;
   border-left: 3px solid #ee4c2c;
   word-wrap: break-word;
   padding-right: 100px;
@@ -10626,24 +10626,18 @@ article.pytorch-article .function dt, article.pytorch-article .attribute dt, art
 article.pytorch-article .class dt.field-odd, article.pytorch-article .class dt.field-even,
 article.pytorch-article .function dt.field-odd, article.pytorch-article .function dt.field-even,
 article.pytorch-article .attribute dt.field-odd, article.pytorch-article .attribute dt.field-even,
-article.pytorch-article .class .attribute dt.field-odd,article.pytorch-article .class .attribute dt.field-even
+article.pytorch-article .class .attribute dt.field-odd,article.pytorch-article .class .attribute dt.field-even,
+article.pytorch-article .class .method dt.field-odd, article.pytorch-article .class .staticmethod dt.field-odd,
+article.pytorch-article .class .method dt.field-even, article.pytorch-article .class .staticmethod dt.field-even
 {
   background: none;
   padding-right: -20px;
   border-top: none;
-  padding-left: 0.0rem;
-  padding-top: 0.0rem;
-  padding-bottom: 0.0rem;
-  font-weight: 700;
-}
-
-article.pytorch-article .class .method dt.field-odd, article.pytorch-article .class .staticmethod dt.field-odd,
-article.pytorch-article .class .method dt.field-even, article.pytorch-article .class .staticmethod dt.field-even {
   border-left: none;
-  font-weight: 700;
   padding-left: 0.0rem;
   padding-top: 0.0rem;
   padding-bottom: 0.0rem;
+  font-weight: 700;
 }
 
 article.pytorch-article .function dt.sig {
@@ -10711,7 +10705,7 @@ article.pytorch-article .function .viewcode-link, article.pytorch-article .attri
 article.pytorch-article .function dd, article.pytorch-article .attribute dd, article.pytorch-article .class .attribute dd, article.pytorch-article .class dd {
   padding-left: 3.75rem;
 }
-article.pytorch-article .function dd p, article.pytorch-article .attribute dd p, article.pytorch-article .class .attribute dd p, article.pytorch-article .class dd p{
+article.pytorch-article .function dd p, article.pytorch-article .attribute dd p, article.pytorch-article .class .attribute dd p, article.pytorch-article .class dd p {
   color: #262626;
 }
 article.pytorch-article .function table tbody tr th.field-name, article.pytorch-article .attribute table tbody tr th.field-name, article.pytorch-article .class table tbody tr th.field-name {
@@ -10782,7 +10776,7 @@ article.pytorch-article .class dl dt em.property {
 }
 
 article.pytorch-article .class .method dt,
-article.pytorch-article .class .staticmethod {
+article.pytorch-article .class .staticmethod dt {
   border-left: 3px solid #ee4c2c;
   border-top: none;
 }
