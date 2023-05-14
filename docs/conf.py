@@ -23,6 +23,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinxcontrib.httpdomain',
+    'sphinxcontrib.jquery',
 ]
 
 # Do not warn about external images (status badges in README.rst)
