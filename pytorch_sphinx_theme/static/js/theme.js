@@ -1140,4 +1140,5 @@ highlightCurrent = function() {
 $(window).scroll(highlightCurrent);
 $(document).ready(highlightCurrent)
 
+
 },{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,10,"pytorch-sphinx-theme"]);
