@@ -31,9 +31,3 @@ jobs:
       - run: git add .
       - run: git commit -m "Deploying theme build via CircleCI"
       - run: git push -q git@github.com:pytorch/pytorch_sphinx_theme.git master
-
-workflows:
-  version: 2
-  commit-and-build:
-      jobs:
-        - build
