@@ -31,7 +31,7 @@
 
   {# CSS #}
 
-  {k OPENSEARCH #}
+  {# OPENSEARCH #}
   {% if not embedded %}
     {% if use_opensearch %}
       <link rel="search" type="application/opensearchdescription+xml"
@@ -100,9 +100,9 @@
       <div class="main-menu">
         <ul>
 
-          <li>
+          <li class="main-menu-item">
           <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
+              <a class="with-down-arrow">
                 Learn
               </a>
               <div class="resources-dropdown-menu">
@@ -146,7 +146,7 @@
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community_module'] }}">
                   <span class=dropdown-title>Community</span>
-                  <p>Join the PyTorch developer community to contribute, learn, and get your questions answered.</p>
+                  <p>Join the PyTorch developer community to contribute, learn, and get your questions answered</p>
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['hub'] }}">
                   <span class=dropdown-title>Models</span>
@@ -170,7 +170,7 @@
 
           <li>
           <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
+              <a class="with-down-arrow">
                 Edge
               </a>
               <div class="resources-dropdown-menu">
@@ -186,24 +186,27 @@
             </div>  
           </li>
 
-          <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
+          <li class="main-menu-item">
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="with-down-arrow">
                 Docs
               </a>
               <div class="resources-dropdown-menu">
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['docs'] }}">
                   <span class="dropdown-title">PyTorch</span>
+                  <p>Explore the documentation for comprehensive guidance on how to use PyTorch</p>
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['docs_domains'] }}">
                   <span class="dropdown-title">PyTorch Domains</span>
+                  <p>Read the PyTorch Domains documentation to learn more about domain-specific libraries</p>
                 </a>
               </div>
             </div>
           </li>
 
-          <li {%- if theme_pytorch_project == 'docs' %} class="active docs-active"{% endif %}>
+          <li>
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-orange-arrow">
+              <a class="with-down-arrow">
                 Blogs & News 
               </a>
               <div class="resources-dropdown-menu">
@@ -223,13 +226,13 @@
 
           <li>
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
+              <a class="with-down-arrow">
                 About
               </a>
               <div class="resources-dropdown-menu">
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['pytorch_foundation'] }}">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['foundation'] }}">
                   <span class="dropdown-title">PyTorch Foundation</span>
-                  <p>Learn more about the PyTorch Foundation.</p>
+                  <p>Learn more about the PyTorch Foundation</p>
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['events'] }}">
                   <span class="dropdown-title">Events</span>
@@ -239,13 +242,18 @@
             </div>
           </li>
 
-          <li>
-            <a href="{{ theme_variables.external_urls['join'] }}" data-cta="join">
-              Join
-            </a>
+          <li class="main-menu-item">
+            <div class="no-dropdown">
+              <a href="{{ theme_variables.external_urls['join_form'] }}" data-cta="join">
+                Join
+              </a>
+            </div>
           </li>
           <li>
-            <a href="{{ theme_variables.external_urls['github'] }}">GitHub</a>
+           <div class="main-menu-item">
+             <a href="{{ theme_variables.external_urls['github'] }}" class="github-icon">
+             </a>
+           </div>
           </li>
         </ul>
       </div>
@@ -635,7 +643,7 @@
             </li>
           </ul>
           <li class="resources-mobile-menu-title">
-            <a href="{{ theme_variables.external_urls['join'] }}">Join</a>
+            <a href="{{ theme_variables.external_urls['join_form'] }}">Join</a>
           </li>
           <li class="resources-mobile-menu-title">
             <a href="{{ theme_variables.external_urls['github'] }}">Github</a>
