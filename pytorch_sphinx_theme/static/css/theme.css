@@ -10410,6 +10410,7 @@ ul.pytorch-breadcrumbs a {
 
 .tutorials-header .main-menu .no-dropdown a:hover {
   color: #262626 !important;
+  border-bottom: 2px solid #262626;
 }
 
 .tutorials-header .main-menu-open-button {
@@ -12255,6 +12256,31 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   border-radius: 25px;
 }
 
+.header-holder .main-menu .github-icon:hover {
+    background-color:#88888833;
+}
+
+@media screen (min-width: 1201px) {
+  .header-holder .main-menu .github-icon {
+    background-image: url("../images/pytorch-github.svg");
+    color: white;
+    display: block;
+    width: 33px;
+    height: 33px;
+    position: relative;
+    background-size: 23px 23px;
+    background-position: 5px 4px;
+    background-repeat: no-repeat;
+    border-radius: 25px;
+  }
+}
+
+@media screen (min-width: 1201px) {
+  .header-holder .main-menu .github-icon:hover {
+    background-color:#88888833;
+  }
+}
+
 @media screen and (min-width: 1201px) {
   .header-holder .main-menu ul {
     padding-left: 0;
@@ -12397,7 +12423,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 
 .main-menu ul li .resources-dropdown a {
-  cursor: pointer;
+  cursor: default;
 }
 .main-menu ul li .dropdown-menu {
   border-radius: 0;
@@ -12524,7 +12550,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 .header-holder .main-menu ul li a.nav-dropdown-item .dropdown-title {
   font-size: 1.125rem;
-  color: #6c6c6d;
+  color: #212529;
   letter-spacing: 0;
   line-height: 34px;
 }
