@@ -9940,6 +9940,11 @@ pre {
   padding-left: 15px;
 }
 
+.mobile-main-menu-links-container ul.resources-mobile-menu-items li a {
+  font-size: 18px;
+  line-height: 34px;    
+}
+
 .site-footer {
   padding: 2.5rem 0;
   width: 100%;
