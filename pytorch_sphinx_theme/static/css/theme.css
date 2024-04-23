@@ -12540,10 +12540,11 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   text-align: left;
   background-color: transparent;
   border-bottom: 1px solid #e2e2e2;
+  cursor: pointer;
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item p {
- margin-bottom: .5rem;
+  margin-bottom: .5rem;
 }
 
 .header-holder .main-menu ul li a.nav-dropdown-item:last-of-type {
