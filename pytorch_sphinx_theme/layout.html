@@ -107,20 +107,8 @@
             <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
           </li>
 
-          <li>
-          <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
-                Edge
-              </a>
-              <div class="resources-dropdown-menu">
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['edge'] }}">
-                  <span class="dropdown-title">About PyTorch Edge</span>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['executorch'] }}">
-                  <span class="dropdown-title">ExecuTorch</span>
-                </a>
-              </div>
-            </div>  
+          <li {%- if theme_pytorch_project == 'executorch' %} class="active"{% endif %}>
+            <a href="{{ theme_variables.external_urls['executorch'] }}">Executorch</a>
           </li>
 
           <li>
