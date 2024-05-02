@@ -110,10 +110,6 @@
                   <span class=dropdown-title>Get Started</span>
                   <p>Run PyTorch locally or get started quickly with one of the supported cloud platforms</p>
                 </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['features'] }}">
-                  <span class=dropdown-title>Features</span>
-                  <p>Learn about PyTorch features and capabilities</p>
-                </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['tutorials'] }}">
                   <span class="dropdown-title">Tutorials</span>
                   <p>Whats new in PyTorch tutorials</p>
@@ -147,10 +143,6 @@
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community_module'] }}">
                   <span class=dropdown-title>Community</span>
                   <p>Join the PyTorch developer community to contribute, learn, and get your questions answered</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['hub'] }}">
-                  <span class=dropdown-title>Models</span>
-                  <p>Discover, publish, and reuse pre-trained models</p>
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['forums'] }}" target="_blank">
                   <span class=dropdown-title>Forums</span>
@@ -225,6 +217,10 @@
                   <span class="dropdown-title">Community Stories</span>
                   <p>Learn how our community solves real, everyday machine learning problems with PyTorch</p>
                 </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['events'] }}">
+                  <span class="dropdown-title">Events</span>
+                  <p>Find events, webinars, and podcasts</p>
+                </a>
             </div>
           </li>
 
@@ -237,10 +233,6 @@
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['foundation'] }}">
                   <span class="dropdown-title">PyTorch Foundation</span>
                   <p>Learn more about the PyTorch Foundation</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['events'] }}">
-                  <span class="dropdown-title">Events</span>
-                  <p>Find events, webinars, and podcasts</p>
                 </a>
               </div>
             </div>
@@ -259,6 +251,14 @@
              </a>
            </div>
           </li>
+          <!--- TODO: This block adds the search icon to the nav bar. We will enable it later. 
+          <li>
+            <div class="main-menu-item">
+             <a href="{{ theme_variables.external_urls['github'] }}" class="search-icon">
+             </a>
+            </div>
+          </li>
+          --->
         </ul>
       </div>
 
@@ -560,9 +560,6 @@
                <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
              </li>
              <li>
-               <a href="{{ theme_variables.external_urls['features'] }}">Features</a>
-             </li>
-             <li>
                <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
              </li>
              <li>
@@ -584,9 +581,6 @@
              </li>
              <li>
                <a href="{{ theme_variables.external_urls['community'] }}">Community</a>
-             </li>
-             <li>
-               <a href="{{ theme_variables.external_urls['hub'] }}">Models</a>
              </li>
              <li>
                <a href="{{ theme_variables.external_urls['forums'] }}">Forums</a>

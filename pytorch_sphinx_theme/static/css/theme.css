@@ -12286,6 +12286,25 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   }
 }
 
+.header-holder .main-menu .search-icon {
+  background-image: url("../images/search-icon-black.svg");
+  color: transparent;
+  display: block;
+  width: 33px;
+  height: 33px;
+  position: relative;
+  background-size: 21px 21px;
+  background-position: 6px 5px;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+  cursor pointer
+}
+
+.header-holder .main-menu .search-icon:hover {
+    background-color:#88888833;
+}
+
+
 @media screen and (min-width: 1201px) {
   .header-holder .main-menu ul {
     padding-left: 0;
