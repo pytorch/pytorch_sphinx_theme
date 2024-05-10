@@ -99,132 +99,170 @@
 
       <div class="main-menu">
         <ul>
-          <li>
-            <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
-          </li>
 
-          <li>
-            <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
+          <li class="main-menu-item">
+          <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="with-down-arrow">
+                Learn
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['get_started'] }}">
+                  <span class=dropdown-title>Get Started</span>
+                  <p>Run PyTorch locally or get started quickly with one of the supported cloud platforms</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['tutorials'] }}">
+                  <span class="dropdown-title">Tutorials</span>
+                  <p>Whats new in PyTorch tutorials</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['learn_basics'] }}">
+                  <span class="dropdown-title">Learn the Basics</span>
+                  <p>Familiarize yourself with PyTorch concepts and modules</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['recipes'] }}">
+                  <span class="dropdown-title">PyTorch Recipes</span>
+                  <p>Bite-size, ready-to-deploy PyTorch code examples</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['youtube_intro_series'] }}">
+                  <span class="dropdown-title">Intro to PyTorch - YouTube Series</span>
+                  <p>Master PyTorch basics with our engaging YouTube tutorial series</p>
+                </a>
+              </div>
+            </div>
           </li>
 
           <li>
           <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
+              <a class="with-down-arrow">
+                Ecosystem
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['ecosystem'] }}">
+                  <span class="dropdown-title">Tools</span>
+                  <p>Learn about the tools and frameworks in the PyTorch Ecosystem</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community_module'] }}">
+                  <span class=dropdown-title>Community</span>
+                  <p>Join the PyTorch developer community to contribute, learn, and get your questions answered</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['forums'] }}" target="_blank">
+                  <span class=dropdown-title>Forums</span>
+                  <p>A place to discuss PyTorch code, issues, install, research</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['resources'] }}">
+                  <span class=dropdown-title>Developer Resources</span>
+                  <p>Find resources and get questions answered</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['contributor_awards_2023'] }}">
+                  <span class="dropdown-title">Contributor Awards - 2023</span>
+                  <p>Award winners announced at this year's PyTorch Conference</p>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li>
+          <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="with-down-arrow">
                 Edge
               </a>
               <div class="resources-dropdown-menu">
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['edge'] }}">
                   <span class="dropdown-title">About PyTorch Edge</span>
+                  <p>Build innovative and privacy-aware AI experiences for edge devices</p>
                 </a>
                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['executorch'] }}">
                   <span class="dropdown-title">ExecuTorch</span>
+                  <p>End-to-end solution for enabling on-device inference capabilities across mobile and edge devices</p>
                 </a>
               </div>
             </div>  
           </li>
 
-          <li>
-            <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
-          </li>
-
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{% endif %}>
-            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
-          </li>
-
-          <li {%- if theme_pytorch_project == 'docs' %} class="active docs-active"{% endif %}>
+          <li class="main-menu-item">
             <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-orange-arrow">
+              <a class="with-down-arrow">
                 Docs
               </a>
               <div class="resources-dropdown-menu">
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['docs'] }}">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['docs'] }}">
                   <span class="dropdown-title">PyTorch</span>
-                  <p></p>
+                  <p>Explore the documentation for comprehensive guidance on how to use PyTorch</p>
                 </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['audio'] }}">
-                  <span class="dropdown-title">torchaudio</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['text'] }}">
-                  <span class="dropdown-title">torchtext</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['vision'] }}">
-                  <span class="dropdown-title">torchvision</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['torcharrow'] }}">
-                  <span class="dropdown-title">torcharrow</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['data'] }}">
-                  <span class="dropdown-title">TorchData</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['torchrec'] }}">
-                  <span class="dropdown-title">TorchRec</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['serve'] }}">
-                  <span class="dropdown-title">TorchServe</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['torchx'] }}">
-                  <span class="dropdown-title">TorchX</span>
-                  <p></p>
-                </a>
-                <a class="doc-dropdown-option nav-dropdown-item" href="{{ theme_variables.external_urls['xla'] }}">
-                  <span class="dropdown-title">PyTorch on XLA Devices</span>
-                  <p></p>
-                </a>
-            </div>
-          </li>
-
-          <li>
-            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
-              <a class="resource-option with-down-arrow">
-                Resources
-              </a>
-              <div class="resources-dropdown-menu">
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['features'] }}">
-                  <span class="dropdown-title">About</span>
-                  <p>Learn about PyTorch’s features and capabilities</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['foundation'] }}">
-                  <span class="dropdown-title">PyTorch Foundation</span>
-                  <p>Learn about the PyTorch foundation</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community'] }}">
-                  <span class="dropdown-title">Community</span>
-                  <p>Join the PyTorch developer community to contribute, learn, and get your questions answered.</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community-stories'] }}">
-                  <span class="dropdown-title">Community Stories</span>
-                  <p>Learn how our community solves real, everyday machine learning problems with PyTorch.</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['resources'] }}">
-                  <span class="dropdown-title">Developer Resources</span>
-                  <p>Find resources and get questions answered</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['events'] }}">
-                  <span class="dropdown-title">Events</span>
-                  <p>Find events, webinars, and podcasts</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['forums'] }}" target="_blank">
-                  <span class="dropdown-title">Forums</span>
-                  <p>A place to discuss PyTorch code, issues, install, research</p>
-                </a>
-                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['hub'] }}">
-                  <span class="dropdown-title">Models (Beta)</span>
-                  <p>Discover, publish, and reuse pre-trained models</p>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['docs_domains'] }}">
+                  <span class="dropdown-title">PyTorch Domains</span>
+                  <p>Read the PyTorch Domains documentation to learn more about domain-specific libraries</p>
                 </a>
               </div>
             </div>
           </li>
 
           <li>
-            <a href="{{ theme_variables.external_urls['github'] }}">GitHub</a>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="with-down-arrow">
+                Blogs & News 
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['blog'] }}">
+                  <span class="dropdown-title">PyTorch Blog</span>
+                  <p>Catch up on the latest technical news and happenings</p>
+                </a>
+                 <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community_blog'] }}">
+                  <span class="dropdown-title">Community Blog</span>
+                  <p>Stories from the PyTorch ecosystem</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['videos'] }}">
+                  <span class="dropdown-title">Videos</span>
+                  <p>Learn about the latest PyTorch tutorials, new, and more </p>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['community-stories'] }}">
+                  <span class="dropdown-title">Community Stories</span>
+                  <p>Learn how our community solves real, everyday machine learning problems with PyTorch</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['events'] }}">
+                  <span class="dropdown-title">Events</span>
+                  <p>Find events, webinars, and podcasts</p>
+                </a>
+            </div>
           </li>
+
+          <li>
+            <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
+              <a class="with-down-arrow">
+                About
+              </a>
+              <div class="resources-dropdown-menu">
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['foundation'] }}">
+                  <span class="dropdown-title">PyTorch Foundation</span>
+                  <p>Learn more about the PyTorch Foundation</p>
+                </a>
+                <a class="nav-dropdown-item" href="{{ theme_variables.external_urls['governing_board'] }}">
+                  <span class="dropdown-title">Governing Board</span>
+                  <p></p>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li class="main-menu-item">
+            <div class="no-dropdown">
+              <a href="{{ theme_variables.external_urls['join_form'] }}" data-cta="join">
+                Become a Member
+              </a>
+            </div>
+          </li>
+          <li>
+           <div class="main-menu-item">
+             <a href="{{ theme_variables.external_urls['github'] }}" class="github-icon">
+             </a>
+           </div>
+          </li>
+          <!--- TODO: This block adds the search icon to the nav bar. We will enable it later. 
+          <li>
+            <div class="main-menu-item">
+             <a href="{{ theme_variables.external_urls['github'] }}" class="search-icon">
+             </a>
+            </div>
+          </li>
+          --->
         </ul>
       </div>
 
@@ -518,114 +556,111 @@
     <div class="mobile-main-menu-links-container">
       <div class="main-menu">
         <ul>
-          <li>
-            <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
-          </li>
+           <li class="resources-mobile-menu-title">
+             <a>Learn</a>
+           </li>
+           <ul class="resources-mobile-menu-items">
+             <li>
+               <a href="{{ theme_variables.external_urls['get_started'] }}">Get Started</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['learn_basics'] }}">Learn the Basics</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['recipes'] }}">PyTorch Recipes</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['youtube_intro_series'] }}">Introduction to PyTorch - YouTube Series</a>
+             </li>
+           </ul>
+           <li class="resources-mobile-menu-title">
+             <a>Ecosystem</a>
+           </li>
+           <ul class="resources-mobile-menu-items">
+             <li>
+               <a href="{{ theme_variables.external_urls['ecosystem'] }}">Tools</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['community'] }}">Community</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['forums'] }}">Forums</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['resources'] }}">Developer Resources</a>
+             </li>
+             <li>
+               <a href="{{ theme_variables.external_urls['contributor_awards_2023'] }}">Contributor Awards - 2023</a>
+             </li>
+           </ul>
 
-          <li>
-            <a href="{{ theme_variables.external_urls['ecosystem'] }}">Ecosystem</a>
-          </li>
-            
-          <li>
-            <a href="{{ theme_variables.external_urls['mobile'] }}">Mobile</a>
-          </li>
+           <li class="resources-mobile-menu-title">
+             <a>Edge</a>
+           </li>
 
-          <li>
-            <a href="{{ theme_variables.external_urls['blog'] }}">Blog</a>
-          </li>
+           <ul class="resources-mobile-menu-items">
+             <li>
+               <a href="{{ theme_variables.external_urls['edge'] }}">About PyTorch Edge</a>
+             </li>
+             
+             <li>
+               <a href="{{ theme_variables.external_urls['executorch'] }}">ExecuTorch</a>
+             </li>
+           </ul>
 
-          <li {%- if theme_pytorch_project == 'tutorials' %} class="active"{%- endif %}>
-            <a href="{{ theme_variables.external_urls['tutorials'] }}">Tutorials</a>
-          </li>
+           <li class="resources-mobile-menu-title">
+             <a>Docs</a>
+           </li>
 
-          <li class="resources-mobile-menu-title" {%- if theme_pytorch_project == 'docs' %} class="active"{%- endif %}>
-            Docs
-          </li>
-
-          <ul class="resources-mobile-menu-items">
+           <ul class="resources-mobile-menu-items">
             <li>
               <a href="{{ theme_variables.external_urls['docs'] }}">PyTorch</a>
             </li>
 
             <li>
-              <a href="{{ theme_variables.external_urls['audio'] }}">torchaudio</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['text'] }}">torchtext</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['vision'] }}">torchvision</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['torcharrow'] }}">torcharrow</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['data'] }}">TorchData</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['torchrec'] }}">TorchRec</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['serve'] }}">TorchServe</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['torchx'] }}">TorchX</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['xla'] }}">PyTorch on XLA Devices</a>
+              <a href="{{ theme_variables.external_urls['docs_domains'] }}">PyTorch Domains</a>
             </li>
           </ul>
 
           <li class="resources-mobile-menu-title">
-            Resources
+            <a>Blog & News</a>
           </li>
             
            <ul class="resources-mobile-menu-items">
-
             <li>
-              <a href="{{ theme_variables.external_urls['features'] }}">About</a>
+              <a href="{{ theme_variables.external_urls['blog'] }}">PyTorch Blog</a>
+            </li>
+            <li>
+              <a href="{{ theme_variables.external_urls['community_blog'] }}">Community Blog</a>
             </li>
 
             <li>
-              <a href="{{ theme_variables.external_urls['foundation'] }}">PyTorch Foundation</a>
-            </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['community'] }}">Community</a>
+              <a href="{{ theme_variables.external_urls['videos'] }}">Videos</a>
             </li>
 
             <li>
               <a href="{{ theme_variables.external_urls['community-stories'] }}">Community Stories</a>
             </li>
-
-            <li>
-              <a href="{{ theme_variables.external_urls['resources'] }}">Developer Resources</a>
-            </li>
-
             <li>
               <a href="{{ theme_variables.external_urls['events'] }}">Events</a>
             </li>
+          </ul>
+          
+          <li class="resources-mobile-menu-title">
+            <a>About</a>
+          </li>
 
+          <ul class="resources-mobile-menu-items">
             <li>
-              <a href="{{ theme_variables.external_urls['forums'] }}">Forums</a>
+              <a href="{{ theme_variables.external_urls['foundation'] }}">PyTorch Foundation</a>
             </li>
-
             <li>
-              <a href="{{ theme_variables.external_urls['hub'] }}">Models (Beta)</a>
+              <a href="{{ theme_variables.external_urls['governing_board'] }}">Governing Board</a>
             </li>
           </ul>
-
-          <li>
-            <a href="{{ theme_variables.external_urls['github'] }}">Github</a>
-          </li>
         </ul>
       </div>
     </div>
