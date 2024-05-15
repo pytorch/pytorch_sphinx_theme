@@ -99,6 +99,30 @@ window.utilities = {
     return window.innerHeight ||
            document.documentElement.clientHeight ||
            document.body.clientHeight;
+  },
+
+  /**
+   * Return the offset amount to deduct from the normal scroll position.
+   * Modify as appropriate to allow for dynamic calculations
+   */
+  getFixedOffset: function() {
+    var OFFSET_HEIGHT_PADDING = 20;
+    // TODO: this is a little janky. We should try to not rely on JS for this
+    return document.getElementById("sphinx-template-page-level-bar").offsetHeight + OFFSET_HEIGHT_PADDING;
+  },
+
+  findParent: function(item) {
+    return $(item).parent().parent().siblings("a.reference.internal")
+  },
+  makeHighlight: function(item) {
+    if ($(item).hasClass("title-link")) {
+      return
+    }
+    $(item).addClass("side-scroll-highlight");
+    var parent = utilities.findParent(item);
+    if (~parent.hasClass("title-link")) {
+      utilities.makeHighlight(parent)
+    }
   }
 }
 
@@ -213,7 +237,7 @@ window.filterTags = {
 // Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
   navigationListItems: document.querySelectorAll("#pytorch-right-menu li"),
-  sections: document.querySelectorAll(".pytorch-article .section"),
+  sections: document.querySelectorAll(".pytorch-article section section, .sig.sig-object"),
   sectionIdTonavigationLink: {},
 
   bind: function() {
@@ -396,11 +420,6 @@ window.scrollToAnchor = {
 
     var anchorScrolls = {
       ANCHOR_REGEX: /^#[^ ]+$/,
-      offsetHeightPx: function() {
-        var OFFSET_HEIGHT_PADDING = 20;
-        // TODO: this is a little janky. We should try to not rely on JS for this
-        return utilities.headersHeight() + OFFSET_HEIGHT_PADDING;
-      },
 
       /**
        * Establish events, and fix initial scroll position if a hash is provided.
@@ -408,17 +427,9 @@ window.scrollToAnchor = {
       init: function() {
         this.scrollToCurrent();
         // This interferes with clicks below it, causing a double fire
-        // $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
+        $(window).on('hashchange', $.proxy(this, 'scrollToCurrent'));
         $('body').on('click', 'a', $.proxy(this, 'delegateAnchors'));
         $('body').on('click', '#pytorch-right-menu li span', $.proxy(this, 'delegateSpans'));
-      },
-
-      /**
-       * Return the offset amount to deduct from the normal scroll position.
-       * Modify as appropriate to allow for dynamic calculations
-       */
-      getFixedOffset: function() {
-        return this.offsetHeightPx();
       },
 
       /**
@@ -437,7 +448,7 @@ window.scrollToAnchor = {
         match = document.getElementById(href.slice(1));
 
         if(match) {
-          var anchorOffset = $(match).offset().top - this.getFixedOffset();
+          var anchorOffset = $(match).offset().top - utilities.getFixedOffset();
 
           $('html, body').scrollTop(anchorOffset);
 
@@ -492,8 +503,6 @@ window.sideMenus = {
   isFixedToBottom: false,
 
   bind: function() {
-    sideMenus.handleLeftMenu();
-
     var rightMenuLinks = document.querySelectorAll("#pytorch-right-menu li");
     var rightMenuHasLinks = rightMenuLinks.length > 1;
 
@@ -558,6 +567,7 @@ window.sideMenus = {
           linkWithHash.nextElementSibling.children.length > 0
         ) {
           linkWithHash.nextElementSibling.style.display = "block";
+          linkWithHash.classList.remove("not-expanded");
           linkWithHash.classList.add("expanded");
         }
 
@@ -578,7 +588,11 @@ window.sideMenus = {
         }
       });
 
-      sideMenus.handleRightMenu();
+      sideMenus.handleNavBar();
+      sideMenus.handleLeftMenu();
+      if (sideMenus.rightMenuIsOnScreen()) {
+        sideMenus.handleRightMenu();
+      }
     }
 
     $(window).on('resize scroll', function(e) {
@@ -669,12 +683,14 @@ window.sideMenus = {
           rightMenu.style.top = utilities.scrollTop() - mainHeaderHeight + "px";
           rightMenu.classList.add("scrolling-absolute");
           rightMenu.classList.remove("scrolling-fixed");
+          document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
         }
       } else {
         rightMenuWrapper.style.height = articleHeight + mainHeaderHeight + "px";
         rightMenu.style.top =
           articleBottom - mainHeaderHeight - rightMenuList.offsetHeight + "px";
         rightMenu.classList.add("scrolling-absolute");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
       }
 
       if (utilities.scrollTop() < articleBottom - rightMenuList.offsetHeight) {
@@ -682,6 +698,7 @@ window.sideMenus = {
         rightMenu.style.top = "";
         rightMenu.classList.remove("scrolling-absolute");
         rightMenu.classList.add("scrolling-fixed");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "block";
       }
     }
 
@@ -829,7 +846,7 @@ function ThemeNav () {
                 // Find associated id element, then its closest section
                 // in the document and try with that one.
                 var id_elt = $('.document [id="' + anchor.substring(1) + '"]');
-                var closest_section = id_elt.closest('div.section');
+                var closest_section = id_elt.closest('section section');
                 link = vmenu.find('[href="#' + closest_section.attr("id") + '"]');
                 if (link.length === 0) {
                     // still not found in the sidebar. fall back to main section
@@ -1086,43 +1103,42 @@ $(".stars-outer > i").on("click", function() {
 })
 
 $("#pytorch-side-scroll-right li a").on("click", function (e) {
-  var href = $(this).attr("href");
+  var href = $(this).attr("href").replaceAll('.', '\\.');
   $('html, body').stop().animate({
     scrollTop: $(href).offset().top - 100
   }, 850);
   e.preventDefault;
 });
 
-var lastId,
-  topMenu = $("#pytorch-side-scroll-right"),
-  topMenuHeight = topMenu.outerHeight() + 1,
-  // All sidenav items
-  menuItems = topMenu.find("a"),
-  // Anchors for menu items
-  scrollItems = menuItems.map(function () {
-    var item = $(this).attr("href");
-    if (item.length) {
-      return item;
-    }
-  });
+topMenu = $("#sphinx-template-side-scroll-right"),
+// All sidenav items
+menuItems = topMenu.find("a[href^='#']"),
+// Anchors for menu items
+scrollItems = {};
+for (var i = 0; i < menuItems.length; i++) {
+  var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
+  if (ref.length > 1 && $(ref).length) {
+    scrollItems[ref] = menuItems[i];
+  }
+}
 
-$(window).scroll(function () {
-  var fromTop = $(this).scrollTop() + topMenuHeight;
-  var article = ".section";
+highlightCurrent = function() {
+  var article = Object.keys(scrollItems).join(', ');
 
-  $(article).each(function (i) {
-    var offsetScroll = $(this).offset().top - $(window).scrollTop();
+  $(article).each(function () {
+    var offsetScroll = $(this).offset().top - $(window).scrollTop() - utilities.getFixedOffset();
     if (
-      offsetScroll <= topMenuHeight + 200 &&
-      offsetScroll >= topMenuHeight - 200 &&
-      scrollItems[i] == "#" + $(this).attr("id") &&
+      offsetScroll <= 50 &&
+      offsetScroll >= -50 &&
       $(".hidden:visible")
     ) {
       $(menuItems).removeClass("side-scroll-highlight");
-      $(menuItems[i]).addClass("side-scroll-highlight");
+      utilities.makeHighlight(scrollItems['#' + this.id.replaceAll('.', '\\.')]);
     }
   });
-});
+}
+$(window).scroll(highlightCurrent);
+$(document).ready(highlightCurrent)
 
 
 },{"jquery":"jquery"}]},{},[1,2,3,4,5,6,7,8,9,10,"pytorch-sphinx-theme"]);
