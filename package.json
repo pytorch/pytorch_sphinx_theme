@@ -4,8 +4,8 @@
   "private": true,
   "devDependencies": {
     "anchor-js": "^4.3.0",
-    "autoprefixer": "^9.8.6",
-    "bootstrap": "4.3.1",
+    "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
     "browserify": "^13.0.0",
     "connect-livereload": "~0.6.0",
     "grunt": "~1.5.3",
@@ -15,11 +15,11 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "~1.0.0",
     "grunt-contrib-uglify": "~3.3.0",
-    "grunt-contrib-watch": "~1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "~1.0.1",
-    "grunt-open": "0.2.3",
+    "grunt-open": "^0.2.4",
     "grunt-postcss": "^0.9.0",
-    "matchdep": "~1.0.1",
+    "matchdep": "^1.0.0",
     "popper.js": "^1.14.3"
   }
 }
