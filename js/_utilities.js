@@ -98,5 +98,29 @@ window.utilities = {
     return window.innerHeight ||
            document.documentElement.clientHeight ||
            document.body.clientHeight;
+  },
+
+  /**
+   * Return the offset amount to deduct from the normal scroll position.
+   * Modify as appropriate to allow for dynamic calculations
+   */
+  getFixedOffset: function() {
+    var OFFSET_HEIGHT_PADDING = 20;
+    // TODO: this is a little janky. We should try to not rely on JS for this
+    return document.getElementById("sphinx-template-page-level-bar").offsetHeight + OFFSET_HEIGHT_PADDING;
+  },
+
+  findParent: function(item) {
+    return $(item).parent().parent().siblings("a.reference.internal")
+  },
+  makeHighlight: function(item) {
+    if ($(item).hasClass("title-link")) {
+      return
+    }
+    $(item).addClass("side-scroll-highlight");
+    var parent = utilities.findParent(item);
+    if (~parent.hasClass("title-link")) {
+      utilities.makeHighlight(parent)
+    }
   }
 }

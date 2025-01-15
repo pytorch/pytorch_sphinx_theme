@@ -134,7 +134,7 @@ function ThemeNav () {
                 // Find associated id element, then its closest section
                 // in the document and try with that one.
                 var id_elt = $('.document [id="' + anchor.substring(1) + '"]');
-                var closest_section = id_elt.closest('div.section');
+                var closest_section = id_elt.closest('section section');
                 link = vmenu.find('[href="#' + closest_section.attr("id") + '"]');
                 if (link.length === 0) {
                     // still not found in the sidebar. fall back to main section
@@ -391,41 +391,39 @@ $(".stars-outer > i").on("click", function() {
 })
 
 $("#pytorch-side-scroll-right li a").on("click", function (e) {
-  var href = $(this).attr("href");
+  var href = $(this).attr("href").replaceAll('.', '\\.');
   $('html, body').stop().animate({
-    scrollTop: $(href).offset().top - 100
+    scrollTop: $(href).offset().top - utilities.getFixedOffset()
   }, 850);
   e.preventDefault;
 });
 
-var lastId,
-  topMenu = $("#pytorch-side-scroll-right"),
-  topMenuHeight = topMenu.outerHeight() + 1,
-  // All sidenav items
-  menuItems = topMenu.find("a"),
-  // Anchors for menu items
-  scrollItems = menuItems.map(function () {
-    var item = $(this).attr("href");
-    if (item.length) {
-      return item;
-    }
-  });
+topMenu = $("#sphinx-template-side-scroll-right"),
+// All sidenav items
+menuItems = topMenu.find("a[href^='#']"),
+// Anchors for menu items
+scrollItems = {};
+for (var i = 0; i < menuItems.length; i++) {
+  var ref = menuItems[i].getAttribute("href").replaceAll('.', '\\.');
+  if (ref.length > 1 && $(ref).length) {
+    scrollItems[ref] = menuItems[i];
+  }
+}
 
-$(window).scroll(function () {
-  var fromTop = $(this).scrollTop() + topMenuHeight;
-  var article = ".section";
+highlightCurrent = function() {
+  var article = Object.keys(scrollItems).join(', ');
 
-  $(article).each(function (i) {
-    var offsetScroll = $(this).offset().top - $(window).scrollTop();
+  $(article).each(function () {
+    var offsetScroll = $(this).offset().top - $(window).scrollTop() - utilities.getFixedOffset();
     if (
-      offsetScroll <= topMenuHeight + 200 &&
-      offsetScroll >= topMenuHeight - 200 &&
-      scrollItems[i] == "#" + $(this).attr("id") &&
+      offsetScroll <= 50 &&
+      offsetScroll >= -50 &&
       $(".hidden:visible")
     ) {
       $(menuItems).removeClass("side-scroll-highlight");
-      $(menuItems[i]).addClass("side-scroll-highlight");
+      utilities.makeHighlight(scrollItems['#' + this.id.replaceAll('.', '\\.')]);
     }
   });
-});
-
+}
+$(window).scroll(highlightCurrent);
+$(document).ready(highlightCurrent)
