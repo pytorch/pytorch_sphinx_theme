@@ -1,6 +1,11 @@
 from setuptools import setup
-from io import open
+import os
+import sys
+
+REPO_ROOT = os.path.dirname(__file__)
+sys.path.insert(0, REPO_ROOT)
 from pytorch_sphinx_theme import __version__
+sys.path.pop(0)
 
 setup(
     name = 'pytorch_sphinx_theme',
