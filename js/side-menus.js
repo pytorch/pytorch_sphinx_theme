@@ -6,8 +6,6 @@ window.sideMenus = {
   isFixedToBottom: false,
 
   bind: function() {
-    sideMenus.handleLeftMenu();
-
     var rightMenuLinks = document.querySelectorAll("#pytorch-right-menu li");
     var rightMenuHasLinks = rightMenuLinks.length > 1;
 
@@ -72,6 +70,7 @@ window.sideMenus = {
           linkWithHash.nextElementSibling.children.length > 0
         ) {
           linkWithHash.nextElementSibling.style.display = "block";
+          linkWithHash.classList.remove("not-expanded");
           linkWithHash.classList.add("expanded");
         }
 
@@ -92,7 +91,11 @@ window.sideMenus = {
         }
       });
 
-      sideMenus.handleRightMenu();
+      sideMenus.handleNavBar();
+      sideMenus.handleLeftMenu();
+      if (sideMenus.rightMenuIsOnScreen()) {
+        sideMenus.handleRightMenu();
+      }
     }
 
     $(window).on('resize scroll', function(e) {
@@ -183,12 +186,14 @@ window.sideMenus = {
           rightMenu.style.top = utilities.scrollTop() - mainHeaderHeight + "px";
           rightMenu.classList.add("scrolling-absolute");
           rightMenu.classList.remove("scrolling-fixed");
+          document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
         }
       } else {
         rightMenuWrapper.style.height = articleHeight + mainHeaderHeight + "px";
         rightMenu.style.top =
           articleBottom - mainHeaderHeight - rightMenuList.offsetHeight + "px";
         rightMenu.classList.add("scrolling-absolute");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "none";
       }
 
       if (utilities.scrollTop() < articleBottom - rightMenuList.offsetHeight) {
@@ -196,6 +201,7 @@ window.sideMenus = {
         rightMenu.style.top = "";
         rightMenu.classList.remove("scrolling-absolute");
         rightMenu.classList.add("scrolling-fixed");
+        document.getElementById("sphinx-template-shortcuts-wrapper").style.display = "block";
       }
     }
 

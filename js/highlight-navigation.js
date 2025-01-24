@@ -1,7 +1,7 @@
 // Modified from https://stackoverflow.com/a/32396543
 window.highlightNavigation = {
   navigationListItems: document.querySelectorAll("#pytorch-right-menu li"),
-  sections: document.querySelectorAll(".pytorch-article .section"),
+  sections: document.querySelectorAll(".pytorch-article section section, .sig.sig-object"),
   sectionIdTonavigationLink: {},
 
   bind: function() {
