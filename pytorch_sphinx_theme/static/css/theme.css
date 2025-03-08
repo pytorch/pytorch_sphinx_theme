@@ -9699,12 +9699,12 @@ pre {
   top: 0;
   width: 100%;
   z-index: 9999;
-  background-color: #ffffff;
+  background-color: #222222;
   border-bottom: 1px solid #e2e2e2;
 }
 @media screen and (min-width: 1200px) {
   .header-holder {
-    height: 90px;
+    height: 70px;
   }
 }
 
@@ -9745,10 +9745,10 @@ pre {
 }
 @media screen and (min-width: 1200px) {
   .header-logo {
-    background-size: 108px 27px;
+    background-size: 115px 34px;
     position: absolute;
-    height: 27px;
-    width: 108px;
+    height: 34px;
+    width: 115px;
     top: 4px;
     float: none;
   }
@@ -9837,7 +9837,7 @@ pre {
 }
 .header-holder .main-menu ul li a {
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 0;
   line-height: 2.125rem;
   text-align: center;
@@ -10394,27 +10394,30 @@ ul.pytorch-breadcrumbs a {
 }
 
 .tutorials-header .header-logo {
-  background-image: url("../images/logo-dark.svg");
+  background-image: url("../images/logo.svg");
 }
 .tutorials-header .main-menu ul li a {
-  color: #262626;
-}
-
-.tutorials-header .main-menu ul li a:hover {
-  color: #262626;
+  color: #fff;
 }
 
 .tutorials-header .main-menu .no-dropdown {
   display: block;
+  background-color: #de3412;
+  height: 35px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.tutorials-header .main-menu .no-dropdown:hover {
+  opacity: 0.85;
 }
 
 .tutorials-header .main-menu .no-dropdown a {
-  color: #262626;
+  margin: 10px 20px;
 }
 
 .tutorials-header .main-menu .no-dropdown a:hover {
-  color: #262626 !important;
-  border-bottom: 2px solid #262626;
+  color: #fff;
 }
 
 .tutorials-header .main-menu-open-button {
@@ -12526,23 +12529,13 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   background-repeat: no-repeat;
 }
 
-.with-down-arrow {
-  padding-right: 2rem;
-  position: relative;
-  background-image: url("../images/chevron-down-black.svg");
-  background-size: 14px 18px;
-  background-position: top 7px right 10px;
-  background-repeat: no-repeat;
-
-}
-
-
 .with-down-arrow a {
-  color: #262626;
+  color: #fff;
 }
 
 .main-menu ul li a.with-down-arrow:hover {
-  color: #262626;
+  color: #fff;
+
 }
 
 .with-down-arrow:hover {
