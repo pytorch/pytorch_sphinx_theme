@@ -12798,19 +12798,24 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .newsletter .legal-consent-container {
   display: none;
 }
+.newsletter p.newsletter__privacy,
+.copyright p {
+  line-height: 21px;
+  font-size: 14px;
+  color: #b6b6b6;
+}
 .newsletter p.newsletter__privacy {
   max-width: 860px;
   margin-top: 30px;
-  line-height: 21px;
-  font-size: 14px;
-  color: #dfdfdf;
 }
-.newsletter p.newsletter__privacy a {
-  color: #dfdfdf;
+.newsletter p.newsletter__privacy a,
+.copyright p a {
+  color: #b6b6b6;
   font-weight: 600;
 }
-.newsletter p.newsletter__privacy a:hover {
-  color: #dfdfdf;
+.newsletter p.newsletter__privacy a:hover,
+.copyright p a:hover {
+  color: #b6b6b6;
   font-weight: 600;
 }
 .newsletter .hbspt-form {
