@@ -31,7 +31,7 @@
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
+  --breakpoint-xl: 1100px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -1572,7 +1572,7 @@ pre code {
     margin-left: 91.6666666667%;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .col-xl {
     -ms-flex-preferred-size: 0;
         flex-basis: 0;
@@ -4146,7 +4146,7 @@ tbody.collapse.show {
     padding-left: 0;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .navbar-expand-xl {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -6215,7 +6215,7 @@ button.bg-dark:focus {
     display: inline-flex !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .d-xl-none {
     display: none !important;
   }
@@ -6989,7 +6989,7 @@ button.bg-dark:focus {
         align-self: stretch !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .flex-xl-row {
     -webkit-box-orient: horizontal !important;
     -webkit-box-direction: normal !important;
@@ -7203,7 +7203,7 @@ button.bg-dark:focus {
     float: none !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .float-xl-left {
     float: left !important;
   }
@@ -8575,7 +8575,7 @@ button.bg-dark:focus {
     margin-left: auto !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .m-xl-0 {
     margin: 0 !important;
   }
@@ -8953,7 +8953,7 @@ button.bg-dark:focus {
     text-align: center !important;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .text-xl-left {
     text-align: left !important;
   }
@@ -9702,7 +9702,7 @@ pre {
   background-color: #222222;
   border-bottom: 1px solid #e2e2e2;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-holder {
     height: 70px;
   }
@@ -9727,7 +9727,7 @@ pre {
 .header-container {
   *zoom: 1;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-container {
     display: block;
   }
@@ -9743,7 +9743,7 @@ pre {
   float: left;
   z-index: 10;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-logo {
     background-size: 115px 34px;
     position: absolute;
@@ -9765,7 +9765,7 @@ pre {
   right: 0;
   top: 4px;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .main-menu-open-button {
     display: none;
   }
@@ -9774,7 +9774,7 @@ pre {
 .header-holder .main-menu {
   display: none;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-holder .main-menu {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -9843,7 +9843,7 @@ pre {
   text-align: center;
   text-decoration: none;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-holder .main-menu ul li a:hover {
     color: #e44c2c;
   }
@@ -9952,6 +9952,7 @@ pre {
   padding-bottom: 2.5rem;
   position: relative;
   z-index: 201;
+  margin-top: 3em;
 }
 @media screen and (min-width: 768px) {
   .docs-tutorials-resources {
@@ -10287,7 +10288,7 @@ ul.pytorch-breadcrumbs a {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .table-of-contents-link-wrapper {
     display: none;
   }
@@ -10475,7 +10476,7 @@ article.pytorch-article .sphx-glr-thumbcontainer {
   text-align: center;
   margin-bottom: 5%;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1100px) {
   article.pytorch-article .sphx-glr-thumbcontainer:nth-child(odd) {
     margin-left: 0;
     margin-right: 2.5%;
@@ -10488,7 +10489,7 @@ article.pytorch-article .sphx-glr-thumbcontainer {
     width: 40%;
   }
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   article.pytorch-article .sphx-glr-thumbcontainer {
     margin-right: 3%;
     margin-bottom: 3%;
@@ -11160,7 +11161,7 @@ article.pytorch-article .math img {
 .pytorch-breadcrumbs-wrapper {
   width: 100%;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-breadcrumbs-wrapper {
     float: left;
     margin-left: 3%;
@@ -11224,7 +11225,7 @@ a:hover {
 .header-holder .main-menu ul li.active a {
   color: #ee4c2c;
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .header-holder .main-menu ul li a:hover {
     color: #ee4c2c;
   }
@@ -11254,7 +11255,7 @@ a:hover {
     padding-top: 0;
   }
 }
-@media (min-width: 1200px) and (max-width: 1239px) {
+@media (min-width: 1100px) and (max-width: 1239px) {
   .pytorch-call-to-action-links {
     padding-top: 2.5rem;
   }
@@ -11584,12 +11585,12 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   width: auto;
   position: relative;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-container {
     padding: 0;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1100px) {
   .pytorch-container {
     margin-left: 25%;
   }
@@ -11628,7 +11629,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-content-wrap {
   *zoom: 1;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-content-wrap {
     padding-top: 45px;
     float: left;
@@ -11654,7 +11655,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   margin-top: 2.5rem;
   width: 100%;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-content-left {
     margin-top: 0;
     margin-left: 3%;
@@ -11684,7 +11685,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   overflow-x: hidden;
   overflow-y: hidden;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-content-right {
     display: block;
     margin-left: 0;
@@ -11699,7 +11700,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   }
 }
 
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-side-scroll {
     position: relative;
     overflow-x: hidden;
@@ -11711,7 +11712,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-menu-vertical {
   padding: 1.25rem 1.875rem 2.5rem 1.875rem;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-menu-vertical {
     display: block;
     padding-top: 0;
@@ -11732,7 +11733,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   color: #262626;
   overflow: scroll;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-left-menu {
     display: block;
     overflow-x: hidden;
@@ -11785,7 +11786,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-left-menu-search {
   margin-bottom: 2.5rem;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-left-menu-search {
     margin: 1.25rem 0.625rem 1.875rem 0;
   }
@@ -11843,7 +11844,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   outline: 0;
 }
 
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-left-menu .pytorch-side-scroll {
     width: 120%;
   }
@@ -11863,7 +11864,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   padding-top: 0;
   position: relative;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-right-menu {
     width: 100%;
   }
@@ -11968,7 +11969,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   font-size: 1.375rem;
   color: #ee4c2c;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-left-menu li.toctree-l1.current > a:before,
   .pytorch-right-menu li.toctree-l1.current > a:before {
     left: -20px;
@@ -12094,7 +12095,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-right-menu .pytorch-side-scroll {
   padding-top: 20px;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-right-menu .pytorch-side-scroll {
     width: 120%;
   }
@@ -12130,7 +12131,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   max-width: none;
   margin-top: 4px;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .header-container {
     margin-top: 0;
   }
@@ -12151,7 +12152,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   padding-right: 1.875rem;
   padding-left: 1.875rem;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .header-holder .container {
     padding-right: 1.875rem;
     padding-left: 1.875rem;
@@ -12182,7 +12183,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
     background-color:#88888833;
 }
 
-@media screen (min-width: 1201px) {
+@media screen (min-width: 1100px) {
   .header-holder .main-menu .github-icon {
     background-image: url("../images/pytorch-github.svg");
     color: white;
@@ -12197,7 +12198,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   }
 }
 
-@media screen (min-width: 1201px) {
+@media screen (min-width: 1100px) {
   .header-holder .main-menu .github-icon:hover {
     background-color:#88888833;
   }
@@ -12222,7 +12223,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 }
 
 
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .header-holder .main-menu ul {
     padding-left: 0;
     margin-left: 26%;
@@ -12245,7 +12246,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   width: 100%;
   z-index: 201;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-page-level-bar {
     left: 0;
     display: -webkit-box;
@@ -12286,7 +12287,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .pytorch-shortcuts-wrapper {
   display: none;
 }
-@media screen and (min-width: 1201px) {
+@media screen and (min-width: 1100px) {
   .pytorch-shortcuts-wrapper {
     font-size: 0.875rem;
     float: left;
@@ -12521,7 +12522,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   position: relative;
   z-index: 201;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .site-footer {
     left: 0;
     bottom: 0;
@@ -12552,7 +12553,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .site-footer a:link, .site-footer a:visited {
   color: inherit;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .site-footer a:hover {
     color: #ee4c2c;
  }
@@ -12595,7 +12596,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   padding-top: rem(40px);
   padding-bottom: rem(40px);
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .docs-tutorials-resources {
     padding-top: rem(66px);
     padding-bottom: 4.09rem;
@@ -12607,7 +12608,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   text-transform: none;
   margin-bottom: 0.25rem;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .docs-tutorials-resources h2 {
     margin-bottom: rem(20px);
  }
@@ -12615,7 +12616,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .docs-tutorials-resources .col-md-4 {
   margin-bottom: rem(32px);
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .docs-tutorials-resources .col-md-4 {
     margin-bottom: 0;
  }
@@ -12624,7 +12625,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   margin-left: 12px;
   background-position: top 3px right 11px;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .docs-tutorials-resources .with-right-arrow {
     background-position: top 6px right 11px;
  }
@@ -12636,7 +12637,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   color: #a0a0a1;
   margin-bottom: rem(8px);
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .docs-tutorials-resources p {
     margin-bottom: rem(20px);
  }
@@ -12654,7 +12655,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .footer-logo-wrapper {
   display: none;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .footer-logo-wrapper {
     display: flex;
     grid-column: span 6;
@@ -12669,7 +12670,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   padding-bottom: 1rem;
   border-bottom: 1px solid white;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .footer-links-wrapper {
     flex-wrap: initial;
     justify-content: flex-end;
@@ -12679,7 +12680,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
   margin-bottom: rem(60px);
   width: 50%;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .footer-links-col {
     margin-bottom: 0;
     width: 14%;
@@ -12730,7 +12731,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
 .site-footer .email-subscribe-form input[type="submit"] {
   top: 9px;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .site-footer .email-subscribe-form input[type="submit"] {
     top: 13px;
  }
@@ -12747,7 +12748,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button a {
     grid-column: span 8;
  }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1100px) {
   .social-links {
     grid-column: span 6;
     align-self: end;
