@@ -13,7 +13,6 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','{{ theme_analytics_id }}');</script>
 <!-- End Google Tag Manager -->
-{% endblock %}
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 
@@ -32,8 +31,5 @@
 
 {% block footer%}
    {% include "pytorch_footer.html" %}
-{% endblock %}
-
-{% block scripts_end %}
-{{ super() }}
+   {{ super() }}
 {% endblock %}
