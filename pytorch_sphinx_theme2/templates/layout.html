@@ -20,9 +20,9 @@
 
 {% block logo %}
 <!-- Replace logo text with Home -->
-<a class="navbar-brand logo" href="{{ pathto('', 1) }}">
-  <p class="title logo__title">Home</p>
-</a>
+{% if not is_logo or theme_logo.get("text") %}
+    <p class="title logo__title">{{ theme_logo.get("text") or "Home" }}</p>
+{% endif %}
 {% endblock %}
 
 {% block body_tag %}
