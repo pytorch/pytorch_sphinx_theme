@@ -709,7 +709,7 @@ input:checked + .slider:before {
   border: 1px solid var(--pst-color-border) !important;
   background-color: var(--pst-color-background) !important;
   height: 38px !important;
-  padding-top: 0 !important;
+  padding-top: 5px !important;
   padding-bottom: 6px !important;
   padding-left: 3px !important;
   box-sizing: border-box !important;
