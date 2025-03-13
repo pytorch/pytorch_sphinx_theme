@@ -19,13 +19,16 @@
 {% endblock%}
 
 {% block logo %}
+<!-- Replace logo text with Home -->
 <a class="navbar-brand nav-link nav-internal" href="{{ pathto('', 1) }}">
-  {% if theme_logo_text %}
-    {{ theme_logo_text }}
+{% if html_theme_options.logo_text %}
+    {{ html_theme_options.logo_text }}
   {% else %}
     Home
   {% endif %}
 </a>
+<!-- Debug: Check if logo_text is being passed -->
+<p>Logo Text: {{ html_theme_options.logo_text }}</p>
 {% endblock %}
 
 {% block body_tag %}
