@@ -20,7 +20,11 @@
 
 {% block logo %}
 <a class="navbar-brand nav-link nav-internal" href="{{ pathto('', 1) }}">
-  {{ html_theme_options.logo_text }}
+  {% if theme_logo_text %}
+    {{ theme_logo_text }}
+  {% else %}
+    Home
+  {% endif %}
 </a>
 {% endblock %}
 
