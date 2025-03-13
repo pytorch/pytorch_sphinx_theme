@@ -1,5 +1,4 @@
 {% extends "!layout.html" %}
-<!DOCTYPE html>
 
 {% block extrahead %}
 {{ super() }}
@@ -7,14 +6,14 @@
 <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/theme.css', 1) }}">
 <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TEST12345"></script>
-    <script type="text/javascript">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-TEST12345');
-    </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','{{ theme_analytics_id }}');</script>
+<!-- End Google Tag Manager -->
+{% endblock %}
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 
@@ -22,7 +21,7 @@
 
 {% block logo %}
 <a class="navbar-brand nav-link nav-internal" href="{{ pathto('', 1) }}">
-  {{ html_theme_options.logo.text }}
+  {{ html_theme_options.logo_text }}
 </a>
 {% endblock %}
 
@@ -38,5 +37,3 @@
 {% block scripts_end %}
 {{ super() }}
 {% endblock %}
-</body>
-</html>
