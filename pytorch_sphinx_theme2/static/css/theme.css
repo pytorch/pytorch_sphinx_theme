@@ -1275,6 +1275,9 @@ body.search-page.gsc-overflow-hidden .footer-article-item .feedback-send {
   .sidebar-header-items__end .navbar-item .search-container-wrapper .form-control {
     width: 100% !important;
   }
+  .sidebar-header-items__end .navbar-item .search-container-wrapper .gsib_a {
+    padding: 5px 8px 4px 9px !important;
+  }
 }
 .gsst_a {
   display: none !important;
