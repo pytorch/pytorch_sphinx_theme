@@ -12,7 +12,7 @@
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
-  
+
   @media (max-width: 767px) {
     justify-content: flex-end;
     white-space: nowrap;
@@ -30,11 +30,11 @@
   cursor: pointer;
   font-size: 12px;
   color: #E6E6E6;
-  
+
   &.active {
     color: var(--pst-color-primary);
   }
-  
+
   &.hover {
     color: var(--pst-color-primary);
   }
@@ -49,7 +49,7 @@
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  
+
   &-send {
     display: flex;
     gap: 0.5rem;
@@ -58,19 +58,19 @@
     justify-content: center;
     align-items: center;
   }
-  
+
   &-btn {
     border-radius: 0;
     border: none;
-    background-color: $background-light;
-    color: $muted-text;
+    background-color: var(--pst-color-surface);
+    color: var(--pst-color-text-muted);
     font-weight: 400;
     position: relative;
     letter-spacing: 0.25px;
     padding: 8px 32px 8px 12px;
     font-size: 18px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    
+
     &::after {
       content: '';
       background-image: url("../img/chevron-right-orange.svg");
@@ -83,7 +83,7 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
-    
+
     &::before {
       content: "";
       width: 0;
@@ -91,19 +91,35 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      background-color: $pytorch-red;
+      background-color: var(--pst-color-primary);
       transition: width 0.25s ease-in-out;
     }
-    
+
     &:hover {
-      color: $dark-text;
-      
+      color: var(--pst-color-text-base);
+
       &::before {
         width: 100%;
       }
     }
   }
 }
+
+// Dark mode specific overrides
+html[data-theme="dark"] {
+  .feedback-btn {
+    background-color: var(--pst-color-surface);
+
+    &::after {
+      filter: brightness(0.8) hue-rotate(180deg);
+    }
+
+    &:hover {
+      color: var(--pst-color-text-base);
+    }
+  }
+}
+
 
 // Button component
 .btn,
@@ -119,7 +135,7 @@ a.btn {
   align-items: center;
   justify-content: space-between;
   align-items: flex-start;
-  
+
   &__start,
   &__end {
     display: flex;
@@ -157,11 +173,11 @@ a.btn {
   background-size: 14px 18px;
   background-position: top 7px right 10px;
   background-repeat: no-repeat;
-  
+
   a {
     color: $dark-text;
   }
-  
+
   &:hover {
     background-repeat: no-repeat;
   }
@@ -169,7 +185,7 @@ a.btn {
 
 .with-right-arrow {
   margin-left: 12px;
-  
+
   &:hover {
     background-image: url("../img/chevron-right-white.svg");
   }
@@ -178,7 +194,7 @@ a.btn {
 // Cookie banner
 .cookie-banner-wrapper {
   display: none;
-  
+
   &.is-visible {
     display: block;
     position: fixed;
@@ -188,32 +204,32 @@ a.btn {
     width: 100%;
     border-top: 3px solid #ededee;
   }
-  
+
   .container {
     padding-left: 1.875rem;
     padding-right: 1.875rem;
     max-width: 1240px;
   }
-  
+
   .gdpr-notice {
     color: $muted-text;
     margin-top: 1.5625rem;
     text-align: left;
     max-width: 1440px;
-    
+
     @media screen and (min-width: 768px) {
       width: 77%;
     }
-    
+
     @media (min-width: 768px) and (max-width: 1239px) {
       width: inherit;
     }
-    
+
     .cookie-policy-link {
       color: #343434;
     }
   }
-  
+
   .close-button {
     appearance: none;
     background: transparent;
@@ -225,12 +241,12 @@ a.btn {
     top: 0;
     cursor: pointer;
     outline: none;
-    
+
     @media screen and (min-width: 768px) {
       right: 20%;
       top: inherit;
     }
-    
+
     @media (min-width: 768px) and (max-width: 1239px) {
       right: 0;
       top: 0;
@@ -243,7 +259,7 @@ a.btn {
   &__button {
     margin-bottom: 0 !important;
   }
-  
+
   &__menu {
     max-height: 300px;
     overflow-y: auto;

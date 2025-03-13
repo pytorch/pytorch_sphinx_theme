@@ -1548,8 +1548,8 @@ a.btn {
 .feedback-btn {
   border-radius: 0;
   border: none;
-  background-color: #f3f4f7;
-  color: #6c6c6d;
+  background-color: var(--pst-color-surface);
+  color: var(--pst-color-text-muted);
   font-weight: 400;
   position: relative;
   letter-spacing: 0.25px;
@@ -1576,14 +1576,24 @@ a.btn {
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: #ee4c2c;
+  background-color: var(--pst-color-primary);
   transition: width 0.25s ease-in-out;
 }
 .feedback-btn:hover {
-  color: #262626;
+  color: var(--pst-color-text-base);
 }
 .feedback-btn:hover::before {
   width: 100%;
+}
+
+html[data-theme=dark] .feedback-btn {
+  background-color: var(--pst-color-surface);
+}
+html[data-theme=dark] .feedback-btn::after {
+  filter: brightness(0.8) hue-rotate(180deg);
+}
+html[data-theme=dark] .feedback-btn:hover {
+  color: var(--pst-color-text-base);
 }
 
 .btn,

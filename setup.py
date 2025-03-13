@@ -1,4 +1,4 @@
-from setuptools import find_packages, setup
+from setuptools import setup  # noqa: F401
 
 setup(
     name="pytorch_sphinx_theme2",
