@@ -20,4 +20,9 @@ setup(
             "links.json",
         ],
     },
+    entry_points={
+        "sphinx.html_themes": [
+            "pytorch_sphinx_theme2 = pytorch_sphinx_theme2",
+        ],
+    },
 )
