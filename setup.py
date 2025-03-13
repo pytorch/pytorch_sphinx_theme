@@ -2,6 +2,11 @@ from setuptools import find_packages, setup
 
 setup(
     name="pytorch_sphinx_theme2",
+    description="PyTorch Sphinx Theme",
+    author="PyTorch Team",
+    author_email="svekars@meta.com",
+    url="https://github.com/pytorch/pytorch_sphinx_theme",
+    license="MIT",
     version="0.1.0",
     install_requires=["pydata-sphinx-theme"],
     packages=["pytorch_sphinx_theme2"],
@@ -25,4 +30,5 @@ setup(
             "pytorch_sphinx_theme2 = pytorch_sphinx_theme2",
         ],
     },
+    python_requires=">=3.7",
 )
