@@ -1,0 +1,59 @@
+{% if pagename != 'index' %}
+<div class="feedback">
+  {% include "rate_page.html" %}
+  <div class="feedback-send">
+    <button class="feedback-btn"
+            onclick="openGitHubIssue()"
+            data-bs-title="Create a GitHub Issue"
+            data-bs-placement="bottom"
+            data-bs-toggle="tooltip">Send Feedback
+    </button>
+  </div>
+</div>
+{% endif %}
+
+<div class="prev-next-area">
+  {%- if prev %}
+    <a class="left-prev"
+       href="{{ prev.link|e }}"
+       title="{{ _('previous page') }}">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">{{ _("previous") }}</p>
+        <p class="prev-next-title">{{ prev_title or prev.title }}</p>
+      </div>
+    </a>
+  {%- endif %}
+  {%- if next %}
+    <a class="right-next"
+       href="{{ next.link|e }}"
+       title="{{ _('next page') }}">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">{{ _("next") }}</p>
+        <p class="prev-next-title">{{ next_title or next.title }}</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+  {%- endif %}
+</div>
+
+<div class="footer-info">
+  <p class="copyright">
+    {% if hasdoc('copyright') %}
+      © <a href="{{ pathto('copyright') }}">
+        {% trans copyright=copyright|e %}Copyright {{ copyright }}{% endtrans %}
+      </a>.<br/>
+    {% else %}
+      {% trans copyright=copyright|e %}
+        © Copyright {{ copyright }}.
+      {% endtrans %}
+      <br/>
+    {% endif %}
+  </p>
+
+  <p class="theme-version">
+    {% trans trimmed theme_version=theme_version|e, PST_url="[https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html)" %}
+      Built with the <a href="{{ PST_url }}">PyData Sphinx Theme</a> {{ theme_version }}.
+    {% endtrans %}
+  </p>
+</div>

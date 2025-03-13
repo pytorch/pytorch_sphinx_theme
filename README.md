@@ -1,6 +1,29 @@
 # PyTorch Sphinx Theme
 
-Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
+Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [pydata_sphinx_theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/index.html).
+
+## Contributing to the theme
+
+To contribute to this theme, edit the files in the `pytorch_sphinx_theme2`
+directory.
+
+To make a request for an improvement or new feature, please file an
+issue in this repo.
+
+### Styling Changes
+To make changes to the styling, edit the SCSS files in
+`pytorch_sphinx_theme2/static/scss/`. These files will be compiled
+into `theme.css` using Grunt. Do not make changes in the `theme.css`
+
+### Template Changes
+To make changes to the templates, edit the HTML files in
+`pytorch_sphinx_theme2/templates/` directory.
+
+### JavaScript Changes
+To make changes to JavaScript functionality, edit the JS files in
+`pytorch_sphinx_theme2/static/js/ directory`. These files will be
+concatenated into a single `theme.js` file using Grunt. Do not
+make changes in the `theme.js`
 
 ## Local Development
 
@@ -8,33 +31,43 @@ Install PyTorch Sphinx Theme:
 
 ```
 git clone https://github.com/pytorch/pytorch_sphinx_theme
-pip install -r docs/requirements.txt
-pip install -e .
+pip install -r docs/requirements.txt # Installs dependencies
+pip install -e . # Installs local version of the theme
 ```
 
-In the root directory, install the dependencies using either yarn using `yarn install` OR npm using `npm install` (not both):
+In the root directory, install the dependencies using
+using `npm install`:
 
-Create an empty `.env.json` file in the root directory and build the site with live reloading
-
-```bash
-echo '{}' > .env.json
-grunt build
+```
+npm install grunt --save-dev
+npm install grunt-sass sass grunt-contrib-concat grunt-contrib-watch grunt-shell --save-dev
 ```
 
-If you want to specify the project folder (docs or tutorial for which
-you want to see docs generated) then you need to specify it into `.env.json`
-file:
+To test your changes locally:
 
-```json
-{
-    "DOCS_DIR": "docs/",
-    "TUTORIALS_DIR": "path/to/tutorial/directory"
-}
-```
+1. Install all the needed dependencies described above.
+2. Make your changes.
+3. Run `npx grunt docs`. This command will:
+
+   * Compile SCSS to `theme.css`.
+   * Concatenate JS files into `theme.s`.
+   * Reinstall the theme package.
+   * Build the test documentation stored in the `docs/` directory.
+   * Start a local server at `http:8000`.
+   * Watch for changes to SCSS and JS files.
+
+When applying subsequent changes, you might need to reinstall the theme
+by running `pip uninstall -y pytorch_sphinx_theme2` and `pip install -e .`,
+and then running the `npx grunt docs` again.
+
+DO NOT submit a PR without running Grunt. We only reference theme.css
+and theme.js in the theme, so those need to be compiled with your
+changes and the PR needs to have those files updated.
 
 ## Testing your changes and submitting a PR
 
-When you are ready to submit a PR with your changes you can first test that your changes have been applied correctly against either the PyTorch Docs or Tutorials repo:
+When you are ready to submit a PR with your changes you can first test
+that your changes have been applied correctly against either the PyTorch Docs or Tutorials repo:
 
 1. Run the `grunt build` task on your branch and commit the build to Github.
 2. In your local docs or tutorials repo, remove any existing `pytorch_sphinx_theme` packages in the `src` folder (there should be a `pip-delete-this-directory.txt` file there)
@@ -49,7 +82,8 @@ If your changes have been applied successfully, remove the build commit from you
 
 ## Publishing the theme
 
-Before the new changes are visible in the theme the maintainer will need to run the build process:
+Before the new changes are visible in the theme the maintainer will
+need to run the build process:
 
 ```bash
 grunt build

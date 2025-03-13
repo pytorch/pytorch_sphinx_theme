@@ -1,2 +1,2 @@
 sphinxcontrib-httpdomain
-sphinx==5.0.0
+sphinx==8.1.0
