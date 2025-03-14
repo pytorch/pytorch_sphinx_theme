@@ -17,6 +17,7 @@ setup(
             "*.html",
             "templates/*.html",
             "templates/sections/*.html",
+            "templates/components/*.html",
             "static/css/*.css",
             "static/js/*.js",
             "static/img/*",
