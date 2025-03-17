@@ -28,7 +28,7 @@
 <img src="{{ theme_logo['image_relative'][default_mode] }}" class="logo__image only-{{ default_mode }}" alt="{{ alt }}"/>
 <img src="{{ theme_logo['image_relative'][js_mode] }}" class="logo__image only-{{ js_mode }} pst-js-only" alt="{{ alt }}"/>
 {% endif %}
-{% if not is_logo or theme_logo.get("text") %}
-<p class="title logo__title">Home</p>
+{% if not is_logo or theme_logo_text %}
+<p class="title logo__title">{{ theme_logo_text }}</p>
 {% endif %}
 </a>
