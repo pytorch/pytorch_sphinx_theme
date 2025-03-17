@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, pytorch_sphinx_theme2 ]
   workflow-dispatch:
 
 jobs:
