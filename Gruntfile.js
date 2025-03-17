@@ -1,8 +1,17 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    copy: {
+      fontawesome: {
+        expand: true,
+        cwd: 'node_modules/@fortawesome/fontawesome-free/webfonts',
+        src: '*',
+        dest: 'pytorch_sphinx_theme2/static/webfonts/'
+      }
+    },
     sass: {
       options: {
-        implementation: require('sass')
+        implementation: require('sass'),
+        includePaths: ['node_modules']
       },
       dist: {
         options: {
@@ -52,6 +61,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -59,6 +69,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
 
-  grunt.registerTask('docs', ['sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'connect:server', 'watch']);
-  grunt.registerTask('default', ['sass', 'concat']);
+  grunt.registerTask('docs', ['copy:fontawesome', 'sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'connect:server', 'watch']);
+  grunt.registerTask('default', ['copy:fontawesome', 'sass', 'concat']);
 };

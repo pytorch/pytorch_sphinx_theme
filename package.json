@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "bootstrap": "^5.3.3",
     "browserify": "^13.0.0",
     "connect-livereload": "~0.6.0",
