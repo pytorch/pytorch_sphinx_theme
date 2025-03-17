@@ -2,10 +2,20 @@ module.exports = function(grunt) {
   grunt.initConfig({
     copy: {
       fontawesome: {
-        expand: true,
-        cwd: 'node_modules/@fortawesome/fontawesome-free/webfonts',
-        src: '*',
-        dest: 'pytorch_sphinx_theme2/static/webfonts/'
+        files: [
+          {
+            expand: true,
+            cwd: 'node_modules/@fortawesome/fontawesome-free/webfonts',
+            src: '*',
+            dest: 'pytorch_sphinx_theme2/static/webfonts/'
+          },
+          {
+            expand: true,
+            cwd: 'node_modules/@fortawesome/fontawesome-free/css',
+            src: 'all.min.css',
+            dest: 'pytorch_sphinx_theme2/static/webfonts/'
+          }
+        ]
       }
     },
     sass: {
