@@ -32,6 +32,9 @@ pytorch_project = "docs"
 
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ["image.nonlocal_uri"]
+html_css_files = [
+    'custom.css',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = [
@@ -70,7 +73,7 @@ language = "en"
 # today = ''
 # Else, today_fmt is used as the format for a strftime call.
 # today_fmt = '%B %d, %Y'
-
+html_static_path = ['_static']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = []
@@ -136,11 +139,12 @@ html_theme_options = {
         },
     ],
     "logo": {
-        "image_light": "_static/img/logo-icon.svg",
-        "image_dark": "_static/img/logo-icon.svg",
-        "text": "Home",
+        "image_light": "img/logo-icon.svg",
+        "image_dark": "img/logo-icon.svg",
     }
 }
+
+
 theme_variables = pytorch_sphinx_theme2.get_theme_variables()
 html_context = {
     "theme_variables": theme_variables,
@@ -169,7 +173,6 @@ html_theme_path = ["../"]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.

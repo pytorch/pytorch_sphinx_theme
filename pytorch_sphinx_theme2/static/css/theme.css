@@ -756,6 +756,7 @@ input:checked + .slider:before {
 #google-search .form-control,
 #google-search .gsc-input {
   margin: 0 !important;
+  border: none !important;
 }
 
 .gcse-search-wrapper {
