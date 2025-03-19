@@ -1,3 +1,11 @@
 .prev-next-footer {
   display: none;
 }
+
+.table tbody tr:hover {
+  background-color: none;
+}
+
+dt:target, span.highlighted {
+  background-color: none;
+}
