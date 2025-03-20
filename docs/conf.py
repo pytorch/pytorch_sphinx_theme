@@ -151,6 +151,7 @@ html_context = {
     "library_links": theme_variables.get("library_links", []),
     "community_links": theme_variables.get("community_links", []),
     "pytorch_project": "docs",
+    "feedback_url": "https://github.com/pytorch/pytorch"
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]

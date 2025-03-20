@@ -37,12 +37,12 @@
   position: relative;
   display: flex;
   align-items: center;
-  
+
   &:before, &:after {
     content: "";
     display: table;
   }
-  
+
   &:after {
     clear: both;
   }
@@ -57,7 +57,7 @@
   display: block;
   float: left;
   z-index: 10;
-  
+
   @media screen and (min-width: 959px) {
     background-size: 108px 27px;
     position: absolute;
@@ -68,42 +68,66 @@
 }
 
 .main-menu-open-button {
-  background-image: url("../img/icon-menu-dots.svg");
-  background-position: center center;
-  background-size: 25px 7px;
-  background-repeat: no-repeat;
+  // Replace background-image with FontAwesome icon
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25px;
   height: 17px;
   position: absolute;
   right: 0;
   top: 4px;
-  
+
+  i {
+    font-size: 1.5rem;
+    color: $muted-text;
+  }
+
   @media screen and (min-width: 960px) {
     display: none;
   }
 }
 
+// Add this to make the close button more visible
+.main-menu-close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  width: 24px;
+  top: -4px;
+  cursor: pointer;
+
+  i {
+    font-size: 1.5rem;
+    color: $light-text;
+  }
+}
+
+
 .header-holder .main-menu {
   display: none;
-  
+
   @media screen and (min-width: 960px) {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-left: 110px;
   }
-  
+
   ul {
     display: flex;
     align-items: center;
     margin: 0;
-    
+
     li {
       display: inline-block;
       margin-right: 26px;
       position: relative;
       color: $dark-text;
-      
+
       &.active:after {
         content: "•";
         bottom: -24px;
@@ -114,11 +138,11 @@
         right: 0;
         text-align: center;
       }
-      
+
       &.active a {
         color: $dark-text;
       }
-      
+
       &.docs-active:after {
         content: "•";
         bottom: -24px;
@@ -129,11 +153,11 @@
         right: 0;
         text-align: center;
       }
-      
+
       &:last-of-type {
         margin-right: 0;
       }
-      
+
       a {
         color: $dark-text;
         font-size: 1.2rem;
@@ -141,10 +165,10 @@
         line-height: 2.125rem;
         text-align: center;
         text-decoration: none;
-        
+
         &:hover {
           color: $dark-text;
-          
+
           @media screen and (min-width: 1200px) {
             color: $pytorch-red;
           }
@@ -208,17 +232,6 @@
   }
 }
 
-.main-menu-close-button {
-  background-image: url("../img/icon-close.svg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-  height: 24px;
-  position: absolute;
-  right: 0;
-  width: 24px;
-  top: -4px;
-}
 
 .mobile-main-menu-header-container {
   position: relative;
@@ -246,20 +259,3 @@
     }
   }
 }
-
-.main-menu-open-button {
-  background-image: url("../img/icon-menu-dots.svg");
-  background-position: center center;
-  background-size: 25px 7px;
-  background-repeat: no-repeat;
-  width: 25px;
-  height: 17px;
-  position: absolute;
-  right: 0;
-  top: 4px;
-
-  @media screen and (min-width: 960px) {
-    display: none;
-  }
-}
-

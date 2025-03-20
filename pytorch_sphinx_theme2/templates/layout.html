@@ -19,9 +19,8 @@
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 
 {% endblock%}
-
-
 {% block body_tag %}
+   <body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
    {% include "pytorch_header.html" %}
    {{ super() }}
 {% endblock %}
@@ -30,3 +29,4 @@
    {% include "pytorch_footer.html" %}
    {{ super() }}
 {% endblock %}
+</body>

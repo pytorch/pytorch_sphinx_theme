@@ -18,6 +18,10 @@ module.exports = function(grunt) {
         ]
       }
     },
+    clean: {
+      css: ['pytorch_sphinx_theme2/static/css/theme.css'],
+      js: ['pytorch_sphinx_theme2/static/js/theme.js']
+    },
     sass: {
       options: {
         implementation: require('sass'),
@@ -77,8 +81,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
 
-  grunt.registerTask('docs', ['copy:fontawesome', 'sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'connect:server', 'watch']);
-  grunt.registerTask('default', ['copy:fontawesome', 'sass', 'concat']);
+
+  grunt.registerTask('docs', ['clean', 'copy:fontawesome', 'sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'connect:server', 'watch']);
+  grunt.registerTask('default', ['clean', 'copy:fontawesome', 'sass', 'concat']);
 };

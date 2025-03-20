@@ -124,9 +124,9 @@ input:checked + .slider {
     border: 1px solid var(--pst-color-border) !important;
     background-color: var(--pst-color-background) !important;
     height: 38px !important;
-    padding-top: 5px !important;
+    padding-top: 0px !important;
     padding-bottom: 6px !important;
-    padding-left: 3px !important;
+    padding-left: 1px !important;
     box-sizing: border-box !important;
   }
 
@@ -187,7 +187,7 @@ input:checked + .slider {
 
   .fa-magnifying-glass {
     position: absolute;
-    left: 8.75px;
+    left: 6.85px;
     color: var(--pst-color-text-base);  // Fixed typo in original CSS
     z-index: 20;
     font-size: 1rem;
@@ -199,7 +199,7 @@ input:checked + .slider {
       top: 0.7em;
     }
     @media (min-width: 720px) {
-      top: 0.6em !important;
+      top: 0.7em !important;
     }
   }
 
