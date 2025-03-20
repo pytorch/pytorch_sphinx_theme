@@ -138,10 +138,21 @@ html_theme_options = {
             "url": "https://pytorch.org/tutorials/",
         },
     ],
+    "navbar_align": "left",
+    "navbar_start": ["version-switcher", "navbar-logo"],
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
+    "header_links_before_dropdown": 4,
+    "navbar_persistent": [],
+    "use_edit_page_button": True,
+    "switcher": {
+        "json_url": "https://svekars.github.io/doc-test/versions.json",
+        "version_match": "main",
+    },
+    "canonical_url": "https://pytorch.org/docs/stable/",
     "logo": {
-        "image_light": "img/logo-icon.svg",
-        "image_dark": "img/logo-icon.svg",
-    }
+        "text": "Home",
+    },
 }
 
 
@@ -151,7 +162,14 @@ html_context = {
     "library_links": theme_variables.get("library_links", []),
     "community_links": theme_variables.get("community_links", []),
     "pytorch_project": "docs",
-    "feedback_url": "https://github.com/pytorch/pytorch"
+
+    "feedback_url": "https://github.com/pytorch/pytorch",
+    "display_github": True,
+    "github_url": "https://github.com",
+    "github_user": "pytorch",
+    "github_repo": "pytorch_sphinx_theme",
+    "github_version": "main",
+    "doc_path": "docs",
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
