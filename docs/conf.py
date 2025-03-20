@@ -147,7 +147,7 @@ html_theme_options = {
     "use_edit_page_button": True,
     "switcher": {
         "json_url": "https://svekars.github.io/doc-test/versions.json",
-        "version_match": "main",
+        "version_match": "master",
     },
     "canonical_url": "https://pytorch.org/docs/stable/",
     "logo": {
@@ -168,7 +168,7 @@ html_context = {
     "github_url": "https://github.com",
     "github_user": "pytorch",
     "github_repo": "pytorch_sphinx_theme",
-    "github_version": "main",
+    "github_version": "master",
     "doc_path": "docs",
 }
 # Add any paths that contain custom themes here, relative to this directory.
