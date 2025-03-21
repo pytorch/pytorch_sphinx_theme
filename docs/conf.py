@@ -170,6 +170,7 @@ html_context = {
     "github_repo": "pytorch_sphinx_theme",
     "github_version": "master",
     "doc_path": "docs",
+    "language_bindings_links": theme_variables.get("language_bindings_links", []),
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
