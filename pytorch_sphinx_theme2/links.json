@@ -10,7 +10,7 @@
     {"url": "https://pytorch.org/xla", "name": "PyTorch on XLA Devices"}
   ],
   "community_links": [
-    {"url": "community/index.html", "name": "PyTorch Governance"},
+    {"url": "https://pytorch.org/docs/stable/community/index.html", "name": "PyTorch Governance"},
     {"url": "https://pytorch.org/docs/stable/community/design.html", "name": "PyTorch Design Philosophy"},
     {"url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions", "name": "The Ultimate Guide to PyTorch Contributions"}
   ]
