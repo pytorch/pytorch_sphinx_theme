@@ -1589,6 +1589,12 @@ html[data-theme=dark] .feedback-btn::after {
 html[data-theme=dark] .feedback-btn:hover {
   color: var(--pst-color-text-base);
 }
+html[data-theme=dark] .star {
+  color: var(--pst-color-text-muted);
+}
+html[data-theme=dark] .star.active, html[data-theme=dark] .star.hover {
+  color: var(--pst-color-primary);
+}
 
 .btn,
 a.btn {
