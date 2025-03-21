@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="search-toggle-container" data-bs-title="Turn on Google Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <div class="search-toggle-container" data-bs-title="Google Search Off" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <div class="search-toggle-inner">
       <label class="switch">
         <input type="checkbox" id="search-toggle">
@@ -63,6 +63,18 @@
         googleSearch.style.display = 'none';
       }
 
+      // Update tooltip based on initial state
+      const tooltipElement = document.querySelector('.search-toggle-container');
+      if (tooltipElement) {
+        tooltipElement.setAttribute('data-bs-title', toggle.checked ? 'Google Search On' : 'Google Search Off');
+        // Reinitialize tooltip if Bootstrap's tooltip is already initialized
+        if (bootstrap && bootstrap.Tooltip) {
+          const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipElement);
+          if (tooltipInstance) tooltipInstance.dispose();
+          new bootstrap.Tooltip(tooltipElement);
+        }
+      }
+
       toggle.addEventListener('change', function() {
         if (this.checked) {
           sphinxSearch.style.display = 'none';
@@ -70,6 +82,16 @@
           localStorage.setItem('searchPreference', 'google');
           // Reinitialize Google search when switching to it
           reinitializeGoogleSearch();
+          const tooltipElement = document.querySelector('.search-toggle-container');
+          if (tooltipElement) {
+            tooltipElement.setAttribute('data-bs-title', 'Google Search On');
+            // Refresh tooltip
+            if (bootstrap && bootstrap.Tooltip) {
+              const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipElement);
+              if (tooltipInstance) tooltipInstance.dispose();
+              new bootstrap.Tooltip(tooltipElement);
+            }
+          }
           if (typeof gtag !== 'undefined') {
             console.log('GA Event: Switching to Google search');
             gtag('event', 'search_engine_switch', {
@@ -83,6 +105,16 @@
           sphinxSearch.style.display = 'block';
           googleSearch.style.display = 'none';
           localStorage.setItem('searchPreference', 'sphinx');
+          const tooltipElement = document.querySelector('.search-toggle-container');
+          if (tooltipElement) {
+            tooltipElement.setAttribute('data-bs-title', 'Google Search Off');
+            // Refresh tooltip
+            if (bootstrap && bootstrap.Tooltip) {
+              const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipElement);
+              if (tooltipInstance) tooltipInstance.dispose();
+              new bootstrap.Tooltip(tooltipElement);
+            }
+          }
           if (typeof gtag !== 'undefined') {
             console.log('GA Event: Switching to Sphinx search');
             gtag('event', 'search_engine_switch', {
