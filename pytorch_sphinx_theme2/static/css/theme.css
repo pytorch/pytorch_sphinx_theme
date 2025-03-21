@@ -1874,11 +1874,19 @@ a.btn {
 }
 
 .table tbody tr:hover {
-  background-color: none;
+  background-color: transparent;
 }
 
-dt:target, span.highlighted {
-  background-color: none;
+dt:target {
+  background-color: transparent;
+}
+
+span.highlighted {
+  background-color: transparent;
+}
+
+.form-control {
+  border: none;
 }
 
 /*!
