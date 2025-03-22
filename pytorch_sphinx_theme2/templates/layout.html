@@ -7,18 +7,33 @@
 <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 <link rel="stylesheet" href="{{ pathto('_static/webfonts/all.min.css', 1) }}">
 
-
-<!-- Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}"
+   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+   <!-- End Google Tag Manager (noscript) -->
+   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','{{ theme_analytics_id }}');</script>
-<!-- End Google Tag Manager -->
+   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+   j.onload = function() {
+     window.dispatchEvent(new Event('gtm_loaded'));
+     console.log('GTM loaded successfully');
+   };
+   })(window,document,'script','dataLayer','{{ theme_analytics_id }}');</script>
+ <!-- End Google Tag Manager -->
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
-
+{% if release == "main" %}
+   <!--
+   Search engines should not index the main version of documentation.
+   Stable documentation are built without release == 'main'.
+   -->
+   <meta name="robots" content="noindex">
+{% endif %}
+{{ super() }}
 {% endblock%}
+
 {% block body_tag %}
 <body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
    {% include "pytorch_header.html" %}

@@ -75,6 +75,12 @@
         }
       }
 
+      // Add a data attribute to track if this toggle has been initialized
+      if (toggle.hasAttribute('data-initialized')) {
+        return; // Skip adding another event listener if already initialized
+      }
+      toggle.setAttribute('data-initialized', 'true');
+
       toggle.addEventListener('change', function() {
         if (this.checked) {
           sphinxSearch.style.display = 'none';
@@ -92,12 +98,13 @@
               new bootstrap.Tooltip(tooltipElement);
             }
           }
-          if (typeof gtag !== 'undefined') {
-            console.log('GA Event: Switching to Google search');
-            gtag('event', 'search_engine_switch', {
+          if (typeof dataLayer !== 'undefined') {
+            dataLayer.push({
+              'event': 'search_engine_switch',
               'event_category': 'Search',
               'event_label': 'Google'
             });
+            console.log('GA event sent via dataLayer: search_engine_switch - Google');
           } else {
             console.log('GA not available: Cannot track Google search switch');
           }
@@ -115,21 +122,23 @@
               new bootstrap.Tooltip(tooltipElement);
             }
           }
-          if (typeof gtag !== 'undefined') {
-            console.log('GA Event: Switching to Sphinx search');
-            gtag('event', 'search_engine_switch', {
+          if (typeof dataLayer !== 'undefined') {
+            dataLayer.push({
+              'event': 'search_engine_switch',
               'event_category': 'Search',
               'event_label': 'Sphinx'
             });
+            console.log('GA event sent via dataLayer: search_engine_switch - Sphinx');
           } else {
             console.log('GA not available: Cannot track Sphinx search switch');
           }
         }
 
         // Also update mobile search if it exists
-        updateMobileSearch();
+        updateMobileSearch(false); // Pass false to prevent triggering another event
       });
     }
+
 
     // Function to update mobile search based on current toggle state
     function updateMobileSearch() {
