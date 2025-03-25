@@ -1900,13 +1900,8 @@ span.highlighted {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 1.5rem auto;
-}
-@media screen and (min-width: 768px) {
-  .pytorch-call-to-action-links {
-    padding-top: 2.5rem;
-  }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
   .pytorch-call-to-action-links {
@@ -1925,20 +1920,19 @@ span.highlighted {
   height: 1rem;
 }
 .pytorch-call-to-action-links a {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem 0.1rem 1rem;
   margin: 0 0.5rem;
   color: #000000;
   cursor: pointer;
-  background-color: #f3f4f7;
+  background-color: var(--pst-color-background);
   border-radius: 4px;
-  border: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   transition: all 0.2s ease;
   text-align: center;
 }
 .pytorch-call-to-action-links a:hover {
-  color: #e44c2c;
-  background-color: #f8f8f8;
-  border-color: #e44c2c;
+  background-color: var(--pst-color-background-light);
+  border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .pytorch-call-to-action-links a .call-to-action-desktop-view {
@@ -1970,7 +1964,7 @@ span.highlighted {
 }
 .pytorch-call-to-action-links a #google-colab-link:hover, .pytorch-call-to-action-links a #download-notebook-link:hover,
 .pytorch-call-to-action-links a #github-view-link:hover {
-  color: #e44c2c;
+  cursor: pointer;
 }
 
 #tutorial-cards-container #tutorial-cards {
