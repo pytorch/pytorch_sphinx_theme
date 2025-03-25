@@ -244,8 +244,7 @@
   }
 }
 
-article.pytorch-article {
-  .tutorials-callout-container {
+.tutorials-callout-container {
     padding-bottom: 50px;
 
     .col-md-6 {
@@ -295,6 +294,5 @@ article.pytorch-article {
       a {
         color: inherit;
       }
-    }
   }
 }

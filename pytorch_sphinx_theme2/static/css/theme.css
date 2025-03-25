@@ -2110,23 +2110,23 @@ span.highlighted {
   background-color: #dee2e6;
 }
 
-article.pytorch-article .tutorials-callout-container {
+.tutorials-callout-container {
   padding-bottom: 50px;
 }
-article.pytorch-article .tutorials-callout-container .col-md-6 {
+.tutorials-callout-container .col-md-6 {
   padding-bottom: 10px;
 }
-article.pytorch-article .tutorials-callout-container .text-container {
+.tutorials-callout-container .text-container {
   padding: 10px 0px 30px 0px;
   padding-bottom: 10px;
 }
-article.pytorch-article .tutorials-callout-container .text-container .body-paragraph {
+.tutorials-callout-container .text-container .body-paragraph {
   color: #666666;
   font-weight: 300;
   font-size: 1.125rem;
   line-height: 1.875rem;
 }
-article.pytorch-article .tutorials-callout-container .btn.callout-button {
+.tutorials-callout-container .btn.callout-button {
   font-size: 1.125rem;
   border-radius: 0;
   border: none;
@@ -2137,7 +2137,7 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button {
   letter-spacing: 0.25px;
 }
 @media screen and (min-width: 768px) {
-  article.pytorch-article .tutorials-callout-container .btn.callout-button:after {
+  .tutorials-callout-container .btn.callout-button:after {
     content: "";
     display: block;
     width: 0;
@@ -2148,11 +2148,11 @@ article.pytorch-article .tutorials-callout-container .btn.callout-button {
     background-color: #ee4c2c;
     transition: width 0.25s ease-in-out;
   }
-  article.pytorch-article .tutorials-callout-container .btn.callout-button:hover:after {
+  .tutorials-callout-container .btn.callout-button:hover:after {
     width: 100%;
   }
 }
-article.pytorch-article .tutorials-callout-container .btn.callout-button a {
+.tutorials-callout-container .btn.callout-button a {
   color: inherit;
 }
 
