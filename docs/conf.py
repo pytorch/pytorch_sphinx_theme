@@ -43,7 +43,7 @@ templates_path = [
 ]
 
 # The suffix of source filenames.
-source_suffix = ".rst"
+source_suffix = [".rst", ".md"]
 
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
@@ -162,7 +162,6 @@ html_context = {
     "library_links": theme_variables.get("library_links", []),
     "community_links": theme_variables.get("community_links", []),
     "pytorch_project": "docs",
-
     "feedback_url": "https://github.com/pytorch/pytorch",
     "display_github": True,
     "github_url": "https://github.com",

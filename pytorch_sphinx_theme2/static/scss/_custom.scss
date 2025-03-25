@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .prev-next-footer {
   display: none;
 }
@@ -19,7 +21,7 @@ dt {
 }
 
 span.highlighted {
-  background-color: transparent;
+  background-color: $pytorch-red;
 }
 
 .form-control {
