@@ -1913,11 +1913,6 @@ span.highlighted {
     padding-top: 0;
   }
 }
-@media (min-width: 1200px) and (max-width: 1239px) {
-  .pytorch-call-to-action-links {
-    padding-top: 2.5rem;
-  }
-}
 .pytorch-call-to-action-links #tutorial-type {
   display: none;
 }
