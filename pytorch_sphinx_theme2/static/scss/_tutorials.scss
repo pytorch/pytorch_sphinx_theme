@@ -7,6 +7,8 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
+  margin: 1.5rem auto;
 
   @media screen and (min-width: 768px) {
     padding-top: 2.5rem;
@@ -35,12 +37,21 @@
   }
 
   a {
-    padding-right: 1.25rem;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
     color: #000000;
     cursor: pointer;
+    background-color: $background-light;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+    text-align: center;
 
     &:hover {
       color: #e44c2c;
+      background-color: #f8f8f8;
+      border-color: #e44c2c;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .call-to-action-desktop-view {
@@ -62,17 +73,15 @@
     #google-colab-link, #download-notebook-link,
     #github-view-link {
       padding-bottom: 0.625rem;
-      border-bottom: 1px solid #f3f4f7;
-      padding-right: 2.5rem;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
           -ms-flex-align: center;
               align-items: center;
+      border-bottom: none;
 
       &:hover {
-        border-bottom-color: #e44c2c;
         color: #e44c2c;
       }
     }
@@ -96,6 +105,20 @@
   }
 
   .card.tutorials-card {
+    a {
+      text-decoration: none;
+
+      p.card-summary, p.tags {
+        color: $muted-text;
+        text-decoration: none;
+
+        &:hover {
+          color: $dark-text;
+          text-decoration: none;
+        }
+      }
+    }
+
     border-radius: 0;
     border-color: $background-light;
     height: 98px;
