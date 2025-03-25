@@ -46,21 +46,27 @@
     {% if theme_pytorch_project == 'tutorials' %}
     <div class="pytorch-call-to-action-links">
       <div id="tutorial-type">{{ pagename }}</div>
-      <div id="google-colab-link">
-        <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}"/>
-        <div class="call-to-action-desktop-view">Run in Google Colab</div>
-        <div class="call-to-action-mobile-view">Colab</div>
-      </div>
-      <div id="download-notebook-link">
-        <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}"/>
-        <div class="call-to-action-desktop-view">Download Notebook</div>
-        <div class="call-to-action-mobile-view">Notebook</div>
-      </div>
-      <div id="github-view-link">
-        <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}"/>
-        <div class="call-to-action-desktop-view">View on GitHub</div>
-        <div class="call-to-action-mobile-view">GitHub</div>
-      </div>
+      <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
+         <div id="google-colab-link">
+         <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}"/>
+         <div class="call-to-action-desktop-view">Run in Google Colab</div>
+         <div class="call-to-action-mobile-view">Colab</div>
+         </div>
+      </a>
+      <a id="notebook-link" data-behavior="call-to-action-event" data-response="Download Notebook">
+         <div id="download-notebook-link">
+         <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}"/>
+         <div class="call-to-action-desktop-view">Download Notebook</div>
+         <div class="call-to-action-mobile-view">Notebook</div>
+         </div>
+      </a>
+      <a id="github-link" data-behavior="call-to-action-event" data-response="View on Github" target="_blank">
+         <div id="github-view-link">
+         <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}"/>
+         <div class="call-to-action-desktop-view">View on GitHub</div>
+         <div class="call-to-action-mobile-view">GitHub</div>
+         </div>
+      </a>
     </div>
     {% endif %}
     {% block body %}{% endblock %}
