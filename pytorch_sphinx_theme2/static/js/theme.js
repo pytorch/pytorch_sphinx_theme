@@ -107,8 +107,8 @@ function openGitHubIssue() {
     // Track event in Google Analytics
     if (typeof gtag === 'function') {
         gtag('event', 'send_feedback', {
-            'event_category': 'Engagement',
-            'event_label': pageUrl
+            'page_title': pageTitle,
+            'page_location': pageUrl
         });
         console.log('GA event tracked: send_feedback', pageUrl);
     } else {
