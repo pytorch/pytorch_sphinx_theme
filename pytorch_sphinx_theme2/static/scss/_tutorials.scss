@@ -53,12 +53,44 @@
     -ms-flex-align: center;
     align-items: center;
     border-bottom: none;
-    text-decoration: none;
 
     &:hover {
       cursor: pointer;
     }
   }
+
+
+    .call-to-action-desktop-view {
+      display: none;
+
+      @media screen and (min-width: 768px) {
+        display: block;
+      }
+    }
+
+    .call-to-action-mobile-view {
+      display: block;
+
+      @media screen and (min-width: 768px) {
+        display: none;
+      }
+    }
+
+    #google-colab-link, #download-notebook-link,
+    #github-view-link {
+      padding-bottom: 0.625rem;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      border-bottom: none;
+
+      &:hover {
+        cursor: pointer
+      }
+    }
 }
 
 #tutorial-cards-container {

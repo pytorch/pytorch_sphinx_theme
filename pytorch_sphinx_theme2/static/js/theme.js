@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
       githubElement.find('div').wrapInner('<a href="' + githubLink + '" data-behavior="call-to-action-event" data-response="View on Github" target="_blank"></a>');
     }
     $(".sphx-glr-footer").hide();
+    $(".sphx-glr-signature").hide();
   } else {
     $(".pytorch-call-to-action-links").hide();
   }

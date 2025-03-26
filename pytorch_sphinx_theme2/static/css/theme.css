@@ -1942,9 +1942,39 @@ span.highlighted {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: none;
-  text-decoration: none;
 }
 .pytorch-call-to-action-links #google-colab-link a:hover, .pytorch-call-to-action-links #download-notebook-link a:hover, .pytorch-call-to-action-links #github-view-link a:hover {
+  cursor: pointer;
+}
+.pytorch-call-to-action-links .call-to-action-desktop-view {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .pytorch-call-to-action-links .call-to-action-desktop-view {
+    display: block;
+  }
+}
+.pytorch-call-to-action-links .call-to-action-mobile-view {
+  display: block;
+}
+@media screen and (min-width: 768px) {
+  .pytorch-call-to-action-links .call-to-action-mobile-view {
+    display: none;
+  }
+}
+.pytorch-call-to-action-links #google-colab-link, .pytorch-call-to-action-links #download-notebook-link,
+.pytorch-call-to-action-links #github-view-link {
+  padding-bottom: 0.625rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: none;
+}
+.pytorch-call-to-action-links #google-colab-link:hover, .pytorch-call-to-action-links #download-notebook-link:hover,
+.pytorch-call-to-action-links #github-view-link:hover {
   cursor: pointer;
 }
 
