@@ -189,6 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (githubElement.length) {
       githubElement.find('div').wrapInner('<a href="' + githubLink + '" data-behavior="call-to-action-event" data-response="View on Github" target="_blank"></a>');
     }
+    $(".sphx-glr-footer").hide();
   } else {
     $(".pytorch-call-to-action-links").hide();
   }
