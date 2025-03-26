@@ -1900,7 +1900,7 @@ span.highlighted {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 auto 1.5rem auto;
 }
 @media (min-width: 768px) and (max-width: 1239px) {
