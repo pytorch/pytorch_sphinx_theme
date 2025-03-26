@@ -1942,6 +1942,7 @@ span.highlighted {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: none;
+  text-decoration: none;
 }
 .pytorch-call-to-action-links #google-colab-link a:hover, .pytorch-call-to-action-links #download-notebook-link a:hover, .pytorch-call-to-action-links #github-view-link a:hover {
   cursor: pointer;

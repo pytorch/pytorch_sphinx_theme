@@ -177,17 +177,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create the links directly instead of wrapping existing elements
     var colabElement = $("#google-colab-link");
     if (colabElement.length) {
-      colabElement.html('<a href="' + colabLink + '" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">Run in Google Colab</a>');
+      colabElement.find('div').wrapInner('<a href="' + colabLink + '" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank"></a>');
     }
 
     var notebookElement = $("#download-notebook-link");
     if (notebookElement.length) {
-      notebookElement.html('<a href="' + notebookLink + '" data-behavior="call-to-action-event" data-response="Download Notebook">Download Notebook</a>');
+      notebookElement.find('div').wrapInner('<a href="' + notebookLink + '" data-behavior="call-to-action-event" data-response="Download Notebook"></a>');
     }
 
     var githubElement = $("#github-view-link");
     if (githubElement.length) {
-      githubElement.html('<a href="' + githubLink + '" data-behavior="call-to-action-event" data-response="View on Github" target="_blank">View on Github</a>');
+      githubElement.find('div').wrapInner('<a href="' + githubLink + '" data-behavior="call-to-action-event" data-response="View on Github" target="_blank"></a>');
     }
   } else {
     $(".pytorch-call-to-action-links").hide();
