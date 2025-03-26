@@ -42,37 +42,20 @@
       background-color: var(--pst-color-background-light);
       border-bottom: 1px solid $pytorch-red;
     }
+  }
 
-    .call-to-action-desktop-view {
-      display: none;
+  #google-colab-link a, #download-notebook-link a, #github-view-link a {
+    padding-bottom: 0.625rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: none;
 
-      @media screen and (min-width: 768px) {
-        display: block;
-      }
-    }
-
-    .call-to-action-mobile-view {
-      display: block;
-
-      @media screen and (min-width: 768px) {
-        display: none;
-      }
-    }
-
-    #google-colab-link, #download-notebook-link,
-    #github-view-link {
-      padding-bottom: 0.625rem;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
-      border-bottom: none;
-
-      &:hover {
-        cursor: pointer
-      }
+    &:hover {
+      cursor: pointer;
     }
   }
 }

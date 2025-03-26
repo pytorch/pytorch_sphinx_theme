@@ -1933,24 +1933,7 @@ span.highlighted {
   background-color: var(--pst-color-background-light);
   border-bottom: 1px solid #ee4c2c;
 }
-.pytorch-call-to-action-links a .call-to-action-desktop-view {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .pytorch-call-to-action-links a .call-to-action-desktop-view {
-    display: block;
-  }
-}
-.pytorch-call-to-action-links a .call-to-action-mobile-view {
-  display: block;
-}
-@media screen and (min-width: 768px) {
-  .pytorch-call-to-action-links a .call-to-action-mobile-view {
-    display: none;
-  }
-}
-.pytorch-call-to-action-links a #google-colab-link, .pytorch-call-to-action-links a #download-notebook-link,
-.pytorch-call-to-action-links a #github-view-link {
+.pytorch-call-to-action-links #google-colab-link a, .pytorch-call-to-action-links #download-notebook-link a, .pytorch-call-to-action-links #github-view-link a {
   padding-bottom: 0.625rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1960,8 +1943,7 @@ span.highlighted {
   align-items: center;
   border-bottom: none;
 }
-.pytorch-call-to-action-links a #google-colab-link:hover, .pytorch-call-to-action-links a #download-notebook-link:hover,
-.pytorch-call-to-action-links a #github-view-link:hover {
+.pytorch-call-to-action-links #google-colab-link a:hover, .pytorch-call-to-action-links #download-notebook-link a:hover, .pytorch-call-to-action-links #github-view-link a:hover {
   cursor: pointer;
 }
 
