@@ -1920,18 +1920,43 @@ span.highlighted {
   height: 1rem;
 }
 .pytorch-call-to-action-links a {
-  padding: 0.6rem 1rem 0.1rem 1rem;
-  margin: 0 0.5rem;
-  color: #000000;
+  color: var(--pst-color-text-base);
   cursor: pointer;
   background-color: var(--pst-color-background);
   border-bottom: 1px solid #e0e0e0;
   transition: all 0.2s ease;
   text-align: center;
+  text-decoration: none;
 }
 .pytorch-call-to-action-links a:hover {
   background-color: var(--pst-color-background-light);
   border-bottom: 1px solid #ee4c2c;
+}
+.pytorch-call-to-action-links a:hover:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ee4c2c;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.pytorch-call-to-action-links a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ee4c2c;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
 }
 .pytorch-call-to-action-links #google-colab-link a, .pytorch-call-to-action-links #download-notebook-link a, .pytorch-call-to-action-links #github-view-link a {
   padding-bottom: 0.625rem;
@@ -1942,6 +1967,7 @@ span.highlighted {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: none;
+  text-decoration: none;
 }
 .pytorch-call-to-action-links #google-colab-link a:hover, .pytorch-call-to-action-links #download-notebook-link a:hover, .pytorch-call-to-action-links #github-view-link a:hover {
   cursor: pointer;
