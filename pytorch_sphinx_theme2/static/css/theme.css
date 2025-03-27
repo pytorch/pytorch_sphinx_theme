@@ -16,14 +16,14 @@ html[data-theme=light] {
 }
 
 html[data-theme=dark] {
-  --pst-color-primary: #11b3d3;
-  --pst-color-secondary: #11b3d3;
-  --pst-color-inline-code-links: #11b3d3;
-  --bs-link-hover-color: #11b3d3;
-  --bs-emphasis-color-rgb: #11b3d3;
-  --bs-emphasis-color: #11b3d3;
+  --pst-color-primary: #F2765D;
+  --pst-color-secondary: #F2765D;
+  --pst-color-inline-code-links: #F2765D;
+  --bs-link-hover-color: #F2765D;
+  --bs-emphasis-color-rgb: #F2765D;
+  --bs-emphasis-color: #F2765D;
   --pst-color-inline-code: #F4A623;
-  --bs-btn-focus-box-shadow: #11b3d3;
+  --bs-btn-focus-box-shadow: #F2765D;
   --pst-color-accent: transparent !important;
 }
 
