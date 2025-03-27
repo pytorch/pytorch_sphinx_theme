@@ -22,7 +22,7 @@ html[data-theme=dark] {
   --bs-link-hover-color: #F2765D;
   --bs-emphasis-color-rgb: #F2765D;
   --bs-emphasis-color: #F2765D;
-  --pst-color-inline-code: #F4A623;
+  --pst-color-inline-code: #BBBBBB;
   --bs-btn-focus-box-shadow: #F2765D;
   --pst-color-accent: transparent !important;
 }
@@ -1902,11 +1902,21 @@ a.btn {
 }
 
 .table tbody tr:hover {
-  background-color: transparent;
+  background-color: #B932CC;
+}
+@media (prefers-color-scheme: dark) {
+  .table tbody tr:hover {
+    background-color: rgb(129.281496063, 34.9409448819, 142.5590551181);
+  }
 }
 
 dt:target {
-  background-color: transparent;
+  background-color: #B932CC;
+}
+@media (prefers-color-scheme: dark) {
+  dt:target {
+    background-color: rgb(129.281496063, 34.9409448819, 142.5590551181);
+  }
 }
 
 span.highlighted {

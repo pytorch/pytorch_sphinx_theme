@@ -8,7 +8,11 @@
   tbody {
     tr {
       &:hover {
-        background-color: transparent;
+        background-color: $pytorch-violet;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: darken($pytorch-violet, 15%);
+        }
       }
     }
   }
@@ -16,9 +20,14 @@
 
 dt {
   &:target {
-    background-color: transparent;
+    background-color: $pytorch-violet;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: darken($pytorch-violet, 15%);
+    }
   }
 }
+
 
 span.highlighted {
   background-color: $pytorch-red;
