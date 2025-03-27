@@ -4,6 +4,7 @@ window.filterTags = {
     bind: function() {
       var options = {
         valueNames: [{ data: ["tags"] }],
+        listClass: "list",
         page: "6",
         pagination: true
       };
@@ -107,5 +108,9 @@ window.filterTags = {
 
   // Initialize when document is ready
   $(document).ready(function() {
-    initTutorialTagsFilter();
+    // Check if we have tutorial cards before trying to initialize
+    if ($(".tutorials-card-container").length > 0) {
+      // Extract tags and create filter buttons
+      initTutorialTagsFilter();
+    }
   });
