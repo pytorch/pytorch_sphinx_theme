@@ -1875,6 +1875,24 @@ a.btn {
     margin-bottom: 0;
   }
 }
+@media screen and (max-width: 767px) {
+  .tutorials-callout-container .row {
+    display: flex;
+    flex-direction: column;
+  }
+  .tutorials-callout-container .col-md-6 {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .tutorials-callout-container .row {
+    display: flex;
+    flex-direction: row;
+  }
+  .tutorials-callout-container .col-md-6 {
+    width: 50%;
+  }
+}
 .prev-next-footer {
   display: none;
 }
