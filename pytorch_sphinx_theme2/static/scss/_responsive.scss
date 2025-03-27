@@ -153,6 +153,10 @@
   }
 }
 
+.tutorials-callout-container .row > p {
+  display: none;
+}
+
 @media screen and (max-width: 767px) {
   .tutorials-callout-container .row {
     display: flex;
