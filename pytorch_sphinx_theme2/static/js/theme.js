@@ -276,7 +276,8 @@ window.filterTags = {
 
     // Add filter buttons to the top of the page for each tag
     function createTagMenu() {
-        $(".tutorial-filter-menu").prepend("<div class='tutorial-filter filter-btn all-tag-selected' data-tag='all'>All</div>");
+        // Add the 'All' tag first if it's not already present
+        $(".tutorial-filter-menu").empty().append("<div class='tutorial-filter filter-btn all-tag-selected' data-tag='all'>All</div>");
 
         // Then add the rest of the tags
         tags.forEach(function(item) {
