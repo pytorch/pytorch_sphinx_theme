@@ -2050,22 +2050,21 @@ span.highlighted {
 }
 #tutorial-cards-container .card.tutorials-card {
   border-radius: 0;
-  border-color: #f3f4f7;
+  border-color: var(--bs-border-color-translucent);
   height: 98px;
   margin-bottom: 1.875rem;
   overflow: scroll;
-  background-color: #f3f4f7;
+  background-color: var(--sg-background-color);
   cursor: pointer;
 }
 #tutorial-cards-container .card.tutorials-card a {
   text-decoration: none;
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary, #tutorial-cards-container .card.tutorials-card a p.tags {
-  color: #6c6c6d;
+  color: var(--pst-color-primary-text);
   text-decoration: none;
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary:hover, #tutorial-cards-container .card.tutorials-card a p.tags:hover {
-  color: #262626;
   text-decoration: none;
 }
 @media screen and (min-width: 1240px) {
@@ -2133,12 +2132,13 @@ span.highlighted {
   margin-bottom: 1.125rem;
   margin-top: 0;
   font-size: 1.5rem;
+  color: var(--pst-heading-color);
 }
 #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
   font-size: 0.9375rem;
   line-height: 1.5rem;
   margin-bottom: 0;
-  color: #6c6c6d;
+  color: var(--pst-color-primary-text);
   font-weight: 400;
   width: 70%;
 }
@@ -2159,7 +2159,7 @@ span.highlighted {
   overflow: hidden;
 }
 #tutorial-cards-container .card.tutorials-card h4 {
-  color: #262626;
+  color: var(--pst-color-primary-text);
   margin-bottom: 1.125rem;
 }
 #tutorial-cards-container .card.tutorials-card a {
@@ -2226,8 +2226,8 @@ span.highlighted {
   cursor: pointer;
 }
 #tutorial-cards-container .filter-btn {
-  color: #979797;
-  border: 1px solid #979797;
+  color: var(--pst-color-text-base);
+  border: 1px solid var(--pst-color-border);
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -2281,9 +2281,9 @@ span.highlighted {
 .tutorials-callout-container .btn.callout-button {
   font-size: 1.125rem;
   border-radius: 0;
-  border: none;
-  background-color: #f3f4f7;
-  color: #6c6c6d;
+  border: 1px solid var(--pst-color-border);
+  background-color: var(--sg-background-color);
+  color: var(--pst-color-text-base);
   font-weight: 400;
   position: relative;
   letter-spacing: 0.25px;

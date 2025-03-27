@@ -29,9 +29,9 @@
   }
 
   a {
-    color: var(--pst-color-text-base);;
+    color: var(--pst-color-text-base);
     cursor: pointer;
-    background-color: var(--pst-color-background);;
+    background-color: var(--pst-color-background);
     border-bottom: 1px solid #e0e0e0;
     transition: all 0.2s ease;
     text-align: center;
@@ -142,22 +142,21 @@
       text-decoration: none;
 
       p.card-summary, p.tags {
-        color: $muted-text;
+        color: var(--pst-color-primary-text);
         text-decoration: none;
 
         &:hover {
-          color: $dark-text;
           text-decoration: none;
         }
       }
     }
 
     border-radius: 0;
-    border-color: $background-light;
+    border-color: var(--bs-border-color-translucent);
     height: 98px;
     margin-bottom: 1.875rem;
     overflow: scroll;
-    background-color: $background-light;
+    background-color: var(--sg-background-color);
     cursor: pointer;
 
     @media screen and (min-width: 1240px) {
@@ -222,6 +221,7 @@
         margin-bottom: 1.125rem;
         margin-top: 0;
         font-size: 1.5rem;
+        color: var(--pst-heading-color)
       }
     }
 
@@ -229,7 +229,7 @@
       font-size: 0.9375rem;
       line-height: 1.5rem;
       margin-bottom: 0;
-      color: $muted-text;
+      color: var(--pst-color-primary-text);
       font-weight: 400;
       width: 70%;
 
@@ -250,7 +250,7 @@
     }
 
     h4 {
-      color: $dark-text;
+      color: var(--pst-color-primary-text);
       margin-bottom: 1.125rem;
     }
 
@@ -332,8 +332,8 @@
   }
 
   .filter-btn {
-    color: #979797;
-    border: 1px solid #979797;
+    color: var(--pst-color-text-base);
+    border: 1px solid var(--pst-color-border);
     display: inline-block;
     text-align: center;
     white-space: nowrap;
@@ -399,9 +399,9 @@
     .btn.callout-button {
       font-size: 1.125rem;
       border-radius: 0;
-      border: none;
-      background-color: $background-light;
-      color: $muted-text;
+      border: 1px solid var(--pst-color-border);
+      background-color: var(--sg-background-color);
+      color: var(--pst-color-text-base);
       font-weight: 400;
       position: relative;
       letter-spacing: 0.25px;

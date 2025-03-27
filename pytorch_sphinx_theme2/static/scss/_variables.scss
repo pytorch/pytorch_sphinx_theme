@@ -10,6 +10,7 @@ $background-dark: #000000;
 $pytorch-indigo: #812CE5;
 $pytorch-violet: #B932CC;
 
+
 :root {
   --header-height: 68px;
   --header-height-desktop: 90px;
@@ -37,4 +38,5 @@ html[data-theme="dark"] {
   --pst-color-inline-code: #BBBBBB;
   --bs-btn-focus-box-shadow: #{$pytorch-blue};
   --pst-color-accent: transparent !important;
+
 }
