@@ -276,12 +276,13 @@ window.filterTags = {
 
     // Add filter buttons to the top of the page for each tag
     function createTagMenu() {
-      tags.forEach(function(item) {
-        $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>");
-      });
-      // Add "All" button
-      $(".tutorial-filter-menu").prepend("<div class='tutorial-filter filter-btn all-tag-selected' data-tag='all'>All</div>");
-    }
+        $(".tutorial-filter-menu").prepend("<div class='tutorial-filter filter-btn all-tag-selected' data-tag='all'>All</div>");
+
+        // Then add the rest of the tags
+        tags.forEach(function(item) {
+          $(".tutorial-filter-menu").append(" <div class='tutorial-filter filter-btn filter' data-tag='" + item + "'>" + item + "</div>");
+        });
+      }
 
     createTagMenu();
 
