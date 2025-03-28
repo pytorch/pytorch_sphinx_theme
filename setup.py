@@ -8,7 +8,10 @@ setup(
     url="https://github.com/pytorch/pytorch_sphinx_theme",
     license="MIT",
     version="0.1.0",
-    install_requires=["pydata-sphinx-theme"],
+    install_requires=[
+        "pydata-sphinx-theme==0.15.4",
+        "sphinx==5.3.0",
+    ],
     packages=["pytorch_sphinx_theme2"],
     include_package_data=True,
     package_data={
