@@ -3,7 +3,8 @@ __version__ = "0.1.0"
 import json
 import os
 import re
-
+from pathlib import Path
+from . import custom_directives
 
 def get_html_theme_path():
     return os.path.dirname(os.path.abspath(__file__))
@@ -42,6 +43,12 @@ def get_theme_variables():
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
+    app.add_directive('includenodoc', directives.IncludeDirective)
+    app.add_directive('galleryitem', directives.GalleryItemDirective)
+    app.add_directive('customgalleryitem', directives.CustomGalleryItemDirective)
+    app.add_directive('customcarditem', directives.CustomCardItemDirective)
+    app.add_directive('customcalloutitem', directives.CustomCalloutItemDirective)
+
     return {
         "version": "0.1.0",
         "parallel_read_safe": True,
