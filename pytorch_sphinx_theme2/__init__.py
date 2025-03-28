@@ -43,11 +43,11 @@ def get_theme_variables():
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
-    app.add_directive('includenodoc', directives.IncludeDirective)
-    app.add_directive('galleryitem', directives.GalleryItemDirective)
-    app.add_directive('customgalleryitem', directives.CustomGalleryItemDirective)
-    app.add_directive('customcarditem', directives.CustomCardItemDirective)
-    app.add_directive('customcalloutitem', directives.CustomCalloutItemDirective)
+    app.add_directive('includenodoc', custom_directives.IncludeDirective)
+    app.add_directive('galleryitem', custom_directives.GalleryItemDirective)
+    app.add_directive('customgalleryitem', custom_directives.CustomGalleryItemDirective)
+    app.add_directive('customcarditem', custom_directives.CustomCardItemDirective)
+    app.add_directive('customcalloutitem', custom_directives.CustomCalloutItemDirective)
 
     return {
         "version": "0.1.0",
