@@ -2192,8 +2192,6 @@ span.highlighted {
   }
 }
 #tutorial-cards-container .card.tutorials-card:hover {
-  background-color: #ffffff;
-  border: 1px solid #e2e2e2;
   border-bottom: none;
 }
 #tutorial-cards-container .card.tutorials-card:hover .tutorials-image {
