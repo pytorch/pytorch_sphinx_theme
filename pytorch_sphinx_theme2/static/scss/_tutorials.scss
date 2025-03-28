@@ -221,7 +221,7 @@
         margin-bottom: 1.125rem;
         margin-top: 0;
         font-size: 1.5rem;
-        color: var(--pst-heading-color)
+        color: var(--pst-color-heading)
       }
     }
 
@@ -229,7 +229,7 @@
       font-size: 0.9375rem;
       line-height: 1.5rem;
       margin-bottom: 0;
-      color: var(--pst-color-primary-text);
+      color: var(--pst-color-text-base);
       font-weight: 400;
       width: 70%;
 
@@ -250,7 +250,7 @@
     }
 
     h4 {
-      color: var(--pst-color-primary-text);
+      color: var(--pst-color-text-base);
       margin-bottom: 1.125rem;
     }
 
