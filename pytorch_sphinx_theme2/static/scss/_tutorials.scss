@@ -142,12 +142,20 @@
       text-decoration: none;
 
       p.card-summary, p.tags {
-        color: var(--pst-color-primary-text);
+        color: var(--pst-color-text-baset);
         text-decoration: none;
 
         &:hover {
           text-decoration: none;
         }
+        @media screen and (min-width: 768px) {
+          width: 75%;
+        }
+
+        @media (min-width: 768px) and (max-width: 1239px) {
+          width: 70%;
+        }
+       }
       }
     }
 
@@ -223,36 +231,7 @@
         font-size: 1.5rem;
         color: var(--pst-color-heading)
       }
-    }
 
-    p.card-summary, p.tags {
-      font-size: 0.9375rem;
-      line-height: 1.5rem;
-      margin-bottom: 0;
-      color: var(--pst-color-text-base);
-      font-weight: 400;
-      width: 70%;
-
-      @media screen and (min-width: 768px) {
-        width: 75%;
-      }
-
-      @media (min-width: 768px) and (max-width: 1239px) {
-        width: 70%;
-      }
-    }
-
-    p.tags {
-      margin-top: 30px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    h4 {
-      color: var(--pst-color-text-base);
-      margin-bottom: 1.125rem;
-    }
 
     a {
       height: 100%;
@@ -288,10 +267,6 @@
       background-color: $light-text;
       border: 1px solid $border-color;
       border-bottom: none;
-
-      p.card-summary {
-        color: $dark-text;
-      }
 
       .tutorials-image {
         opacity: unset;

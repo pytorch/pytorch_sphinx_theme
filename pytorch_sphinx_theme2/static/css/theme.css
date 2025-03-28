@@ -2036,6 +2036,15 @@ span.highlighted {
   cursor: pointer;
 }
 
+#tutorial-cards-container {
+  border-radius: 0;
+  border-color: var(--bs-border-color-translucent);
+  height: 98px;
+  margin-bottom: 1.875rem;
+  overflow: scroll;
+  background-color: var(--sg-background-color);
+  cursor: pointer;
+}
 #tutorial-cards-container #tutorial-cards {
   width: 100%;
 }
@@ -2048,38 +2057,39 @@ span.highlighted {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-#tutorial-cards-container .card.tutorials-card {
-  border-radius: 0;
-  border-color: var(--bs-border-color-translucent);
-  height: 98px;
-  margin-bottom: 1.875rem;
-  overflow: scroll;
-  background-color: var(--sg-background-color);
-  cursor: pointer;
-}
 #tutorial-cards-container .card.tutorials-card a {
   text-decoration: none;
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary, #tutorial-cards-container .card.tutorials-card a p.tags {
-  color: var(--pst-color-primary-text);
+  color: var(--pst-color-text-baset);
   text-decoration: none;
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary:hover, #tutorial-cards-container .card.tutorials-card a p.tags:hover {
   text-decoration: none;
 }
+@media screen and (min-width: 768px) {
+  #tutorial-cards-container .card.tutorials-card a p.card-summary, #tutorial-cards-container .card.tutorials-card a p.tags {
+    width: 75%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1239px) {
+  #tutorial-cards-container .card.tutorials-card a p.card-summary, #tutorial-cards-container .card.tutorials-card a p.tags {
+    width: 70%;
+  }
+}
 @media screen and (min-width: 1240px) {
-  #tutorial-cards-container .card.tutorials-card {
+  #tutorial-cards-container {
     height: 200px;
     overflow: inherit;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card {
+  #tutorial-cards-container {
     height: 200px;
     overflow: scroll;
   }
 }
-#tutorial-cards-container .card.tutorials-card .tutorials-image {
+#tutorial-cards-container .tutorials-image {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -2087,23 +2097,23 @@ span.highlighted {
   width: 96px;
   opacity: 0.5;
 }
-#tutorial-cards-container .card.tutorials-card .tutorials-image img {
+#tutorial-cards-container .tutorials-image img {
   height: 100%;
   width: 100%;
 }
 @media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card .tutorials-image {
+  #tutorial-cards-container .tutorials-image {
     height: 100%;
     width: 25%;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card .tutorials-image {
+  #tutorial-cards-container .tutorials-image {
     height: 100%;
     width: 198px;
   }
 }
-#tutorial-cards-container .card.tutorials-card .tutorials-image:before {
+#tutorial-cards-container .tutorials-image:before {
   content: "";
   position: absolute;
   top: 0;
@@ -2114,69 +2124,41 @@ span.highlighted {
   background: #000000;
   opacity: 0.075;
 }
-#tutorial-cards-container .card.tutorials-card .card-title-container {
+#tutorial-cards-container .card-title-container {
   width: 70%;
   display: inline-flex;
 }
 @media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card .card-title-container {
+  #tutorial-cards-container .card-title-container {
     width: 75%;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card .card-title-container {
+  #tutorial-cards-container .card-title-container {
     width: 70%;
   }
 }
-#tutorial-cards-container .card.tutorials-card .card-title-container h4 {
+#tutorial-cards-container .card-title-container h4 {
   margin-bottom: 1.125rem;
   margin-top: 0;
   font-size: 1.5rem;
   color: var(--pst-color-heading);
 }
-#tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-  font-size: 0.9375rem;
-  line-height: 1.5rem;
-  margin-bottom: 0;
-  color: var(--pst-color-text-base);
-  font-weight: 400;
-  width: 70%;
-}
-@media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-    width: 75%;
-  }
-}
-@media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card p.card-summary, #tutorial-cards-container .card.tutorials-card p.tags {
-    width: 70%;
-  }
-}
-#tutorial-cards-container .card.tutorials-card p.tags {
-  margin-top: 30px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-#tutorial-cards-container .card.tutorials-card h4 {
-  color: var(--pst-color-text-base);
-  margin-bottom: 1.125rem;
-}
-#tutorial-cards-container .card.tutorials-card a {
+#tutorial-cards-container .card-title-container a {
   height: 100%;
 }
 @media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card a {
+  #tutorial-cards-container .card-title-container a {
     min-height: 190px;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
-  #tutorial-cards-container .card.tutorials-card a {
+  #tutorial-cards-container .card-title-container a {
     min-height: 234px;
   }
 }
 @media screen and (min-width: 768px) {
-  #tutorial-cards-container .card.tutorials-card:after {
+  #tutorial-cards-container .card-title-container:after {
     content: "";
     display: block;
     width: 0;
@@ -2187,19 +2169,16 @@ span.highlighted {
     background-color: #ee4c2c;
     transition: width 0.25s ease-in-out;
   }
-  #tutorial-cards-container .card.tutorials-card:hover:after {
+  #tutorial-cards-container .card-title-container:hover:after {
     width: 100%;
   }
 }
-#tutorial-cards-container .card.tutorials-card:hover {
+#tutorial-cards-container .card-title-container:hover {
   background-color: #ffffff;
   border: 1px solid #e2e2e2;
   border-bottom: none;
 }
-#tutorial-cards-container .card.tutorials-card:hover p.card-summary {
-  color: #262626;
-}
-#tutorial-cards-container .card.tutorials-card:hover .tutorials-image {
+#tutorial-cards-container .card-title-container:hover .tutorials-image {
   opacity: unset;
 }
 #tutorial-cards-container .tutorial-tags-container {
