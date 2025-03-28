@@ -414,7 +414,7 @@
         }
 
         &:hover:after {
-          width: 100%;
+            background-image: none !important;
         }
       }
 

@@ -2296,7 +2296,7 @@ span.highlighted {
     transition: width 0.25s ease-in-out;
   }
   .tutorials-callout-container .btn.callout-button:hover:after {
-    width: 100%;
+    background-image: none !important;
   }
 }
 .tutorials-callout-container .btn.callout-button a {
