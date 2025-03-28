@@ -8,7 +8,7 @@
     const pageTitle = document.querySelector('h1')?.textContent || document.title;
 
     document.addEventListener('click', function(e) {
-        if (!e.target.matches('.star') || isProcessing) return;
+        if (!e.target.matches('.star[data-behavior="tutorial-rating"]') || isProcessing) return;
 
         const value = parseInt(e.target.dataset.value);
         const allStars = document.querySelectorAll('.star');
