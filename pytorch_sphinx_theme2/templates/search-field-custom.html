@@ -177,9 +177,24 @@
       searchInputs.forEach(input => {
       if (input) {
         input.setAttribute('placeholder', 'Search the docs ...');
+
+        if (!input.hasAttribute('data-tracking-added')) {
+        input.setAttribute('data-tracking-added', 'true');
+        input.closest('form')?.addEventListener('submit', function() {
+          if (typeof dataLayer !== 'undefined' && input.value) {
+            dataLayer.push({
+              'event': 'google_search',
+              'search_term': input.value,
+              'event_category': 'Search',
+              'event_label': 'Google Search'
+            });
+            console.log('GA event sent: google_search - ' + input.value);
+            }
+          });
+        }
       }
+      });
     });
-  });
 
     observer.observe(document.body, { childList: true, subtree: true });
 

@@ -22,13 +22,12 @@
         debounceTimer = setTimeout(() => {
             if (value !== lastRating) {
                 console.log(`Sending rating for ${pageTitle} after 2.5s: ${value} (previous: ${lastRating})`);
-                if (typeof gtag !== 'undefined') {
+                if (typeof gtag == 'function') {
                     gtag('event', 'click', {
                         'event_category': 'Page Rating',
                         'event_label': pageTitle,
                         'value': value,
                         'customEvent:Rating': value,
-                        'previousRating': lastRating
                     });
                 }
                 lastRating = value;

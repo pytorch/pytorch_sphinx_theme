@@ -23,6 +23,23 @@
    };
    })(window,document,'script','dataLayer','{{ theme_analytics_id }}');</script>
  <!-- End Google Tag Manager -->
+ <!-- Facebook Pixel Code -->
+<script>
+   !function(f,b,e,v,n,t,s)
+   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+   n.queue=[];t=b.createElement(e);t.async=!0;
+   t.src=v;s=b.getElementsByTagName(e)[0];
+   s.parentNode.insertBefore(t,s)}(window,document,'script',
+   'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '243028289693773');
+   fbq('track', 'PageView');
+   </script>
+   <noscript>
+   <img height="1" width="1" src="https://www.facebook.com/tr?id=243028289693773&ev=PageView&noscript=1"/>
+   </noscript>
+<!-- End Facebook Pixel Code -->
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 {% if release == "main" %}
@@ -79,4 +96,30 @@
    {% include "pytorch_footer.html" %}
    {{ super() }}
 {% endblock %}
+<script>
+// Tutorials Call to action event tracking
+$("[data-behavior='call-to-action-event']").on('click', function(){
+  fbq('trackCustom', "Download", {
+    tutorialTitle: $('h1:first').text(),
+    downloadLink: this.href,
+    tutorialLink: window.location.href,
+    downloadTitle: $(this).attr("data-response")
+  });
+  if (typeof gtag === 'function') {
+    gtag('event', 'click', {
+      'event_category': $(this).attr("data-response"),
+      'event_label': $("h1").first().text(),
+      'tutorial_link': window.location.href
+    });
+  }
+});
+// Pixel Page rating tracking
+$("[data-behavior='tutorial-rating']").on('click', function(){
+  fbq('trackCustom', "Page Rating", {
+    tutorialLink: window.location.href,
+    tutorialTitle: $('h1:first').text(),
+    rating: $(this).attr("data-count")
+  });
+});
+</script>
 </body>
