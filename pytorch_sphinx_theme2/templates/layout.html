@@ -113,13 +113,5 @@ $("[data-behavior='call-to-action-event']").on('click', function(){
     });
   }
 });
-// Pixel Page rating tracking
-$("[data-behavior='tutorial-rating']").on('click', function(){
-  fbq('trackCustom', "Page Rating", {
-    tutorialLink: window.location.href,
-    tutorialTitle: $('h1:first').text(),
-    rating: $(this).attr("data-count")
-  });
-});
 </script>
 </body>
