@@ -8,10 +8,10 @@
   tbody {
     tr {
       &:hover {
-        background-color: $pytorch-violet;
+        background-color: $pytorch-light-gray;
 
         @media (prefers-color-scheme: dark) {
-          background-color: darken($pytorch-violet, 15%);
+          background-color: darken($pytorch-light-gray, 15%);
         }
       }
     }
@@ -23,7 +23,7 @@ dt {
     background-color: $pytorch-violet;
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($pytorch-violet, 15%);
+      background-color: darken($pytorch-light-gray, 15%);
     }
   }
 }

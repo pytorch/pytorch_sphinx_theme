@@ -1902,11 +1902,11 @@ a.btn {
 }
 
 .table tbody tr:hover {
-  background-color: #B932CC;
+  background-color: #F6F6F6;
 }
 @media (prefers-color-scheme: dark) {
   .table tbody tr:hover {
-    background-color: rgb(129.281496063, 34.9409448819, 142.5590551181);
+    background-color: rgb(207.75, 207.75, 207.75);
   }
 }
 
@@ -1915,7 +1915,7 @@ dt:target {
 }
 @media (prefers-color-scheme: dark) {
   dt:target {
-    background-color: rgb(129.281496063, 34.9409448819, 142.5590551181);
+    background-color: rgb(207.75, 207.75, 207.75);
   }
 }
 
