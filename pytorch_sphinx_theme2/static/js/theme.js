@@ -300,11 +300,16 @@ window.filterTags = {
 
   // Build an array from each tag that's present
   function initTutorialTagsFilter() {
-    var tagList = $(".tutorials-card-container").map(function() {
-      return $(this).data("tags").split(",").map(function(item) {
+    var tagList = [];
+
+    // Collect all tags from all tutorial cards
+    $(".tutorials-card-container").each(function() {
+      var cardTags = $(this).data("tags").split(",").map(function(item) {
         return item.trim();
       });
-    }).get();
+      // Add each tag to the tagList
+      tagList = tagList.concat(cardTags);
+    });
 
     function unique(value, index, self) {
       return self.indexOf(value) == index && value != "";
