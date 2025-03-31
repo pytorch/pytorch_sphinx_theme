@@ -5,6 +5,8 @@ import os
 import re
 from pathlib import Path
 from . import custom_directives
+from .custom_directives import HAS_SPHINX_GALLERY
+
 
 def get_html_theme_path():
     return os.path.dirname(os.path.abspath(__file__))
@@ -43,11 +45,13 @@ def get_theme_variables():
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
-    app.add_directive('includenodoc', custom_directives.IncludeDirective)
-    app.add_directive('galleryitem', custom_directives.GalleryItemDirective)
-    app.add_directive('customgalleryitem', custom_directives.CustomGalleryItemDirective)
-    app.add_directive('customcarditem', custom_directives.CustomCardItemDirective)
-    app.add_directive('customcalloutitem', custom_directives.CustomCalloutItemDirective)
+    
+    if HAS_SPHINX_GALLERY:
+        app.add_directive('includenodoc', custom_directives.IncludeDirective)
+        app.add_directive('galleryitem', custom_directives.GalleryItemDirective)
+        app.add_directive('customgalleryitem', custom_directives.CustomGalleryItemDirective)
+        app.add_directive('customcarditem', custom_directives.CustomCardItemDirective)
+        app.add_directive('customcalloutitem', custom_directives.CustomCalloutItemDirective)
 
     return {
         "version": "0.1.0",

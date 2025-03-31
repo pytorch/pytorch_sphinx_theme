@@ -1,7 +1,6 @@
 import os
 import re
 
-import sphinx_gallery
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
 from docutils.statemachine import StringList
@@ -11,6 +10,11 @@ try:
 except NameError:
     FileNotFoundError = IOError
 
+try:
+    import sphinx_gallery
+    HAS_SPHINX_GALLERY = True
+except ImportError:
+    HAS_SPHINX_GALLERY = False
 
 class IncludeDirective(Directive):
     """Include source file without docstring at the top of file.
