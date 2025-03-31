@@ -23,6 +23,27 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Define the search callback
+    const myWebSearchStartingCallback = (gname, query) => {
+      if (typeof dataLayer !== 'undefined' && query) {
+        dataLayer.push({
+          'event': 'google_search',
+          'search_term': query,
+          'event_category': 'Search',
+          'event_label': 'Google Search'
+        });
+        console.log('GA event sent via callback: google_search - ' + query);
+      }
+      return '';
+    };
+
+    // Set up the GCSE search callbacks
+    window.__gcse || (window.__gcse = {});
+    window.__gcse.searchCallbacks = {
+      web: {
+        starting: myWebSearchStartingCallback,
+      },
+    };
     if (window.location.pathname.includes('/search.html')) {
       document.body.classList.add('search-page');
     }
@@ -179,18 +200,7 @@
         input.setAttribute('placeholder', 'Search the docs ...');
 
         if (!input.hasAttribute('data-tracking-added')) {
-        input.setAttribute('data-tracking-added', 'true');
-        input.closest('form')?.addEventListener('submit', function() {
-          if (typeof dataLayer !== 'undefined' && input.value) {
-            dataLayer.push({
-              'event': 'google_search',
-              'search_term': input.value,
-              'event_category': 'Search',
-              'event_label': 'Google Search'
-            });
-            console.log('GA event sent: google_search - ' + input.value);
-            }
-          });
+          input.setAttribute('data-tracking-added', 'true');
         }
       }
       });

@@ -10,11 +10,11 @@
     document.addEventListener('click', function(e) {
         if (!e.target.matches('.star[data-behavior="tutorial-rating"]') || isProcessing) return;
 
-        const value = parseInt(e.target.dataset.value);
+        const value = parseInt(e.target.dataset.count || e.target.dataset.value);
         const allStars = document.querySelectorAll('.star');
 
         allStars.forEach(s => {
-            s.classList.toggle('active', s.dataset.value <= value);
+            s.classList.toggle('active', parseInt(s.dataset.count || s.dataset.value) <= value);
         });
 
         isProcessing = true;
@@ -27,7 +27,7 @@
                         'event_category': 'Page Rating',
                         'event_label': pageTitle,
                         'value': value,
-                        'customEvent:Rating': value,
+                        'customEvent:Rating': value // send to GA custom dimension customEvent:Rating
                     });
                 }
                 lastRating = value;
