@@ -241,7 +241,7 @@ window.filterTags = {
       var options = {
         valueNames: [{ data: ["tags"] }],
         listClass: "list",
-        page: "6",
+        page: 5,
         pagination: true
       };
 
