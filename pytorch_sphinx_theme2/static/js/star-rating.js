@@ -22,12 +22,17 @@
         debounceTimer = setTimeout(() => {
             if (value !== lastRating) {
                 console.log(`Sending rating for ${pageTitle} after 2.5s: ${value} (previous: ${lastRating})`);
+
                 // Push to dataLayer for GTM
                 if (window.dataLayer) {
                     window.dataLayer.push({
-                        'event': 'tutorialRated',
-                        'starRating': value,
-                        'Rating': value
+                        'event': 'click',
+                        'eventModel': {
+                            'event_category': 'Page Rating',
+                            'event_label': pageTitle,
+                            'value': value.toString(),
+                            'customEvent:Rating': value.toString()
+                        }
                     });
                 }
 
