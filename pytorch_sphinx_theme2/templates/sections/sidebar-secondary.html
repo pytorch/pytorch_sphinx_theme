@@ -1,10 +1,20 @@
 {# sidebar-secondary.html #}
 {% if secondary_sidebar_items -%}
-<div class="sidebar-secondary-items sidebar-secondary__inner">
-{% for toc_item in secondary_sidebar_items %}
-  <div class="sidebar-secondary-item">{% include toc_item %}</div>
-{% endfor %}
+  <div class="sidebar-secondary-items sidebar-secondary__inner">
+    {% for toc_item in secondary_sidebar_items %}
+       <div class="sidebar-secondary-item">{% include toc_item %}</div>
+    {% endfor %}
+{% if extra_project_links %}
+<div class="sidebar-secondary-item">
+  <div class="sidebar-heading">Quick Links</div>
+   <ul style="list-style-type: none; padding: 0;">
+     {% for link in extra_project_links %}
+       <li><a class="nav-link nav-external" href="{{ link.url }}" style="color: var(--pst-color-text-muted)">{{ link.name }}</a></li>
+     {% endfor %}
+   </ul>
 </div>
+{% endif %}
+{% if community_links %}
 <div class="sidebar-secondary-item">
   <div class="sidebar-heading">PyTorch Community</div>
   <ul style="list-style-type: none; padding: 0;">
@@ -13,6 +23,7 @@
   {% endfor %}
   </ul>
 </div>
+{% endif %}
 {% if language_bindings_links %}
 <div class="sidebar-secondary-item">
  <div class="sidebar-heading">Language Bindings</div>
@@ -23,6 +34,7 @@
  </ul>
 </div>
 {% endif %}
+{% if library_links %}
 <div class="sidebar-secondary-item">
   <div class="sidebar-heading">PyTorch Libraries</div>
   <ul style="list-style-type: none; padding: 0; padding-bottom: 80px;">
@@ -31,5 +43,6 @@
   {% endfor %}
   </ul>
 </div>
+{% endif %}
 </div>
 {% endif %}

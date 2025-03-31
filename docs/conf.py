@@ -132,6 +132,16 @@ html_theme_options = {
             "icon": "fa-brands fa-python",
         },
     ],
+    "extra_project_links": [
+      {
+        "name": "See All Recipes",
+        "url": "https://pytorch.org/tutorials/recipes/recipes_index.html",
+      },
+      {
+        "name": "See All Prototype Recipes",
+        "url": "https://pytorch.org/tutorials/prototype/prototype_index.html",
+      },
+    ],
     "external_links": [
         {
             "name": "Tutorials",
@@ -169,7 +179,7 @@ html_context = {
     "github_repo": "pytorch_sphinx_theme",
     "github_version": "master",
     "doc_path": "docs",
-    "language_bindings_links": theme_variables.get("language_bindings_links", []),
+    "extra_project_links": theme_variables.get("extra_project_links", []),
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
