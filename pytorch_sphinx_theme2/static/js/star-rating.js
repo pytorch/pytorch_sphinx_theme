@@ -22,14 +22,23 @@
         debounceTimer = setTimeout(() => {
             if (value !== lastRating) {
                 console.log(`Sending rating for ${pageTitle} after 2.5s: ${value} (previous: ${lastRating})`);
-                if (typeof gtag == 'function') {
-                    gtag('event', 'click', {
-                        'event_category': 'Page Rating',
-                        'event_label': pageTitle,
-                        'value': value,
-                        'customEvent:Rating': value // send to GA custom dimension customEvent:Rating
+                // Push to dataLayer for GTM
+                if (window.dataLayer) {
+                    window.dataLayer.push({
+                        'event': 'tutorialRated',
+                        'starRating': value,
+                        'Rating': value
                     });
                 }
+
+                // Direct GA4 event
+                if (typeof gtag == 'function') {
+                    gtag('event', 'star_rating', {
+                        'Rating': value,
+                        'page_title': pageTitle
+                    });
+                }
+
                 lastRating = value;
             }
             isProcessing = false;
