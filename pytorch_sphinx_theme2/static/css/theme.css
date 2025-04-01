@@ -1912,13 +1912,7 @@ a.btn {
 }
 
 dt:target {
-  box-shadow: 0 0 0 1px #F6F6F6;
-  position: relative;
-}
-@media (prefers-color-scheme: dark) {
-  dt:target {
-    box-shadow: 0 0 0 1px white;
-  }
+  background-color: transparent;
 }
 
 span.highlighted {
