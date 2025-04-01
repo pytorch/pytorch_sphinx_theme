@@ -29,14 +29,15 @@
                         'event': 'star_rating',
                         'Rating': value,
                         'page_path': pagePath,
-                        'event_name': 'click'
+                        'event_name': 'click',
+                        'event_category': 'Page Rating'
                     });
                 }
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
                     gtag('event', 'star_rating', {
-                        'Rating': value,
+                        'rating': value,
                         'page_path': pagePath,
                         'event_category': 'Page Rating',
                     });
