@@ -194,7 +194,8 @@ function openGitHubIssue() {
                 if (typeof gtag == 'function') {
                     gtag('event', 'star_rating', {
                         'Rating': value,
-                        'page_title': pageTitle
+                        'page_title': pageTitle,
+                        'customEvent:Rating': value
                     });
                 }
 
