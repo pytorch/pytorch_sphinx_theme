@@ -25,7 +25,7 @@
                 // Push to dataLayer for GTM
                 if (window.dataLayer) {
                     window.dataLayer.push({
-                        'event': 'star_rating',
+                        'event': 'tutorialRated',
                         'Rating': value,
                         'page_title': pageTitle
                     });
@@ -33,9 +33,10 @@
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
-                    gtag('event', 'star_rating', {
+                    gtag('event', 'tutorialRated', {
                         'Rating': value,
-                        'page_title': pageTitle
+                        'page_title': pageTitle,
+                        'customEvent:Rating': value
                     });
                 }
 
