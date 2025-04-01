@@ -27,15 +27,17 @@
                     window.dataLayer.push({
                         'event': 'star_rating',
                         'Rating': value,
-                        'page_title': pageTitle
+                        'page_title': pageTitle,
+                        'event_name': 'click'
                     });
                 }
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
-                    gtag('event', 'star_rating', {
-                        'Rating': value,
-                        'page_title': pageTitle,
+                    gtag('event', 'click', {
+                        'event_category': 'Page Rating',
+                        'event_label': pageTitle,
+                        'value': value,
                         'customEvent:Rating': value
                     });
                 }
