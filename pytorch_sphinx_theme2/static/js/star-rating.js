@@ -31,7 +31,7 @@
                         'page_path': pagePath,
                         'event_name': 'click'
                     });
-                }git
+                }
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
