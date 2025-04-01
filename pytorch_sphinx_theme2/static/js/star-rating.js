@@ -6,6 +6,7 @@
     let debounceTimer;
     let isProcessing = false;
     const pageTitle = document.querySelector('h1')?.textContent || document.title;
+    const pagePath = window.location.pathname;
 
     document.addEventListener('click', function(e) {
         if (!e.target.matches('.star[data-behavior="tutorial-rating"]') || isProcessing) return;
@@ -27,18 +28,18 @@
                     window.dataLayer.push({
                         'event': 'star_rating',
                         'Rating': value,
-                        'page_title': pageTitle,
+                        'page_path': pagePath,
                         'event_name': 'click'
                     });
-                }
+                }git
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
                     gtag('event', 'click', {
+                        'Rating': value,
+                        'page_path': pagePath,
                         'event_category': 'Page Rating',
                         'event_label': pageTitle,
-                        'value': value,
-                        'customEvent:Rating': value
                     });
                 }
 
