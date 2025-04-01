@@ -35,11 +35,10 @@
 
                 // Direct GA4 event
                 if (typeof gtag == 'function') {
-                    gtag('event', 'click', {
+                    gtag('event', 'star_rating', {
                         'Rating': value,
                         'page_path': pagePath,
                         'event_category': 'Page Rating',
-                        'event_label': pageTitle,
                     });
                 }
 
