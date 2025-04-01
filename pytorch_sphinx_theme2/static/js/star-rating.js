@@ -28,6 +28,7 @@
                     window.dataLayer.push({
                         'event': 'star_rating',
                         'Rating': value,
+                        'value': value,
                         'page_path': pagePath,
                         'event_name': 'click',
                         'event_category': 'Page Rating'
