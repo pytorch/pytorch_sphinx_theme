@@ -8,10 +8,11 @@
   tbody {
     tr {
       &:hover {
-        background-color: $pytorch-light-gray;
+        box-shadow: 0 0 0 1px $pytorch-light-gray;
+        position: relative;
 
         @media (prefers-color-scheme: dark) {
-          background-color: darken($pytorch-light-gray, 15%);
+          box-shadow: 0 0 0 1px lighten($pytorch-light-gray, 10%);
         }
       }
     }
@@ -20,10 +21,11 @@
 
 dt {
   &:target {
-    background-color: $pytorch-violet;
+    box-shadow: 0 0 0 1px $pytorch-light-gray;
+    position: relative;
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($pytorch-light-gray, 15%);
+      box-shadow: 0 0 0 1px lighten($pytorch-light-gray, 10%);
     }
   }
 }
@@ -35,4 +37,17 @@ span.highlighted {
 
 .form-control {
   border: none;
+}
+
+// Remove link styling from TOC backref links
+h1, h2, h3, h4, h5, h6 {
+  .toc-backref {
+    color: inherit !important;
+    text-decoration: none !important;
+
+    &:hover, &:active, &:visited, &:focus {
+      text-decoration: none !important;
+      color: inherit !important;
+    }
+  }
 }

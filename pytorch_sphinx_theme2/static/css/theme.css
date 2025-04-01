@@ -1902,20 +1902,22 @@ a.btn {
 }
 
 .table tbody tr:hover {
-  background-color: #F6F6F6;
+  box-shadow: 0 0 0 1px #F6F6F6;
+  position: relative;
 }
 @media (prefers-color-scheme: dark) {
   .table tbody tr:hover {
-    background-color: rgb(207.75, 207.75, 207.75);
+    box-shadow: 0 0 0 1px white;
   }
 }
 
 dt:target {
-  background-color: #B932CC;
+  box-shadow: 0 0 0 1px #F6F6F6;
+  position: relative;
 }
 @media (prefers-color-scheme: dark) {
   dt:target {
-    background-color: rgb(207.75, 207.75, 207.75);
+    box-shadow: 0 0 0 1px white;
   }
 }
 
@@ -1925,6 +1927,15 @@ span.highlighted {
 
 .form-control {
   border: none;
+}
+
+h1 .toc-backref, h2 .toc-backref, h3 .toc-backref, h4 .toc-backref, h5 .toc-backref, h6 .toc-backref {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-backref:focus, h2 .toc-backref:hover, h2 .toc-backref:active, h2 .toc-backref:visited, h2 .toc-backref:focus, h3 .toc-backref:hover, h3 .toc-backref:active, h3 .toc-backref:visited, h3 .toc-backref:focus, h4 .toc-backref:hover, h4 .toc-backref:active, h4 .toc-backref:visited, h4 .toc-backref:focus, h5 .toc-backref:hover, h5 .toc-backref:active, h5 .toc-backref:visited, h5 .toc-backref:focus, h6 .toc-backref:hover, h6 .toc-backref:active, h6 .toc-backref:visited, h6 .toc-backref:focus {
+  text-decoration: none !important;
+  color: inherit !important;
 }
 
 .pytorch-call-to-action-links {
