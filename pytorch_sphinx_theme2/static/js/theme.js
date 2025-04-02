@@ -141,18 +141,19 @@ function openGitHubIssue() {
     var pageTitle = document.querySelector('h1')?.textContent.split('#')[0].trim() || 'Page';
     var issueTitle = encodeURIComponent(`Feedback about ${pageTitle}`);
     var issueBody = encodeURIComponent(`There is the following issue on this page: ${pageUrl}`);
-    var labels = encodeURIComponent("module: docs,docs-feedback");
+    var labels = encodeURIComponent("module: docs,page-feedback");
     var feedbackUrl = `${baseUrl}/issues/new?title=${issueTitle}&body=${issueBody}&labels=${labels}`;
 
     // Track event in Google Analytics
-    if (typeof gtag === 'function') {
-        gtag('event', 'send_feedback', {
+    if (window.dataLayer) {
+        window.dataLayer.push({
+            'event': 'send_feedback',
             'page_title': pageTitle,
             'page_location': pageUrl
         });
-        console.log('GA event tracked: send_feedback', pageUrl);
+        console.log('Data Layer event pushed: send_feedback', pageUrl);
     } else {
-        console.log('GA tracking not available');
+        console.log('Data Layer not available');
     }
 
     window.open(feedbackUrl, '_blank');
