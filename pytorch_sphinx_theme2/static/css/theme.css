@@ -13,6 +13,7 @@ html[data-theme=light] {
   --bs-emphasis-color: #ee4c2c;
   --bs-btn-focus-box-shadow: #ee4c2c;
   --pst-color-accent: transparent !important;
+  --pst-color-table-row-hover-bg: #F9BFB4;
 }
 
 html[data-theme=dark] {
@@ -25,6 +26,7 @@ html[data-theme=dark] {
   --pst-color-inline-code: #BBBBBB;
   --bs-btn-focus-box-shadow: #F2765D;
   --pst-color-accent: transparent !important;
+  --pst-color-table-row-hover-bg: #711B09;
 }
 
 /* PyTorch top nav bar */
@@ -1902,13 +1904,7 @@ a.btn {
 }
 
 .table tbody tr:hover {
-  box-shadow: 0 0 0 1px #F6F6F6;
-  position: relative;
-}
-@media (prefers-color-scheme: dark) {
-  .table tbody tr:hover {
-    box-shadow: 0 0 0 1px white;
-  }
+  background: var(--pst-color-table-row-hover-bg);
 }
 
 dt:target {

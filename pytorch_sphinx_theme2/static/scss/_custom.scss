@@ -8,12 +8,7 @@
   tbody {
     tr {
       &:hover {
-        box-shadow: 0 0 0 1px $pytorch-light-gray;
-        position: relative;
-
-        @media (prefers-color-scheme: dark) {
-          box-shadow: 0 0 0 1px lighten($pytorch-light-gray, 10%);
-        }
+        background: var(--pst-color-table-row-hover-bg);
       }
     }
   }
