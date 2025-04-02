@@ -1932,6 +1932,14 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
   color: inherit !important;
 }
 
+.div.math {
+  overflow-x: auto;
+}
+
+.katex-display {
+  width: 100%;
+}
+
 .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;
