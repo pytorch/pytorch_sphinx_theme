@@ -1,0 +1,7 @@
+{% extends "components/sidebar-nav-bs.html" %}
+
+{% if theme_pytorch_project == 'tutorials' %}
+ {%- include 'version-switcher.html' -%}
+   <div style="margin-bottom: 1rem;"></div>
+{{ super() }}
+{% endif %}
