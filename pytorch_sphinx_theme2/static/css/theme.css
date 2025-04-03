@@ -1936,6 +1936,10 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
   width: 100%;
 }
 
+.version {
+  padding-bottom: 1rem;
+}
+
 .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;
