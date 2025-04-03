@@ -7,7 +7,7 @@ import pytorch_sphinx_theme2
 
 html_theme = "pytorch_sphinx_theme2"
 html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
-__version__ = "0.1.0"
+__version__ = "v0.1.0"
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -149,7 +149,7 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    #"navbar_start": ["navbar-logo"],
+    "navbar_start": ["pytorch_version"],
     "navbar_center": ["navbar-nav"],
     "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 4,
@@ -160,9 +160,7 @@ html_theme_options = {
         "version_match": "master",
     },
     "canonical_url": "https://pytorch.org/docs/stable/",
-    "logo": {
-        "text": "Home",
-    },
+    "display_version": True,
 }
 
 

@@ -1937,7 +1937,7 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
 }
 
 .version {
-  padding-bottom: 1rem;
+  font-weight: 600;
 }
 
 .pytorch-call-to-action-links {
