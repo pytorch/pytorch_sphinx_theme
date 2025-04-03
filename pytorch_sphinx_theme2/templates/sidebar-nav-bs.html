@@ -1,9 +1,9 @@
 {% extends "components/sidebar-nav-bs.html" %}
 
 {% if theme_pytorch_project == 'tutorials' %}
-  {% if nav_version %}
+  {% if theme_display_version and version %}
   <div class="version">
-    {{ nav_version }}
+    {{ version }}
   </div>
   {% endif %}
 {{ super() }}

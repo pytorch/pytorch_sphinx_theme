@@ -20,13 +20,11 @@ def get_theme_variables():
     if os.path.exists(template_path):
         with open(template_path) as f:
             content = f.read()
-            print(f"Template content length: {len(content)}")
             
             # Use regex to extract the dictionary content
             match = re.search(r"external_urls\s*=\s*({.*?})", content, re.DOTALL)
             if match:
                 external_urls_str = match.group(1)
-                print(f"Extracted external_urls string: {external_urls_str[:100]}...")
                 
                 try:
                     # Parse the dictionary string
