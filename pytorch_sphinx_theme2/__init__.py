@@ -20,14 +20,24 @@ def get_theme_variables():
     if os.path.exists(template_path):
         with open(template_path) as f:
             content = f.read()
-            # Extract the dictionary from the Jinja template
-            match = re.search(r"{%- set external_urls = (.*?) -%}", content, re.DOTALL)
+            print(f"Template content length: {len(content)}")
+            
+            # Use regex to extract the dictionary content
+            match = re.search(r"external_urls\s*=\s*({.*?})", content, re.DOTALL)
             if match:
-                # Convert the dictionary string to a Python dictionary
                 external_urls_str = match.group(1)
-                local_vars = {}
-                exec("external_urls = " + external_urls_str, {}, local_vars)
-                external_urls = local_vars["external_urls"]
+                print(f"Extracted external_urls string: {external_urls_str[:100]}...")
+                
+                try:
+                    # Parse the dictionary string
+                    local_vars = {}
+                    exec("external_urls = " + external_urls_str, {}, local_vars)
+                    external_urls = local_vars["external_urls"]
+                    print(f"Parsed external_urls: {list(external_urls.keys())[:5]}")
+                except Exception as e:
+                    print(f"Error parsing external_urls: {e}")
+            else:
+                print("No dictionary found in template")
 
     # Get links from JSON file
     links_path = os.path.join(os.path.dirname(__file__), "links.json")
@@ -39,13 +49,13 @@ def get_theme_variables():
         except json.JSONDecodeError:
             pass
 
-    # Combine both sources
-    return {"external_urls": external_urls, **links}
+    result = {"external_urls": external_urls, **links}
+    return result
 
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
-    
+
     if HAS_SPHINX_GALLERY:
         app.add_directive('includenodoc', custom_directives.IncludeDirective)
         app.add_directive('galleryitem', custom_directives.GalleryItemDirective)
