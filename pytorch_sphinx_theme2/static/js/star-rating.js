@@ -24,15 +24,14 @@
             if (value !== lastRating) {
                 console.log(`Sending rating for ${pageTitle} after 2.5s: ${value} (previous: ${lastRating})`);
                 // Push to dataLayer for GTM
-                if (window.dataLayer) {
-                    window.dataLayer.push({
-                        'event': 'star_rating',
-                        'Rating': value,
-                        'page_path': pagePath,
-                        'event_name': 'click',
-                        'event_category': 'Page Rating'
-                    });
-                }
+                window.dataLayer = [];
+                window.dataLayer.push({
+                    'event': 'star_rating',
+                    'Rating': value,
+                    'page_path': pagePath,
+                    'event_name': 'click',
+                    'event_category': 'Page Rating'
+                });
 
                 lastRating = value;
             }

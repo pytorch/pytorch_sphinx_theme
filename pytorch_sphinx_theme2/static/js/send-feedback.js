@@ -14,16 +14,13 @@ function openGitHubIssue() {
     var feedbackUrl = `${baseUrl}/issues/new?title=${issueTitle}&body=${issueBody}&labels=${labels}`;
 
     // Track event in Google Analytics
-    if (window.dataLayer) {
-        window.dataLayer.push({
-            'event': 'send_feedback',
-            'page_title': pageTitle,
-            'page_location': pageUrl
-        });
-        console.log('Data Layer event pushed: send_feedback', pageUrl);
-    } else {
-        console.log('Data Layer not available');
-    }
+    window.dataLayer = [];
+    window.dataLayer.push({
+        'event': 'send_feedback',
+        'page_title': pageTitle,
+        'page_location': pageUrl
+    });
+    console.log('Data Layer event pushed: send_feedback', pageUrl);
 
     window.open(feedbackUrl, '_blank');
 }
