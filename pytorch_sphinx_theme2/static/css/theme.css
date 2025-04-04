@@ -14,6 +14,7 @@ html[data-theme=light] {
   --bs-btn-focus-box-shadow: #ee4c2c;
   --pst-color-accent: transparent !important;
   --pst-color-table-row-hover-bg: #F9BFB4;
+  --sg-script-pre: #FBEEF6;
 }
 
 html[data-theme=dark] {
@@ -346,6 +347,30 @@ button.btn.version-switcher__button {
 
 div.math {
   flex-direction: column;
+}
+
+body.search-page {
+  height: auto !important;
+  overflow: visible !important;
+}
+body.search-page .bd-main {
+  height: auto !important;
+  overflow: visible !important;
+}
+body.search-page .bd-main .bd-content {
+  height: auto !important;
+  overflow: visible !important;
+}
+body.search-page .bd-main .bd-content #search-results {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.search-results-container {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 .bd-footer {

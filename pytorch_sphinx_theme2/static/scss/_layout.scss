@@ -5,11 +5,11 @@
 .bd-header {
   top: var(--header-height-desktop) !important;
   position: sticky !important;
-  
+
   @media (max-width: 1200px) {
     top: var(--header-height) !important;
   }
-  
+
   @media (max-width: 960px) {
     top: var(--header-height) !important;
   }
@@ -38,7 +38,7 @@ article h1, article .h1 {
   word-break: break-word !important;
   max-width: 100%;
   hyphens: auto;
-  
+
   a {
     display: inline-block;
     word-break: break-word;
@@ -59,7 +59,7 @@ article h1, article .h1 {
 .prev-next-area {
   display: block;
   margin-bottom: 20px;
-  
+
   p {
     word-break: break-word;
   }
@@ -95,3 +95,31 @@ div.math {
   flex-direction: column;
 }
 
+// Fix search page scrolling
+body.search-page {
+  height: auto !important;
+  overflow: visible !important;
+
+  .bd-main {
+    height: auto !important;
+    overflow: visible !important;
+
+    .bd-content {
+      height: auto !important;
+      overflow: visible !important;
+
+      #search-results {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+  }
+}
+
+// Ensure search results container doesn't have restricted height
+.search-results-container {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}

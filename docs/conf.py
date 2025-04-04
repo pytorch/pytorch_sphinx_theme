@@ -30,6 +30,12 @@ extensions = [
 
 pytorch_project = "docs"
 
+html_search_options = {
+    'prune_html_trees': ['nav', 'aside', 'footer'],
+    'prune_html_classes': ['bd-sidebar-primary', 'bd-sidebar-secondary', 'bd-header', 'bd-footer'],
+    'prune_html_ids': ['site-navigation', 'search-results'],
+}
+
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ["image.nonlocal_uri"]
 html_css_files = [
