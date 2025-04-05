@@ -30,11 +30,6 @@ extensions = [
 
 pytorch_project = "docs"
 
-html_search_options = {
-    'prune_html_trees': ['nav', 'aside', 'footer'],
-    'prune_html_classes': ['bd-sidebar-primary', 'bd-sidebar-secondary', 'bd-header', 'bd-footer'],
-    'prune_html_ids': ['site-navigation', 'search-results'],
-}
 
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ["image.nonlocal_uri"]
@@ -177,7 +172,6 @@ html_context = {
     "community_links": theme_variables.get("community_links", []),
     "pytorch_project": "docs",
     "feedback_url": "https://github.com/pytorch/pytorch",
-    "display_github": True,
     "github_url": "https://github.com",
     "github_user": "pytorch",
     "github_repo": "pytorch_sphinx_theme",
@@ -187,6 +181,14 @@ html_context = {
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
+
+def setup(app):
+    app.connect("html-page-context", hide_edit_button_for_pages)
+    return {"version": "0.1", "parallel_read_safe": True}
+
+def hide_edit_button_for_pages(app, pagename, templatename, context, doctree):
+    if pagename == 'installing' or pagename.startswith('installing/'):
+        context['theme_use_edit_page_button'] = False
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
