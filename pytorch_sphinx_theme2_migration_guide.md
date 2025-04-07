@@ -61,7 +61,6 @@ Navbar settings:
 html_theme_options = {
     "navigation_with_keys": False,
     "analytics_id": "GTM-T8XT4PS",
-    "pytorch_project": "tutorials",
     "logo": {
         "text": "",
     },
