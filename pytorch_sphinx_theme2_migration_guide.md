@@ -24,7 +24,7 @@ myst-parser==0.18.1  # if want to contribute in markdown
 sphinx-gallery==0.11.1  # if hosting interactive tutorials
 ```
 
-Step 3: Update `conf.py`
+## Step 3: Update `conf.py`
 
 Add imports and theme settings:
 ```
@@ -121,7 +121,7 @@ myst_enable_extensions = [
 ]
 ```
 
-For special requirements, contact the PyTorch documentation team.
+For special requirements, contact the PyTorch documentation team or create an issue in this repo.
 
 ## Restructuring your index.rst/index.md
 
