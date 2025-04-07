@@ -37,7 +37,7 @@ html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
 
 Add opengraph protocol settings: 
 ```
-ogp_site_url = "http://pytorch.org/tutorials"
+ogp_site_url = "http://pytorch.org/<your-sub-site>"
 ogp_image = "https://pytorch.org/assets/images/social-share.jpg"
 ```
 
