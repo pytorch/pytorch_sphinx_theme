@@ -141,6 +141,14 @@
     a {
       text-decoration: none;
 
+      @media screen and (min-width: 768px) {
+        min-height: 190px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1239px) {
+        min-height: 234px;
+      }
+
       p.card-summary, p.tags {
         color: var(--pst-color-text-base);
         text-decoration: none;
@@ -220,8 +228,11 @@
       h4 {
         margin-bottom: 1.125rem;
         margin-top: 0;
-        font-size: 1.5rem;
-        color: var(--pst-color-heading)
+        font-size: 1.125rem;
+        color: var(--sg-text-colorg);
+
+        @media screen and (min-width: 768px) {
+          font-size: 1.5rem;
       }
     }
 
@@ -421,6 +432,7 @@
       a {
         color: inherit;
       }
+    }
   }
 }
 

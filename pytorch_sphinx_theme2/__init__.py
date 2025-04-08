@@ -64,10 +64,11 @@ def get_git_dates(file_path):
         
         # Get creation date
         git_command = [
-            "git", "log", "--reverse", "--diff-filter=A", "--date=format:%B %d, %Y",
-            "--format=%ad", "-1", "--", file_path
+            "git", "log", "--follow", "--format=%ad", "--date=format:%B %d, %Y",
+            "--", file_path
         ]
-        created_on = subprocess.check_output(git_command).decode().strip()
+        creation_output = subprocess.check_output(git_command).decode().strip().split('\n')
+        created_on = creation_output[-1] if creation_output else "Unknown"
         
         # Check if dates are empty and provide defaults
         if not created_on:
@@ -84,7 +85,7 @@ def html_page_context(app, pagename, templatename, context, doctree):
     if doctree is None:
         return
     
-    paths_to_skip = context.get("date_info", {}).get("paths_to_skip", [])
+    paths_to_skip = ["_static", "_images", "_templates"] + context.get("date_info", {}).get("paths_to_skip", [])
     if any(pagename == path.rstrip('/') or pagename.startswith(path.rstrip('/') + '/') for path in paths_to_skip):
         return
 
