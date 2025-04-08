@@ -26,10 +26,11 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinxcontrib.httpdomain",
+    "sphinx_last_updated_by_git"
 ]
 
 pytorch_project = "docs"
-
+html_last_updated_fmt = "%B %d, %Y"
 
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ["image.nonlocal_uri"]
@@ -178,10 +179,9 @@ html_context = {
     "github_version": "master",
     "doc_path": "docs",
     "extra_project_links": theme_variables.get("extra_project_links", []),
-      "date_info": {
-        "enabled": True,
-        "paths_to_skip": ["installing"],
-    },
+    "date_info": {
+        "paths_to_skip": ["index", "installing", "installing/"]
+    }
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
