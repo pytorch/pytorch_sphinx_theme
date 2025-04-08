@@ -83,9 +83,8 @@ def process_html_files(
                 d
                 for d in dirs
                 if not any(
-                    os.path.join(root, d)
-                    .replace(build_dir + os.path.sep, "")
-                    .startswith(skip_path)
+                    os.path.join(root, d).replace(build_dir + os.path.sep, "").rstrip("/") == skip_path.rstrip("/") or
+                    os.path.join(root, d).replace(build_dir + os.path.sep, "").startswith(skip_path.rstrip("/") + "/")
                     for skip_path in paths_to_skip
                 )
             ]
