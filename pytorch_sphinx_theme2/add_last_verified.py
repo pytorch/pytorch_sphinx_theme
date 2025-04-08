@@ -137,7 +137,7 @@ def process_html_files(
                         )
                         date_info_tag["style"] = "color: #6c6c6d; font-size: small;"
                         date_info_tag.string = (
-                            f"Created on: {created_on}, Last updated: {last_updated}"
+                            f"Created on: {created_on.split(',')[0]} | {created_on.split(',')[1]}, Last updated: {last_updated}"
                         )
                         h1_tag.insert_after(date_info_tag)
 
