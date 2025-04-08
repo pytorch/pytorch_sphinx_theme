@@ -52,29 +52,34 @@ def get_theme_variables():
     result = {"external_urls": external_urls, **links}
     return result
 
-_git_dates_cache = {}
-
-def get_git_creation_date(source_file):
-    """Get creation date for a file."""
+def get_git_dates(file_path):
+    """Get creation and last update dates for a file."""
     try:
+        # Get last update date
         git_command = [
-            "git", "rev-list", "HEAD", source_file, "|", "tail", "-n", "1"
+            "git", "log", "-1", "--date=format:%B %d, %Y", 
+            "--format=%ad", "--", file_path
         ]
-        hash_output = subprocess.check_output(" ".join(git_command), shell=True).decode().strip()
+        last_updated = subprocess.check_output(git_command).decode().strip()
         
-        date_command = ["git", "show", "-s", "--format=%cd", hash_output, "--date=format:%B %d, %Y", "--"]
-        date_output = subprocess.check_output(date_command).decode().strip()
-        return date_output
-    except Exception as e:
-        print(f"Error getting creation date for {source_file}: {e}")
-        return "Unknown"
+        # Get creation date
+        git_command = [
+            "git", "log", "--diff-filter=A", "--date=format:%B %d, %Y",
+            "--format=%ad", "--", file_path
+        ]
+        created_on = subprocess.check_output(git_command).decode().strip()
+        
+        return created_on, last_updated
+    except:
+        return "Unknown", "Unknown"
 
 def html_page_context(app, pagename, templatename, context, doctree):
     if doctree is None:
         return
     
     paths_to_skip = context.get("date_info", {}).get("paths_to_skip", [])
-    if paths_to_skip and any(pagename == path.rstrip('/') or pagename.startswith(path.rstrip('/') + '/') for path in paths_to_skip):
+    if any(pagename == path.rstrip('/') or pagename.startswith(path.rstrip('/') + '/') for path in paths_to_skip):
+        print(f"Skipping page: {pagename}")
         return
 
     source_file = context.get('sourcename')
@@ -83,26 +88,19 @@ def html_page_context(app, pagename, templatename, context, doctree):
         if source_file.endswith('.txt'):
             source_file = source_file[:-4]
 
-        # Get creation date
-        if source_file in _git_dates_cache:
-            created_on = _git_dates_cache[source_file]
-        else:
-            created_on = get_git_creation_date(source_file)
-            _git_dates_cache[source_file] = created_on
-        
-        # The extension provides last_updated in context
-        last_updated = context.get('last_updated', 'Unknown')
-        
-        # Add both dates to context for layout.html
-        context['doc_created'] = created_on
-        context['doc_updated'] = last_updated
+        try:
+            created_on, last_updated = get_git_dates(source_file)
+            print(f"Got dates for {source_file}: {created_on}, {last_updated}")
+            body = context.get('body', '')
+            h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
+            match = re.search(h1_pattern, body)
+            if match:
+                date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created on: {created_on} | Last updated: {last_updated}</p>'
+                context['body'] = re.sub(h1_pattern, r'<h1\1>\2</h1>\n' + date_info, body, count=1)
+            
+        except Exception as e:
+            print(f"Error getting dates for {source_file}: {e}")
 
-        body = context.get('body', '')
-        h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
-        match = re.search(h1_pattern, body)
-        if match:
-            date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created on: {created_on} | Last updated: {last_updated}</p>'
-            context['body'] = re.sub(h1_pattern, r'<h1\1>\2</h1>\n' + date_info, body, count=1)
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())

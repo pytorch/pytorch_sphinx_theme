@@ -93,6 +93,11 @@
       </a>
     </div>
     {% endif %}
+    {% if doc_created and doc_updated %}
+         <p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">
+            Created on: {{ doc_created }} | Last updated: {{ doc_updated }}
+         </p>
+    {% endif %}
     {{ super() }}
   </article>
 {% endblock docs_body %}
