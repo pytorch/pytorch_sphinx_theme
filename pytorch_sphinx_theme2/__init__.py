@@ -69,8 +69,15 @@ def get_git_dates(file_path):
         ]
         created_on = subprocess.check_output(git_command).decode().strip()
         
+        # Check if dates are empty and provide defaults
+        if not created_on:
+            created_on = "Unknown"
+        if not last_updated:
+            last_updated = "Unknown"
+            
         return created_on, last_updated
-    except:
+    except Exception as e:
+        print(f"Git date error for {file_path}: {e}")
         return "Unknown", "Unknown"
 
 def html_page_context(app, pagename, templatename, context, doctree):
@@ -79,7 +86,6 @@ def html_page_context(app, pagename, templatename, context, doctree):
     
     paths_to_skip = context.get("date_info", {}).get("paths_to_skip", [])
     if any(pagename == path.rstrip('/') or pagename.startswith(path.rstrip('/') + '/') for path in paths_to_skip):
-        print(f"Skipping page: {pagename}")
         return
 
     source_file = context.get('sourcename')
@@ -88,18 +94,25 @@ def html_page_context(app, pagename, templatename, context, doctree):
         if source_file.endswith('.txt'):
             source_file = source_file[:-4]
 
+        # Get the full path to the source file
+        source_dir = app.srcdir if hasattr(app, 'srcdir') else ''
+        full_source_path = os.path.join(source_dir, source_file)
+        
         try:
-            created_on, last_updated = get_git_dates(source_file)
-            print(f"Got dates for {source_file}: {created_on}, {last_updated}")
-            body = context.get('body', '')
-            h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
-            match = re.search(h1_pattern, body)
-            if match:
-                date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created on: {created_on} | Last updated: {last_updated}</p>'
-                context['body'] = re.sub(h1_pattern, r'<h1\1>\2</h1>\n' + date_info, body, count=1)
+            created_on, last_updated = get_git_dates(full_source_path)
+            print(f"Got dates for {full_source_path}: {created_on}, {last_updated}")
+            
+            # Only add date info if we have actual dates
+            if created_on != "Unknown" or last_updated != "Unknown":
+                body = context.get('body', '')
+                h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
+                match = re.search(h1_pattern, body)
+                if match:
+                    date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created on: {created_on} | Last updated: {last_updated}</p>'
+                    context['body'] = re.sub(h1_pattern, r'<h1\1>\2</h1>\n' + date_info, body, count=1)
             
         except Exception as e:
-            print(f"Error getting dates for {source_file}: {e}")
+            print(f"Error getting dates for {full_source_path}: {e}")
 
 
 def setup(app):
