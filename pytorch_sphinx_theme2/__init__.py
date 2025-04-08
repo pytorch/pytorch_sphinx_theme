@@ -64,8 +64,8 @@ def get_git_dates(file_path):
         
         # Get creation date
         git_command = [
-            "git", "log", "--diff-filter=A", "--date=format:%B %d, %Y",
-            "--format=%ad", "--", file_path
+            "git", "log", "--reverse", "--diff-filter=A", "--date=format:%B %d, %Y",
+            "--format=%ad", "-1", "--", file_path
         ]
         created_on = subprocess.check_output(git_command).decode().strip()
         
@@ -103,7 +103,7 @@ def html_page_context(app, pagename, templatename, context, doctree):
             print(f"Got dates for {full_source_path}: {created_on}, {last_updated}")
             
             # Only add date info if we have actual dates
-            if created_on != "Unknown" or last_updated != "Unknown":
+            if created_on != "Unknown" and last_updated != "Unknown":
                 body = context.get('body', '')
                 h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
                 match = re.search(h1_pattern, body)
