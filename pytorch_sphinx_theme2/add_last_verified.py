@@ -90,8 +90,12 @@ def process_html_files(
                 print(f"Relative path: {path_without_ext}")
 
                 if path_without_ext in paths_to_skip:
-                    print(f"Skipping path: {path_without_ext}")
-                    continue
+                    if any(
+                        path_without_ext.startswith(skip_path)
+                        for skip_path in paths_to_skip
+                    ):
+                        print(f"Skipping path: {path_without_ext}")
+                        continue
 
                 source_file_path = None
                 for prefix, src_dir in source_to_build_mapping.items():
