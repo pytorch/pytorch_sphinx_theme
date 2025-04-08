@@ -178,22 +178,14 @@ html_context = {
     "github_version": "master",
     "doc_path": "docs",
     "extra_project_links": theme_variables.get("extra_project_links", []),
-    "date_info": {
-        "enabled": True,
-        "paths_to_skip": ["installing"],
-        "source_to_build_mapping": {"": ""},
-    },
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
 
 
 def setup(app):
+    pytorch_sphinx_theme2.setup(app)
     app.connect("html-page-context", hide_edit_button_for_pages)
-    from pytorch_sphinx_theme2 import on_build_finished
-
-    # add last-updated date to docs
-    app.connect("build-finished", on_build_finished)
     return {"version": "0.1", "parallel_read_safe": True}
 
 

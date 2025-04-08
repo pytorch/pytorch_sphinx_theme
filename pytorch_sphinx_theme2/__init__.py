@@ -3,10 +3,10 @@ __version__ = "0.1.0"
 import json
 import os
 import re
+import subprocess 
 from pathlib import Path
 
 from . import custom_directives
-from .add_last_verified import add_dates_to_html
 from .custom_directives import HAS_SPHINX_GALLERY
 
 
@@ -52,23 +52,49 @@ def get_theme_variables():
     result = {"external_urls": external_urls, **links}
     return result
 
+def get_git_dates(file_path):
+    """Get creation and last update dates for a file."""
+    try:
+        # Get last update date
+        git_command = [
+            "git", "log", "-1", "--date=format:%B %d, %Y", 
+            "--format=%ad", "--", file_path
+        ]
+        last_updated = subprocess.check_output(git_command).decode().strip()
+        
+        # Get creation date
+        git_command = [
+            "git", "log", "--diff-filter=A", "--date=format:%B %d, %Y",
+            "--format=%ad", "--", file_path
+        ]
+        created_on = subprocess.check_output(git_command).decode().strip()
+        
+        return created_on, last_updated
+    except:
+        return "Unknown", "Unknown"
 
-def on_build_finished(app, exception):
-    print("\n\n==== ON BUILD FINISHED CALLED ====\n\n")
-    if exception is None and app.builder.name == "html":
-        build_dir = app.outdir
-        config = app.config.html_context.get("date_info", {})
-        enabled = config.get("enabled", True)
-        paths_to_skip = config.get("paths_to_skip", [])
-        source_to_build_mapping = config.get("source_to_build_mapping", {"": ""})
+def html_page_context(app, pagename, templatename, context, doctree):
+    if doctree is None:
+        return
+    
+    source_file = context.get('sourcename')
+    if source_file:
+        # Remove the .txt extension that Sphinx adds
+        if source_file.endswith('.txt'):
+            source_file = source_file[:-4]
 
-        print(f"Build directory: {build_dir}")
-        print(f"Date info enabled: {enabled}")
-        print(f"Paths to skip: {paths_to_skip}")
-        print(f"Source to build mapping: {source_to_build_mapping}")
-
-        add_dates_to_html(build_dir, paths_to_skip, source_to_build_mapping, enabled)
-        print("Finished adding dates to HTML files.")
+        try:
+            created_on, last_updated = get_git_dates(source_file)
+            print(f"Got dates for {source_file}: {created_on}, {last_updated}")
+            body = context.get('body', '')
+            h1_pattern = r'<h1([^>]*)>(.*?)</h1>'
+            match = re.search(h1_pattern, body)
+            if match:
+                date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created on: {created_on} | Last updated: {last_updated}</p>'
+                context['body'] = re.sub(h1_pattern, r'<h1\1>\2</h1>\n' + date_info, body, count=1)
+            
+        except Exception as e:
+            print(f"Error getting dates for {source_file}: {e}")
 
 
 def setup(app):
@@ -85,7 +111,7 @@ def setup(app):
             "customcalloutitem", custom_directives.CustomCalloutItemDirective
         )
 
-    app.connect("build-finished", on_build_finished)
+    app.connect('html-page-context', html_page_context)
     print("Registered build-finished event handler")
 
     return {
