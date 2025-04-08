@@ -77,6 +77,11 @@ def html_page_context(app, pagename, templatename, context, doctree):
     if doctree is None:
         return
     
+    paths_to_skip = context.get("date_info", {}).get("paths_to_skip", [])
+    if any(pagename == path.rstrip('/') or pagename.startswith(path.rstrip('/') + '/') for path in paths_to_skip):
+        print(f"Skipping page: {pagename}")
+        return
+
     source_file = context.get('sourcename')
     if source_file:
         # Remove the .txt extension that Sphinx adds

@@ -178,6 +178,10 @@ html_context = {
     "github_version": "master",
     "doc_path": "docs",
     "extra_project_links": theme_variables.get("extra_project_links", []),
+      "date_info": {
+        "enabled": True,
+        "paths_to_skip": ["installing"],
+    },
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
