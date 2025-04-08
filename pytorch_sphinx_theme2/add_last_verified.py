@@ -39,6 +39,13 @@ def find_source_file(base_path):
         if os.path.exists(source_file_path):
             return source_file_path
 
+    # Try looking in the source directory
+    source_dir = "source"  # Adjust this to your actual source directory
+    for ext in [".rst", ".py", ".md"]:
+        source_path = os.path.join(source_dir, base_path + ext)
+        if os.path.exists(source_path):
+            return source_path
+
     # Try looking in the current directory
     if os.path.exists(base_path):
         return base_path
