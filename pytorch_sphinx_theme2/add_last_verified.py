@@ -77,7 +77,19 @@ def process_html_files(
             print(f"Build path does not exist: {build_path}")
             continue
 
-        for root, _, files in os.walk(build_path):
+        for root, dirs, files in os.walk(build_path):
+            # Skip directories in paths_to_skip
+            dirs[:] = [
+                d
+                for d in dirs
+                if not any(
+                    os.path.join(root, d)
+                    .replace(build_dir + os.path.sep, "")
+                    .startswith(skip_path)
+                    for skip_path in paths_to_skip
+                )
+            ]
+
             for file in files:
                 if not file.endswith(".html"):
                     continue
@@ -89,63 +101,54 @@ def process_html_files(
                 print(f"Processing HTML file: {html_file_path}")
                 print(f"Relative path: {path_without_ext}")
 
-                if path_without_ext in paths_to_skip:
-                    if any(
-                        path_without_ext.startswith(skip_path)
-                        for skip_path in paths_to_skip
-                    ):
-                        print(f"Skipping path: {path_without_ext}")
-                        continue
+                if path_without_ext in paths_to_skip or any(
+                    path_without_ext.startswith(skip_path)
+                    for skip_path in paths_to_skip
+                ):
+                    print(f"Skipping path: {path_without_ext}")
+                    continue
 
-                source_file_path = None
-                for prefix, src_dir in source_to_build_mapping.items():
-                    if path_without_ext.startswith(prefix):
-                        base_source_path = (
-                            os.path.join(src_dir, path_without_ext[len(prefix) + 1 :])
-                            if prefix
-                            else os.path.join(src_dir, path_without_ext)
-                        )
-                        print(f"Looking for source file at: {base_source_path}")
-                        source_file_path = find_source_file(base_source_path)
-                        if source_file_path:
-                            print(f"Found source file: {source_file_path}")
-                            break
-
+                source_file_path = find_source_file(path_without_ext)
                 if not source_file_path:
+                    print(f"Looking for source file at: {path_without_ext}")
                     print(f"Warning: Source file not found for path {path_without_ext}")
                     continue
+
+                print(f"Found source file: {source_file_path}")
 
                 try:
                     created_on = get_creation_date(source_file_path)
                     last_updated = get_last_updated_date(source_file_path)
                     print(f"Created on: {created_on}, Last updated: {last_updated}")
+
+                    # Add dates to HTML file
+                    with open(html_file_path, "r", encoding="utf-8") as file:
+                        soup = BeautifulSoup(file, "html.parser")
+
+                    # Check if date info already exists
+                    if soup.find("p", {"class": "date-info-last-verified"}):
+                        print(f"Date info already exists in {html_file_path}")
+                        continue
+
+                    h1_tag = soup.find("h1")
+                    if h1_tag:
+                        print("Found h1 tag, adding date info")
+                        date_info_tag = soup.new_tag(
+                            "p", **{"class": "date-info-last-verified"}
+                        )
+                        date_info_tag["style"] = "color: #6c6c6d; font-size: small;"
+                        date_info_tag.string = (
+                            f"Created on: {created_on}, Last updated: {last_updated}"
+                        )
+                        h1_tag.insert_after(date_info_tag)
+
+                        with open(html_file_path, "w", encoding="utf-8") as file:
+                            file.write(str(soup))
+                        print("Updated HTML file with date info")
+                    else:
+                        print(f"Warning: No h1 tag found in {html_file_path}")
                 except ValueError as e:
-                    print(f"Warning: {e}")
-                    continue
-
-                with open(html_file_path, "r", encoding="utf-8") as f:
-                    soup = BeautifulSoup(f, "html.parser")
-
-                existing_date_info = soup.find("p", {"class": "date-info"})
-                if existing_date_info:
-                    print(f"Found existing date info, removing it")
-                    existing_date_info.decompose()
-
-                h1_tag = soup.find("h1")
-                if h1_tag:
-                    print(f"Found h1 tag, adding date info")
-                    date_info_tag = soup.new_tag("p", **{"class": "date-info"})
-                    date_info_tag["style"] = "color: #6c6c6d; font-size: small;"
-                    date_info_tag.string = (
-                        f"Created On: {created_on} | " f"Last Updated: {last_updated}"
-                    )
-                    h1_tag.insert_after(date_info_tag)
-
-                    with open(html_file_path, "w", encoding="utf-8") as f:
-                        f.write(str(soup))
-                    print(f"Updated HTML file with date info")
-                else:
-                    print(f"Warning: <h1> tag not found in {html_file_path}")
+                    print(f"Warning: {str(e)}")
 
 
 def add_dates_to_html(
