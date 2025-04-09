@@ -150,18 +150,18 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    "navbar_start": ["pytorch_version"],
+    # "navbar_start": ["pytorch_version"],
+    "navbar_start": ["version-switcher"],
     "navbar_center": ["navbar-nav"],
     "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 4,
     "navbar_persistent": [],
     "use_edit_page_button": True,
     "switcher": {
-        "json_url": "https://svekars.github.io/doc-test/versions.json",
-        "version_match": "master",
+        "json_url": "https://pytorch.org/docs/pytorch-versions.json",
+        "version_match": "main",
     },
     "canonical_url": "https://pytorch.org/docs/stable/",
-    "display_version": True,
 }
 
 
@@ -181,8 +181,8 @@ html_context = {
     "date_info": {
         "paths_to_skip": ["installing"],
     },
+    "version": version,
 }
-
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
 
@@ -191,8 +191,9 @@ def setup(app):
     app.connect("html-page-context", hide_edit_button_for_pages)
     app.config.add_last_updated = True
     from pytorch_sphinx_theme2 import add_date_info_to_page
+
     app.connect("html-page-context", add_date_info_to_page)
-    return {"version": "0.1", "parallel_read_safe": True}
+    return {"version": version, "parallel_read_safe": True}
 
 
 def hide_edit_button_for_pages(app, pagename, templatename, context, doctree):

@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/theme.css', 1) }}">
 <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 <link rel="stylesheet" href="{{ pathto('_static/webfonts/all.min.css', 1) }}">
-
+<meta name="pytorch_project" content="{{ pytorch_project }}">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}"
    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -37,6 +37,9 @@
    fbq('init', '243028289693773');
    fbq('track', 'PageView');
 </script>
+<script>
+   document.documentElement.setAttribute('data-version', '{{ version }}');
+ </script>
 <noscript>
    <img height="1" width="1" src="https://www.facebook.com/tr?id=243028289693773&ev=PageView&noscript=1"/>
 </noscript>
@@ -57,6 +60,10 @@
 {% endif %}
 {{ super() }}
 {% endblock%}
+
+{% block html_tag %}
+   <html data-version="{{ version }}">
+{% endblock %}
 
 {% block body_tag %}
 <body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
