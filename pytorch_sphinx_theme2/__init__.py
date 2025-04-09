@@ -81,7 +81,10 @@ def get_git_dates(file_path):
         print(f"Git date error for {file_path}: {e}")
         return "Unknown", "Unknown"
 
-def html_page_context(app, pagename, templatename, context, doctree):
+def add_date_info_to_page(app, pagename, templatename, context, doctree):
+    if not getattr(app.config, 'add_last_updated', False):
+        return
+
     if doctree is None:
         return
     
@@ -118,6 +121,8 @@ def html_page_context(app, pagename, templatename, context, doctree):
 
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
+    app.add_config_value('add_last_updated', False, 'html')
+    app.connect('html-page-context', add_date_info_to_page)
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)
@@ -129,9 +134,6 @@ def setup(app):
         app.add_directive(
             "customcalloutitem", custom_directives.CustomCalloutItemDirective
         )
-
-    app.connect('html-page-context', html_page_context)
-    print("Registered build-finished event handler")
 
     return {
         "version": "0.1.0",
