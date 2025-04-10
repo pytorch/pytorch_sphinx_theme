@@ -52,3 +52,10 @@ h1, h2, h3, h4, h5, h6 {
 .version {
   font-weight: 600;
 }
+
+// Hide logo on mobile
+.navbar-brand {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
