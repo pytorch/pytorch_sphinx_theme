@@ -111,6 +111,7 @@ intersphinx_mapping = {"rtd": ("https://docs.readthedocs.io/en/latest/", None)}
 # documentation.
 html_theme_options = {
     "header_links_before_dropdown": 4,
+    "logo": {"text": "Home"},
     "icon_links": [
         {
             "name": "X",
@@ -150,8 +151,8 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    # "navbar_start": ["pytorch_version"],
-    "navbar_start": ["version-switcher"],
+    #"navbar_start": ["pytorch_version"],
+    "navbar_start": ["version-switcher", "navbar-logo"],
     "navbar_center": ["navbar-nav"],
     "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 4,
@@ -181,7 +182,7 @@ html_context = {
     "date_info": {
         "paths_to_skip": ["installing"],
     },
-    "version": version,
+    "version": "main (2.8.0a0+git95f2aa3)",
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
