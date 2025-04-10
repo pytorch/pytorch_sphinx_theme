@@ -107,10 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
     buttons.forEach(btn => {
       console.log("Found button:", btn.innerText);
       if (btn.innerText.includes('main')) {
-        btn.innerText = btn.innerText.replace('main', version);
+        btn.innerText = version;
         if (btn.hasAttribute('data-active-version-name')) {
           btn.setAttribute('data-active-version-name',
-                          btn.getAttribute('data-active-version-name').replace('main', version));
+            btn.setAttribute('data-active-version-name', version));
         }
         found = true;
       }
