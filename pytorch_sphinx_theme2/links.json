@@ -9,11 +9,6 @@
     {"url": "https://pytorch.org/data", "name": "torchvision"},
     {"url": "https://pytorch.org/xla", "name": "PyTorch on XLA Devices"}
   ],
-  "community_links": [
-    {"url": "https://pytorch.org/docs/stable/community/index.html", "name": "PyTorch Governance"},
-    {"url": "https://pytorch.org/docs/stable/community/design.html", "name": "PyTorch Design Philosophy"},
-    {"url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions", "name": "The Ultimate Guide to PyTorch Contributions"}
-  ],
   "language_bindings_links": [
     {"url": "https://pytorch.org/docs/stable/cpp_index.html", "name": "C++"},
     {"url": "https://pytorch.org/javadoc/", "name": "Javadoc"},

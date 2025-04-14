@@ -165,12 +165,17 @@ html_theme_options = {
     "canonical_url": "https://pytorch.org/docs/stable/",
 }
 
+community_links = [
+    {"url": "community/index.html", "name": "PyTorch Governance"},
+    {"url": "community/design.html", "name": "PyTorch Design Philosophy"},
+    {"url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions", "name": "The Ultimate Guide to PyTorch Contributions"}
+]
 
 theme_variables = pytorch_sphinx_theme2.get_theme_variables()
 html_context = {
     "theme_variables": theme_variables,
     "library_links": theme_variables.get("library_links", []),
-    "community_links": theme_variables.get("community_links", []),
+    "community_links": community_links,
     "pytorch_project": "docs",
     "feedback_url": "https://github.com/pytorch/pytorch",
     "github_url": "https://github.com",
