@@ -4,11 +4,12 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 
 import pytorch_sphinx_theme2
-
+import torch
 html_theme = "pytorch_sphinx_theme2"
 html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
 __version__ = "v0.1.0"
 
+RELEASE = os.environ.get("RELEASE", False)
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -29,7 +30,20 @@ extensions = [
 ]
 
 pytorch_project = "docs"
+torch_version = str(torch.__version__)
+version = "main (" + torch_version + " )"
+# The full version, including alpha/beta/rc tags.
+release = "main"
 
+# Customized html_title here.
+# Default is " ".join(project, release, "documentation") if not set
+if RELEASE:
+    # Turn 1.11.0aHASH into 1.11
+    # Note: the release candidates should no longer have the aHASH suffix, but in any
+    # case we wish to leave only major.minor, even for rc builds.
+    version = ".".join(torch_version.split(".")[:2])
+    html_title = " ".join((project, version, "documentation"))
+    release = version
 
 # Do not warn about external images (status badges in README.rst)
 suppress_warnings = ["image.nonlocal_uri"]
@@ -166,8 +180,8 @@ html_theme_options = {
 }
 
 community_links = [
-    {"url": "community/index.html", "name": "PyTorch Governance"},
-    {"url": "community/design.html", "name": "PyTorch Design Philosophy"},
+    {"url": "/community/index", "name": "PyTorch Governance"},
+    {"url": "/community/design", "name": "PyTorch Design Philosophy"},
     {"url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions", "name": "The Ultimate Guide to PyTorch Contributions"}
 ]
 
@@ -187,7 +201,7 @@ html_context = {
     "date_info": {
         "paths_to_skip": ["installing"],
     },
-    "version": "main (2.8.0a0+git95f2aa3)",
+    "version": version,
 }
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]

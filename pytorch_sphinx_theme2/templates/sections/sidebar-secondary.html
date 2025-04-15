@@ -19,7 +19,7 @@
   <div class="sidebar-heading">PyTorch Community</div>
   <ul style="list-style-type: none; padding: 0;">
   {% for link in community_links %}
-   <li><a class="nav-link nav-external" href="{{ link.url }}" style="color: var(--pst-color-text-muted)">{{ link.name }}</a></li>
+     <li><a class="nav-link nav-external" href="{% if link.url.startswith('http') %}{{ link.url }}{% else %}{{ pathto(link.url.lstrip('/')) }}{% endif %}" style="color: var(--pst-color-text-muted)">{{ link.name }}</a></li>
   {% endfor %}
   </ul>
 </div>
