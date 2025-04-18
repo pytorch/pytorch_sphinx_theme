@@ -1,10 +1,10 @@
 # PyTorch Sphinx Theme2 Migration Guide
 
-*   [Introduction](#introduction)
-*   [Step 1: Clean Up Custom Overrides](#step-1-clean-up-custom-overrides)
-*   [Step 2: Update `requirements.txt`](#step-2-update-requirementstxt)
-*   [Step 3: Update `conf.py`](#step-3-update-confpy)
-*   [Restructuring your index.rst/index.md](#restructuring-your-indexrstindexmd)
+*   [Introduction: 4 Steps to Migrate](introduction-4-steps-to-migrate)
+    *   [Step 1: Clean Up Custom Overrides](#step-1-clean-up-custom-overrides)
+    *   [Step 2: Update `requirements.txt`](#step-2-update-requirementstxt)
+    *   [Step 3: Update `conf.py`](#step-3-update-confpy)
+    *   [Step 4: Restructuring your index.rst/index.md](#step-4-restructuring-your-indexrstindexmd)
 *   [Version Switcher](#version-switcher)
     *   [Option 1: Add a version switcher dropdown](#option-1-add-a-version-switcher-dropdown)
     *   [Option 2: Display version in the navbar](#option-2-display-version-in-the-navbar)
@@ -12,12 +12,13 @@
 *   [Using `sphinx.ext.linkcode`](#using-sphinxextlinkcode)
 *   [Enabling "Created On | Last Updated" Feature](#enabling-created-on--last-updated-feature)
 
-## Introduction
+## Introduction: 4 Steps to Migrate
 
 This guide will help you migrate from pytorch_sphinx_theme to pytorch_sphinx_theme2.
 pytorch_sphinx_theme2 is based on pydata_sphinx_theme with a few overrides specific to 
 pytorch. pydata_sphinx_theme has a great [documentation](https://pydata-sphinx-theme.readthedocs.io/en/stable/)
 that can help answer a lot of the theme configuration-related questions.
+
 ## Step 1: Clean Up Custom Overrides
 Delete all local overrides in `layout.html`. If you have special requirements, file an issue in this repo.
 Remove custom CSS files (most likely all `custom.css` can be deleted).
@@ -137,7 +138,7 @@ myst_enable_extensions = [
 
 For special requirements, contact the PyTorch documentation team or create an issue in this repo.
 
-## Restructuring your index.rst/index.md
+## Step 4: Restructuring your index.rst/index.md
 
 The pytorch_sphinx_theme2 uses a horizontal navigation bar for your top-level toctree entries. To optimize this layout:
 
