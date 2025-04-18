@@ -5,6 +5,7 @@ sys.path.insert(0, os.path.abspath(".."))
 
 import pytorch_sphinx_theme2
 import torch
+
 html_theme = "pytorch_sphinx_theme2"
 html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
 __version__ = "v0.1.0"
@@ -165,7 +166,7 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    #"navbar_start": ["pytorch_version"],
+    # "navbar_start": ["pytorch_version"],
     "navbar_start": ["version-switcher", "navbar-logo"],
     "navbar_center": ["navbar-nav"],
     "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
@@ -182,7 +183,10 @@ html_theme_options = {
 community_links = [
     {"url": "/community/index", "name": "PyTorch Governance"},
     {"url": "/community/design", "name": "PyTorch Design Philosophy"},
-    {"url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions", "name": "The Ultimate Guide to PyTorch Contributions"}
+    {
+        "url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions",
+        "name": "The Ultimate Guide to PyTorch Contributions",
+    },
 ]
 
 theme_variables = pytorch_sphinx_theme2.get_theme_variables()
