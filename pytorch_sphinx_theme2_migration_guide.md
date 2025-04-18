@@ -342,6 +342,10 @@ This feature is useful because:
 *   Establishes credibility by showing active maintenance
 *   Helps prioritize which docs need updating first
 
+**NOTE:** Collecting dates from git log can be slow when dealing with many files (thousands+).
+This may significantly increase your doc build time. We recommend using `paths_to_skip`
+to exclude pages that don't require dates.
+
 To enable the **Created On | Last Updated** feature on your site,
 add the following to your `conf.py`:
 
