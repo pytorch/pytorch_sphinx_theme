@@ -1,4 +1,4 @@
-# PyTorch Sphinx Theme Migration Guide
+# PyTorch Sphinx Theme2 Migration Guide
 
 *   [Introduction](#introduction)
 *   [Step 1: Clean Up Custom Overrides](#step-1-clean-up-custom-overrides)
