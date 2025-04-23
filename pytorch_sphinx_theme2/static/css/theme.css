@@ -666,9 +666,12 @@ body.search-page .bd-main .bd-content #search-results {
 }
 .docs-tutorials-resources .with-right-arrow {
   margin-left: 12px;
-}
-.docs-tutorials-resources .with-right-arrow:hover {
-  background-image: url("../img/chevron-right-white.svg");
+  position: relative;
+  background-image: url(../img/chevron-right-orange.svg);
+  background-size: 12px 13px;
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  padding-right: 26px;
 }
 .docs-tutorials-resources a {
   font-size: 1.125rem;
@@ -1671,7 +1674,7 @@ html[data-theme=dark] .feedback-btn {
   background-color: var(--pst-color-surface);
 }
 html[data-theme=dark] .feedback-btn::after {
-  filter: brightness(0.8) hue-rotate(180deg);
+  filter: invert(65%) sepia(11%) saturate(206%) hue-rotate(182deg) brightness(89%) contrast(85%);
 }
 html[data-theme=dark] .feedback-btn:hover {
   color: var(--pst-color-text-base);
@@ -1739,9 +1742,13 @@ a.btn {
 
 .with-right-arrow {
   margin-left: 12px;
+  background-image: url("../img/chevron-right-white.svg");
+  background-size: 14px 18px;
+  background-position: center right;
+  background-repeat: no-repeat;
 }
 .with-right-arrow:hover {
-  background-image: url("../img/chevron-right-white.svg");
+  background-repeat: no-repeat;
 }
 
 .cookie-banner-wrapper {

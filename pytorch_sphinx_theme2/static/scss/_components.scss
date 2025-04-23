@@ -111,7 +111,7 @@ html[data-theme="dark"] {
     background-color: var(--pst-color-surface);
 
     &::after {
-      filter: brightness(0.8) hue-rotate(180deg);
+      filter: invert(65%) sepia(11%) saturate(206%) hue-rotate(182deg) brightness(89%) contrast(85%);
     }
 
     &:hover {
@@ -194,9 +194,13 @@ a.btn {
 
 .with-right-arrow {
   margin-left: 12px;
+  background-image: url("../img/chevron-right-white.svg");
+  background-size: 14px 18px;
+  background-position: center right;
+  background-repeat: no-repeat;
 
   &:hover {
-    background-image: url("../img/chevron-right-white.svg");
+    background-repeat: no-repeat;
   }
 }
 
