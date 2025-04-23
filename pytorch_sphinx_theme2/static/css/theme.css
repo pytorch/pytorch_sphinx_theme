@@ -2037,6 +2037,14 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
   }
 }
 
+nav.bd-links li > a {
+  color: var(--pst-color-text-base) !important;
+}
+
+.toc-entry a.nav-link, .toc-entry a > code {
+  color: var(--pst-color-text-base) !important;
+}
+
 .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;

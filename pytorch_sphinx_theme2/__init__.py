@@ -128,7 +128,6 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
 
         try:
             created_on, last_updated = get_git_dates(full_source_path)
-            print(f"Got dates for {full_source_path}: {created_on}, {last_updated}")
 
             # Only add date info if we have actual dates
             if created_on != "Unknown" and last_updated != "Unknown":
