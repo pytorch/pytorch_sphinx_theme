@@ -30,7 +30,7 @@ extensions = [
     "sphinxcontrib.httpdomain",
 ]
 
-pytorch_project = "docs"
+pytorch_project = "tutorials"
 torch_version = str(torch.__version__)
 version = "main (" + torch_version + " )"
 # The full version, including alpha/beta/rc tags.
