@@ -2,6 +2,7 @@
 
 {% block extrahead %}
 {{ super() }}
+<link rel="canonical" href="{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/theme.css', 1) }}">
@@ -73,7 +74,27 @@
 
 {% block docs_body %}
   {% include "components/searchbox.html" %}
-  <article class="bd-article">
+  <article class="bd-article" itemscope="itemscope" itemtype="https://schema.org/Article">
+   <meta itemprop="headline" content="{% if title %}{{ title }}{% elif shorttitle %}{{ shorttitle }}{% else %}PyTorch Documentation{% endif %}">
+   <meta itemprop="description" content="{% if meta is defined and meta.description is defined %}{{ meta.description[0] }}{% else %}PyTorch documentation{% endif %}">
+   <meta itemprop="datePublished" content="{% if doc_created %}{{ doc_created }}{% endif %}">
+   <meta itemprop="dateModified" content="{% if doc_updated %}{{ doc_updated }}{% endif %}">
+   <meta itemprop="author" content="PyTorch Contributors">
+   <!-- Hidden breadcrumb schema for SEO only -->
+   <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {% for parent in parents %}
+        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <link itemprop="item" href="{{ parent.link|e }}">
+          <meta itemprop="name" content="{{ parent.title }}">
+          <meta itemprop="position" content="{{ loop.index }}">
+        </div>
+      {% endfor %}
+      <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <meta itemprop="name" content="{{ title }}">
+        <meta itemprop="position" content="{{ parents|length + 1 }}">
+      </div>
+   </div>
+
     {% if theme_pytorch_project == 'tutorials' %}
     <div class="pytorch-call-to-action-links">
       <div id="tutorial-type">{{ pagename }}</div>

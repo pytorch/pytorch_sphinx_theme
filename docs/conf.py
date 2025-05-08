@@ -28,10 +28,18 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinxcontrib.httpdomain",
-    "sphinx_gallery"
+    "sphinx_gallery.gen_gallery"
 ]
 
 print(f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}")
+
+
+sphinx_gallery_conf = {
+    'examples_dirs': 'examples',   # path to your example scripts
+    'gallery_dirs': 'auto_examples',  # where to save gallery generated output
+    'filename_pattern': '/example_',  # Only run files that match this pattern
+    'plot_gallery': True,             # Generate plots for examples
+}
 
 pytorch_project = "tutorials"
 torch_version = str(torch.__version__)
@@ -87,6 +95,8 @@ release = "main"
 # for a list of supported languages.
 language = "en"
 
+html_title = " ".join((project, version, "documentation"))
+
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
 # today = ''
@@ -118,6 +128,7 @@ pygments_style = "default"
 # modindex_common_prefix = []
 
 intersphinx_mapping = {"rtd": ("https://docs.readthedocs.io/en/latest/", None)}
+pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY = True
 
 # -- Options for HTML output ---------------------------------------------------
 
