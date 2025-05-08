@@ -17,11 +17,12 @@
 This guide will help you migrate from pytorch_sphinx_theme to pytorch_sphinx_theme2.
 pytorch_sphinx_theme2 is based on pydata_sphinx_theme with a few overrides specific to 
 pytorch. pydata_sphinx_theme has a great [documentation](https://pydata-sphinx-theme.readthedocs.io/en/stable/)
-that can help answer a lot of the theme configuration-related questions.
+that can help answer a lot of the theme configuration-related questions. 
 
 ## Step 1: Clean Up Custom Overrides
 Delete all local overrides in `layout.html`. If you have special requirements, file an issue in this repo.
-Remove custom CSS files (most likely all `custom.css` can be deleted).
+Remove custom CSS files (most likely all `custom.css` can be deleted). If starting from scratch, skip
+this step.
 
 ## Step 2: Update `requirements.txt`
 
@@ -39,6 +40,14 @@ sphinxcontrib-mermaid==1.0.0
 myst-parser==0.18.1  # if want to contribute in markdown
 sphinx-gallery==0.11.1  # if hosting interactive tutorials
 ```
+
+If starting from scratch, create `requirements.txt` and the dependencies listed above and then run:
+
+```
+sphinx-quickstart
+```
+
+This command creates `conf.py` and other required files and directories.
 
 ## Step 3: Update `conf.py`
 
