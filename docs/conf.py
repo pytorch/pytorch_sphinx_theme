@@ -28,7 +28,10 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinxcontrib.httpdomain",
+    "sphinx_gallery"
 ]
+
+print(f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}")
 
 pytorch_project = "tutorials"
 torch_version = str(torch.__version__)
@@ -210,11 +213,14 @@ html_context = {
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
 
+print(f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}")
 
 def setup(app):
     app.connect("html-page-context", hide_edit_button_for_pages)
     app.config.add_last_updated = True
-    from pytorch_sphinx_theme2 import add_date_info_to_page
+    from pytorch_sphinx_theme2 import add_date_info_to_page, custom_directives
+
+    app.add_directive("customcarditem", custom_directives.CustomCardItemDirective)
 
     app.connect("html-page-context", add_date_info_to_page)
     return {"version": version, "parallel_read_safe": True}

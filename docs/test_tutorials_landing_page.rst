@@ -62,73 +62,25 @@ Welcome to PyTorch Tutorials
    :header: Learn the Basics
    :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
    :image: _static/img/thumbnails/cropped/60-min-blitz.png
-   :link: beginner/basics/intro.html
+   :link: installing.html
    :tags: Getting-Started
 
 .. customcarditem::
    :header: Introduction to PyTorch on YouTube
    :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
    :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
-   :link: beginner/introyt/introyt_index.html
-   :tags: Getting-Started
+   :link: changelog
+   :tags: Changelog
 
-.. customcarditem::
-   :header: Learning PyTorch with Examples
-   :card_description: This tutorial introduces the fundamental concepts of PyTorch through self-contained examples.
-   :image: _static/img/thumbnails/cropped/learning-pytorch-with-examples.png
-   :link: beginner/pytorch_with_examples.html
-   :tags: Getting-Started
 
-.. customcarditem::
-   :header: What is torch.nn really?
-   :card_description: Use torch.nn to create and train a neural network.
-   :image: _static/img/thumbnails/cropped/torch-nn.png
-   :link: beginner/nn_tutorial.html
-   :tags: Getting-Started
+.. End of callout section
 
-.. customcarditem::
-   :header: Visualizing Models, Data, and Training with TensorBoard
-   :card_description: Learn to use TensorBoard to visualize data and model training.
-   :image: _static/img/thumbnails/cropped/visualizing-with-tensorboard.png
-   :link: intermediate/tensorboard_tutorial.html
-   :tags: Interpretability,Getting-Started,TensorBoard
+.. raw:: html
 
-.. customcarditem::
-   :header: Good usage of `non_blocking` and `pin_memory()` in PyTorch
-   :card_description: A guide on best practices to copy data from CPU to GPU.
-   :image: _static/img/pinmem.png
-   :link: intermediate/pinmem_nonblock.html
-   :tags: Getting-Started
+        </div>
+    </div>
 
-.. Image/Video
-
-.. customcarditem::
-   :header: TorchVision Object Detection Finetuning Tutorial
-   :card_description: Finetune a pre-trained Mask R-CNN model.
-   :image: _static/img/thumbnails/cropped/TorchVision-Object-Detection-Finetuning-Tutorial.png
-   :link: intermediate/torchvision_tutorial.html
-   :tags: Image/Video
-
-.. customcarditem::
-   :header: Transfer Learning for Computer Vision Tutorial
-   :card_description: Train a convolutional neural network for image classification using transfer learning.
-   :image: _static/img/thumbnails/cropped/Transfer-Learning-for-Computer-Vision-Tutorial.png
-   :link: beginner/transfer_learning_tutorial.html
-   :tags: Image/Video
-
-.. customcarditem::
-   :header: Optimizing Vision Transformer Model
-   :card_description: Apply cutting-edge, attention-based transformer models to computer vision tasks.
-   :image: _static/img/thumbnails/cropped/60-min-blitz.png
-   :link: beginner/vt_tutorial.html
-   :tags: Image/Video
-
-.. customcarditem::
-   :header: Adversarial Example Generation
-   :card_description: Train a convolutional neural network for image classification using transfer learning.
-   :image: _static/img/thumbnails/cropped/Adversarial-Example-Generation.png
-   :link: beginner/fgsm_tutorial.html
-   :tags: Image/Video
+    <div style='clear:both'></div>
 
 
 Additional Resources
