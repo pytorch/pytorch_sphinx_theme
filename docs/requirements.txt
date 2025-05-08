@@ -2,3 +2,4 @@ sphinxcontrib-httpdomain
 docutils==0.16
 sphinx==5.3.0
 sphinx-gallery==0.11.1
+pydata_sphinx_theme==0.15.4
