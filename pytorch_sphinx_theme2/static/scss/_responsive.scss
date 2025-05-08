@@ -11,10 +11,6 @@
     max-width: 1140px;
   }
 
-  .header-holder .main-menu ul li a:hover {
-    color: $pytorch-red;
-  }
-
   .gcse-search-wrapper .fa-magnifying-glass {
     top: 0.7em;
   }
@@ -25,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-left: 110px;
+    padding-left: 350px;
   }
 
   .main-menu-open-button {
@@ -35,10 +31,10 @@
 
 @media screen and (min-width: 959px) {
   .header-logo {
-    background-size: 108px 27px;
+    background-size: 162px 40px;
     position: absolute;
-    height: 27px;
-    width: 108px;
+    height: 40px;
+    width: 162px;
     float: none;
   }
 }
