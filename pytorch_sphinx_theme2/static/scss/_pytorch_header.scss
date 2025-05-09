@@ -166,13 +166,6 @@
         text-align: center;
         text-decoration: none;
 
-        &:hover {
-          color: $dark-text;
-
-          @media screen and (min-width: 1200px) {
-            color: $pytorch-red;
-          }
-        }
       }
     }
   }
@@ -219,6 +212,10 @@
         }
       }
     }
+  }
+
+  .resources-mobile-menu-title a:hover {
+    color: $light-text;
   }
 
   .container-fluid {

@@ -189,14 +189,6 @@ html[data-theme=dark] {
   text-align: center;
   text-decoration: none;
 }
-.header-holder .main-menu ul li a:hover {
-  color: #262626;
-}
-@media screen and (min-width: 1200px) {
-  .header-holder .main-menu ul li a:hover {
-    color: #ee4c2c;
-  }
-}
 
 .resources-dropdown-menu a.nav-dropdown-item:last-of-type {
   border-bottom: none !important;
@@ -232,6 +224,9 @@ html[data-theme=dark] {
 }
 .mobile-main-menu.open ul li.active a {
   color: #ee4c2c;
+}
+.mobile-main-menu .resources-mobile-menu-title a:hover {
+  color: #ffffff;
 }
 .mobile-main-menu .container-fluid {
   align-items: center;
