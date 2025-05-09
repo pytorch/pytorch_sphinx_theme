@@ -98,7 +98,7 @@ article {
 // Navigation menu typography
 .header-holder .main-menu ul li {
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 18px;
   color: $light-text;
   a {
@@ -109,11 +109,11 @@ article {
   a.nav-dropdown-item {
     display: block;
     width: 100%;
-    padding: 0.25rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     clear: both;
     text-align: left;
     background-color: transparent;
-    border-bottom: 1px solid $border-color;
+    line-height: 1.4em;
     cursor: pointer;
     
     p {
