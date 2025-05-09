@@ -188,7 +188,7 @@ html_theme_options = {
     "navbar_persistent": [],
     "use_edit_page_button": True,
     "switcher": {
-        "json_url": "https://pytorch.org/docs/pytorch-versions.json",
+        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
         "version_match": "main",
     },
     "canonical_url": "https://pytorch.org/docs/stable/",

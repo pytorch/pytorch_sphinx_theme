@@ -276,10 +276,15 @@
         margin-bottom: 1.125rem;
         margin-top: 0;
         font-size: 1.125rem;
-        color: var(--sg-text-colorg);
+        color: var(--pst-color-text-base);
 
         @media screen and (min-width: 768px) {
           font-size: 1.5rem;
+        }
+        @media screen and (max-width: 767px) {
+          font-size: 0.8rem;
+          margin-bottom: 0.4rem;
+        }
       }
     }
 
@@ -298,6 +303,10 @@
       @media (min-width: 768px) and (max-width: 1239px) {
         width: 70%;
       }
+      @media screen and (max-width: 767px) {
+        font-size: 0.6rem;
+        line-height: 1rem;
+      }
     }
 
     p.tags {
@@ -307,10 +316,6 @@
       overflow: hidden;
     }
 
-    h4 {
-      color: var(--pst-color-text-base);
-      margin-bottom: 1.125rem;
-    }
 
     a {
       height: 100%;
@@ -436,7 +441,6 @@
         color: inherit;
       }
     }
-  }
 }
 
 .card-body {
