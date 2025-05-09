@@ -26,7 +26,7 @@
     // Define the search callback
     const myWebSearchStartingCallback = (gname, query) => {
       if (typeof dataLayer !== 'undefined' && query) {
-        window.dataLayer = [];
+        window.dataLayer = window.dataLayer || [];
         dataLayer.push({
           'event': 'google_search',
           'search_term': query,
@@ -121,7 +121,7 @@
             }
           }
           if (typeof dataLayer !== 'undefined') {
-            window.dataLayer = [];
+            window.dataLayer = window.dataLayer || [];
             dataLayer.push({
               'event': 'search_engine_switch',
               'event_category': 'Search',
@@ -146,7 +146,7 @@
             }
           }
           if (typeof dataLayer !== 'undefined') {
-            window.dataLayer = [];
+            window.dataLayer = window.dataLayer || [];
             dataLayer.push({
               'event': 'search_engine_switch',
               'event_category': 'Search',
