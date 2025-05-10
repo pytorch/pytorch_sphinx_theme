@@ -62,7 +62,7 @@ article {
 // Docs, tutorials, resources section typography
 .docs-tutorials-resources {
   p {
-    color: #929292;
+    color: $light-text;
     font-size: 1rem;
     line-height: 1.5rem;
     letter-spacing: 0.22px;
@@ -74,7 +74,7 @@ article {
   }
   
   h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     letter-spacing: -0.25px;
     text-transform: none;
     margin-bottom: 0.25rem;
