@@ -6,13 +6,13 @@
 }
 
 html[data-theme=light] {
-  --pst-color-primary: #ee4c2c;
-  --pst-color-secondary: #ee4c2c;
-  --pst-color-inline-code-links: #ee4c2c;
-  --bs-link-hover-color: #ee4c2c;
-  --bs-emphasis-color-rgb: #ee4c2c;
-  --bs-emphasis-color: #ee4c2c;
-  --bs-btn-focus-box-shadow: #ee4c2c;
+  --pst-color-primary: #de3412;
+  --pst-color-secondary: #de3412;
+  --pst-color-inline-code-links: #de3412;
+  --bs-link-hover-color: #de3412;
+  --bs-emphasis-color-rgb: #de3412;
+  --bs-emphasis-color: #de3412;
+  --bs-btn-focus-box-shadow: #de3412;
   --pst-color-accent: transparent !important;
   --pst-color-table-row-hover-bg: #F9BFB4;
   --sg-script-pre: #FBEEF6;
@@ -141,7 +141,12 @@ html[data-theme=dark] {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-left: 250px;
+    padding-left: 290px;
+  }
+}
+@media screen and (min-width: 1130px) {
+  .header-holder .main-menu {
+    padding-left: 450px;
   }
 }
 .header-holder .main-menu ul {
@@ -171,7 +176,7 @@ html[data-theme=dark] {
 .header-holder .main-menu ul li.docs-active:after {
   content: "•";
   bottom: -24px;
-  color: #ee4c2c;
+  color: #de3412;
   font-size: 1.375rem;
   left: -24px;
   position: absolute;
@@ -180,15 +185,39 @@ html[data-theme=dark] {
 }
 .header-holder .main-menu ul li:last-of-type {
   margin-right: 0;
+  margin-left: 10px;
 }
 .header-holder .main-menu ul li a {
   color: #ffffff;
   font-size: 15px;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
   line-height: 2.125rem;
   text-align: center;
   text-decoration: none;
   padding: 2em 0;
+}
+.header-holder .main-menu ul li.main-menu-item a.with-down-arrow span:after {
+  transform-origin: 0 0;
+  transition: transform 0.35s cubic-bezier(0.52, 0.01, 0.16, 1);
+  bottom: -3px;
+  -webkit-transition: -webkit-transform 0.3s ease-out, border-color 0.3s ease-out;
+  transition: transform 0.3s ease-out, border-color 0.3s ease-out;
+  position: absolute;
+  display: block;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  -ms-transform: scaleX(0);
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  border-top: 2px solid #ee4c2c;
+  content: "";
+  padding-bottom: inherit;
+}
+.header-holder .main-menu ul li.main-menu-item:hover a.with-down-arrow span:after {
+  backface-visibility: hidden;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 .mobile-main-menu {
@@ -220,7 +249,7 @@ html[data-theme=dark] {
   text-decoration: none;
 }
 .mobile-main-menu.open ul li.active a {
-  color: #ee4c2c;
+  color: #de3412;
 }
 .mobile-main-menu .resources-mobile-menu-title a:hover {
   color: #ffffff;
@@ -265,7 +294,7 @@ html[data-theme=dark] {
 
 .header-holder .main-menu ul li a.nav-dropdown-item:hover,
 .header-holder .main-menu ul li a.nav-dropdown-item.active {
-  color: #ee4c2c !important;
+  color: #de3412 !important;
 }
 
 .header-holder .main-menu ul li .no-dropdown a:before {
@@ -288,7 +317,7 @@ html[data-theme=dark] {
   transition: opacity 0.2s;
   transform: translateY(-50%);
   top: 50%;
-  background-color: #ee4c2c !important;
+  background-color: #de3412 !important;
   padding: 17px;
 }
 
@@ -456,7 +485,7 @@ body.search-page .bd-main .bd-content #search-results {
 }
 @media screen and (min-width: 768px) {
   .site-footer a:hover {
-    color: #ee4c2c;
+    color: #de3412;
   }
 }
 .site-footer .privacy-policy {
@@ -647,7 +676,7 @@ body.search-page .bd-main .bd-content #search-results {
 }
 .docs-tutorials-resources a {
   font-size: 1.125rem;
-  color: #ee4c2c;
+  color: #de3412;
 }
 .docs-tutorials-resources a:hover {
   color: #ffffff;
@@ -1407,7 +1436,7 @@ article h1 a, article .h1 a {
 }
 .docs-tutorials-resources a {
   font-size: 1.125rem;
-  color: #ee4c2c;
+  color: #de3412;
 }
 .docs-tutorials-resources a:hover {
   color: #ffffff;
@@ -1444,7 +1473,7 @@ article h1 a, article .h1 a {
   text-decoration: none;
 }
 .mobile-main-menu.open ul li.active a {
-  color: #ee4c2c;
+  color: #de3412;
 }
 
 .mobile-main-menu-links-container ul.resources-mobile-menu-items li a {
@@ -1802,12 +1831,6 @@ a.btn {
   }
 }
 @media screen and (min-width: 960px) {
-  .header-holder .main-menu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-left: 350px;
-  }
   .main-menu-open-button {
     display: none;
   }
@@ -1826,7 +1849,7 @@ a.btn {
     padding: 5rem 0;
   }
   .site-footer a:hover {
-    color: #ee4c2c;
+    color: #de3412;
   }
   .footer-logo-wrapper {
     position: absolute;
@@ -1944,7 +1967,7 @@ dt:target {
 }
 
 span.highlighted {
-  background-color: #ee4c2c;
+  background-color: #de3412;
 }
 
 .form-control {
@@ -2030,7 +2053,7 @@ nav.bd-links li > a {
 }
 .pytorch-call-to-action-links a:hover {
   background-color: var(--pst-color-background-light);
-  border-bottom: 1px solid #ee4c2c;
+  border-bottom: 1px solid #de3412;
 }
 .pytorch-call-to-action-links a:hover:after {
   content: "";
@@ -2040,7 +2063,7 @@ nav.bd-links li > a {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #ee4c2c;
+  background-color: #de3412;
   transform: scaleX(1);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -2053,7 +2076,7 @@ nav.bd-links li > a {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #ee4c2c;
+  background-color: #de3412;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -2268,7 +2291,7 @@ nav.bd-links li > a {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #ee4c2c;
+    background-color: #de3412;
     transition: width 0.25s ease-in-out;
   }
   #tutorial-cards-container .card.tutorials-card .card-title-container:hover:after {
@@ -2299,7 +2322,7 @@ nav.bd-links li > a {
   color: #979797;
 }
 #tutorial-cards-container .card.tutorials-card .tutorial-filter-menu ul li a:hover {
-  color: #ee4c2c;
+  color: #de3412;
 }
 #tutorial-cards-container .card.tutorials-card .tutorial-filter {
   cursor: pointer;
@@ -2317,12 +2340,12 @@ nav.bd-links li > a {
   margin-bottom: 5px;
 }
 #tutorial-cards-container .card.tutorials-card .filter-btn:hover {
-  border: 1px solid #ee4c2c;
-  color: #ee4c2c;
+  border: 1px solid #de3412;
+  color: #de3412;
 }
 #tutorial-cards-container .card.tutorials-card .filter-btn.selected {
-  background-color: #ee4c2c;
-  border: 1px solid #ee4c2c;
+  background-color: #de3412;
+  border: 1px solid #de3412;
   color: #ffffff;
 }
 #tutorial-cards-container .card.tutorials-card .all-tag-selected {
@@ -2375,7 +2398,7 @@ nav.bd-links li > a {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: #ee4c2c;
+    background-color: #de3412;
     transition: width 0.25s ease-in-out;
   }
   #tutorial-cards-container .tutorials-callout-container .btn.callout-button:hover:after {
