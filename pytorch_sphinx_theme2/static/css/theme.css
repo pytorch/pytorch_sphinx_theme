@@ -2,10 +2,10 @@
 :root {
   --header-height: 45px;
   --header-height-desktop: 45px;
-  --header-background: #262626;
 }
 
 html[data-theme=light] {
+  --header-background: #262626;
   --pst-color-primary: #de3412;
   --pst-color-secondary: #de3412;
   --pst-color-inline-code-links: #de3412;
@@ -19,6 +19,7 @@ html[data-theme=light] {
 }
 
 html[data-theme=dark] {
+  --header-background: #222832;
   --pst-color-primary: #F2765D;
   --pst-color-secondary: #F2765D;
   --pst-color-inline-code-links: #F2765D;

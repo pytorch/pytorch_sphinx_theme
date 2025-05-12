@@ -15,11 +15,11 @@ $pytorch-light-gray: #F6F6F6;
 :root {
   --header-height: 45px;
   --header-height-desktop: 45px;
-  --header-background: #262626;
 }
 
 // Theme color variables
 html[data-theme="light"] {
+  --header-background: #262626;
   --pst-color-primary: #{$pytorch-red};
   --pst-color-secondary: #{$pytorch-red};
   --pst-color-inline-code-links: #{$pytorch-red};
@@ -33,6 +33,7 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
+  --header-background: #222832;
   --pst-color-primary: #{$pytorch-blue};
   --pst-color-secondary: #{$pytorch-blue};
   --pst-color-inline-code-links: #{$pytorch-blue};
