@@ -1,3 +1,6 @@
+.. meta::
+   :description: This page describes hot instal pytorch_sphinx_theme in your project
+
 
 ************
 Installation
