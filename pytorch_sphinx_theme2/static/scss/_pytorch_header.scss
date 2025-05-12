@@ -20,7 +20,7 @@
   width: 100%;
   z-index: 10001;
   background-color: var(--header-background);
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid #333;
 
   @media screen and (min-width: 1200px) {
     height: var(--header-height-desktop);
@@ -59,10 +59,10 @@
   z-index: 10;
 
   @media screen and (min-width: 959px) {
-    background-size: 108px 27px;
+    background-size: auto 24px;
     position: absolute;
-    height: 27px;
-    width: 108px;
+    height: 24px;
+    width: 103px;
     float: none;
   }
 }
@@ -303,7 +303,7 @@
   transition: opacity .45s cubic-bezier(0.25,1,0.33,1), transform .45s cubic-bezier(0.25,1,0.33,1), border-color .45s cubic-bezier(0.25,1,0.33,1), color .45s cubic-bezier(0.25,1,0.33,1), background-color .45s cubic-bezier(0.25,1,0.33,1), box-shadow .45s cubic-bezier(0.25,1,0.33,1);
   display: block;
   position: absolute;
-  left: -10px;
+  left: -11px;
   padding-bottom: 10px;
   transform: translateY(-7px);
   width: 170%;

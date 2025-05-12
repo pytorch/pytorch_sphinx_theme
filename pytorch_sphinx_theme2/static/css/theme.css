@@ -1,7 +1,7 @@
 @charset "UTF-8";
 :root {
-  --header-height: 68px;
-  --header-height-desktop: 80px;
+  --header-height: 45px;
+  --header-height-desktop: 45px;
   --header-background: #262626;
 }
 
@@ -51,7 +51,7 @@ html[data-theme=dark] {
   width: 100%;
   z-index: 10001;
   background-color: var(--header-background);
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid #333;
 }
 @media screen and (min-width: 1200px) {
   .header-holder {
@@ -89,10 +89,10 @@ html[data-theme=dark] {
 }
 @media screen and (min-width: 959px) {
   .header-logo {
-    background-size: 108px 27px;
+    background-size: auto 24px;
     position: absolute;
-    height: 27px;
-    width: 108px;
+    height: 24px;
+    width: 103px;
     float: none;
   }
 }
@@ -307,7 +307,7 @@ html[data-theme=dark] {
   transition: opacity 0.45s cubic-bezier(0.25, 1, 0.33, 1), transform 0.45s cubic-bezier(0.25, 1, 0.33, 1), border-color 0.45s cubic-bezier(0.25, 1, 0.33, 1), color 0.45s cubic-bezier(0.25, 1, 0.33, 1), background-color 0.45s cubic-bezier(0.25, 1, 0.33, 1), box-shadow 0.45s cubic-bezier(0.25, 1, 0.33, 1);
   display: block;
   position: absolute;
-  left: -10px;
+  left: -11px;
   padding-bottom: 10px;
   transform: translateY(-7px);
   width: 170%;
@@ -2209,7 +2209,7 @@ a.btn {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-top: 1px solid #ffffff;
-  top: 56px;
+  top: 40px;
   padding: 20px 0;
 }
 
@@ -2239,15 +2239,6 @@ a.btn {
 @media screen and (min-width: 960px) {
   .main-menu-open-button {
     display: none;
-  }
-}
-@media screen and (min-width: 959px) {
-  .header-logo {
-    background-size: 162px 40px;
-    position: absolute;
-    height: 40px;
-    width: 162px;
-    float: none;
   }
 }
 @media screen and (min-width: 768px) {
