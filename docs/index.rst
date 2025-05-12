@@ -1,3 +1,6 @@
+.. meta::
+   :description: PyTorch Sphinx Theme 2 Documentation Overview. Learn how to install it in your project.
+
 Welcome to PyTorch Sphinx Theme 2 Docs
 ======================================
 

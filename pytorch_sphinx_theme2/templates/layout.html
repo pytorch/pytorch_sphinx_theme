@@ -76,7 +76,7 @@
 
 {% block docs_body %}
   {% include "components/searchbox.html" %}
-  <article class="bd-article" itemscope="itemscope" itemtype="https://schema.org/Article">
+  <article class="bd-article"id="pytorch-article" itemscope="itemscope" itemtype="https://schema.org/Article" itemprop="articleBody">
    <meta itemprop="headline" content="{% if title %}{{ title }}{% elif shorttitle %}{{ shorttitle }}{% else %}PyTorch Documentation{% endif %}">
    <meta itemprop="description" content="{% if meta is defined and meta.description is defined %}{{ meta.description[0] }}{% else %}PyTorch documentation{% endif %}">
    <meta itemprop="datePublished" content="{% if doc_created %}{{ doc_created }}{% endif %}">
@@ -123,11 +123,6 @@
       </a>
     </div>
     {% endif %}
-    {% if doc_created and doc_updated %}
-         <p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">
-            Created on: {{ doc_created }} | Last updated: {{ doc_updated }}
-         </p>
-    {% endif %}
     {{ super() }}
   </article>
 {% endblock docs_body %}
@@ -136,6 +131,29 @@
 {% block footer%}
    {% include "pytorch_footer.html" %}
    {{ super() }}
+   <div style="display:none" id="debug-vars">
+      title: {{ title|default('title not available') }}<br>
+      description: {{ meta.description[0] if meta and meta.description else 'description not available' }}<br>
+      doc_created: {{ doc_created|default('doc_created not available') }}<br>
+      doc_updated: {{ doc_updated|default('doc_updated not available') }}<br>
+      content available: {{ body is defined }}<br>
+      articleBody: {{ (body|striptags|truncate(500) if body is defined else '')|replace('\n', ' ') }}<br>
+    </div>
+   <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ title }}",
+        "description": "{{ (meta.description[0] if meta and meta.description else 'PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment. Discover tutorials, API references, and guides to help you build and deploy deep learning models efficiently')|tojson }}",
+        "author": {
+          "@type": "Organization",
+          "name": "PyTorch Contributors"
+        },
+        "datePublished": "{{ doc_created|default('') }}",
+        "dateModified": "{{ doc_updated|default('') }}",
+        "articleBody": "{{ (body|striptags|truncate(500) if body is defined else '')|replace('\n', ' ')|tojson  }}"
+      }
+   </script>
 {% endblock %}
 <script>
 // Tutorials Call to action event tracking

@@ -129,13 +129,17 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
         try:
             created_on, last_updated = get_git_dates(full_source_path)
 
+            # Add dates to context to use in templates
+            context["doc_created"] = created_on
+            context["doc_updated"] = last_updated
+
             # Only add date info if we have actual dates
             if created_on != "Unknown" and last_updated != "Unknown":
                 body = context.get("body", "")
                 h1_pattern = r"<h1([^>]*)>(.*?)</h1>"
                 match = re.search(h1_pattern, body)
                 if match:
-                    date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created On: {created_on} | Last Updated: {last_updated}</p>'
+                    date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created On: {created_on} | Last Updated On: {last_updated}</p>'
                     context["body"] = re.sub(
                         h1_pattern, r"<h1\1>\2</h1>\n" + date_info, body, count=1
                     )
