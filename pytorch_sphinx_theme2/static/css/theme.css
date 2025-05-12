@@ -2539,7 +2539,7 @@ nav.bd-links li > a {
 }
 #tutorial-cards-container .filter-btn:hover {
   border: 1px solid var(--pst-color-primary);
-  color: #ee4c2c;
+  color: #de3412;
 }
 #tutorial-cards-container .filter-btn.selected {
   background-color: var(--pst-color-primary);
@@ -2763,49 +2763,14 @@ nav.bd-links li > a {
 #tutorial-cards-container .tutorial-filter-menu ul li a {
   color: #979797;
 }
-#tutorial-cards-container .card.tutorials-card .tutorial-filter-menu ul li a:hover {
+#tutorial-cards-container .tutorial-filter-menu ul li a:hover {
   color: #de3412;
 }
 #tutorial-cards-container .tutorial-filter {
   cursor: pointer;
 }
-#tutorial-cards-container .card.tutorials-card .filter-btn {
-  color: var(--pst-color-text-base);
-  border: 1px solid var(--pst-color-border);
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 5px;
-}
-#tutorial-cards-container .card.tutorials-card .filter-btn:hover {
-  border: 1px solid #de3412;
-  color: #de3412;
-}
-#tutorial-cards-container .card.tutorials-card .filter-btn.selected {
-  background-color: #de3412;
-  border: 1px solid #de3412;
-  color: #ffffff;
-}
-#tutorial-cards-container .card.tutorials-card .all-tag-selected {
-  background-color: #979797;
-  color: #ffffff;
-}
-#tutorial-cards-container .card.tutorials-card .all-tag-selected:hover {
-  border-color: #979797;
-  color: #ffffff;
-}
-#tutorial-cards-container .card.tutorials-card .pagination .page {
-  border: 1px solid #dee2e6;
-  padding: 0.5rem 0.75rem;
-}
-#tutorial-cards-container .card.tutorials-card .pagination .active .page {
-  background-color: #dee2e6;
-}
-#tutorial-cards-container .tutorials-callout-container {
+
+.tutorials-callout-container {
   padding-bottom: 50px;
 }
 .tutorials-callout-container .col-md-6 {
@@ -2853,6 +2818,10 @@ nav.bd-links li > a {
 
 .card-body a {
   text-decoration: none;
+}
+
+.sphx-glr-download-link-note.admonition.note {
+  display: none;
 }
 
 .m_54c44539 {
