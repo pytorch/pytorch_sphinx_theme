@@ -28,17 +28,19 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
     "sphinxcontrib.httpdomain",
-    "sphinx_gallery.gen_gallery"
+    "sphinx_gallery.gen_gallery",
 ]
 
-print(f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}")
+print(
+    f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}"
+)
 
 
 sphinx_gallery_conf = {
-    'examples_dirs': 'examples',   # path to your example scripts
-    'gallery_dirs': 'auto_examples',  # where to save gallery generated output
-    'filename_pattern': '/example_',  # Only run files that match this pattern
-    'plot_gallery': True,             # Generate plots for examples
+    "examples_dirs": "examples",  # path to your example scripts
+    "gallery_dirs": "auto_examples",  # where to save gallery generated output
+    "filename_pattern": "/example_",  # Only run files that match this pattern
+    "plot_gallery": True,  # Generate plots for examples
 }
 
 pytorch_project = "tutorials"
@@ -180,34 +182,24 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    # "navbar_start": ["pytorch_version"],
-    "navbar_start": ["version-switcher", "navbar-logo"],
+    "navbar_start": ["pytorch_version"],
+    # "navbar_start": ["version-switcher", "navbar-logo"],
     "navbar_center": ["navbar-nav"],
     "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
     "header_links_before_dropdown": 4,
     "navbar_persistent": [],
     "use_edit_page_button": True,
-    "switcher": {
-        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
-        "version_match": "main",
-    },
+    # "switcher": {
+    #    "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
+    #    "version_match": "main",
+    # },
     "canonical_url": "https://pytorch.org/docs/stable/",
 }
-
-community_links = [
-    {"url": "/community/index", "name": "PyTorch Governance"},
-    {"url": "/community/design", "name": "PyTorch Design Philosophy"},
-    {
-        "url": "https://github.com/pytorch/pytorch/wiki/The-Ultimate-Guide-to-PyTorch-Contributions",
-        "name": "The Ultimate Guide to PyTorch Contributions",
-    },
-]
 
 theme_variables = pytorch_sphinx_theme2.get_theme_variables()
 html_context = {
     "theme_variables": theme_variables,
     "library_links": theme_variables.get("library_links", []),
-    "community_links": community_links,
     "pytorch_project": "docs",
     "feedback_url": "https://github.com/pytorch/pytorch",
     "github_url": "https://github.com",
@@ -224,7 +216,10 @@ html_context = {
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
 
-print(f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}")
+print(
+    f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}"
+)
+
 
 def setup(app):
     app.connect("html-page-context", hide_edit_button_for_pages)

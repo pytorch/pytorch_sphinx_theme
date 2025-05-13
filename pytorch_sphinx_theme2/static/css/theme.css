@@ -2391,6 +2391,11 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
 
 .version {
   font-weight: 600;
+  text-decoration: none;
+  color: var(--pst-color-text-muted);
+}
+.version:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 767px) {
