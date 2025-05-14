@@ -2416,6 +2416,11 @@ nav.bd-links li > a {
   width: 18%;
   padding: 1rem 1rem 1rem;
 }
+@media (max-width: 959.98px) {
+  .bd-sidebar-primary {
+    width: 75%;
+  }
+}
 
 .bd-sidebar-secondary {
   padding: 1rem 1rem 1rem;
