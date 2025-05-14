@@ -72,6 +72,78 @@ Welcome to PyTorch Tutorials
    :link: changelog
    :tags: Changelog
 
+.. customcarditem::
+   :header: Learn the Basics
+   :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
+   :image: _static/img/thumbnails/cropped/60-min-blitz.png
+   :link: installing.html
+   :tags: Getting-Started
+
+.. customcarditem::
+   :header: Introduction to PyTorch on YouTube
+   :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
+   :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
+   :link: changelog
+   :tags: Changelog
+
+
+.. customcarditem::
+   :header: Learn the Basics
+   :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
+   :image: _static/img/thumbnails/cropped/60-min-blitz.png
+   :link: installing.html
+   :tags: Getting-Started
+
+.. customcarditem::
+   :header: Introduction to PyTorch on YouTube
+   :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
+   :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
+   :link: changelog
+   :tags: Changelog
+
+.. customcarditem::
+   :header: Learn the Basics
+   :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
+   :image: _static/img/thumbnails/cropped/60-min-blitz.png
+   :link: installing.html
+   :tags: Getting-Started
+
+.. customcarditem::
+   :header: Introduction to PyTorch on YouTube
+   :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
+   :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
+   :link: changelog
+   :tags: Changelog
+
+.. customcarditem::
+   :header: Learn the Basics
+   :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
+   :image: _static/img/thumbnails/cropped/60-min-blitz.png
+   :link: installing.html
+   :tags: Getting-Started
+
+.. customcarditem::
+   :header: Introduction to PyTorch on YouTube
+   :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
+   :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
+   :link: changelog
+   :tags: Changelog
+
+.. customcarditem::
+   :header: Learn the Basics
+   :card_description: A step-by-step guide to building a complete ML workflow with PyTorch.
+   :image: _static/img/thumbnails/cropped/60-min-blitz.png
+   :link: installing.html
+   :tags: Getting-Started
+
+.. customcarditem::
+   :header: Introduction to PyTorch on YouTube
+   :card_description: An introduction to building a complete ML workflow with PyTorch. Follows the PyTorch Beginner Series on YouTube.
+   :image: _static/img/thumbnails/cropped/generic-pytorch-logo.png
+   :link: changelog
+   :tags: Changelog
+
+
 
 .. End of callout section
 
