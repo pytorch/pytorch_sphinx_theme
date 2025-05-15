@@ -142,7 +142,7 @@
         },
         "datePublished": "{{ doc_created|default('') }}",
         "dateModified": "{{ doc_updated|default('') }}",
-        "articleBody": "{{ (body|striptags|truncate(3000, true))|e }}",
+        "articleBody": "{{ (body|striptags|truncate(3000, true))|e }}"
       }
    </script>
 {% endblock %}
