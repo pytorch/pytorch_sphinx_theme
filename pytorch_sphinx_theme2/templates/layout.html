@@ -76,11 +76,7 @@
 
 {% block docs_body %}
   {% include "components/searchbox.html" %}
-  <article class="bd-article"id="pytorch-article" itemscope="itemscope" itemtype="https://schema.org/Article" itemprop="articleBody">
-   <meta itemprop="description" content="{% if meta is defined and meta.description is defined %}{{ meta.description[0] }}{% else %}PyTorch documentation{% endif %}">
-   <meta itemprop="datePublished" content="{% if doc_created %}{{ doc_created }}{% endif %}">
-   <meta itemprop="dateModified" content="{% if doc_updated %}{{ doc_updated }}{% endif %}">
-   <meta itemprop="author" content="PyTorch Contributors">
+  <article class="bd-article"id="pytorch-article">
    <!-- Hidden breadcrumb schema for SEO only -->
    <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
       {% for parent in parents %}
