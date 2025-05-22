@@ -118,6 +118,15 @@
       </a>
     </div>
     {% endif %}
+    <script>
+      if((window.location.href.indexOf("/prototype/")!= -1) && (window.location.href.indexOf("/prototype/prototype_index")< 1))
+      {
+        var div = '<div class="admonition note"><p class="admonition-title">Note</p><p><i class="fa fa-flask" aria-hidden="true">&nbsp</i> This page describes a prototype feature. Prototype features are typically not available as part of binary distributions like PyPI, except sometimes behind run-time flags, and are at an early stage for feedback and testing.</p></div>'
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
+        });
+      }
+    </script>
     {{ super() }}
   </article>
 {% endblock docs_body %}
