@@ -29,6 +29,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinxcontrib.httpdomain",
     "sphinx_gallery.gen_gallery",
+    "sphinx_design"
 ]
 
 print(
