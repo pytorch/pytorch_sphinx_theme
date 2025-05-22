@@ -93,6 +93,15 @@
    </div>
 
     {% if theme_pytorch_project == 'tutorials' %}
+    <script>
+      if((window.location.href.indexOf("/prototype/")!= -1) && (window.location.href.indexOf("/prototype/prototype_index")< 1))
+      {
+        var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Prototype feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
+        });
+      }
+    </script>
     <div class="pytorch-call-to-action-links">
       <div id="tutorial-type">{{ pagename }}</div>
       <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
@@ -118,15 +127,6 @@
       </a>
     </div>
     {% endif %}
-    <script>
-      if((window.location.href.indexOf("/prototype/")!= -1) && (window.location.href.indexOf("/prototype/prototype_index")< 1))
-      {
-        var div = '<div class="admonition note"><p class="admonition-title">Note</p><p><i class="fa fa-flask" aria-hidden="true">&nbsp</i> This page describes a prototype feature. Prototype features are typically not available as part of binary distributions like PyPI, except sometimes behind run-time flags, and are at an early stage for feedback and testing.</p></div>'
-        document.addEventListener('DOMContentLoaded', function() {
-          document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
-        });
-      }
-    </script>
     {{ super() }}
   </article>
 {% endblock docs_body %}
