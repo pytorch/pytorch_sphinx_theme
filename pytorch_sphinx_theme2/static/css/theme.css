@@ -2438,6 +2438,13 @@ nav.bd-links li > a {
   padding: 1rem 1rem 1rem;
 }
 
+.div.highlight, div.literal-block-wrapper, div[class*=highlight-] {
+  border-radius: 0.25rem;
+  break-inside: avoid;
+  flex-direction: column;
+  width: unset;
+}
+
 .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;

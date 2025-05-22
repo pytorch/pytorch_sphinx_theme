@@ -88,3 +88,10 @@ nav.bd-links li>a {
 .bd-sidebar-secondary {
   padding: 1rem 1rem 1rem;
 }
+
+.div.highlight, div.literal-block-wrapper, div[class*=highlight-] {
+  border-radius: .25rem;
+  break-inside: avoid;
+  flex-direction: column;
+  width: unset;
+}
