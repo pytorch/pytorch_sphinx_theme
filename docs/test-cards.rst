@@ -62,3 +62,20 @@ understand PyTorch's core functionality through step-by-step guidance.
    intermediate/nlp_from_scratch_index
    intermediate/tensorboard_tutorial
    intermediate/pinmem_nonblock
+
+.. grid:: 2
+
+   .. grid-item-card:: :octicon:`mortar-board;1em;` What you will learn
+      :class-card: card-prerequisites
+
+      * PyTorch's Fully Sharded Data Parallel Module: A wrapper for sharding module parameters across
+      data parallel workers.
+
+
+
+
+   .. grid-item-card:: :octicon:`list-unordered;1em;` Prerequisites
+      :class-card: card-prerequisites
+
+      * PyTorch 1.12 or later
+      * Read about the `FSDP API <https://pytorch.org/docs/main/fsdp.html>`__.

@@ -3058,7 +3058,6 @@ html[data-theme=dark] {
 
 .card-prerequisites:hover {
   transition: none;
-  border: var(--sd-color-card-border) !important;
 }
 .card-prerequisites:hover:after {
   transition: none;
