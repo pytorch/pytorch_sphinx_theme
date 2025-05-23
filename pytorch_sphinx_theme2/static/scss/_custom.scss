@@ -89,10 +89,7 @@ nav.bd-links li>a {
   padding: 1rem 1rem 1rem;
 }
 
-.div.highlight, div.literal-block-wrapper, div[class*=highlight-] {
-  border-radius: .25rem;
-  break-inside: avoid;
-  flex-direction: column;
-  display: block;
-  width: unset;
+
+html[data-theme="dark"] .highlight {
+  background: transparent;
 }
