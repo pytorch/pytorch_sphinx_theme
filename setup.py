@@ -10,7 +10,7 @@ setup(
     version="0.1.0",
     install_requires=[
         "pydata-sphinx-theme==0.15.4",
-        "sphinx==5.3.0",
+        "sphinx>=5.3.0,<=7.2.6",
     ],
     packages=["pytorch_sphinx_theme2"],
     include_package_data=True,
