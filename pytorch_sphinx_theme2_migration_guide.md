@@ -20,7 +20,7 @@ pytorch. pydata_sphinx_theme has a great [documentation](https://pydata-sphinx-t
 that can help answer a lot of the theme configuration-related questions. 
 
 ## Step 1: Clean Up Custom Overrides
-Delete all local overrides in `layout.html`. If you have special requirements, file an issue in this repo.
+Delete all local overrides and delete `layout.html`. If you have special requirements, file an issue in this repo.
 Remove custom CSS files (most likely all `custom.css` can be deleted). If starting from scratch, skip
 this step.
 
@@ -39,6 +39,7 @@ sphinx-design==0.4.0
 sphinxcontrib-mermaid==1.0.0
 myst-parser==0.18.1  # if want to contribute in markdown
 sphinx-gallery==0.11.1  # if hosting interactive tutorials
+sphinx-sitemap==2.7.1
 ```
 
 If starting from scratch, create `requirements.txt` and the dependencies listed above and then run:
