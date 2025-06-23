@@ -1,12 +1,10 @@
 {
   "library_links": [
-    {"url": "https://pytorch.org/audio/stable/", "name": "torchaudio"},
     {"url": "https://pytorch.org/ao", "name": "torchao"},
-    {"url": "https://pytorch.org/executorch", "name": "ExecuTorch"},
     {"url": "https://pytorch.org/torchrec", "name": "torchrec"},
-    {"url": "https://pytorch.org/serve/", "name": "torchserve"},
-    {"url": "https://pytorch.org/data", "name": "torchdata"},
-    {"url": "https://pytorch.org/data", "name": "torchvision"},
+    {"url": "https://pytorch.org/torchcodec", "name": "TorchCodec"},
+    {"url": "https://pytorch.org/vision", "name": "torchvision"},
+    {"url": "https://pytorch.org/executorch", "name": "ExecuTorch"},
     {"url": "https://pytorch.org/xla", "name": "PyTorch on XLA Devices"}
   ]
 }
