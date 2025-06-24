@@ -72,6 +72,10 @@ templates_path = [
     os.path.join(os.path.dirname(pytorch_sphinx_theme2.__file__), "templates"),
 ]
 
+html_additional_pages = {
+    '404': '404.html',
+}
+
 # The suffix of source filenames.
 source_suffix = [".rst", ".md"]
 

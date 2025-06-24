@@ -1,4 +1,4 @@
-{% if pagename != 'index' %}
+{% if pagename != 'index' and pagename != 'genindex' and pagename != 'search' and pagename != '404' and status_code != 404 %}
 <div class="feedback">
   {% include "rate_page.html" %}
   <div class="feedback-send">
