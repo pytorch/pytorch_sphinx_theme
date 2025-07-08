@@ -28,17 +28,16 @@ this step.
 
 For pytorch_sphinx_theme2 theme, requirements should inlcude:
 ```
-sphinx==5.3.0
+sphinx==7.2.6
 -e git+https://github.com/pytorch/pytorch_sphinx_theme.git@pytorch_sphinx_theme2#egg=pytorch_sphinx_theme2
-sphinxcontrib.katex==0.8.6
-sphinxext-opengraph==0.9.1
+sphinxcontrib.katex==0.9.10
 breathe==4.34.0  # only if generating C++
 exhale==0.2.3  # only if generating C++ docs
-docutils==0.16
-sphinx-design==0.4.0
+docutils==>=0.18.1,<0.21
+sphinx-design==0.6.1
 sphinxcontrib-mermaid==1.0.0
 myst-parser==0.18.1  # if want to contribute in markdown
-sphinx-gallery==0.11.1  # if hosting interactive tutorials
+sphinx-gallery==0.14.0  # only if hosting interactive tutorials
 sphinx-sitemap==2.7.1
 ```
 
