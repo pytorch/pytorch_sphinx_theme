@@ -1,10 +1,11 @@
 {
   "library_links": [
-    {"url": "https://pytorch.org/ao", "name": "torchao"},
-    {"url": "https://pytorch.org/torchrec", "name": "torchrec"},
-    {"url": "https://pytorch.org/torchcodec", "name": "TorchCodec"},
-    {"url": "https://pytorch.org/vision", "name": "torchvision"},
-    {"url": "https://pytorch.org/executorch", "name": "ExecuTorch"},
-    {"url": "https://pytorch.org/xla", "name": "PyTorch on XLA Devices"}
+    {"url": "https://docs.ppytorch.org/ao", "name": "torchao"},
+    {"url": "https://docs.ppytorch.org/torchrec", "name": "torchrec"},
+    {"url": "https://docs.pytorch.org/torchft", "name": "torchft"},
+    {"url": "https://docs.ppytorch.org/torchcodec", "name": "TorchCodec"},
+    {"url": "https://docs.ppytorch.org/vision", "name": "torchvision"},
+    {"url": "https://docs.ppytorch.org/executorch", "name": "ExecuTorch"},
+    {"url": "https://docs.ppytorch.org/xla", "name": "PyTorch on XLA Devices"}
   ]
 }
