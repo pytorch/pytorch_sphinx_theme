@@ -316,29 +316,87 @@ table.gsc-search-box td {
   display: none !important;
 }
 
-// Google search results styling
-.gsc-results-wrapper-overlay {
-  z-index: 10000 !important;
-  position: fixed !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 75% !important;
-  max-width: 900px !important;
-  top: 160px !important;
-  height: calc(100% - 148px) !important;
-  pointer-events: auto !important;
-  background-color: var(--pst-color-background) !important;
-  border: 1px solid var(--pst-color-border) !important;
+// Fix for search results in mobile sidebar
+@media (max-width: 959px) {
+  // Allow search results to extend beyond sidebar
+  .bd-sidebar {
+    .gsc-results-wrapper-overlay {
+      position: fixed !important;
+      width: 90vw !important;
+      left: 5vw !important;
+      right: 5vw !important;
+      max-width: none !important;
+      overflow-y: auto !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch;
+    }
 
-  @media (max-width: 1200px) {
-    top: 150px !important;
-    height: calc(100% - 148px) !important;
+    // Ensure search box has proper width
+    .gsc-input-box,
+    .gsc-search-box {
+      width: 100% !important;
+    }
+
+    // Fix for search result content
+    .gsc-results {
+      min-width: 100%;
+
+      // Ensure result content doesn't get cut off
+      .gsc-webResult .gsc-result {
+        width: auto;
+        min-width: 100%;
+      }
+    }
+
+    // Fix search results container
+    .gsc-results-wrapper-visible {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 300px !important;
+    }
+    // Ensure table cells don't get cut off
+    .gsc-table-result,
+    .gsc-thumbnail-inside,
+    .gsc-url-top {
+      padding-right: 15px !important;
+     }
   }
+}
+
+
+.gsc-results-wrapper-overlay {
+  width: 90% !important;
+  max-width: 1200px !important;
+  height: 80% !important;
+  max-height: 800px !important;
+  left: 5% !important;
+  right: 5% !important;
+  top: 10% !important;
+  overflow: auto !important;
+}
+
+@media (max-width: 767px) {
+  .gsc-results-wrapper-overlay {
+    width: 95% !important;
+    left: 2.5% !important;
+    right: 2.5% !important;
+    top: 5% !important;
+    height: 90% !important;
+  }
+}
+
+// Ensure Google search results are always visible
+.gsc-results-wrapper-visible {
+  z-index: 9999 !important;
 }
 
 .gsc-modal-background-image {
   position: fixed !important;
   z-index: 1000 !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 // Results styling
