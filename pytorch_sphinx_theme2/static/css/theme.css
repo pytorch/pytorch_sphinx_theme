@@ -1526,6 +1526,11 @@ table.gsc-search-box td {
     z-index: 9999 !important;
   }
 }
+.gs-promotion .gs-visibleUrl,
+.gs-webResult .gs-visibleUrl {
+  color: var(--sd-color-secondary-bg-text) !important;
+}
+
 .gsc-modal-background-image {
   position: fixed !important;
   z-index: 1000 !important;
@@ -1557,7 +1562,6 @@ table.gsc-search-box td {
 }
 
 .gs-visibleUrl {
-  color: var(--pst-color-success) !important;
   font-size: 0.85rem !important;
 }
 
@@ -1684,9 +1688,6 @@ html[data-theme=dark] .gs-snippet {
 html[data-theme=dark] .gs-snippet b {
   color: inherit !important;
   font-weight: bold !important;
-}
-html[data-theme=dark] .gs-visibleUrl {
-  color: #F4A623 !important;
 }
 html[data-theme=dark] .gsc-cursor-page {
   color: var(--pst-color-primary) !important;

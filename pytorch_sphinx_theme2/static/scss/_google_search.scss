@@ -341,6 +341,11 @@ table.gsc-search-box td {
     }
 }
 
+.gs-promotion .gs-visibleUrl,
+.gs-webResult .gs-visibleUrl {
+  color: var(--sd-color-secondary-bg-text) !important;
+}
+
 .gsc-modal-background-image {
   position: fixed !important;
   z-index: 1000 !important;
@@ -376,7 +381,6 @@ table.gsc-search-box td {
 }
 
 .gs-visibleUrl {
-  color: var(--pst-color-success) !important;
   font-size: 0.85rem !important;
 }
 
@@ -530,10 +534,6 @@ html[data-theme="dark"] {
       color: inherit !important;
       font-weight: bold !important;
     }
-  }
-
-  .gs-visibleUrl {
-    color: #F4A623 !important;
   }
 
   .gsc-cursor-page {
