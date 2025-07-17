@@ -3016,6 +3016,14 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 576px) {
+  .tutorials-pagination {
+    gap: 3px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
 }
 .tutorials-pagination .page-btn {
   color: var(--pst-color-text-base);
@@ -3029,6 +3037,12 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   line-height: 1.5;
   background-color: var(--sg-background-color);
   cursor: pointer;
+}
+@media screen and (max-width: 576px) {
+  .tutorials-pagination .page-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
 }
 .tutorials-pagination .page-btn:hover:not([disabled]) {
   border: 1px solid var(--pst-color-primary);
