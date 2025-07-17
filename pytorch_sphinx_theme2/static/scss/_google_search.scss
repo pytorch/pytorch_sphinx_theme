@@ -325,44 +325,66 @@ table.gsc-search-box td {
       width: 90vw !important;
       left: 5vw !important;
       right: 5vw !important;
+      top: 5vh !important;
+      height: 90vh !important;
       max-width: none !important;
-      overflow-y: auto !important;
-      overflow-x: auto !important;
-      -webkit-overflow-scrolling: touch;
+      max-height: none !important;
+      z-index: 10000 !important; // Higher z-index
+      overflow-y: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
     }
 
-    // Ensure search box has proper width
-    .gsc-input-box,
-    .gsc-search-box {
-      width: 100% !important;
-    }
-
-    // Fix for search result content
+    // Fix content width inside results
     .gsc-results {
-      min-width: 100%;
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
 
-      // Ensure result content doesn't get cut off
-      .gsc-webResult .gsc-result {
-        width: auto;
-        min-width: 100%;
+      .gsc-expansionArea {
+        overflow: visible !important;
+        height: auto !important;
       }
     }
+  }
 
     // Fix search results container
-    .gsc-results-wrapper-visible {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 300px !important;
-    }
-    // Ensure table cells don't get cut off
-    .gsc-table-result,
-    .gsc-thumbnail-inside,
-    .gsc-url-top {
-      padding-right: 15px !important;
-     }
+    body.gsc-overflow-hidden {
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 }
 
+@media (max-width: 991.98px) {
+  // Prevent scroll jumps on input focus in Safari
+  .gsc-input input,
+  .search-container input,
+  #gsc-i-id1 {
+    -webkit-appearance: none; // Removes default iOS styling
+    position: static !important; // Prevents repositioning
+    height: auto !important;
+
+    // Prevent iOS from trying to center the input when focused
+    &:focus {
+      position: static !important;
+      transform: none !important;
+    }
+  }
+
+  // Fix for container to maintain position
+  .gsc-input-box,
+  .search-container {
+    position: relative !important;
+    transform: none !important;
+  }
+
+  // Prevent body scrolling when input is focused
+  body.input-focused {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+}
 
 .gsc-results-wrapper-overlay {
   width: 90% !important;
@@ -855,4 +877,21 @@ body.search-page.gsc-overflow-hidden .footer-article-item .feedback-send {
 //Don't disply X cancel button for google search.
 .gsst_a {
   display: none !important;
+}
+
+
+// Fix for mobile search input scrolling issue
+.gsc-input input,
+.search-container input {
+  // Prevent iOS zoom on focus
+  font-size: 16px !important;
+
+  // Prevent scroll behavior changes
+  position: relative;
+  z-index: 10;
+
+  // Prevent scroll jumps
+  &:focus {
+    transform: translateY(0);
+  }
 }
