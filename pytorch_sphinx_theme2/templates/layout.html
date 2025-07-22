@@ -125,9 +125,9 @@
 
     {% if theme_pytorch_project == 'tutorials' %}
     <script>
-      if((window.location.href.indexOf("/prototype/")!= -1) && (window.location.href.indexOf("/prototype/prototype_index")< 1))
-      {
-        var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Prototype feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
+      if((window.location.href.indexOf("/unstable/")!= -1) && (window.location.href.indexOf("/unstable/unstable_index")< 1))
+        {
+        var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Unstable feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
         document.addEventListener('DOMContentLoaded', function() {
           document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
         });
