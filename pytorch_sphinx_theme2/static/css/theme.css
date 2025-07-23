@@ -30,6 +30,7 @@ html[data-theme=dark] {
   --bs-btn-focus-box-shadow: #F2765D;
   --pst-color-accent: transparent !important;
   --pst-color-table-row-hover-bg: #711B09;
+  --sg-script-pre: #2e2e22;
 }
 
 .error-404-container {
