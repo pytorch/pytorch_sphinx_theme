@@ -2276,8 +2276,18 @@ a.btn {
   background-repeat: no-repeat;
 }
 
+.osano-cm-dialog {
+  background-color: var(--pst-color-background);
+  color: var(--pst-color-text-base);
+}
+
 .osano-cm-header, .osano-cm-info-dialog-header {
   background: var(--pst-color-background);
+}
+
+.osano-cm-info-dialog-header__close {
+  color: var(--pst-color-text-base);
+  stroke: var(--pst-color-text-base);
 }
 
 .osano-cm-info {
