@@ -45,7 +45,7 @@ sphinx_gallery_conf = {
     "plot_gallery": True,  # Generate plots for examples
 }
 
-pytorch_project = "tutorials"
+#pytorch_project = "tutorials"
 torch_version = str(torch.__version__)
 version = "main (" + torch_version + " )"
 # The full version, including alpha/beta/rc tags.
@@ -200,6 +200,7 @@ html_theme_options = {
     #    "version_match": "main",
     # },
     "canonical_url": "https://pytorch.org/docs/stable/",
+    "pytorch_project": "tutorials",
 }
 
 theme_variables = pytorch_sphinx_theme2.get_theme_variables()
