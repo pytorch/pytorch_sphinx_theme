@@ -194,7 +194,7 @@ a.btn {
   }
 }
 
-// privacy notice
+// Cookie banner LF
 
 .osano-cm-dialog {
     background-color: var(--pst-color-background);
@@ -284,6 +284,72 @@ a.btn {
 .osano-cm-widget__outline {
     fill: var(--pst-color-background);
     stroke: var(--pst-color-primary);
+}
+
+// Cookie banner pytorch
+
+.cookie-banner-wrapper {
+  display: none;
+
+  &.is-visible {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--pst-color-background);
+    min-height: 100px;
+    width: 100%;
+    border-top: 3px solid #ededee;
+    z-index: 100000;
+  }
+
+  .container {
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
+    max-width: 1240px;
+  }
+
+  .gdpr-notice {
+    color: var(--pst-color-text-muted);
+    margin-top: 1.5625rem;
+    text-align: left;
+    max-width: 1440px;
+
+    @media screen and (min-width: 768px) {
+      width: 77%;
+    }
+
+    @media (min-width: 768px) and (max-width: 1239px) {
+      width: inherit;
+    }
+
+    .cookie-policy-link {
+      color: var(--pst-color-text-muted);
+    }
+  }
+
+  .close-button {
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--pst-color-background);
+    height: 1.3125rem;
+    position: absolute;
+    bottom: 42px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    outline: none;
+
+    @media screen and (min-width: 768px) {
+      right: 20%;
+      top: inherit;
+    }
+
+
+    @media (min-width: 768px) and (max-width: 1239px) {
+      right: 0;
+      top: 0;
+    }
+  }
 }
 
 // Version switcher
