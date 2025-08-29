@@ -60,7 +60,11 @@
 
     // Check if the URL contains /stable/ or /tutorials/
     const currentUrl = window.location.href;
-    const shouldDefaultToGoogle = currentUrl.includes('/stable/') || currentUrl.includes('/tutorials/');
+    // TODO: We've had reports that the google programmable search is returning stale documentation,
+    //       Simple reproduction is to turn google search on and search for multinomial which will
+    //       result in returning 1.8.1 documentation.
+    //       We should turn this back on when we resolve that bug.
+    const shouldDefaultToGoogle = false;
     const savedPreference = localStorage.getItem('searchPreference');
 
     // Set initial state
