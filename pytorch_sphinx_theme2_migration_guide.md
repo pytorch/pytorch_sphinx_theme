@@ -33,7 +33,7 @@ sphinx==7.2.6
 sphinxcontrib.katex==0.9.10
 breathe==4.34.0  # only if generating C++
 exhale==0.2.3  # only if generating C++ docs
-docutils==>=0.18.1,<0.21
+docutils==0.18.1,<0.21
 sphinx-design==0.6.1
 sphinxcontrib-mermaid==1.0.0
 myst-parser==0.18.1  # if want to contribute in markdown
