@@ -3,6 +3,188 @@
 
 {% block title %}Page Not Found{% endblock %}
 
+{# Override the pathto function to return absolute paths for 404 page #}
+{%- macro pathto(otheruri, resource=false) -%}
+  {%- if otheruri and otheruri != '#' -%}
+    {%- if otheruri.startswith('#') -%}
+      {{ otheruri }}
+    {%- elif otheruri.startswith('http') -%}
+      {{ otheruri }}
+    {%- else -%}
+      /{{ otheruri.lstrip('/') }}
+    {%- endif -%}
+  {%- else -%}
+    /
+  {%- endif -%}
+{%- endmacro %}
+
+{# Override stylesheets block to use absolute paths #}
+{% block stylesheets %}
+  <!-- Loaded before other Sphinx assets -->
+  <link href="/_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="/_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="/_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  <link href="/_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+  <link rel="stylesheet" type="text/css" href="/_static/pygments.css?v=536c50fe" />
+  <link rel="stylesheet" type="text/css" href="/_static/css/theme.css?v=c9393ea6" />
+  <link rel="stylesheet" type="text/css" href="/_static/copybutton.css?v=76b2166b" />
+  <link rel="stylesheet" type="text/css" href="/_static/sg_gallery.css?v=d2d258e8" />
+  <link rel="stylesheet" type="text/css" href="/_static/sg_gallery-binder.css?v=f4aeca0c" />
+  <link rel="stylesheet" type="text/css" href="/_static/sg_gallery-dataframe.css?v=2082cf3c" />
+  <link rel="stylesheet" type="text/css" href="/_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+  <link rel="stylesheet" type="text/css" href="/_static/sphinx-design.min.css?v=95c83b7e" />
+  <link rel="stylesheet" type="text/css" href="/_static/custom.css?v=4f0f6348" />
+{% endblock %}
+
+{# Override scripts block to use absolute paths #}
+{% block scripts %}
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+  <link rel="preload" as="script" href="/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="/_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <script src="/_static/documentation_options.js?v=bffbcef7"></script>
+  <script src="/_static/doctools.js?v=888ff710"></script>
+  <script src="/_static/sphinx_highlight.js?v=dc90522c"></script>
+  <script src="/_static/clipboard.min.js?v=a7894cd8"></script>
+  <script src="/_static/copybutton.js?v=f281be69"></script>
+  <script src="/_static/design-tabs.js?v=f930bc37"></script>
+
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="/_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script src="/_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+{% endblock %}
+
+{# Override extrahead to add 404-specific content #}
+{% block extrahead %}
+  <link rel="canonical" href="/404.html" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+
+  <script>
+    if (window.location.hostname === 'docs.pytorch.org' || window.location.hostname === 'docs-preview.pytorch.org') {
+      const script = document.createElement('script');
+      script.src = 'https://cmp.osano.com/16A0DbT9yDNIaQkvZ/31b1b91a-e0b6-47ea-bde2-7f2bd13dbe5c/osano.js?variant=one';
+      document.head.appendChild(script);
+    }
+  </script>
+
+  <script>
+    // Cookie banner for non-LF projects
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide cookie banner on local environments and LF owned docs
+      if (window.location.hostname === 'localhost' ||
+          window.location.hostname === '0.0.0.0' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname === 'docs.pytorch.org' ||
+          window.location.hostname === 'docs-preview.pytorch.org' ||
+          window.location.hostname.startsWith('192.168.')) {
+        const banner = document.querySelector('.cookie-banner-wrapper');
+        if (banner) {
+          banner.style.display = 'none';
+        }
+      }
+    });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="/_static/css/theme.css" crossorigin="anonymous">
+  <script type="text/javascript" src="/_static/js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <meta property="og:image" content="/_static/img/pytorch_seo.png" />
+  <link rel="stylesheet" href="/_static/webfonts/all.min.css" crossorigin="anonymous">
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval' blob:;">
+  <meta name="pytorch_project" content="{{ pytorch_project }}">
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}"
+     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+     j.onload = function() {
+       window.dispatchEvent(new Event('gtm_loaded'));
+       console.log('GTM loaded successfully');
+     };
+     })(window,document,'script','dataLayer','{{ theme_analytics_id }}');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Facebook Pixel Code -->
+  <script>
+     !function(f,b,e,v,n,t,s)
+     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+     n.queue=[];t=b.createElement(e);t.async=!0;
+     t.src=v;s=b.getElementsByTagName(e)[0];
+     s.parentNode.insertBefore(t,s)}(window,document,'script',
+     'https://connect.facebook.net/en_US/fbevents.js');
+     fbq('init', '243028289693773');
+     fbq('track', 'PageView');
+  </script>
+  <script>
+     document.documentElement.setAttribute('data-version', '{{ version }}');
+  </script>
+  <noscript>
+     <img height="1" width="1" src="https://www.facebook.com/tr?id=243028289693773&ev=PageView&noscript=1"/>
+  </noscript>
+  <script>
+     function gtag() {
+      window.dataLayer.push(arguments);
+     }
+  </script>
+  <!-- End Facebook Pixel Code -->
+
+  <!-- Script to Fix scrolling -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fix anchor scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            const headerHeight =
+              (document.querySelector('.header-holder') ? document.querySelector('.header-holder').offsetHeight : 0) +
+              (document.querySelector('.bd-header') ? document.querySelector('.bd-header').offsetHeight : 0) + 20;
+
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+
+            // Update URL hash without scrolling
+            history.pushState(null, null, '#' + targetId);
+          }
+        });
+      });
+    });
+  </script>
+
+  <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
+  {% if release == "main" %}
+     <!--
+     Search engines should not index the main version of documentation.
+     Stable documentation are built without release == 'main'.
+     -->
+     <meta name="robots" content="noindex">
+  {% endif %}
+{% endblock %}
+
 {% block body %}
 <div class="container text-center error-404-container">
   <h1 class="error-404-title">404</h1>
