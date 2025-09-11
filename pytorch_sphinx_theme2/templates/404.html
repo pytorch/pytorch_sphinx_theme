@@ -1,107 +1,68 @@
-{% extends "layout.html" %}
+{% extends "!layout.html" %}
 
 {% block extrahead %}
 {{ super() }}
-<!-- Dynamic base URL calculation for static hosting -->
 <script>
-    // Calculate the correct base path based on URL depth and site structure
-    function calculateBasePath() {
-        const pathname = window.location.pathname;
-        const hostname = window.location.hostname;
-
-        // Handle root path
-        if (pathname === '/' || pathname === '') {
-            return './';
+    // Fix static asset paths for 404 page on static hosting
+    (function () {
+        // Skip on localhost/development
+        if (window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1') {
+            return;
         }
 
-        // Split path into segments and remove empty ones
-        const pathSegments = pathname.split('/').filter(segment => segment !== '');
+        // Get the base path for _static assets
+        let basePath = '/';
 
-        // Check if the last segment is a file
-        const lastSegment = pathSegments[pathSegments.length - 1] || '';
-        const fileExtensions = ['.html', '.htm', '.php', '.jsp', '.asp'];
-        const isFile = fileExtensions.some(ext => lastSegment.toLowerCase().endsWith(ext));
-
-        // Calculate current directory depth (exclude filename if present)
-        let currentDepth = isFile ? pathSegments.length - 1 : pathSegments.length;
-
-        // Determine the target depth based on site structure
-        let targetDepth = 0;
-
-        if (hostname.includes('docs-preview.pytorch.org')) {
-            // For docs-preview: _static is at /pytorch/<project>/<version>/ level
-            // Pattern: /pytorch/tutorials/1234/ or /pytorch/pytorch/5678/ or /pytorch/executorch/9101/
-            const pytorchIndex = pathSegments.indexOf('pytorch');
-            if (pytorchIndex >= 0 && pytorchIndex + 2 < pathSegments.length) {
-                const projectSegment = pathSegments[pytorchIndex + 1]; // tutorials, pytorch, executorch, etc.
-                const versionSegment = pathSegments[pytorchIndex + 2];
-
-                // Check if the third segment is a version number
-                if (/^\d+$/.test(versionSegment)) {
-                    targetDepth = pytorchIndex + 3; // Go to /pytorch/<project>/<version>/ level
-                }
-            }
-        } else if (hostname.includes('docs.pytorch.org')) {
-            // For docs.pytorch.org: different projects may have different structures
-            // Common patterns: /tutorials/, /docs/stable/, etc.
-            const tutorialsIndex = pathSegments.indexOf('tutorials');
-            if (tutorialsIndex >= 0) {
-                targetDepth = tutorialsIndex + 1; // Go to tutorials level
-            } else {
-                // For other docs projects, try to find common patterns
-                const docsIndex = pathSegments.indexOf('docs');
-                if (docsIndex >= 0 && docsIndex + 1 < pathSegments.length) {
-                    const versionSegment = pathSegments[docsIndex + 1]; // stable, master, etc.
-                    targetDepth = docsIndex + 2; // Go to /docs/<version>/ level
-                }
+        // On docs.pytorch.org, use first subdirectory (e.g. /tutorials, /docs) as base
+        if (window.location.hostname === 'docs.pytorch.org') {
+            const pathParts = window.location.pathname.split('/').filter(part => part);
+            if (pathParts.length > 0) {
+                basePath = '/' + pathParts[0] + '/';
             }
         }
 
-        // Fallback: go to root if we can't determine structure
-        if (targetDepth === 0) {
-            targetDepth = 0;
-        }
+        // Fix CSS links
+        document.querySelectorAll('link[href*="_static"]').forEach(link => {
+            if (!link.href.startsWith('http') && !link.href.startsWith('/')) {
+                link.href = basePath + link.getAttribute('href');
+            }
+        });
 
-        // Calculate how many levels to go up
-        const levelsUp = Math.max(0, currentDepth - targetDepth);
+        // Fix script sources
+        document.querySelectorAll('script[src*="_static"]').forEach(script => {
+            if (!script.src.startsWith('http') && !script.src.startsWith('/')) {
+                script.src = basePath + script.getAttribute('src');
+            }
+        });
 
-        // Generate the base path
-        return levelsUp > 0 ? '../'.repeat(levelsUp) : './';
-    }
-
-    const basePath = calculateBasePath();
-    document.write('<base href="' + basePath + '">');
-
-    // Debug logging (remove in production)
-    console.log('Current path:', window.location.pathname);
-    console.log('Current hostname:', window.location.hostname);
-    console.log('Calculated base path:', basePath);
+        // Fix image sources
+        document.querySelectorAll('img[src*="_static"]').forEach(img => {
+            if (!img.src.startsWith('http') && !img.src.startsWith('/')) {
+                img.src = basePath + img.getAttribute('src');
+            }
+        });
+    })();
 </script>
+{% endblock extrahead %}
 
-<!-- Meta tags for 404 page -->
-<meta name="robots" content="noindex">
-<meta property="og:title" content="404 - Page Not Found">
-<meta property="og:description" content="The page you are looking for could not be found.">
-{% endblock %}
-
-{% block docs_navbar %}
-{# Skip the docs navbar for 404 page #}
-{% endblock %}
-
-{% block docs_body %}
+{% block body %}
 <article class="bd-article" id="pytorch-article">
-  <div class="container text-center error-404-container">
-    <h1 class="error-404-title">404</h1>
-    <h2 class="error-404-subtitle">Page Not Found</h2>
-    <p class="error-404-text">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-    <div class="error-404-buttons">
-      <a href="{{ html_baseurl or '/' }}" class="btn btn-primary error-404-button">
-        Back Home <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      </a>
-      <a href="{{ theme_feedback_url|default('https://github.com/pytorch/pytorch') }}/issues/new?template=documentation.yml&labels=module:%20docs,broken-link" class="btn btn-secondary error-404-button error-404-issue-button">
-        Found a broken link? File an issue <i class="fa-brands fa-github" aria-hidden="true"></i>
-      </a>
+    <div class="container text-center error-404-container">
+        <h1 class="error-404-title">404</h1>
+        <h2 class="error-404-subtitle">Page Not Found</h2>
+        <p class="error-404-text">The page you are looking for might have been removed, had its name changed, or is
+            temporarily unavailable.</p>
+        <div class="error-404-buttons">
+            <a href="{{ html_baseurl or '/' }}" class="btn btn-primary error-404-button">
+                Back Home <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
+            <a href="{{ theme_feedback_url|default('https://github.com/pytorch/pytorch') }}/issues/new?template=documentation.yml&labels=module:%20docs,broken-link"
+                class="btn btn-secondary error-404-button error-404-issue-button">
+                Found a broken link? File an issue <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
     </div>
-  </div>
 </article>
-{% endblock %}
+
+{% endblock body %}
