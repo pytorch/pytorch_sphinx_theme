@@ -207,7 +207,7 @@ theme_variables = pytorch_sphinx_theme2.get_theme_variables()
 html_context = {
     "theme_variables": theme_variables,
     "library_links": theme_variables.get("library_links", []),
-    "feedback_url": "https://github.com/pytorch/pytorch",
+    "feedback_url": "https://github.com/pytorch/pytorch_sphinx_theme",
     "github_url": "https://github.com",
     "github_user": "pytorch",
     "github_repo": "pytorch_sphinx_theme",

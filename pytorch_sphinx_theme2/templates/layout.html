@@ -2,7 +2,9 @@
 
 {% block extrahead %}
 {{ super() }}
-<link rel="canonical" href="{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}" crossorigin="anonymous">
+<link rel="canonical"
+  href="{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}"
+  crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <script>
@@ -14,14 +16,14 @@
 </script>
 <script>
   // Cookie banner for non-LF projects
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     // Hide cookie banner on local environments and LF owned docs
     if (window.location.hostname === 'localhost' ||
-        window.location.hostname === '0.0.0.0' ||
-        window.location.hostname === '127.0.0.1' ||
-        window.location.hostname === 'docs.pytorch.org' ||
-        window.location.hostname === 'docs-preview.pytorch.org' ||
-        window.location.hostname.startsWith('192.168.')) {
+      window.location.hostname === '0.0.0.0' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === 'docs.pytorch.org' ||
+      window.location.hostname === 'docs-preview.pytorch.org' ||
+      window.location.hostname.startsWith('192.168.')) {
       const banner = document.querySelector('.cookie-banner-wrapper');
       if (banner) {
         banner.style.display = 'none';
@@ -29,6 +31,37 @@
     }
   });
 </script>
+<!-- Conditional CSS for header and footer height adjustment -->
+{% if not theme_show_lf_header or not theme_show_lf_footer %}
+<style>
+  {
+    % if not theme_show_lf_header %
+  }
+
+  :root {
+    --header-height: 0px !important;
+    --header-height-desktop: 0px !important;
+  }
+
+    {
+    % endif %
+  }
+
+    {
+    % if not theme_show_lf_footer %
+  }
+
+  @media (min-width: 1100px) {
+    .site-footer {
+      height: 300px !important;
+    }
+  }
+
+    {
+    % endif %
+  }
+</style>
+{% endif %}
 <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/theme.css', 1) }}" crossorigin="anonymous">
 <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,55 +69,62 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 <meta property="og:image" content="{{ pathto('_static/img/pytorch_seo.png', 1) }}" />
 <link rel="stylesheet" href="{{ pathto('_static/webfonts/all.min.css', 1) }}" crossorigin="anonymous">
-<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval' blob:;">
+<meta http-equiv="Content-Security-Policy"
+  content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval' blob:;">
 <meta name="pytorch_project" content="{{ pytorch_project }}">
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}"
-   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-   <!-- End Google Tag Manager (noscript) -->
-   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-   j.onload = function() {
-     window.dispatchEvent(new Event('gtm_loaded'));
-     console.log('GTM loaded successfully');
-   };
-   })(window,document,'script','dataLayer','{{ theme_analytics_id }}');
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    j.onload = function () {
+      window.dispatchEvent(new Event('gtm_loaded'));
+      console.log('GTM loaded successfully');
+    };
+  })(window, document, 'script', 'dataLayer', '{{ theme_analytics_id }}');
 </script>
- <!-- End Google Tag Manager -->
- <!-- Facebook Pixel Code -->
+<!-- End Google Tag Manager -->
+<!-- Facebook Pixel Code -->
 <script>
-   !function(f,b,e,v,n,t,s)
-   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-   n.queue=[];t=b.createElement(e);t.async=!0;
-   t.src=v;s=b.getElementsByTagName(e)[0];
-   s.parentNode.insertBefore(t,s)}(window,document,'script',
-   'https://connect.facebook.net/en_US/fbevents.js');
-   fbq('init', '243028289693773');
-   fbq('track', 'PageView');
+  !function (f, b, e, v, n, t, s) {
+    if (f.fbq) return; n = f.fbq = function () {
+      n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+    };
+    if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+    n.queue = []; t = b.createElement(e); t.async = !0;
+    t.src = v; s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s)
+  }(window, document, 'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '243028289693773');
+  fbq('track', 'PageView');
 </script>
 <script>
-   document.documentElement.setAttribute('data-version', '{{ version }}');
- </script>
+  document.documentElement.setAttribute('data-version', '{{ version }}');
+</script>
 <noscript>
-   <img height="1" width="1" src="https://www.facebook.com/tr?id=243028289693773&ev=PageView&noscript=1"/>
+  <img height="1" width="1" src="https://www.facebook.com/tr?id=243028289693773&ev=PageView&noscript=1" />
 </noscript>
 <script>
-   function gtag() {
+  function gtag() {
     window.dataLayer.push(arguments);
-   }
+  }
 </script>
 <!-- End Facebook Pixel Code -->
 <!-- Script to Fix scrolling -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     // Fix anchor scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
@@ -110,49 +150,51 @@
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 {% if release == "main" %}
-   <!--
+<!--
    Search engines should not index the main version of documentation.
    Stable documentation are built without release == 'main'.
    -->
-   <meta name="robots" content="noindex">
+<meta name="robots" content="noindex">
 {% endif %}
 {{ super() }}
 {% endblock%}
 
 {% block html_tag %}
-   <html data-version="{{ version }}">
+<html data-version="{{ version }}">
 {% endblock %}
 
 {% block body_tag %}
-<body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
-   {% include "pytorch_header.html" %}
-   {{ super() }}
-{% endblock %}
 
-{% block docs_body %}
+<body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
+  {% if theme_show_lf_header %}
+  {% include "pytorch_header.html" %}
+  {% endif %}
+  {{ super() }}
+  {% endblock %}
+
+  {% block docs_body %}
   {% include "components/searchbox.html" %}
-  <article class="bd-article"id="pytorch-article">
-   <!-- Hidden breadcrumb schema for SEO only -->
-   <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <article class="bd-article" id="pytorch-article">
+    <!-- Hidden breadcrumb schema for SEO only -->
+    <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
       {% for parent in parents %}
-        <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <link itemprop="item" href="{{ parent.link|e }}">
-          <meta itemprop="name" content="{{ parent.title }}">
-          <meta itemprop="position" content="{{ loop.index }}">
-        </div>
+      <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <link itemprop="item" href="{{ parent.link|e }}">
+        <meta itemprop="name" content="{{ parent.title }}">
+        <meta itemprop="position" content="{{ loop.index }}">
+      </div>
       {% endfor %}
       <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
         <meta itemprop="name" content="{{ title }}">
         <meta itemprop="position" content="{{ parents|length + 1 }}">
       </div>
-   </div>
+    </div>
 
     {% if theme_pytorch_project == 'tutorials' %}
     <script>
-      if((window.location.href.indexOf("/unstable/")!= -1) && (window.location.href.indexOf("/unstable/unstable_index")< 1))
-        {
+      if ((window.location.href.indexOf("/unstable/") != -1) && (window.location.href.indexOf("/unstable/unstable_index") < 1)) {
         var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Unstable feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
           document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
         });
       }
@@ -160,76 +202,75 @@
     <div class="pytorch-call-to-action-links">
       <div id="tutorial-type">{{ pagename }}</div>
       <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
-         <div id="google-colab-link">
-         <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}"/>
-         <div class="call-to-action-desktop-view">Run in Google Colab</div>
-         <div class="call-to-action-mobile-view">Colab</div>
-         </div>
+        <div id="google-colab-link">
+          <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}" />
+          <div class="call-to-action-desktop-view">Run in Google Colab</div>
+          <div class="call-to-action-mobile-view">Colab</div>
+        </div>
       </a>
       <a id="notebook-link" data-behavior="call-to-action-event" data-response="Download Notebook">
-         <div id="download-notebook-link">
-         <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}"/>
-         <div class="call-to-action-desktop-view">Download Notebook</div>
-         <div class="call-to-action-mobile-view">Notebook</div>
-         </div>
+        <div id="download-notebook-link">
+          <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}" />
+          <div class="call-to-action-desktop-view">Download Notebook</div>
+          <div class="call-to-action-mobile-view">Notebook</div>
+        </div>
       </a>
       <a id="github-link" data-behavior="call-to-action-event" data-response="View on Github" target="_blank">
-         <div id="github-view-link">
-         <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}"/>
-         <div class="call-to-action-desktop-view">View on GitHub</div>
-         <div class="call-to-action-mobile-view">GitHub</div>
-         </div>
+        <div id="github-view-link">
+          <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}" />
+          <div class="call-to-action-desktop-view">View on GitHub</div>
+          <div class="call-to-action-mobile-view">GitHub</div>
+        </div>
       </a>
     </div>
     {% endif %}
+
     {{ super() }}
   </article>
-{% endblock docs_body %}
+  {% endblock docs_body %}
 
-
-{% block footer%}
-   {% include "pytorch_footer.html" %}
-   {{ super() }}
-   <script type="application/ld+json">
-      {
-         "@context": "https://schema.org",
-         "@type": "Article",
-         "name": {{ title|striptags|trim|tojson }},
-         "headline": {{ title|striptags|trim|tojson }},
-         "description": "PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment. Discover tutorials, API references, and guides to help you build and deploy deep learning models efficiently.",
-         "url": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}",
-         "articleBody": {{ body|striptags|trim|tojson }},
-         "author": {
-           "@type": "Organization",
-           "name": "PyTorch Contributors",
-           "url": "https://pytorch.org"
-         },
-         "image": "{{ url_root }}{{ pathto('_static/img/pytorch_seo.png', 1) }}",
-         "mainEntityOfPage": {
-           "@type": "WebPage",
-           "@id": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}"
-         },
-         "datePublished": "{{ doc_created|default('2023-01-01') }}T00:00:00Z",
-         "dateModified": "{{ doc_updated|default('2023-01-01') }}T00:00:00Z"
-       }
-   </script>
-{% endblock %}
-<script>
-// Tutorials Call to action event tracking
-$("[data-behavior='call-to-action-event']").on('click', function(){
-  fbq('trackCustom', "Download", {
-    tutorialTitle: $('h1:first').text(),
-    downloadLink: this.href,
-    tutorialLink: window.location.href,
-    downloadTitle: $(this).attr("data-response")
-  });
-  if (typeof gtag === 'function') {
-    gtag('event', 'click', {
-      'event_category': $(this).attr("data-response"),
-      'event_label': $("h1").first().text(),
-      'tutorial_link': window.location.href
+  {% block footer%}
+  {% include "pytorch_footer.html" %}
+  {{ super() }}
+  <script type="application/ld+json">
+    {
+       "@context": "https://schema.org",
+       "@type": "Article",
+       "name": {{ title|striptags|trim|tojson }},
+       "headline": {{ title|striptags|trim|tojson }},
+       "description": "PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment. Discover tutorials, API references, and guides to help you build and deploy deep learning models efficiently.",
+       "url": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}",
+       "articleBody": {{ body|striptags|trim|tojson }},
+       "author": {
+         "@type": "Organization",
+         "name": "PyTorch Contributors",
+         "url": "https://pytorch.org"
+       },
+       "image": "{{ url_root }}{{ pathto('_static/img/pytorch_seo.png', 1) }}",
+       "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}"
+       },
+       "datePublished": "{{ doc_created|default('2023-01-01') }}T00:00:00Z",
+       "dateModified": "{{ doc_updated|default('2023-01-01') }}T00:00:00Z"
+     }
+ </script>
+  <script>
+    // Tutorials Call to action event tracking
+    $("[data-behavior='call-to-action-event']").on('click', function () {
+      fbq('trackCustom', "Download", {
+        tutorialTitle: $('h1:first').text(),
+        downloadLink: this.href,
+        tutorialLink: window.location.href,
+        downloadTitle: $(this).attr("data-response")
+      });
+      if (typeof gtag === 'function') {
+        gtag('event', 'click', {
+          'event_category': $(this).attr("data-response"),
+          'event_label': $("h1").first().text(),
+          'tutorial_link': window.location.href
+        });
+      }
     });
-  }
-});
-</script>
-</body>
+  </script>
+  {% endblock %}
