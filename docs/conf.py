@@ -30,7 +30,7 @@ extensions = [
     "sphinxcontrib.httpdomain",
     "sphinx_gallery.gen_gallery",
     "sphinx_design",
-    "myst_nb"
+    "myst_nb",
 ]
 
 print(
@@ -45,7 +45,7 @@ sphinx_gallery_conf = {
     "plot_gallery": True,  # Generate plots for examples
 }
 
-#pytorch_project = "tutorials"
+# pytorch_project = "tutorials"
 torch_version = str(torch.__version__)
 version = "main (" + torch_version + " )"
 # The full version, including alpha/beta/rc tags.
@@ -74,7 +74,7 @@ templates_path = [
 ]
 
 html_additional_pages = {
-    '404': '404.html',
+    "404": "404.html",
 }
 
 # The suffix of source filenames.
@@ -199,7 +199,8 @@ html_theme_options = {
     #    "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
     #    "version_match": "main",
     # },
-    "canonical_url": "https://pytorch.org/docs/stable/",
+    # "canonical_url": "https://pytorch.org/docs/stable/",
+    "canonical_url": "http://localhost:8000",
     "pytorch_project": "tutorials",
 }
 
@@ -240,8 +241,14 @@ def setup(app):
 
 def hide_edit_button_for_pages(app, pagename, templatename, context, doctree):
     if pagename == "installing" or pagename.startswith("installing/"):
-        context["theme_use_edit_page_button"] = False
+        context["theme_edit_page_button"] = False
 
+
+# The base URL which points to the root of the HTML documentation. It is used
+# to indicate the location of document using The Canonical Link Relation.
+# Default: None.
+# Example for GitHub Pages: https://user.github.io/project/ (with trailing slash)
+html_baseurl = "http://localhost:8000/"  # Set this for production deployment
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
