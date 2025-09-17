@@ -76,7 +76,7 @@
         <p class="error-404-text">The page you are looking for might have been removed, had its name changed, or is
             temporarily unavailable.</p>
         <div class="error-404-buttons">
-            <a href="http://localhost:8000/" class="btn btn-primary error-404-button">
+            <a href="{{ theme_canonical_url }}" class="btn btn-primary error-404-button">
                 Back Home <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </a>
             <a href="{{ theme_feedback_url|default('https://github.com/pytorch/pytorch') }}/issues/new?template=documentation.yml&labels=module:%20docs,broken-link"
