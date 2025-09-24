@@ -196,6 +196,8 @@
         });
       }
     </script>
+    {% endif %}
+    {% if theme_pytorch_project == 'tutorials' or has_sphinx_gallery %}
     <div class="pytorch-call-to-action-links">
       <div id="tutorial-type">{{ pagename }}</div>
       <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
