@@ -29,33 +29,20 @@
   });
 </script>
 <!-- Conditional CSS for header and footer height adjustment -->
-{% if not theme_show_lf_header or not theme_show_lf_footer %}
+{% if not theme_show_lf_header %}
 <style>
-  {
-    % if not theme_show_lf_header %
-  }
-
   :root {
     --header-height: 0px !important;
     --header-height-desktop: 0px !important;
   }
-
-    {
-    % endif %
-  }
-
-    {
-    % if not theme_show_lf_footer %
-  }
-
+</style>
+{% endif %}
+{% if not theme_show_lf_footer %}
+<style>
   @media (min-width: 1100px) {
     .site-footer {
       height: 300px !important;
     }
-  }
-
-    {
-    % endif %
   }
 </style>
 {% endif %}
@@ -68,7 +55,7 @@
 <link rel="stylesheet" href="{{ pathto('_static/webfonts/all.min.css', 1) }}" crossorigin="anonymous">
 <meta http-equiv="Content-Security-Policy"
   content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval' blob:;">
-<meta name="pytorch_project" content="{{ pytorch_project }}">
+<meta name="pytorch_project" content="{{ theme_pytorch_project }}">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ theme_analytics_id }}" height="0" width="0"
     style="display:none;visibility:hidden"></iframe></noscript>
@@ -116,6 +103,20 @@
   }
 </script>
 <!-- End Facebook Pixel Code -->
+<!-- Repository configuration for tutorials -->
+{% if (theme_pytorch_project == 'tutorials' or has_sphinx_gallery) and github_user and github_repo %}
+<script>
+  // Define repository configuration for tutorial buttons using existing html_context variables
+  // Only injected when tutorial buttons are shown AND github variables are defined
+  // If either condition is false, JavaScript will fallback to default PyTorch tutorial links
+  window.repoConfig = {
+    github_repo: "{{ github_user }}/{{ github_repo }}",
+    github_branch: "{{ github_version }}",
+    colab_repo: "{{ github_user }}/{{ github_repo }}",
+    colab_branch: "{{ colab_branch }}"
+  };
+</script>
+{% endif %}
 <!-- Script to Fix scrolling -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {

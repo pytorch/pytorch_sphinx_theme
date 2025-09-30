@@ -4,7 +4,7 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 
 import pytorch_sphinx_theme2
-import torch
+# import torch  # Temporarily commented out for testing
 
 html_theme = "pytorch_sphinx_theme2"
 html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
@@ -41,12 +41,15 @@ print(
 sphinx_gallery_conf = {
     "examples_dirs": "examples",  # path to your example scripts
     "gallery_dirs": "auto_examples",  # where to save gallery generated output
-    "filename_pattern": "/example_",  # Only run files that match this pattern
+    "filename_pattern": "/(example_|template_)",  # Process files starting with example_ or template_
     "plot_gallery": True,  # Generate plots for examples
+    "promote_jupyter_magic": True,
+    "first_notebook_cell": ("%matplotlib inline"),
 }
 
 # pytorch_project = "tutorials"
-torch_version = str(torch.__version__)
+# torch_version = str(torch.__version__)  # Temporarily commented out for testing
+torch_version = "2.0.0"  # Hardcoded for testing
 version = "main (" + torch_version + " )"
 # The full version, including alpha/beta/rc tags.
 release = "main"
@@ -58,7 +61,7 @@ if RELEASE:
     # Note: the release candidates should no longer have the aHASH suffix, but in any
     # case we wish to leave only major.minor, even for rc builds.
     version = ".".join(torch_version.split(".")[:2])
-    html_title = " ".join((project, version, "documentation"))
+    html_title = " ".join(("PyTorch Sphinx Theme2", version, "documentation"))
     release = version
 
 # Do not warn about external images (status badges in README.rst)
@@ -104,6 +107,26 @@ release = "main"
 language = "en"
 
 html_title = " ".join((project, version, "documentation"))
+
+# Tutorial repository configuration using existing html_context variables
+theme_variables = pytorch_sphinx_theme2.get_theme_variables()
+html_context = {
+    "theme_variables": theme_variables,
+    "library_links": theme_variables.get("library_links", []),
+    "feedback_url": "https://github.com/pytorch/pytorch_sphinx_theme",
+    "github_url": "https://github.com",
+    "github_user": "pytorch",
+    "github_repo": "tutorials",     # Changed to tutorials for tutorial buttons
+    "github_version": "main",       # Changed to main branch for tutorials
+    "colab_branch": "gh-pages",     # New variable for Colab branch
+    "doc_path": "docs",
+    "extra_project_links": theme_variables.get("extra_project_links", []),
+    "date_info": {
+        "paths_to_skip": ["installing"],
+    },
+    "version": version,
+    "has_sphinx_gallery": True,
+}
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -201,25 +224,10 @@ html_theme_options = {
     # },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
-    "pytorch_project": "tutorials",
-}
+    #"pytorch_project": "tutorials",
+  }
 
-theme_variables = pytorch_sphinx_theme2.get_theme_variables()
-html_context = {
-    "theme_variables": theme_variables,
-    "library_links": theme_variables.get("library_links", []),
-    "feedback_url": "https://github.com/pytorch/pytorch_sphinx_theme",
-    "github_url": "https://github.com",
-    "github_user": "pytorch",
-    "github_repo": "pytorch_sphinx_theme",
-    "github_version": "master",
-    "doc_path": "docs",
-    "extra_project_links": theme_variables.get("extra_project_links", []),
-    "date_info": {
-        "paths_to_skip": ["installing"],
-    },
-    "version": version,
-}
+
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ["../"]
 
