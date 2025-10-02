@@ -1,3 +1,5 @@
+{% if theme_show_lf_footer %}
+
 <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
   <div class="container">
     <div class="row">
@@ -21,11 +23,36 @@
     </div>
   </div>
 </div>
+{% endif%}
+
+{% if not theme_show_lf_footer %}
+<style>
+.site-footer {
+    padding: 20px 40px;
+    height: 60px !important;
+}
+
+@media screen and (min-width: 768px) {
+    .site-footer {
+        padding: 20px 40px;
+    }
+}
+
+.site-footer .privacy-policy {
+    border-top: none;
+    margin-top: 0px;
+}
+
+.site-footer .privacy-policy .copyright {
+    padding-top: 0;
+}
+</style>
+{% endif %}
 
 <footer class="site-footer">
+{% if theme_show_lf_footer %}
   <div class="container footer-container">
 
-    {% if theme_show_lf_footer %}
     <div class="newsletter" id="newsletter">
 
       <p class="newsletter__title is-style-max-width-800"><strong>Stay in touch</strong> for updates, event info, and
@@ -48,7 +75,6 @@
           href="https://www.linuxfoundation.org/privacy/">Privacy Policy</a>.</p>
 
     </div>
-    {% endif %}
 
     <div class="lf-grid">
       <ul class="social-links">
@@ -98,10 +124,10 @@
           </a></li>
       </ul>
     </div>
-
+    {% endif %}
     <div class="privacy-policy">
       <div class="copyright">
-        {% if theme_show_lf_footer %}
+      {% if theme_show_lf_footer %}
         <p>
           &copy; PyTorch. Copyright © The Linux Foundation®. All rights reserved. The Linux Foundation has registered
           trademarks and uses trademarks. For more information, including terms of use, privacy policy, and trademark

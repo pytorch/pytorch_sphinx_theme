@@ -43,11 +43,6 @@
       © <a href="{{ pathto('copyright') }}">
         {% trans copyright=copyright|e %}Copyright {{ copyright }}{% endtrans %}
       </a>.<br/>
-    {% else %}
-      {% trans copyright=copyright|e %}
-        © Copyright {{ copyright }}.
-      {% endtrans %}
-      <br/>
     {% endif %}
   </p>
 
