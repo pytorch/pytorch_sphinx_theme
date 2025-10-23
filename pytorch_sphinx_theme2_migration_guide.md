@@ -134,6 +134,15 @@ html_context = {
     "community_links": theme_variables.get("community_links", []),
     "language_bindings_links": html_theme_options.get("language_bindings_links", []),
 }
+
+# Need a reliable way to acquire the version
+html_baseurl = f"https://<site>/<siteproject>/{version}/"
+sitemap_locales = [None]
+sitemap_excludes = [
+    "search.html",
+    "genindex.html",
+]
+sitemap_url_scheme = "{link}"
 ```
 
 If using myst-markdown, add:
