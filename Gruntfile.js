@@ -66,7 +66,7 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 8000,
+          port: 3000,
           base: 'docs/_build/html',
           livereload: true,
           open: true
