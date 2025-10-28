@@ -12,11 +12,9 @@ except NameError:
 
 try:
     import sphinx_gallery
-
     HAS_SPHINX_GALLERY = True
 except ImportError:
     HAS_SPHINX_GALLERY = False
-
 
 class IncludeDirective(Directive):
     """Include source file without docstring at the top of file.
@@ -94,9 +92,7 @@ class GalleryItemDirective(Directive):
             if "intro" in self.options:
                 intro = self.options["intro"][:195] + "..."
             else:
-                block_parser = sphinx_gallery.gen_rst.BlockParser(
-                    abs_fname, {"filetype_parsers": {}}
-                )
+                block_parser = sphinx_gallery.gen_rst.BlockParser(abs_fname, {"filetype_parsers": {}})
                 _, blocks, _ = block_parser.split_code_and_text_blocks(abs_fname)
                 intro, _ = sphinx_gallery.gen_rst.extract_intro_and_title(
                     abs_fname, blocks[0][1]
