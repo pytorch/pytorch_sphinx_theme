@@ -36,7 +36,7 @@ class IncludeDirective(Directive):
     has_content = False
     add_index = False
 
-    docstring_pattern = r'"""(?P<docstring>(?:.|[\r\n])*?)"""\n'
+    docstring_pattern = r'r?"""(?P<docstring>(?:.|[\r\n])*?)"""\n'
     docstring_regex = re.compile(docstring_pattern)
 
     def run(self):
