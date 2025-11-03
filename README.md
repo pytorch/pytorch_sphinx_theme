@@ -142,11 +142,72 @@ This will create two files in the `dist/` directory:
 
 ### 4. Publish to PyPI
 
-Install twine if you haven't already:
+**Option A: Install in current environment**
+
+Note that the latest twine and readme-renderer require `docutils>=0.21.2`, which conflicts with Sphinx's requirement for `docutils<0.21`. First, upgrade pip and setuptools, then install compatible versions:
 
 ```bash
-pip install twine
+pip install --upgrade pip setuptools wheel
+pip install --upgrade importlib_metadata
+pip install 'twine<5.0' 'readme-renderer<44.0'
 ```
+
+**Option B: Use a separate environment (recommended)**
+
+This avoids all dependency conflicts.
+
+For conda users:
+
+```bash
+conda create -n publish_env python=3.10
+conda activate publish_env
+pip install --upgrade pip setuptools wheel
+pip install build twine
+```
+
+For venv users:
+
+```bash
+python -m venv publish_env
+source publish_env/bin/activate  # On Windows: publish_env\Scripts\activate
+pip install --upgrade pip setuptools wheel
+pip install build twine
+```
+
+**Authentication Setup**
+
+Before publishing, you need to set up authentication:
+
+1. Create accounts:
+   - TestPyPI: https://test.pypi.org/account/register/
+   - PyPI: https://pypi.org/account/register/
+
+2. Create API tokens:
+   - TestPyPI token: https://test.pypi.org/manage/account/token/
+   - PyPI token: https://pypi.org/manage/account/token/
+
+3. Configure `~/.pypirc`:
+
+```ini
+[distutils]
+index-servers =
+    pypi
+    testpypi
+
+[testpypi]
+repository = https://test.pypi.org/legacy/
+username = __token__
+password = pypi-YOUR-TESTPYPI-TOKEN-HERE
+
+[pypi]
+repository = https://pypi.org/legacy/
+username = __token__
+password = pypi-YOUR-PYPI-TOKEN-HERE
+```
+
+Replace `pypi-YOUR-TESTPYPI-TOKEN-HERE` and `pypi-YOUR-PYPI-TOKEN-HERE` with your actual tokens.
+
+**Publishing**
 
 For testing, publish to TestPyPI first:
 
