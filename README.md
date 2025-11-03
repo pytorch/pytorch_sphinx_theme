@@ -31,9 +31,13 @@ Install PyTorch Sphinx Theme:
 
 ```
 git clone https://github.com/pytorch/pytorch_sphinx_theme
+cd pytorch_sphinx_theme
+git checkout pytorch_sphinx_theme2  # The default branch is pytorch_sphinx_theme2
 pip install -r docs/requirements.txt # Installs dependencies
 pip install -e . # Installs local version of the theme
 ```
+
+**Note:** The default branch for this repository is `pytorch_sphinx_theme2`.
 
 In the root directory, install the dependencies using
 using `npm install`:
@@ -50,7 +54,7 @@ To test your changes locally:
 3. Run `npx grunt docs`. This command will:
 
    * Compile SCSS to `theme.css`.
-   * Concatenate JS files into `theme.s`.
+   * Concatenate JS files into `theme.js`.
    * Reinstall the theme package.
    * Build the test documentation stored in the `docs/` directory.
    * Start a local server at `http:8000`.
@@ -86,10 +90,75 @@ Before the new changes are visible in the theme the maintainer will
 need to run the build process:
 
 ```bash
-grunt build
+npx grunt
 ```
 
 Once that is successful commit the change to Github.
+
+## Building and Publishing to PyPI
+
+To build and publish a new version of the theme to PyPI, follow these steps:
+
+### 1. Update the version number
+
+Update the version number in `setup.py`:
+
+```python
+version="0.1.0",  # Change to your new version
+```
+
+### 2. Build the theme assets
+
+Compile SCSS and concatenate JS files:
+
+```bash
+npx grunt
+```
+
+This runs the default Grunt task which cleans, copies FontAwesome assets, compiles SCSS to CSS, and concatenates JS files.
+
+### 3. Build the wheel
+
+Clean previous builds and create a new wheel:
+
+```bash
+# Clean previous builds
+rm -rf dist/ build/ pytorch_sphinx_theme2.egg-info/
+
+# Build the wheel (using modern build tools)
+pip install build
+python -m build
+```
+
+Alternatively, using setuptools directly:
+
+```bash
+python setup.py sdist bdist_wheel
+```
+
+This will create two files in the `dist/` directory:
+- `pytorch_sphinx_theme2-{version}-py3-none-any.whl`
+- `pytorch_sphinx_theme2-{version}.tar.gz`
+
+### 4. Publish to PyPI
+
+Install twine if you haven't already:
+
+```bash
+pip install twine
+```
+
+For testing, publish to TestPyPI first:
+
+```bash
+twine upload --repository testpypi dist/*
+```
+
+Once verified, publish to PyPI:
+
+```bash
+twine upload dist/*
+```
 
 ### Developing locally against PyTorch Docs and Tutorials
 
