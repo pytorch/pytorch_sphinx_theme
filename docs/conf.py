@@ -4,6 +4,7 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 
 import pytorch_sphinx_theme2
+
 # import torch  # Temporarily commented out for testing
 
 html_theme = "pytorch_sphinx_theme2"
@@ -31,6 +32,13 @@ extensions = [
     "sphinx_gallery.gen_gallery",
     "sphinx_design",
     "myst_nb",
+    "sphinx_tippy",
+]
+
+# MyST parser configuration for markdown files
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
 ]
 
 print(
@@ -93,6 +101,18 @@ master_doc = "index"
 project = "PyTorch Sphinx Theme2"
 copyright = "PyTorch"
 
+# sphinx-tippy configuration for glossary tooltips
+tippy_props = {
+    "placement": "auto-start",
+    "maxWidth": 500,
+    "interactive": True,  # Allow clicking links inside tooltips
+    "theme": "material",
+}
+
+# Skip all URLs except glossary term links (glossary.html#term-*)
+tippy_skip_urls = (r"^(?!.*glossary\.html#term-).*$",)
+tippy_enable_mathjax = True
+
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
@@ -116,9 +136,9 @@ html_context = {
     "feedback_url": "https://github.com/pytorch/pytorch_sphinx_theme",
     "github_url": "https://github.com",
     "github_user": "pytorch",
-    "github_repo": "tutorials",     # Changed to tutorials for tutorial buttons
-    "github_version": "main",       # Changed to main branch for tutorials
-    "colab_branch": "gh-pages",     # New variable for Colab branch
+    "github_repo": "tutorials",  # Changed to tutorials for tutorial buttons
+    "github_version": "main",  # Changed to main branch for tutorials
+    "colab_branch": "gh-pages",  # New variable for Colab branch
     "doc_path": "docs",
     "extra_project_links": theme_variables.get("extra_project_links", []),
     "date_info": {
@@ -136,7 +156,12 @@ html_context = {
 html_static_path = ["_static"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = []
+exclude_patterns = [
+    "_build",
+    "build",
+    "jupyter_execute",
+    "**.ipynb_checkpoints",
+]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 # default_role = None
@@ -158,7 +183,12 @@ pygments_style = "default"
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
 
-intersphinx_mapping = {"rtd": ("https://docs.readthedocs.io/en/latest/", None)}
+intersphinx_mapping = {
+    "rtd": ("https://docs.readthedocs.io/en/latest/", None),
+    "python": ("https://docs.python.org/3/", None),
+    "torch": ("https://docs.pytorch.org/docs/stable/", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+}
 pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY = True
 
 # -- Options for HTML output ---------------------------------------------------
@@ -224,10 +254,10 @@ html_theme_options = {
     # },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
-    #"pytorch_project": "tutorials",
-    #"show_lf_header": False,
-    #"show_lf_footer": False,
-  }
+    # "pytorch_project": "tutorials",
+    # "show_lf_header": False,
+    # "show_lf_footer": False,
+}
 
 
 # Add any paths that contain custom themes here, relative to this directory.
