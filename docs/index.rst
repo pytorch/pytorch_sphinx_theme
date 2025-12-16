@@ -31,3 +31,8 @@ Welcome to PyTorch Sphinx Theme 2 Docs
     :caption: This is an incredibly long caption for a long menu
 
     demo/long
+
+Indices and tables
+------------------
+
+* :ref:`Glossary <glossary>`
