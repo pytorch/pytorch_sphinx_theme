@@ -153,6 +153,23 @@ def setup(app):
     app.add_config_value("add_last_updated", False, "html")
     app.connect("html-page-context", add_date_info_to_page)
 
+    # Fix sphinx-tippy for parallel builds
+    # sphinx-tippy doesn't implement env-merge-info, so tooltip data from
+    # parallel workers is lost. This handler merges that data.
+    # TODO: Remove once sphinx-tippy merges the fix upstream.
+    try:
+        from sphinx_tippy import get_tippy_data
+
+        def merge_tippy_data(app, env, docnames, other):
+            """Merge tippy data from parallel workers."""
+            tippy_data = get_tippy_data(app)
+            other_data = getattr(other, "tippy_data", {})
+            tippy_data["pages"].update(other_data.get("pages", {}))
+
+        app.connect("env-merge-info", merge_tippy_data)
+    except ImportError:
+        pass  # sphinx-tippy not installed, skip the fix
+
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)
         app.add_directive("galleryitem", custom_directives.GalleryItemDirective)
