@@ -1,9 +1,32 @@
 {# sidebar-secondary.html #}
+{# Approach: Capture component content first, then conditionally render #}
+{# This prevents empty sidebar sections from being displayed #}
+
 {% if secondary_sidebar_items -%}
+  {% set ns = namespace(has_component_content=false) %}
+
+  {# First pass: check if any sidebar component has content #}
+  {% for toc_item in secondary_sidebar_items %}
+    {% set component_content %}{% include toc_item %}{% endset %}
+    {% if component_content | trim %}
+      {% set ns.has_component_content = true %}
+    {% endif %}
+  {% endfor %}
+
+  {# Check if any extra links sections have content #}
+  {% set has_extra_links = extra_project_links or community_links or language_bindings_links or library_links %}
+
+  {# Only render the sidebar container if there's actual content #}
+  {% if ns.has_component_content or has_extra_links %}
   <div class="sidebar-secondary-items sidebar-secondary__inner">
+    {# Render each component only if it has content #}
     {% for toc_item in secondary_sidebar_items %}
-       <div class="sidebar-secondary-item">{% include toc_item %}</div>
+      {% set component_content %}{% include toc_item %}{% endset %}
+      {% if component_content | trim %}
+        <div class="sidebar-secondary-item">{{ component_content }}</div>
+      {% endif %}
     {% endfor %}
+
 {% if extra_project_links %}
 <div class="sidebar-secondary-item">
   <div class="sidebar-heading">Quick Links</div>
@@ -44,5 +67,6 @@
   </ul>
 </div>
 {% endif %}
-</div>
+  </div>
+  {% endif %}
 {% endif %}
