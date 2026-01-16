@@ -248,7 +248,7 @@ cd tutorials
 make html
 ```
 
-Once these are successful, navigate to the `conf.py` file in each project. In the Docs these are at `./docs/source`. The Tutorials one can be found in the root directory.
+Once these are successful, navigate to the `conf.py` file in each project. In the docs these are at `./docs/source`. The Tutorials one can be found in the root directory.
 
 In `conf.py` change the html theme to `pytorch_sphinx_theme` and point the html theme path to this repo's local folder, which will end up looking something like:
 
