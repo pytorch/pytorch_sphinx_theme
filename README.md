@@ -33,8 +33,8 @@ Install PyTorch Sphinx Theme:
 git clone https://github.com/pytorch/pytorch_sphinx_theme
 cd pytorch_sphinx_theme
 git checkout pytorch_sphinx_theme2  # The default branch is pytorch_sphinx_theme2
-pip install -r docs/requirements.txt # Installs dependencies
-pip install -e . # Installs local version of the theme
+uv pip install -r docs/requirements.txt # Installs dependencies
+uv pip install -e . # Installs local version of the theme
 ```
 
 **Note:** The default branch for this repository is `pytorch_sphinx_theme2`.
@@ -61,7 +61,7 @@ To test your changes locally:
    * Watch for changes to SCSS and JS files.
 
 When applying subsequent changes, you might need to reinstall the theme
-by running `pip uninstall -y pytorch_sphinx_theme2` and `pip install -e .`,
+by running `uv pip uninstall pytorch_sphinx_theme2` and `uv pip install -e .`,
 and then running the `npx grunt docs` again.
 
 DO NOT submit a PR without running Grunt. We only reference theme.css
@@ -76,8 +76,8 @@ that your changes have been applied correctly against either the PyTorch Docs or
 1. Run the `grunt build` task on your branch and commit the build to Github.
 2. In your local docs or tutorials repo, remove any existing `pytorch_sphinx_theme` packages in the `src` folder (there should be a `pip-delete-this-directory.txt` file there)
 3. Clone the repo locally `git clone https://github.com/pytorch/pytorch_sphinx_theme`
-4. Install `pytorch_sphinx_theme` by running `pip install -e pytorch_sphinx_theme`
-5. Install the requirements `pip install -r requirements.txt`
+4. Install `pytorch_sphinx_theme` by running `uv pip install -e pytorch_sphinx_theme`
+5. Install the requirements `uv pip install -r requirements.txt`
 6. Remove the current build. In the docs this is `make clean`, tutorials is `make clean-cache`
 7. Build the static site. In the docs this is `make html`, tutorials is `make html-noplot`
 8. Open the site and look around. In the docs open `docs/build/html/index.html`, in the tutorials open `_build/html.index.html`
@@ -126,7 +126,7 @@ Clean previous builds and create a new wheel:
 rm -rf dist/ build/ pytorch_sphinx_theme2.egg-info/
 
 # Build the wheel (using modern build tools)
-pip install build
+uv pip install build
 python -m build
 ```
 
@@ -144,12 +144,12 @@ This will create two files in the `dist/` directory:
 
 **Option A: Install in current environment**
 
-Note that the latest twine and readme-renderer require `docutils>=0.21.2`, which conflicts with Sphinx's requirement for `docutils<0.21`. First, upgrade pip and setuptools, then install compatible versions:
+Note that the latest twine and readme-renderer require `docutils>=0.21.2`, which conflicts with Sphinx's requirement for `docutils<0.21`. First, install compatible versions:
 
 ```bash
-pip install --upgrade pip setuptools wheel
-pip install --upgrade importlib_metadata
-pip install 'twine<5.0' 'readme-renderer<44.0'
+uv pip install --upgrade setuptools wheel
+uv pip install --upgrade importlib_metadata
+uv pip install 'twine<5.0' 'readme-renderer<44.0'
 ```
 
 **Option B: Use a separate environment (recommended)**
@@ -161,8 +161,8 @@ For conda users:
 ```bash
 conda create -n publish_env python=3.10
 conda activate publish_env
-pip install --upgrade pip setuptools wheel
-pip install build twine
+uv pip install --upgrade setuptools wheel
+uv pip install build twine
 ```
 
 For venv users:
@@ -170,8 +170,8 @@ For venv users:
 ```bash
 python -m venv publish_env
 source publish_env/bin/activate  # On Windows: publish_env\Scripts\activate
-pip install --upgrade pip setuptools wheel
-pip install build twine
+uv pip install --upgrade setuptools wheel
+uv pip install build twine
 ```
 
 **Authentication Setup**
