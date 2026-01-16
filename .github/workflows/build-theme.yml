@@ -64,4 +64,4 @@ jobs:
           s3-bucket: doc-previews
           if-no-files-found: error
           path: docs/_build/html
-          s3-prefix: pytorch_sphinx_theme/${{ github.event.pull_request.number }
+          s3-prefix: pytorch_sphinx_theme/${{ github.event.pull_request.number }}
