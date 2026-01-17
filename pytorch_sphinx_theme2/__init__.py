@@ -148,9 +148,11 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
             print(f"Error getting dates for {full_source_path}: {e}")
 
 
+
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
     app.add_config_value("add_last_updated", False, "html")
+    # Use config-inited which fires earlier than builder-inited
     app.connect("html-page-context", add_date_info_to_page)
 
     # Fix sphinx-tippy for parallel builds

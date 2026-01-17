@@ -201,7 +201,11 @@ pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY = True
 # documentation.
 html_theme_options = {
     "header_links_before_dropdown": 4,
-    "logo": {"text": "Home"},
+    # Test with a different logo to verify custom logo works
+    #"logo": {
+    #    "image_light": "_static/logo-icon.svg",
+    #    "image_dark": "_static/logo-icon.svg",
+    #},
     "icon_links": [
         {
             "name": "X",
@@ -241,27 +245,32 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    "navbar_start": ["pytorch_version"],
+    "navbar_start": ["navbar-logo", "version-switcher"],
     # "navbar_start": ["version-switcher", "navbar-logo"],
     "navbar_center": ["navbar-nav"],
-    "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
+    "navbar_end": [
+        "search-field-custom",
+        "theme-switcher",
+        "navbar-icon-links",
+    ],
     "header_links_before_dropdown": 4,
     "navbar_persistent": [],
     "use_edit_page_button": True,
-    # "switcher": {
-    #    "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
-    #    "version_match": "main",
-    # },
+    "switcher": {
+        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
+        "version_match": "main",
+    },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
     # "pytorch_project": "tutorials",
-    # "show_lf_header": False,
+    "show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
     # Each repository should have its own unique assistant_id from RunLLM
     # "runllm_assistant_id": "ID",  # Required: Your RunLLM assistant ID
     # "runllm_name": "PyTorch",  # Optional: Display name (default: "Assistant")
     # "runllm_position": "BOTTOM_RIGHT",  # Optional: BOTTOM_RIGHT, BOTTOM_LEFT, etc.
+    # "show_pytorch_org_link": False,  # Set to False to hide "Go to pytorch.org" link
 }
 
 

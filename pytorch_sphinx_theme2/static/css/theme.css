@@ -2,6 +2,8 @@
 :root {
   --header-height: 45px;
   --header-height-desktop: 45px;
+  --pst-sidebar-secondary: 15rem;
+  --navbar-brand-width: 140px;
 }
 
 html[data-theme=light] {
@@ -111,6 +113,8 @@ html[data-theme=dark] {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .header-holder {
@@ -135,7 +139,7 @@ html[data-theme=dark] {
 
 @media (min-width: 1200px) {
   .header-container-wrapper {
-    max-width: 1140px;
+    max-width: 100%;
   }
 }
 .header-container {
@@ -402,6 +406,8 @@ html[data-theme=dark] {
 .bd-header {
   top: var(--header-height-desktop) !important;
   position: sticky !important;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 @media (max-width: 1200px) {
   .bd-header {
@@ -411,17 +417,25 @@ html[data-theme=dark] {
 @media (max-width: 960px) {
   .bd-header {
     top: var(--header-height) !important;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
   }
 }
 
+.bd-page-width {
+  max-width: 100% !important;
+}
+
 .bd-main .bd-content .bd-article-container {
-  padding-left: 1rem !important;
-  padding-right: 0.1rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  max-width: 100% !important;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
   padding-left: 0 !important;
   padding-top: 1rem !important;
+  padding-right: 1rem !important;
 }
 
 @media (max-width: 959px) {
@@ -2373,13 +2387,13 @@ a.btn {
 .cookie-banner-wrapper .container {
   padding-left: 1.875rem;
   padding-right: 1.875rem;
-  max-width: 1240px;
+  max-width: 1400px;
 }
 .cookie-banner-wrapper .gdpr-notice {
   color: var(--pst-color-text-muted);
   margin-top: 1.5625rem;
   text-align: left;
-  max-width: 1440px;
+  max-width: 1600px;
 }
 @media screen and (min-width: 768px) {
   .cookie-banner-wrapper .gdpr-notice {
@@ -2476,7 +2490,7 @@ a.btn {
     height: var(--header-height-desktop);
   }
   .header-container-wrapper {
-    max-width: 1140px;
+    max-width: 100%;
   }
   .gcse-search-wrapper .fa-magnifying-glass {
     top: 0.7em;
@@ -2618,6 +2632,22 @@ span.highlighted {
   background-color: #de3412;
 }
 
+p.highlight-link {
+  display: none;
+}
+
+.bd-footer span.highlighted,
+.bd-sidebar-primary span.highlighted,
+.bd-sidebar-secondary span.highlighted,
+footer span.highlighted,
+.footer-items span.highlighted,
+.site-footer span.highlighted,
+.site-footer .highlighted,
+.privacy-policy span.highlighted,
+.docs-tutorials-resources span.highlighted {
+  background-color: transparent;
+}
+
 .form-control {
   border: none;
 }
@@ -2648,9 +2678,33 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
   text-decoration: underline;
 }
 
-@media (max-width: 767px) {
-  .navbar-brand {
+@media (max-width: 959px) {
+  .navbar-header-items__start .navbar-brand {
     display: none;
+  }
+}
+
+@media (max-width: 959px) {
+  .desktop-only-version {
+    display: none !important;
+  }
+}
+
+.navbar-header-items__mobile-logo {
+  display: none;
+}
+@media (max-width: 959px) {
+  .navbar-header-items__mobile-logo {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+  }
+  .navbar-header-items__mobile-logo .navbar-brand {
+    display: flex !important;
+  }
+  .navbar-header-items__mobile-logo .logo__image {
+    max-height: 24px;
+    width: auto;
   }
 }
 
@@ -2663,23 +2717,66 @@ nav.bd-links li > a {
 }
 
 .bd-sidebar-primary {
-  width: 18%;
-  padding: 1rem 1rem 1rem;
+  width: 15%;
+  min-width: 200px;
+  padding: 1rem 1.5rem 1rem 3rem;
 }
 @media (max-width: 959.98px) {
   .bd-sidebar-primary {
     width: 75%;
     top: 30px;
+    padding: 1rem;
   }
 }
 
 .bd-sidebar-secondary {
-  padding: 1rem 1rem 1rem;
+  width: 15%;
+  min-width: 180px;
+  padding: 1rem 3rem 1rem 1rem;
 }
 @media (max-width: 959.98px) {
   .bd-sidebar-secondary {
     width: 75%;
     top: 30px;
+    padding: 1rem;
+  }
+}
+
+.bd-sidebar-primary.hide-on-wide ~ .bd-main .bd-content .bd-article-container {
+  padding-left: calc(var(--navbar-brand-width) + 2rem) !important;
+  padding-right: 3rem !important;
+}
+@media (max-width: 1199.98px) and (min-width: 960px) {
+  .bd-sidebar-primary.hide-on-wide ~ .bd-main .bd-content .bd-article-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+@media (max-width: 959.98px) {
+  .bd-sidebar-primary.hide-on-wide ~ .bd-main .bd-content .bd-article-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+.bd-header button.primary-toggle {
+  margin-right: 0rem !important;
+}
+
+.bd-container:has(.bd-sidebar-primary.hide-on-wide) .bd-article-container {
+  padding-left: calc(var(--navbar-brand-width) + 2rem) !important;
+  padding-right: 3rem !important;
+}
+@media (max-width: 1199.98px) and (min-width: 960px) {
+  .bd-container:has(.bd-sidebar-primary.hide-on-wide) .bd-article-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+@media (max-width: 959.98px) {
+  .bd-container:has(.bd-sidebar-primary.hide-on-wide) .bd-article-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
@@ -2692,6 +2789,68 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   scroll-padding-top: 150px !important;
 }
 
+.pytorch-site-link {
+  display: none;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+}
+.pytorch-site-link.nav-external::after {
+  display: none;
+}
+.pytorch-site-link.nav-link {
+  color: var(--pst-color-text-base);
+}
+.pytorch-site-link.nav-link:hover {
+  color: var(--pst-color-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+.pytorch-site-link .pytorch-site-link-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  text-align: left;
+}
+.pytorch-site-link .pytorch-site-link-text span:first-child {
+  font-size: 0.65rem;
+}
+.pytorch-site-link .pytorch-site-link-text span:last-child {
+  font-weight: 600;
+}
+.pytorch-site-link .pytorch-site-link-text span:last-child .external-icon {
+  font-size: 0.55rem;
+  margin-left: 0.2rem;
+  vertical-align: middle;
+}
+@media (min-width: 1200px) {
+  .pytorch-site-link {
+    display: flex;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .bd-sidebar-primary .sidebar-header-items .sidebar-header-items__end .pytorch-site-link {
+    display: flex;
+    width: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    padding: 0.5rem 0;
+  }
+  .bd-sidebar-primary .sidebar-header-items .sidebar-header-items__end .pytorch-site-link .pytorch-site-link-text {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+  .bd-sidebar-primary .sidebar-header-items .sidebar-header-items__end .pytorch-site-link .pytorch-site-link-text span:first-child,
+  .bd-sidebar-primary .sidebar-header-items .sidebar-header-items__end .pytorch-site-link .pytorch-site-link-text span:last-child {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
 .pytorch-call-to-action-links {
   padding-top: 0;
   display: -webkit-box;
@@ -2849,6 +3008,15 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+#tutorial-cards-container .card.tutorials-card {
+  border-radius: 0;
+  border-color: var(--bs-border-color-translucent);
+  height: 98px;
+  margin-bottom: 1.875rem;
+  overflow: scroll;
+  background-color: var(--sg-background-color);
+  cursor: pointer;
+}
 #tutorial-cards-container .card.tutorials-card a {
   text-decoration: none;
 }
@@ -2869,15 +3037,6 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary:hover, #tutorial-cards-container .card.tutorials-card a p.tags:hover {
   text-decoration: none;
-}
-#tutorial-cards-container .card.tutorials-card {
-  border-radius: 0;
-  border-color: var(--bs-border-color-translucent);
-  height: 98px;
-  margin-bottom: 1.875rem;
-  overflow: scroll;
-  background-color: var(--sg-background-color);
-  cursor: pointer;
 }
 @media screen and (min-width: 1240px) {
   #tutorial-cards-container .card.tutorials-card {
@@ -11717,8 +11876,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-classic: 'Font Awesome 6 Free';
-  --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Free';
+  --fa-style-family-classic: "Font Awesome 6 Free";
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
 }
 
 @font-face {
@@ -11739,8 +11898,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-classic: 'Font Awesome 6 Free';
-  --fa-font-regular: normal 400 1em/1 'Font Awesome 6 Free';
+  --fa-style-family-classic: "Font Awesome 6 Free";
+  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
 }
 
 @font-face {
@@ -11761,8 +11920,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-brands: 'Font Awesome 6 Brands';
-  --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';
+  --fa-style-family-brands: "Font Awesome 6 Brands";
+  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
 }
 
 @font-face {

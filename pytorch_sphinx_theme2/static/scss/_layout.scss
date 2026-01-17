@@ -5,6 +5,8 @@
 .bd-header {
   top: var(--header-height-desktop) !important;
   position: sticky !important;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   @media (max-width: 1200px) {
     top: var(--header-height) !important;
@@ -12,17 +14,26 @@
 
   @media (max-width: 960px) {
     top: var(--header-height) !important;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
   }
 }
 
+// Main content width - make it use full available width
+.bd-page-width {
+  max-width: 100% !important;
+}
+
 .bd-main .bd-content .bd-article-container {
-  padding-left: 1rem !important;
-  padding-right: 0.1rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  max-width: 100% !important;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
   padding-left: 0 !important;
   padding-top: 1rem !important;
+  padding-right: 1rem !important;
 }
 
 // Hide Home button on mobile
