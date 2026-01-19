@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
@@ -47,23 +47,5 @@ jobs:
         with:
           name: documentation
           path: docs/_build/html/
-
-  doc-preview:
-    runs-on: ubuntu-latest
-    needs: build-docs
-    if: ${{ github.event_name == 'pull_request' }}
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: documentation
-          path: docs/_build/html
-
-      - name: Upload docs preview
-        uses: seemethere/upload-artifact-s3@v5
-        with:
-          retention-days: 14
-          s3-bucket: doc-previews
-          if-no-files-found: error
-          path: docs/_build/html
-          s3-prefix: pytorch_sphinx_theme/${{ github.event.pull_request.number }}
+      # Doc previews are handled automatically by Netlify
+      # See netlify.toml for configuration
