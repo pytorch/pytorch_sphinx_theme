@@ -1,39 +1,6 @@
 [build]
-  # Build command that sets up both Node.js and Python environments
-  command = """
-    npm install && \
-    npx grunt default && \
-    pip install -r docs/requirements.txt && \
-    pip install -e . && \
-    cd docs && \
-    sphinx-build -b html . _build/html
-  """
+  command = "npm install && npx grunt default && pip install -r docs/requirements.txt && pip install -e . && cd docs && sphinx-build -b html . _build/html"
   publish = "docs/_build/html"
 
-[build.environment]
-  # Python version
-  PYTHON_VERSION = "3.10"
-  # Node.js version
-  NODE_VERSION = "16"
-
-# Deploy preview settings for pull requests
-[context.deploy-preview]
-  command = """
-    npm install && \
-    npx grunt default && \
-    pip install -r docs/requirements.txt && \
-    pip install -e . && \
-    cd docs && \
-    sphinx-build -b html . _build/html
-  """
-
-# Branch deploy settings
-[context.branch-deploy]
-  command = """
-    npm install && \
-    npx grunt default && \
-    pip install -r docs/requirements.txt && \
-    pip install -e . && \
-    cd docs && \
-    sphinx-build -b html . _build/html
-  """
+# Node version is specified in .nvmrc (18)
+# Python version is specified in .python-version (3.10)
