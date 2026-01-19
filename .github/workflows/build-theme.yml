@@ -2,9 +2,9 @@ name: Test Documentation Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master, pytorch_sphinx_theme2 ]
   pull_request:
-    branches: [ main, pytorch_sphinx_theme2 ]
+    branches: [ master, pytorch_sphinx_theme2 ]
   workflow_dispatch:
 
 jobs:
