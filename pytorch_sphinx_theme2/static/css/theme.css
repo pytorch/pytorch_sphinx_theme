@@ -2598,6 +2598,10 @@ a.btn {
     width: 50%;
   }
 }
+html {
+  scroll-behavior: auto !important;
+}
+
 .prev-next-footer {
   display: none;
 }
@@ -2845,15 +2849,6 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-#tutorial-cards-container .card.tutorials-card {
-  border-radius: 0;
-  border-color: var(--bs-border-color-translucent);
-  height: 98px;
-  margin-bottom: 1.875rem;
-  overflow: scroll;
-  background-color: var(--sg-background-color);
-  cursor: pointer;
-}
 #tutorial-cards-container .card.tutorials-card a {
   text-decoration: none;
 }
@@ -2874,6 +2869,15 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 #tutorial-cards-container .card.tutorials-card a p.card-summary:hover, #tutorial-cards-container .card.tutorials-card a p.tags:hover {
   text-decoration: none;
+}
+#tutorial-cards-container .card.tutorials-card {
+  border-radius: 0;
+  border-color: var(--bs-border-color-translucent);
+  height: 98px;
+  margin-bottom: 1.875rem;
+  overflow: scroll;
+  background-color: var(--sg-background-color);
+  cursor: pointer;
 }
 @media screen and (min-width: 1240px) {
   #tutorial-cards-container .card.tutorials-card {
@@ -11713,8 +11717,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-classic: "Font Awesome 6 Free";
-  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+  --fa-style-family-classic: 'Font Awesome 6 Free';
+  --fa-font-solid: normal 900 1em/1 'Font Awesome 6 Free';
 }
 
 @font-face {
@@ -11735,8 +11739,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-classic: "Font Awesome 6 Free";
-  --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Free";
+  --fa-style-family-classic: 'Font Awesome 6 Free';
+  --fa-font-regular: normal 400 1em/1 'Font Awesome 6 Free';
 }
 
 @font-face {
@@ -11757,8 +11761,8 @@ readers do not read off random characters that represent icons */
  * Copyright 2024 Fonticons, Inc.
  */
 :root, :host {
-  --fa-style-family-brands: "Font Awesome 6 Brands";
-  --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+  --fa-style-family-brands: 'Font Awesome 6 Brands';
+  --fa-font-brands: normal 400 1em/1 'Font Awesome 6 Brands';
 }
 
 @font-face {
