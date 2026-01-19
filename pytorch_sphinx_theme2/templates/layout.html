@@ -122,8 +122,17 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const SCROLL_DURATION = 150; // Fixed duration in ms regardless of distance
-    let lockedTargetId = null; // Lock the TOC to this target until user scrolls manually
-    let isUpdatingToc = false; // Guard against infinite loops
+    let scrollSpyDisabled = false;
+    let scrollSpyInstance = null;
+    const scrollSpyElement = document.body;
+
+    // Get or cache the ScrollSpy instance
+    function getScrollSpyInstance() {
+      if (!scrollSpyInstance && typeof bootstrap !== 'undefined' && bootstrap.ScrollSpy) {
+        scrollSpyInstance = bootstrap.ScrollSpy.getInstance(scrollSpyElement);
+      }
+      return scrollSpyInstance;
+    }
 
     function smoothScrollTo(targetY, duration, onComplete) {
       const startY = window.pageYOffset;
@@ -146,59 +155,75 @@
     }
 
     function updateTocHighlight(targetId) {
-      if (isUpdatingToc) return; // Prevent infinite loop
-      isUpdatingToc = true;
-
-      // Find the TOC link that points to this target
       const tocNav = document.querySelector('.bd-toc-nav');
-      if (!tocNav) {
-        isUpdatingToc = false;
-        return;
-      }
+      if (!tocNav) return;
 
       // Remove active class from all TOC items
       tocNav.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        link.parentElement.classList.remove('active');
+      });
+      tocNav.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
       });
 
-      // Add active class to the matching link
+      // Collapse previously expanded ULs (ones we expanded, not originally visible)
+      tocNav.querySelectorAll('ul[data-toc-expanded]').forEach(ul => {
+        ul.classList.remove('visible');
+        ul.removeAttribute('data-toc-expanded');
+      });
+
+      // Add active class to the matching link and its parent
       const matchingLink = tocNav.querySelector(`a[href="#${CSS.escape(targetId)}"]`);
       if (matchingLink) {
         matchingLink.classList.add('active');
-        matchingLink.parentElement.classList.add('active');
-      }
-
-      // Use setTimeout to reset the guard after the current call stack
-      setTimeout(function() {
-        isUpdatingToc = false;
-      }, 0);
-    }
-
-    // Watch for ScrollSpy trying to change the active state and override it
-    const tocNav = document.querySelector('.bd-toc-nav');
-    if (tocNav) {
-      const observer = new MutationObserver(function(mutations) {
-        if (lockedTargetId && !isUpdatingToc) {
-          // Force our target to stay highlighted
-          updateTocHighlight(lockedTargetId);
+        if (matchingLink.parentElement) {
+          matchingLink.parentElement.classList.add('active');
         }
-      });
-      observer.observe(tocNav, {
-        attributes: true,
-        attributeFilter: ['class'],
-        subtree: true
-      });
+
+        // Expand all parent UL elements to make the item visible
+        let parent = matchingLink.parentElement;
+        while (parent && parent !== tocNav) {
+          if (parent.tagName === 'UL' && !parent.classList.contains('visible')) {
+            parent.classList.add('visible');
+            parent.setAttribute('data-toc-expanded', 'true');
+          }
+          parent = parent.parentElement;
+        }
+      }
     }
 
-    // Release the lock when user scrolls manually (not programmatically)
-    window.addEventListener('wheel', function() {
-      lockedTargetId = null;
-    });
-    window.addEventListener('touchmove', function() {
-      lockedTargetId = null;
-    });
+    function disableScrollSpy() {
+      const instance = getScrollSpyInstance();
+      if (instance) {
+        instance.dispose();
+        scrollSpyInstance = null;
+      }
+      scrollSpyDisabled = true;
+    }
 
+    function enableScrollSpy() {
+      if (!scrollSpyDisabled) return;
+      scrollSpyDisabled = false;
+      // Re-initialize ScrollSpy
+      if (typeof bootstrap !== 'undefined' && bootstrap.ScrollSpy) {
+        scrollSpyInstance = new bootstrap.ScrollSpy(scrollSpyElement, {
+          target: '.bd-toc-nav',
+          offset: 180,
+          rootMargin: '0px 0px -60%'
+        });
+      }
+    }
+
+    // Re-enable ScrollSpy when user scrolls manually
+    function onUserScroll() {
+      if (scrollSpyDisabled) {
+        enableScrollSpy();
+      }
+    }
+    window.addEventListener('wheel', onUserScroll, { passive: true });
+    window.addEventListener('touchmove', onUserScroll, { passive: true });
+
+    // Handle anchor link clicks
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href').substring(1);
@@ -208,8 +233,8 @@
         if (targetElement) {
           e.preventDefault();
 
-          // Lock the TOC to this target
-          lockedTargetId = targetId;
+          // Disable ScrollSpy to prevent it from overriding our highlight
+          disableScrollSpy();
 
           const headerHeight =
             (document.querySelector('.header-holder') ? document.querySelector('.header-holder').offsetHeight : 0) +
@@ -221,7 +246,7 @@
           updateTocHighlight(targetId);
 
           smoothScrollTo(targetPosition, SCROLL_DURATION, function() {
-            // Keep it highlighted after scroll
+            // Ensure highlight is still correct after scroll
             updateTocHighlight(targetId);
           });
 
