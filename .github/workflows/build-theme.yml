@@ -31,9 +31,11 @@ jobs:
           uv pip install --system -r docs/requirements.txt
           uv pip install --system -e .
 
+      - name: Install Node.js dependencies
+        run: npm install
+
       - name: Build theme assets
-        run: |
-          npx grunt default
+        run: npx grunt default
 
       - name: Build Test documentation
         run: |
