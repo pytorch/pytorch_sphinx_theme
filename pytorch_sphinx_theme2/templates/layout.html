@@ -234,6 +234,18 @@
 </script>
 
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
+<!-- RunLLM Widget Configuration -->
+{% if theme_runllm_assistant_id %}
+<script>
+  window.runllmConfig = {
+    assistant_id: "{{ theme_runllm_assistant_id }}",
+    name: "{{ theme_runllm_name }}",
+    position: "{{ theme_runllm_position }}",
+    keyboard_shortcut: "{{ theme_runllm_keyboard_shortcut }}"
+  };
+</script>
+<script type="text/javascript" src="{{ pathto('_static/js/runllm-widget.js', 1) }}"></script>
+{% endif %}
 {{ super() }}
 {% endblock%}
 

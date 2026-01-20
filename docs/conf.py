@@ -257,6 +257,11 @@ html_theme_options = {
     # "pytorch_project": "tutorials",
     # "show_lf_header": False,
     # "show_lf_footer": False,
+    # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
+    # Each repository should have its own unique assistant_id from RunLLM
+    # "runllm_assistant_id": "ID",  # Required: Your RunLLM assistant ID
+    # "runllm_name": "PyTorch",  # Optional: Display name (default: "Assistant")
+    # "runllm_position": "BOTTOM_RIGHT",  # Optional: BOTTOM_RIGHT, BOTTOM_LEFT, etc.
 }
 
 
