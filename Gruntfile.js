@@ -57,7 +57,7 @@ module.exports = function(grunt) {
     },
     shell: {
       reinstall: {
-        command: 'pip uninstall -y pytorch_sphinx_theme2 && pip install -e .'
+        command: 'uv pip uninstall pytorch_sphinx_theme2 && uv pip install -e .'
       },
       sphinx: {
         command: 'cd docs && rm -rf _build && PYTHONPATH=.. sphinx-build -b html . _build/html'

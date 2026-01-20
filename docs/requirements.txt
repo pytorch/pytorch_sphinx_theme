@@ -1,8 +1,9 @@
 sphinxcontrib-httpdomain
-docutils=>0.19
+docutils>=0.19
 sphinx==7.2.6
 sphinx-gallery==0.11.1
 pydata_sphinx_theme==0.15.4
 myst-nb>=1.0.0
 sphinx-tippy>=0.4.3
 sphinx-design
+matplotlib

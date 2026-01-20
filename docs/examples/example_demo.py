@@ -1,31 +1,45 @@
 """
-Introduction to PyTorch
-=======================
+Sphinx Gallery Demo
+===================
 
-Follow along with the video below or on `youtube <https://www.youtube.com/watch?v=IC0_FRiX-sw>`__.
+This is a simple example demonstrating the Sphinx Gallery integration
+with the PyTorch Sphinx Theme.
 
-.. raw:: html
+NumPy Arrays
+------------
 
-   <div style="margin-top:10px; margin-bottom:10px;">
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/IC0_FRiX-sw" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-   </div>
-
-PyTorch Tensors
----------------
-
-Follow along with the video beginning at `03:50 <https://www.youtube.com/watch?v=IC0_FRiX-sw&t=230s>`__.
-
-First, we’ll import pytorch.
+Let's create some arrays and demonstrate basic operations.
 
 """
 
-import torch
+import numpy as np
 
 ######################################################################
-# Let’s see a few basic tensor manipulations. First, just a few of the
-# ways to create tensors:
-# 
+# First, let's create some arrays:
+#
 
-z = torch.zeros(5, 3)
+z = np.zeros((5, 3))
 print(z)
 print(z.dtype)
+
+######################################################################
+# We can also create arrays with random values:
+#
+
+x = np.random.randn(3, 3)
+print(x)
+
+######################################################################
+# Plotting with Matplotlib
+# ------------------------
+#
+# The gallery can also display plots:
+
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3, 4], [1, 4, 2, 3])
+ax.set_xlabel('X axis')
+ax.set_ylabel('Y axis')
+ax.set_title('Simple Plot')
+plt.show()
