@@ -262,6 +262,96 @@
   {{ super() }}
   {% endblock %}
 
+  {# Override content block to conditionally skip rendering empty primary sidebar container #}
+  {% block content %}
+  {# A tiny helper pixel to detect if we've scrolled #}
+  <div id="pst-scroll-pixel-helper"></div>
+
+  {%- if theme_back_to_top_button %}
+  {# the scroll to top button #}
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    {{- _("Back to top") -}}
+  </button>
+  {%- endif %}
+
+  {# checkbox to toggle primary sidebar #}
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  {# Checkboxes to toggle the secondary sidebar #}
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  {# A search field pop-up that will only show when the search button is clicked #}
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">{% include "components/search-field.html" %}</div>
+  </div>
+
+  {% include "sections/announcement.html" %}
+
+  {% block docs_navbar %}
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+      {%- include "sections/header.html" %}
+    </header>
+  {% endblock docs_navbar %}
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      {# Primary sidebar - MODIFIED: completely skip rendering container if empty #}
+      {% if suppress_sidebar_toctree(includehidden=theme_sidebar_includehidden | tobool) %}
+        {% set sidebars = sidebars | reject("in", "sidebar-nav-bs.html") | list %}
+      {% endif %}
+      {# Only render the sidebar container if there are sidebar items #}
+      {% if sidebars %}
+      <div class="bd-sidebar-primary bd-sidebar">
+        {% include "sections/sidebar-primary.html" %}
+      </div>
+      {% endif %}
+      {# Using an ID here so that the skip-link works #}
+      <main id="main-content" class="bd-main" role="main">
+        {# Main content area #}
+        {% block docs_main %}
+          <div class="bd-content">
+            <div class="bd-article-container">
+              {# Article header #}
+              <div class="bd-header-article d-print-none">{% include "sections/header-article.html" %}</div>
+              {# Article content #}
+              {% block docs_body %}{% endblock docs_body %}
+              {# Article Footer #}
+              {% if theme_article_footer_items %}
+                <footer class="bd-footer-article">
+                  {% include "sections/footer-article.html" %}
+                </footer>
+              {% endif %}
+              {# prev-next buttons #}
+              {% if theme_show_prev_next %}
+                <footer class="prev-next-footer d-print-none">
+                  {% include "components/prev-next.html" %}
+                </footer>
+              {% endif %}
+            </div>
+            {# Secondary sidebar #}
+            {% block docs_toc %}
+              {% if not remove_sidebar_secondary %}
+                <div class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
+              {% endif %}
+            {% endblock docs_toc %}
+          </div>
+          <footer class="bd-footer-content">
+            {% include "sections/footer-content.html" %}
+          </footer>
+        {% endblock docs_main %}
+      </main>
+    </div>
+  </div>
+  {# Scripts placed at the end of the page to cut down on time to first content #}
+  {%- block scripts_end %}{{ _webpack.body_post() }}{%- endblock scripts_end %}
+  {%- endblock content %}
+
   {% block docs_body %}
   {% include "components/searchbox.html" %}
   <article class="bd-article" id="pytorch-article">
