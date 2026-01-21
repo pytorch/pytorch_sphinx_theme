@@ -1,5 +1,43 @@
 {% extends "!layout.html" %}
 
+{# Override the primary sidebar to hide it completely when empty #}
+{% block docs_sidebar %}
+  {# Check if sidebar-nav-bs has actual toctree content #}
+  {% set has_toctree_content = not suppress_sidebar_toctree(includehidden=theme_sidebar_includehidden | tobool) %}
+
+  {# Generate the toctree HTML to check if it's truly empty #}
+  {% if has_toctree_content %}
+    {% set toctree_html = generate_toctree_html(
+      "sidebar",
+      show_nav_level=theme_show_nav_level | int,
+      maxdepth=theme_navigation_depth | int,
+      collapse=theme_collapse_navigation | tobool,
+      includehidden=theme_sidebar_includehidden | tobool,
+      titles_only=True
+    ) %}
+    {% set toctree_str = toctree_html | string | trim %}
+    {% if toctree_str == '' or toctree_str == 'None' %}
+      {% set has_toctree_content = false %}
+    {% endif %}
+  {% endif %}
+
+  {# Check if there's any other content besides the potentially empty toctree #}
+  {% set has_other_sidebars = sidebars | reject("in", "sidebar-nav-bs.html") | list | length > 0 %}
+  {% set has_primary_end = theme_primary_sidebar_end | length > 0 if theme_primary_sidebar_end else false %}
+
+  {# If there's no toctree content and no other sidebar content, add hide-on-wide class #}
+  {% if has_toctree_content or has_other_sidebars or has_primary_end %}
+    <div class="bd-sidebar-primary bd-sidebar">
+      {% include "sections/sidebar-primary.html" %}
+    </div>
+  {% else %}
+    {# Hide the sidebar completely when empty - no vertical line, content expands #}
+    <div class="bd-sidebar-primary bd-sidebar hide-on-wide" style="display: none;">
+      {% include "sections/sidebar-primary.html" %}
+    </div>
+  {% endif %}
+{% endblock docs_sidebar %}
+
 {% block extrahead %}
 {{ super() }}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
