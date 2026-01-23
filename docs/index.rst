@@ -32,6 +32,35 @@ Welcome to PyTorch Sphinx Theme 2 Docs
 
     demo/long
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Test Pages
+
+    test-myst
+    test-cards
+    test-glossary
+    glossary
+    test_tutorials_landing_page
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Community
+
+    community/index
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Gallery Examples
+
+    auto_examples/index
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Prototype/Unstable
+
+    prototype/test
+    unstable/test
+
 Indices and tables
 ------------------
 

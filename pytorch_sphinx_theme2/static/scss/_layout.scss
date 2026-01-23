@@ -151,6 +151,28 @@ body.search-page {
   }
 }
 
+// Right sidebar border - apply to the inner content wrapper instead of individual items
+// This creates a continuous border that spans all sidebar-secondary-items
+.bd-sidebar-secondary {
+  .sidebar-secondary-items {
+    border-left: 1px solid var(--pst-color-border);
+    padding-left: 1rem;
+    margin-top: 0.5rem; // Add spacing from the top (horizontal bar)
+
+    @media (max-width: 1199.98px) {
+      border-left: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+  }
+
+  // Remove border from individual sidebar-secondary-items to avoid gaps
+  .sidebar-secondary-item {
+    border-left: none !important;
+    padding-left: 0 !important;
+  }
+}
+
 
 // Match code cell output styling to tutorials for myst-nb
 div[class^="codecell"] {

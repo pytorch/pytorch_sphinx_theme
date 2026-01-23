@@ -538,6 +538,23 @@ body.search-page .bd-main .bd-content #search-results {
   }
 }
 
+.bd-sidebar-secondary .sidebar-secondary-items {
+  border-left: 1px solid var(--pst-color-border);
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 1199.98px) {
+  .bd-sidebar-secondary .sidebar-secondary-items {
+    border-left: none;
+    padding-left: 0;
+    margin-top: 0;
+  }
+}
+.bd-sidebar-secondary .sidebar-secondary-item {
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
 div[class^=codecell] {
   margin-bottom: 1rem;
 }
