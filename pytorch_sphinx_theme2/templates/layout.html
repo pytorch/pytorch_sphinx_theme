@@ -260,66 +260,66 @@
   {% include "pytorch_header.html" %}
   {% endif %}
   {{ super() }}
-  {% endblock %}
+{% endblock %}
 
-  {% block docs_body %}
-  {% include "components/searchbox.html" %}
-  <article class="bd-article" id="pytorch-article">
-    <!-- Hidden breadcrumb schema for SEO only -->
-    <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
-      {% for parent in parents %}
-      <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <link itemprop="item" href="{{ parent.link|e }}">
-        <meta itemprop="name" content="{{ parent.title }}">
-        <meta itemprop="position" content="{{ loop.index }}">
-      </div>
-      {% endfor %}
-      <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <meta itemprop="name" content="{{ title }}">
-        <meta itemprop="position" content="{{ parents|length + 1 }}">
-      </div>
+{% block docs_body %}
+{% include "components/searchbox.html" %}
+<article class="bd-article" id="pytorch-article">
+  <!-- Hidden breadcrumb schema for SEO only -->
+  <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% for parent in parents %}
+    <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <link itemprop="item" href="{{ parent.link|e }}">
+      <meta itemprop="name" content="{{ parent.title }}">
+      <meta itemprop="position" content="{{ loop.index }}">
     </div>
-
-    {% if theme_pytorch_project == 'tutorials' %}
-    <script>
-      if ((window.location.href.indexOf("/unstable/") != -1) && (window.location.href.indexOf("/unstable/unstable_index") < 1)) {
-        var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Unstable feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
-        document.addEventListener('DOMContentLoaded', function () {
-          document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
-        });
-      }
-    </script>
-    {% endif %}
-    {% if theme_pytorch_project == 'tutorials' or has_sphinx_gallery %}
-    <div class="pytorch-call-to-action-links">
-      <div id="tutorial-type">{{ pagename }}</div>
-      <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
-        <div id="google-colab-link">
-          <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}" />
-          <div class="call-to-action-desktop-view">Run in Google Colab</div>
-          <div class="call-to-action-mobile-view">Colab</div>
-        </div>
-      </a>
-      <a id="notebook-link" data-behavior="call-to-action-event" data-response="Download Notebook">
-        <div id="download-notebook-link">
-          <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}" />
-          <div class="call-to-action-desktop-view">Download Notebook</div>
-          <div class="call-to-action-mobile-view">Notebook</div>
-        </div>
-      </a>
-      <a id="github-link" data-behavior="call-to-action-event" data-response="View on Github" target="_blank">
-        <div id="github-view-link">
-          <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}" />
-          <div class="call-to-action-desktop-view">View on GitHub</div>
-          <div class="call-to-action-mobile-view">GitHub</div>
-        </div>
-      </a>
+    {% endfor %}
+    <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <meta itemprop="name" content="{{ title }}">
+      <meta itemprop="position" content="{{ parents|length + 1 }}">
     </div>
-    {% endif %}
+  </div>
 
-    {{ super() }}
-  </article>
-  {% endblock docs_body %}
+  {% if theme_pytorch_project == 'tutorials' %}
+  <script>
+    if ((window.location.href.indexOf("/unstable/") != -1) && (window.location.href.indexOf("/unstable/unstable_index") < 1)) {
+      var div = '<div class="prototype-banner"><i class="fa fa-flask" aria-hidden="true"></i> <strong>Unstable feature:</strong> Not typically available in binary distributions like PyPI. Early stage for feedback and testing.</div>'
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById("pytorch-article").insertAdjacentHTML('afterBegin', div);
+      });
+    }
+  </script>
+  {% endif %}
+  {% if theme_pytorch_project == 'tutorials' or has_sphinx_gallery %}
+  <div class="pytorch-call-to-action-links">
+    <div id="tutorial-type">{{ pagename }}</div>
+    <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
+      <div id="google-colab-link">
+        <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-colab.svg', 1) }}" />
+        <div class="call-to-action-desktop-view">Run in Google Colab</div>
+        <div class="call-to-action-mobile-view">Colab</div>
+      </div>
+    </a>
+    <a id="notebook-link" data-behavior="call-to-action-event" data-response="Download Notebook">
+      <div id="download-notebook-link">
+        <img class="call-to-action-notebook-img" src="{{ pathto('_static/img/pytorch-download.svg', 1) }}" />
+        <div class="call-to-action-desktop-view">Download Notebook</div>
+        <div class="call-to-action-mobile-view">Notebook</div>
+      </div>
+    </a>
+    <a id="github-link" data-behavior="call-to-action-event" data-response="View on Github" target="_blank">
+      <div id="github-view-link">
+        <img class="call-to-action-img" src="{{ pathto('_static/img/pytorch-github.svg', 1) }}" />
+        <div class="call-to-action-desktop-view">View on GitHub</div>
+        <div class="call-to-action-mobile-view">GitHub</div>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+
+  {{ super() }}
+</article>
+{% endblock docs_body %}
 
   {% block footer%}
   {% include "pytorch_footer.html" %}
