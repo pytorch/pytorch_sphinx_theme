@@ -38,7 +38,6 @@ Welcome to PyTorch Sphinx Theme 2 Docs
 
     test-myst
     test-cards
-    glossary
     test-glossary
     test_tutorials_landing_page
 
@@ -64,4 +63,4 @@ Welcome to PyTorch Sphinx Theme 2 Docs
 .. toctree::
    :maxdepth: 1
 
-   glossary
+   _glossary

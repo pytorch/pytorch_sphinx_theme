@@ -109,9 +109,10 @@ tippy_props = {
     "theme": "material",
 }
 
-# Skip all URLs except glossary term links (glossary.html#term-* or glossary#term-*)
+# Skip all URLs except glossary term links (_glossary.html#term-* or _glossary#term-*)
 # Support both .html extension and clean URLs (dirhtml builder)
-tippy_skip_urls = (r"^(?!.*glossary(\.html)?#term-).*$",)
+# File is named _glossary.md for deterministic processing order across filesystems
+tippy_skip_urls = (r"^(?!.*_glossary(\.html)?#term-).*$",)
 tippy_enable_mathjax = True
 
 # The version info for the project you're documenting, acts as replacement for
