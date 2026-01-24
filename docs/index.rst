@@ -63,4 +63,4 @@ Welcome to PyTorch Sphinx Theme 2 Docs
 .. toctree::
    :maxdepth: 1
 
-   _glossary
+   glossary
