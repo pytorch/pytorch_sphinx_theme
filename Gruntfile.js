@@ -60,7 +60,7 @@ module.exports = function(grunt) {
         command: 'uv pip uninstall pytorch_sphinx_theme2 && uv pip install -e .'
       },
       sphinx: {
-        command: 'cd docs && rm -rf _build && PYTHONPATH=.. sphinx-build -b html . _build/html'
+        command: 'cd docs && rm -rf _build && PYTHONPATH=.. sphinx-build -j auto -b html . _build/html'
       }
     },
     connect: {
