@@ -296,20 +296,27 @@
 
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
-      {# Generate the actual toctree HTML to check if there's real content to display #}
-      {# This works correctly with :hidden: toctrees - they won't produce output #}
-      {% set toctree_html = generate_toctree_html(
-          "sidebar",
-          startdepth=1,
-          show_nav_level=theme_show_nav_level|int if theme_show_nav_level else 1,
-          maxdepth=theme_navigation_depth|int if theme_navigation_depth else 4,
-          collapse=theme_collapse_navigation|tobool if theme_collapse_navigation else false,
-          includehidden=theme_sidebar_includehidden|tobool if theme_sidebar_includehidden else true,
-          titles_only=true
-      ) %}
+      {# First check if toctree should be suppressed (handles pages without toctree ancestry) #}
+      {% set should_suppress = suppress_sidebar_toctree(includehidden=theme_sidebar_includehidden|tobool if theme_sidebar_includehidden else true) %}
 
-      {# Check if the rendered toctree content is actually empty #}
-      {% set has_sidebar_content = toctree_html|trim|length > 0 %}
+      {# Only try to generate toctree HTML if not suppressed #}
+      {% if not should_suppress %}
+        {# Generate the actual toctree HTML to check if there's real content to display #}
+        {# This works correctly with :hidden: toctrees - they won't produce output #}
+        {% set toctree_html = generate_toctree_html(
+            "sidebar",
+            startdepth=1,
+            show_nav_level=theme_show_nav_level|int if theme_show_nav_level else 1,
+            maxdepth=theme_navigation_depth|int if theme_navigation_depth else 4,
+            collapse=theme_collapse_navigation|tobool if theme_collapse_navigation else false,
+            includehidden=theme_sidebar_includehidden|tobool if theme_sidebar_includehidden else true,
+            titles_only=true
+        ) %}
+        {# Check if the rendered toctree content is actually empty #}
+        {% set has_sidebar_content = toctree_html|trim|length > 0 %}
+      {% else %}
+        {% set has_sidebar_content = false %}
+      {% endif %}
 
       {# Only render sidebar container if there's actual content to display #}
       {% if has_sidebar_content %}
