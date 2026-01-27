@@ -1,15 +1,25 @@
-{# Override of sidebar-primary.html to hide sidebar when Section Navigation is empty #}
-{# Uses suppress_sidebar_toctree(includehidden=False) to check for VISIBLE toctree content #}
-{# This allows hidden toctrees to still work while hiding the sidebar when visible content is empty #}
+{# Override of sidebar-primary.html to hide Section Navigation when empty #}
+{# Uses generate_toctree_html() to check actual rendered content instead of toctree existence #}
+{# This correctly handles :hidden: toctrees - they won't produce output #}
 
 {% block docs_sidebar %}
-{# Check if there's VISIBLE toctree content (using includehidden=False) #}
-{# This differs from the parent which uses theme_sidebar_includehidden (default True) #}
-{% set has_visible_sidebar_toctree = not suppress_sidebar_toctree(includehidden=False) %}
+{# Generate the actual toctree HTML to check if there's real content to display #}
+{% set toctree_html = generate_toctree_html(
+    "sidebar",
+    startdepth=1,
+    show_nav_level=theme_show_nav_level|int if theme_show_nav_level else 1,
+    maxdepth=theme_navigation_depth|int if theme_navigation_depth else 4,
+    collapse=theme_collapse_navigation|tobool if theme_collapse_navigation else false,
+    includehidden=theme_sidebar_includehidden|tobool if theme_sidebar_includehidden else true,
+    titles_only=true
+) %}
+
+{# Check if the rendered toctree content is actually empty #}
+{% set has_sidebar_content = toctree_html|trim|length > 0 %}
 
 {# Determine if we should show the sidebar at all #}
-{# Show if: there's visible toctree content, OR we have mobile nav items to display #}
-{% set show_sidebar = has_visible_sidebar_toctree or theme_navbar_center or theme_navbar_end or theme_primary_sidebar_end %}
+{# Show if: there's actual toctree content, OR we have mobile nav items to display #}
+{% set show_sidebar = has_sidebar_content or theme_navbar_center or theme_navbar_end or theme_primary_sidebar_end %}
 
 {% if show_sidebar %}
   {# Header items that will be displayed in the sidebar on mobile #}
@@ -35,8 +45,8 @@
     {% endif %}
   </div>
 
-  {# Only render Section Navigation if there's VISIBLE toctree content #}
-  {% if sidebars and has_visible_sidebar_toctree %}
+  {# Only render Section Navigation if there's actual toctree content #}
+  {% if sidebars and has_sidebar_content %}
     <div class="sidebar-primary-items__start sidebar-primary__section">
       {%- for sidebartemplate in sidebars %}
         <div class="sidebar-primary-item">{%- include sidebartemplate %}</div>
