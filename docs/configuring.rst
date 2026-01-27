@@ -108,6 +108,7 @@ altogether change the setting in ``conf.py``.
 .. _hidden: http://sphinx-doc.org/markup/toctree.html
 
 .. toctree::
+   :hidden:
    :caption: Test
 
    installing
