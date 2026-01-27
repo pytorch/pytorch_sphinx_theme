@@ -109,7 +109,7 @@ altogether change the setting in ``conf.py``.
 
 .. toctree::
    :hidden:
-   :caption: Test
+   :caption: Tests
 
    installing
    test-glossary
