@@ -155,22 +155,207 @@ def setup(app):
     # Use config-inited which fires earlier than builder-inited
     app.connect("html-page-context", add_date_info_to_page)
 
-    # Fix sphinx-tippy for parallel builds
-    # sphinx-tippy doesn't implement env-merge-info, so tooltip data from
-    # parallel workers is lost. This handler merges that data.
-    # TODO: Remove once sphinx-tippy merges the fix upstream.
+    # Fix sphinx-tippy for parallel builds (-j auto)
+    # The problem: sphinx_tippy collects tooltip data during html-page-context
+    # (write phase), but this data is lost in parallel workers because
+    # env-merge-info runs during read phase (before data collection).
+    #
+    # Solution: Extract glossary terms during doctree-resolved (read phase),
+    # store in app.env where it merges properly, then write JS files for
+    # glossary tooltips during html-page-context (immediately, not deferred).
     try:
-        from sphinx_tippy import get_tippy_data
+        from docutils import nodes
+        from uuid import uuid4
+        from bs4 import BeautifulSoup
 
-        def merge_tippy_data(app, env, docnames, other):
-            """Merge tippy data from parallel workers."""
-            tippy_data = get_tippy_data(app)
-            other_data = getattr(other, "tippy_data", {})
-            tippy_data["pages"].update(other_data.get("pages", {}))
+        print("[tippy-fix] All imports successful, enabling glossary tooltip fix")
 
-        app.connect("env-merge-info", merge_tippy_data)
-    except ImportError:
-        pass  # sphinx-tippy not installed, skip the fix
+        def extract_glossary_terms(app, doctree, docname):
+            """Extract glossary terms during read phase for parallel build support."""
+            # Check for glossary docnames (with or without underscore prefix)
+            glossary_docnames = ["_glossary", "glossary"]
+            if docname not in glossary_docnames:
+                return
+
+            print(f"[tippy-fix] Processing glossary document: {docname}")
+
+            if not hasattr(app.env, "glossary_terms_for_tippy"):
+                app.env.glossary_terms_for_tippy = {}
+
+            terms_found = 0
+
+            # Method 1: Standard RST glossary - look for definition_list_item nodes
+            for node in doctree.findall(nodes.definition_list_item):
+                term_node = node.next_node(nodes.term)
+                def_node = node.next_node(nodes.definition)
+
+                if term_node is None:
+                    continue
+
+                term_ids = term_node.get("ids", [])
+                if not term_ids:
+                    continue
+
+                term_id = term_ids[0]
+                term_text = term_node.astext()
+
+                def_html = ""
+                if def_node is not None:
+                    paragraphs = []
+                    for child in def_node.children:
+                        if isinstance(child, nodes.paragraph):
+                            paragraphs.append(child.astext())
+                            if len(paragraphs) >= 2:
+                                break
+                    def_html = "".join(f"<p>{p}</p>" for p in paragraphs)
+
+                term_html = f'<dt id="{term_id}">{term_text}</dt><dd>{def_html}</dd>'
+                app.env.glossary_terms_for_tippy[term_id] = term_html
+                terms_found += 1
+
+            # Method 2: Also check for term nodes directly (MyST may structure differently)
+            if terms_found == 0:
+                for term_node in doctree.findall(nodes.term):
+                    term_ids = term_node.get("ids", [])
+                    if not term_ids:
+                        continue
+
+                    term_id = term_ids[0]
+                    term_text = term_node.astext()
+
+                    # Find parent definition_list_item to get definition
+                    parent = term_node.parent
+                    def_html = ""
+                    if parent is not None:
+                        for sibling in parent.children:
+                            if isinstance(sibling, nodes.definition):
+                                paragraphs = []
+                                for child in sibling.children:
+                                    if isinstance(child, nodes.paragraph):
+                                        paragraphs.append(child.astext())
+                                        if len(paragraphs) >= 2:
+                                            break
+                                def_html = "".join(f"<p>{p}</p>" for p in paragraphs)
+                                break
+
+                    term_html = f'<dt id="{term_id}">{term_text}</dt><dd>{def_html}</dd>'
+                    app.env.glossary_terms_for_tippy[term_id] = term_html
+                    terms_found += 1
+
+            print(f"[tippy-fix] Extracted {terms_found} glossary terms from {docname}")
+
+        def merge_glossary_terms(app, env, docnames, other):
+            """Merge glossary terms from parallel workers."""
+            if not hasattr(env, "glossary_terms_for_tippy"):
+                env.glossary_terms_for_tippy = {}
+            other_terms = getattr(other, "glossary_terms_for_tippy", {})
+            if other_terms:
+                print(f"[tippy-fix] Merging {len(other_terms)} glossary terms from worker")
+            env.glossary_terms_for_tippy.update(other_terms)
+
+        def write_glossary_tippy_js(app, pagename, templatename, context, doctree):
+            """Write tippy JS immediately during page context for glossary links."""
+            if not doctree or app.builder.name != "html":
+                return
+
+            glossary_terms = getattr(app.env, "glossary_terms_for_tippy", {})
+            if not glossary_terms:
+                return
+
+            body_html = context.get("body", "")
+            if not body_html:
+                return
+
+            soup = BeautifulSoup(body_html, "html.parser")
+
+            selector_to_html = {}
+            glossary_link_pattern = re.compile(r"_glossary\.html#(term-[\w-]+)")
+
+            for anchor in soup.find_all("a", href=True):
+                href = anchor.get("href", "")
+                match = glossary_link_pattern.search(href)
+                if match:
+                    term_id = match.group(1)
+                    if term_id in glossary_terms:
+                        page_dir = os.path.dirname(pagename)
+                        if page_dir:
+                            rel_glossary = os.path.relpath("_glossary", page_dir)
+                        else:
+                            rel_glossary = "_glossary"
+                        selector = f'a[href="{rel_glossary}.html#{term_id}"]'
+                        selector_to_html[selector] = glossary_terms[term_id]
+
+            if not selector_to_html:
+                return
+
+            print(f"[tippy-fix] Writing JS for {pagename} with {len(selector_to_html)} glossary links")
+
+            tippy_props = getattr(app.config, "tippy_props", {})
+            props = {
+                "placement": f"'{tippy_props.get('placement', 'auto-start')}'",
+                "maxWidth": str(tippy_props.get("maxWidth", 500)),
+                "interactive": "true"
+                if tippy_props.get("interactive", False)
+                else "false",
+            }
+            theme = tippy_props.get("theme")
+            if theme:
+                props["theme"] = f"'{theme}'"
+
+            tippy_props_str = ", ".join(f"{k}: {v}" for k, v in props.items())
+
+            js_content = f'''selector_to_html = {json.dumps(selector_to_html)}
+skip_classes = ["headerlink", "sd-stretched-link"]
+
+window.onload = function () {{
+    for (const [select, tip_html] of Object.entries(selector_to_html)) {{
+        const links = document.querySelectorAll(` ${{select}}`);
+        for (const link of links) {{
+            if (skip_classes.some(c => link.classList.contains(c))) {{
+                continue;
+            }}
+            tippy(link, {{
+                content: tip_html,
+                allowHTML: true,
+                arrow: true,
+                {tippy_props_str},
+            }});
+        }};
+    }};
+    console.log("tippy glossary tips loaded!");
+}};
+'''
+
+            parts = pagename.split("/")
+            tippy_dir = Path(app.outdir) / "_static" / "tippy"
+            tippy_dir.mkdir(parents=True, exist_ok=True)
+
+            if len(parts) > 1:
+                page_tippy_dir = tippy_dir / "/".join(parts[:-1])
+                page_tippy_dir.mkdir(parents=True, exist_ok=True)
+            else:
+                page_tippy_dir = tippy_dir
+
+            for old_file in page_tippy_dir.glob(f"{parts[-1]}.*.js"):
+                old_file.unlink()
+
+            js_filename = f"{parts[-1]}.{uuid4()}.js"
+            if len(parts) > 1:
+                js_path = tippy_dir / "/".join(parts[:-1]) / js_filename
+            else:
+                js_path = tippy_dir / js_filename
+
+            js_path.write_text(js_content, encoding="utf-8")
+
+            rel_js_path = js_path.relative_to(Path(app.outdir) / "_static")
+            app.add_js_file(str(rel_js_path), loading_method="defer")
+
+        app.connect("doctree-resolved", extract_glossary_terms)
+        app.connect("env-merge-info", merge_glossary_terms)
+        app.connect("html-page-context", write_glossary_tippy_js, priority=900)
+
+    except ImportError as e:
+        print(f"[tippy-fix] DISABLED - missing dependency: {e}")
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)
