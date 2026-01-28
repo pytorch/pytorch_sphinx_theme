@@ -6,7 +6,8 @@
 #}
 
 {% block docs_sidebar %}
-{% if theme_navbar_center or theme_navbar_end or sidebars or theme_primary_sidebar_end %}
+{% set sidebar_items = sidebars or theme_primary_sidebar_items %}
+{% if theme_navbar_center or theme_navbar_end or sidebar_items or theme_primary_sidebar_end %}
   {# Header items that will be displayed in the sidebar on mobile #}
   <div class="sidebar-header-items sidebar-primary__section">
     {# Version switcher at the top of sidebar #}
@@ -50,9 +51,9 @@
       </div>
     {% endif %}
   </div>
-  {% if sidebars %}
+  {% if sidebar_items %}
     <div class="sidebar-primary-items__start sidebar-primary__section">
-      {%- for sidebartemplate in sidebars %}
+      {%- for sidebartemplate in sidebar_items %}
         <div class="sidebar-primary-item{% if sidebartemplate == 'sidebar-collapse.html' %} pst-sidebar-collapse{% endif %}">{%- include sidebartemplate %}</div>
       {%- endfor %}
     </div>

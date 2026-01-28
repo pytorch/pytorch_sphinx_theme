@@ -426,6 +426,28 @@ html[data-theme=dark] {
   max-width: 100% !important;
 }
 
+@media (max-width: 1699.98px) and (min-width: 1500px) {
+  .bd-header .navbar-header-items__center .navbar-item .nav-link {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 1499.98px) and (min-width: 1410px) {
+  .bd-header .navbar-header-items__center .navbar-item .nav-link {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 1409.98px) and (min-width: 960px) {
+  .bd-header .navbar-header-items__center .navbar-item .nav-link {
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    font-size: 0.72rem;
+    letter-spacing: -0.02em;
+  }
+}
 .bd-main .bd-content .bd-article-container {
   padding-left: 2rem !important;
   padding-right: 2rem !important;

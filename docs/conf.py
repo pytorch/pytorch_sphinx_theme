@@ -255,7 +255,6 @@ html_theme_options = {
         "theme-switcher",
         "navbar-icon-links",
     ],
-    "header_links_before_dropdown": 4,
     "navbar_persistent": [],
     "use_edit_page_button": True,
     "switcher": {
