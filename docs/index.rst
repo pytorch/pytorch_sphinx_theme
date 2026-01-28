@@ -8,7 +8,7 @@ Welcome to PyTorch Sphinx Theme 2 Docs
 
 .. toctree::
    :caption: Theme Documentation
-   :maxdepth: 2
+   :maxdepth: 1
 
    installing
    configuring
@@ -26,13 +26,41 @@ Welcome to PyTorch Sphinx Theme 2 Docs
     demo/api
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
     :numbered:
     :caption: This is an incredibly long caption for a long menu
 
     demo/long
 
-Indices and tables
-------------------
+.. toctree::
+    :maxdepth: 1
+    :caption: Test Pages
 
-* :ref:`Glossary <glossary>`
+    test-myst
+    test-cards
+    test-glossary
+    test_tutorials_landing_page
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Community
+
+    community/index
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Gallery Examples
+
+    auto_examples/index
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Prototype/Unstable
+
+    prototype/test
+    unstable/test
+
+.. toctree::
+   :maxdepth: 1
+
+   _glossary

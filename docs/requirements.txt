@@ -7,3 +7,4 @@ myst-nb>=1.0.0
 sphinx-tippy>=0.4.3
 sphinx-design
 matplotlib
+beautifulsoup4

@@ -27,33 +27,20 @@
 <script async src="https://cse.google.com/cse.js?cx=e65585f8c3ea1440e"></script>
 {{ super() }}
 <!-- Conditional CSS for header and footer height adjustment -->
-{% if not theme_show_lf_header or not theme_show_lf_footer %}
+{% if theme_show_lf_header|lower != 'true' and theme_show_lf_header != true %}
 <style>
-    {
-        % if not theme_show_lf_header %
-    }
-
     :root {
         --header-height: 0px !important;
         --header-height-desktop: 0px !important;
     }
-
-        {
-        % endif %
-    }
-
-        {
-        % if not theme_show_lf_footer %
-    }
-
+</style>
+{% endif %}
+{% if theme_show_lf_footer|lower != 'true' and theme_show_lf_footer != true %}
+<style>
     @media (min-width: 1100px) {
         .site-footer {
             height: 300px !important;
         }
-    }
-
-        {
-        % endif %
     }
 </style>
 {% endif %}
@@ -62,7 +49,7 @@
 {% block body_tag %}
 
 <body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
-    {% if theme_show_lf_header %}
+    {% if theme_show_lf_header|lower == 'true' or theme_show_lf_header == true %}
     {% include "pytorch_header.html" %}
     {% endif %}
     {{ super() }}

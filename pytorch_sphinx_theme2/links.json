@@ -1,11 +1,14 @@
 {
   "library_links": [
-    {"url": "https://docs.pytorch.org/ao", "name": "torchao"},
-    {"url": "https://docs.pytorch.org/torchrec", "name": "torchrec"},
-    {"url": "https://docs.pytorch.org/torchft", "name": "torchft"},
-    {"url": "https://docs.pytorch.org/torchcodec", "name": "TorchCodec"},
-    {"url": "https://docs.pytorch.org/vision", "name": "torchvision"},
     {"url": "https://docs.pytorch.org/executorch", "name": "ExecuTorch"},
+    {"url": "https://docs.pytorch.org/helion", "name": "Helion"},
+    {"url": "https://docs.pytorch.org/ao", "name": "torchao"},
+    {"url": "https://github.com/pytorch/kineto", "name": "kineto"},
+    {"url": "https://github.com/pytorch/torchtitan", "name": "torchtitan"},
+    {"url": "https://docs.pytorch.org/rl", "name": "TorchRL"},
+    {"url": "https://docs.pytorch.org/vision", "name": "torchvision"},
+    {"url": "https://docs.pytorch.org/audio", "name": "torchaudio"},
+    {"url": "https://docs.pytorch.org/tensordict", "name": "tensordict"},
     {"url": "https://docs.pytorch.org/xla", "name": "PyTorch on XLA Devices"}
   ]
 }
