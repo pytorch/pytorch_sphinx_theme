@@ -29,7 +29,7 @@
   });
 </script>
 <!-- Conditional CSS for header and footer height adjustment -->
-{% if not theme_show_lf_header %}
+{% if theme_show_lf_header|lower != 'true' and theme_show_lf_header != true %}
 <style>
   :root {
     --header-height: 0px !important;
@@ -256,7 +256,7 @@
 {% block body_tag %}
 
 <body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
-  {% if theme_show_lf_header %}
+  {% if theme_show_lf_header|lower == 'true' or theme_show_lf_header == true %}
   {% include "pytorch_header.html" %}
   {% endif %}
   {{ super() }}

@@ -265,7 +265,7 @@ html_theme_options = {
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
     # "pytorch_project": "tutorials",
-    "show_lf_header": False,
+    #"show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
     # Each repository should have its own unique assistant_id from RunLLM
