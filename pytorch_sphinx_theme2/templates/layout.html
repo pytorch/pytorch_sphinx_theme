@@ -35,6 +35,16 @@
     --header-height: 0px !important;
     --header-height-desktop: 0px !important;
   }
+  /* Ensure proper mobile layout when LF header is hidden */
+  @media (max-width: 767px) {
+    .bd-main {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+    .bd-article-container {
+      padding-top: 0 !important;
+    }
+  }
 </style>
 {% endif %}
 {% if not theme_show_lf_footer %}
