@@ -36,7 +36,12 @@
     --header-height-desktop: 0px !important;
   }
   /* Ensure proper mobile layout when LF header is hidden */
-  @media (max-width: 767px) {
+  @media (max-width: 960px) {
+    .bd-header {
+      top: 0 !important;
+      position: sticky !important;
+      z-index: 1020 !important;
+    }
     .bd-main {
       padding-top: 0 !important;
       margin-top: 0 !important;
