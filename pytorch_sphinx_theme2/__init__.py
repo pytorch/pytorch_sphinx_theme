@@ -269,20 +269,17 @@ def setup(app):
             soup = BeautifulSoup(body_html, "html.parser")
 
             selector_to_html = {}
-            glossary_link_pattern = re.compile(r"_glossary\.html#(term-[\w-]+)")
+            # Match glossary links with any path prefix (../, ../../, etc.)
+            glossary_link_pattern = re.compile(r"(?:\.\./)*(glossary|_glossary)\.html#(term-[\w-]+)")
 
             for anchor in soup.find_all("a", href=True):
                 href = anchor.get("href", "")
                 match = glossary_link_pattern.search(href)
                 if match:
-                    term_id = match.group(1)
+                    term_id = match.group(2)  # group(2) is the term-xxx part
                     if term_id in glossary_terms:
-                        page_dir = os.path.dirname(pagename)
-                        if page_dir:
-                            rel_glossary = os.path.relpath("_glossary", page_dir)
-                        else:
-                            rel_glossary = "_glossary"
-                        selector = f'a[href="{rel_glossary}.html#{term_id}"]'
+                        # Use the exact href from the HTML as the selector
+                        selector = f'a[href="{href}"]'
                         selector_to_html[selector] = glossary_terms[term_id]
 
             if not selector_to_html:
