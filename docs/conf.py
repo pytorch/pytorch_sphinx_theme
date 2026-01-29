@@ -33,6 +33,7 @@ extensions = [
     "sphinx_design",
     "myst_nb",
     "sphinx_tippy",
+    "pytorch_sphinx_theme2",  # Register as extension to call setup()
 ]
 
 # MyST parser configuration for markdown files
@@ -291,6 +292,16 @@ def setup(app):
     app.add_directive("customcarditem", custom_directives.CustomCardItemDirective)
 
     app.connect("html-page-context", add_date_info_to_page)
+
+    # Fix sphinx-tippy for parallel builds (-j auto)
+    # The problem: sphinx_tippy collects tooltip data during html-page-context
+    # (write phase), but this data is lost in parallel workers because
+    # env-merge-info runs during read phase (before data collection).
+    #
+    # Solution: Extract glossary terms during doctree-resolved (read phase),
+    # store in app.env where it merges properly, then write JS files for
+    # glossary tooltips during html-page-context (immediately, not deferred).
+    
     return {"version": version, "parallel_read_safe": True}
 
 
