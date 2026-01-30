@@ -198,10 +198,7 @@ function openGitHubIssue() {
         }, 500);
     });
 })();
-;// This code replaces the default sphinx gallery download buttons
-// with the 3 download buttons at the top of the page
-
-document.addEventListener('DOMContentLoaded', function() {
+;document.addEventListener('DOMContentLoaded', function() {
   var downloadNote = $(".sphx-glr-download-link-note.admonition.note");
   if (downloadNote.length >= 1) {
       var tutorialUrlArray = $("#tutorial-type").text().split('/');
@@ -245,15 +242,16 @@ document.addEventListener('DOMContentLoaded', function() {
       $("#notebook-link").attr("href", notebookLink);
       $("#github-link").attr("href", githubLink);
 
+      // Show the call-to-action links (hidden by default in CSS)
+      $(".pytorch-call-to-action-links").css("display", "flex");
+
       // Hide the original download links and signature
       $(".sphx-glr-footer").hide();
       $(".sphx-glr-signature").hide();
       $(".sphx-glr-footer, .sphx-glr-download").hide();
       $(".sphx-glr-signature").hide();
-
-  } else {
-      $(".pytorch-call-to-action-links").hide();
   }
+  // No else needed - buttons stay hidden by default via CSS
 });
 ;$(document).ready(function() {
   // Build an array from each tag that's present

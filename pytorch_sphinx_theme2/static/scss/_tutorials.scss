@@ -2,11 +2,10 @@
 @use "variables" as *;
 
 // Tutorial cards styles
+// Hidden by default, shown by JS only when .sphx-glr-download-link-note.admonition.note is present
 .pytorch-call-to-action-links {
   padding-top: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   justify-content: space-around;
   margin: 0px;
 
