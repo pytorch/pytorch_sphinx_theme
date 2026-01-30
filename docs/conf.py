@@ -33,6 +33,7 @@ extensions = [
     "sphinx_design",
     "myst_nb",
     "sphinx_tippy",
+    "pytorch_sphinx_theme2",  # Register as extension to call setup()
 ]
 
 # MyST parser configuration for markdown files
@@ -109,8 +110,10 @@ tippy_props = {
     "theme": "material",
 }
 
-# Skip all URLs except glossary term links (glossary.html#term-*)
-tippy_skip_urls = (r"^(?!.*glossary\.html#term-).*$",)
+# Skip all URLs except glossary term links (_glossary.html#term-* or _glossary#term-*)
+# Support both .html extension and clean URLs (dirhtml builder)
+# File is named _glossary.md for deterministic processing order across filesystems
+tippy_skip_urls = (r"^(?!.*_glossary(\.html)?#term-).*$",)
 tippy_enable_mathjax = True
 
 # The version info for the project you're documenting, acts as replacement for
@@ -201,7 +204,11 @@ pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY = True
 # documentation.
 html_theme_options = {
     "header_links_before_dropdown": 4,
-    "logo": {"text": "Home"},
+    # Test with a different logo to verify custom logo works
+    #"logo": {
+    #    "image_light": "_static/logo-icon.svg",
+    #    "image_dark": "_static/logo-icon.svg",
+    #},
     "icon_links": [
         {
             "name": "X",
@@ -241,27 +248,31 @@ html_theme_options = {
         },
     ],
     "navbar_align": "left",
-    "navbar_start": ["pytorch_version"],
+    "navbar_start": ["navbar-logo", "version-switcher"],
     # "navbar_start": ["version-switcher", "navbar-logo"],
     "navbar_center": ["navbar-nav"],
-    "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
-    "header_links_before_dropdown": 4,
+    "navbar_end": [
+        "search-field-custom",
+        "theme-switcher",
+        "navbar-icon-links",
+    ],
     "navbar_persistent": [],
     "use_edit_page_button": True,
-    # "switcher": {
-    #    "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
-    #    "version_match": "main",
-    # },
+    "switcher": {
+        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
+        "version_match": "main",
+    },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
     # "pytorch_project": "tutorials",
-    # "show_lf_header": False,
+    #"show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
     # Each repository should have its own unique assistant_id from RunLLM
     # "runllm_assistant_id": "ID",  # Required: Your RunLLM assistant ID
     # "runllm_name": "PyTorch",  # Optional: Display name (default: "Assistant")
     # "runllm_position": "BOTTOM_RIGHT",  # Optional: BOTTOM_RIGHT, BOTTOM_LEFT, etc.
+    # "show_pytorch_org_link": False,  # Set to False to hide "Go to pytorch.org" link
 }
 
 
@@ -281,6 +292,16 @@ def setup(app):
     app.add_directive("customcarditem", custom_directives.CustomCardItemDirective)
 
     app.connect("html-page-context", add_date_info_to_page)
+
+    # Fix sphinx-tippy for parallel builds (-j auto)
+    # The problem: sphinx_tippy collects tooltip data during html-page-context
+    # (write phase), but this data is lost in parallel workers because
+    # env-merge-info runs during read phase (before data collection).
+    #
+    # Solution: Extract glossary terms during doctree-resolved (read phase),
+    # store in app.env where it merges properly, then write JS files for
+    # glossary tooltips during html-page-context (immediately, not deferred).
+    
     return {"version": version, "parallel_read_safe": True}
 
 

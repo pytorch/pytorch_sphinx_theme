@@ -1,0 +1,36 @@
+{#
+  Custom navbar-logo.html for pytorch_sphinx_theme2
+  Uses PyTorch logo by default unless a custom logo is specified in html_theme_options["logo"]
+#}
+
+{# Check if custom logo images are specified - handle case where theme_logo might be None or empty #}
+{% set logo_config = theme_logo if theme_logo else {} %}
+{% set has_custom_logo = logo_config.get('image_light') or logo_config.get('image_dark') or logo_config.get('text') %}
+
+{# Set default PyTorch logos if no custom logo is specified #}
+{% if has_custom_logo %}
+  {% set logo_light = logo_config.get('image_light', '') %}
+  {% set logo_dark = logo_config.get('image_dark', '') %}
+  {% set logo_text = logo_config.get('text', '') %}
+{% else %}
+  {# Use PyTorch default logos from the theme's static/img directory #}
+  {% set logo_light = '_static/img/logo-dark.svg' %}
+  {% set logo_dark = '_static/img/logo-white.svg' %}
+  {% set logo_text = '' %}
+{% endif %}
+
+<a class="navbar-brand logo" href="{{ pathto(root_doc) }}">
+  {% if logo_light or logo_dark %}
+    {% if logo_light %}
+    <img src="{{ pathto(logo_light, 1) }}" class="logo__image only-light" alt="{{ project }} - Home"/>
+    {% endif %}
+    {% if logo_dark %}
+    <script>document.write(`<img src="{{ pathto(logo_dark, 1) }}" class="logo__image only-dark" alt="{{ project }} - Home"/>`);</script>
+    {% endif %}
+  {% elif logo_text %}
+    <span class="logo__title">{{ logo_text }}</span>
+  {% else %}
+    {# Fallback to project name if nothing else is available #}
+    <span class="logo__title">{{ project }}</span>
+  {% endif %}
+</a>

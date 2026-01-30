@@ -2,12 +2,23 @@ __version__ = "0.1.0"
 
 import json
 import os
+import posixpath
 import re
 import subprocess
 from pathlib import Path
+from uuid import uuid4
 
 from . import custom_directives
 from .custom_directives import HAS_SPHINX_GALLERY
+
+# Optional import for tippy glossary support
+try:
+    from bs4 import BeautifulSoup
+    from docutils import nodes
+
+    HAS_TIPPY_DEPS = True
+except ImportError:
+    HAS_TIPPY_DEPS = False
 
 
 def get_html_theme_path():
@@ -148,27 +159,139 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
             print(f"Error getting dates for {full_source_path}: {e}")
 
 
+
+# =============================================================================
+# Sphinx-tippy parallel build fix
+# =============================================================================
+# Problem: sphinx-tippy collects tooltip data during html-page-context (write
+# phase), but this data is lost in parallel workers because env-merge-info runs
+# during read phase (before data collection).
+#
+# Solution: Extract glossary terms during doctree-resolved (read phase), store
+# in app.env where it merges properly, then write JS files during html-page-context.
+
+
+def _extract_glossary_terms(app, doctree, docname):
+    """Extract glossary terms during read phase for parallel build support."""
+    if not HAS_TIPPY_DEPS:
+        return
+
+    glossary_page = getattr(app.config, "tippy_glossary_page", "_glossary")
+    if docname != glossary_page:
+        return
+
+    if not hasattr(app.env, "glossary_terms_for_tippy"):
+        app.env.glossary_terms_for_tippy = {}
+
+    for node in doctree.findall(nodes.definition_list_item):
+        term_node = node.next_node(nodes.term)
+        def_node = node.next_node(nodes.definition)
+        if not term_node or not term_node.get("ids"):
+            continue
+
+        term_id = term_node["ids"][0]
+        paragraphs = [
+            c.astext() for c in (def_node.children if def_node else [])
+            if isinstance(c, nodes.paragraph)
+        ][:2]
+        def_html = "".join(f"<p>{p}</p>" for p in paragraphs)
+        app.env.glossary_terms_for_tippy[term_id] = (
+            f'<dt id="{term_id}">{term_node.astext()}</dt><dd>{def_html}</dd>'
+        )
+
+
+def _merge_glossary_terms(app, env, docnames, other):
+    """Merge glossary terms from parallel workers."""
+    if not hasattr(env, "glossary_terms_for_tippy"):
+        env.glossary_terms_for_tippy = {}
+    env.glossary_terms_for_tippy.update(getattr(other, "glossary_terms_for_tippy", {}))
+
+
+def _write_glossary_tippy_js(app, pagename, templatename, context, doctree):
+    """Write tippy JS for glossary links on each page."""
+    if not HAS_TIPPY_DEPS or not doctree or app.builder.name != "html":
+        return
+
+    glossary_terms = getattr(app.env, "glossary_terms_for_tippy", {})
+    body_html = context.get("body", "")
+    if not glossary_terms or not body_html:
+        return
+
+    # Find glossary links in page
+    glossary_page = getattr(app.config, "tippy_glossary_page", "_glossary")
+    pattern = re.compile(rf"{re.escape(glossary_page)}\.html#(term-[\w-]+)")
+    soup = BeautifulSoup(body_html, "html.parser")
+
+    selector_to_html = {}
+    for anchor in soup.find_all("a", href=True):
+        match = pattern.search(anchor["href"])
+        if match and match.group(1) in glossary_terms:
+            term_id = match.group(1)
+            page_dir = posixpath.dirname(pagename)
+            rel_path = posixpath.relpath(glossary_page, page_dir) if page_dir else glossary_page
+            selector_to_html[f'a[href="{rel_path}.html#{term_id}"]'] = glossary_terms[term_id]
+
+    if not selector_to_html:
+        return
+
+    # Build tippy props
+    tippy_props = getattr(app.config, "tippy_props", {})
+    props_str = ", ".join([
+        f"placement: '{tippy_props.get('placement', 'auto-start')}'",
+        f"maxWidth: {tippy_props.get('maxWidth', 500)}",
+        f"interactive: {'true' if tippy_props.get('interactive') else 'false'}",
+    ] + ([f"theme: '{tippy_props['theme']}'"] if tippy_props.get("theme") else []))
+
+    # Write JS file
+    js_content = f"""selector_to_html = {json.dumps(selector_to_html)}
+window.onload = function () {{
+    for (const [select, tip_html] of Object.entries(selector_to_html)) {{
+        document.querySelectorAll(select).forEach(link => {{
+            if (!["headerlink", "sd-stretched-link"].some(c => link.classList.contains(c))) {{
+                tippy(link, {{ content: tip_html, allowHTML: true, arrow: true, {props_str} }});
+            }}
+        }});
+    }};
+}};
+"""
+    tippy_dir = Path(app.outdir) / "_static" / "tippy"
+    parts = pagename.split("/")
+    if len(parts) > 1:
+        (tippy_dir / "/".join(parts[:-1])).mkdir(parents=True, exist_ok=True)
+    else:
+        tippy_dir.mkdir(parents=True, exist_ok=True)
+
+    # Clean old files and write new one
+    page_dir = tippy_dir / "/".join(parts[:-1]) if len(parts) > 1 else tippy_dir
+    for old in page_dir.glob(f"{parts[-1]}.*.js"):
+        old.unlink()
+
+    js_path = page_dir / f"{parts[-1]}.{uuid4()}.js"
+    js_path.write_text(js_content, encoding="utf-8")
+    app.add_js_file(str(js_path.relative_to(Path(app.outdir) / "_static")), loading_method="defer")
+
+
+# =============================================================================
+# Sphinx setup function
+# =============================================================================
+
+
 def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
     app.add_config_value("add_last_updated", False, "html")
     app.connect("html-page-context", add_date_info_to_page)
 
-    # Fix sphinx-tippy for parallel builds
-    # sphinx-tippy doesn't implement env-merge-info, so tooltip data from
-    # parallel workers is lost. This handler merges that data.
-    # TODO: Remove once sphinx-tippy merges the fix upstream.
-    try:
-        from sphinx_tippy import get_tippy_data
+    # Configuration for sphinx-tippy parallel build fix
+    # tippy_glossary_page: name of the glossary page (without extension)
+    app.add_config_value("tippy_glossary_page", "_glossary", "html")
 
-        def merge_tippy_data(app, env, docnames, other):
-            """Merge tippy data from parallel workers."""
-            tippy_data = get_tippy_data(app)
-            other_data = getattr(other, "tippy_data", {})
-            tippy_data["pages"].update(other_data.get("pages", {}))
-
-        app.connect("env-merge-info", merge_tippy_data)
-    except ImportError:
-        pass  # sphinx-tippy not installed, skip the fix
+    # Connect sphinx-tippy parallel build fix handlers
+    # These fix the issue where tooltip data is lost in parallel workers
+    if HAS_TIPPY_DEPS:
+        app.connect("doctree-resolved", _extract_glossary_terms)
+        app.connect("env-merge-info", _merge_glossary_terms)
+        # Write JS immediately during page context (high priority to run early)
+        app.connect("html-page-context", _write_glossary_tippy_js, priority=900)
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)

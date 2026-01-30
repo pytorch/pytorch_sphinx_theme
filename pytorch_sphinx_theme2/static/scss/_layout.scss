@@ -5,6 +5,8 @@
 .bd-header {
   top: var(--header-height-desktop) !important;
   position: sticky !important;
+  padding-left: 2rem;
+  padding-right: 2rem;
 
   @media (max-width: 1200px) {
     top: var(--header-height) !important;
@@ -12,17 +14,74 @@
 
   @media (max-width: 960px) {
     top: var(--header-height) !important;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+  }
+}
+
+// Main content width - make it use full available width
+.bd-page-width {
+  max-width: 100% !important;
+}
+
+// Make navbar items more compact on screens under 1700px to prevent wrapping
+// This applies to the horizontal navbar in .bd-header (Home, Install PyTorch, etc.)
+@media (max-width: 1699.98px) and (min-width: 1500px) {
+  .bd-header {
+    .navbar-header-items__center {
+      .navbar-item {
+        // Reduce spacing between navbar items
+        .nav-link {
+          padding-left: 0.4rem;
+          padding-right: 0.4rem;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+
+// Even more compact for smaller screens (1500px and below)
+@media (max-width: 1499.98px) and (min-width: 1410px) {
+  .bd-header {
+    .navbar-header-items__center {
+      .navbar-item {
+        .nav-link {
+          padding-left: 0.3rem;
+          padding-right: 0.3rem;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+// More compact for 1410px and below
+@media (max-width: 1409.98px) and (min-width: 960px) {
+  .bd-header {
+    .navbar-header-items__center {
+      .navbar-item {
+        .nav-link {
+          padding-left: 0.15rem;
+          padding-right: 0.15rem;
+          font-size: 0.72rem;
+          letter-spacing: -0.02em;
+        }
+      }
+    }
   }
 }
 
 .bd-main .bd-content .bd-article-container {
-  padding-left: 1rem !important;
-  padding-right: 0.1rem !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  max-width: 100% !important;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
   padding-left: 0 !important;
   padding-top: 1rem !important;
+  padding-right: 1rem !important;
 }
 
 // Hide Home button on mobile
@@ -137,6 +196,28 @@ body.search-page {
 
   @media (max-width: 767px) {
     max-height: none !important;
+  }
+}
+
+// Right sidebar border - apply to the inner content wrapper instead of individual items
+// This creates a continuous border that spans all sidebar-secondary-items
+.bd-sidebar-secondary {
+  .sidebar-secondary-items {
+    border-left: 1px solid var(--pst-color-border);
+    padding-left: 1rem;
+    margin-top: 0.5rem; // Add spacing from the top (horizontal bar)
+
+    @media (max-width: 1199.98px) {
+      border-left: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+  }
+
+  // Remove border from individual sidebar-secondary-items to avoid gaps
+  .sidebar-secondary-item {
+    border-left: none !important;
+    padding-left: 0 !important;
   }
 }
 
