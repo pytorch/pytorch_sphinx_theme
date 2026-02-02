@@ -273,3 +273,19 @@ div.cell > div.cell_input {
 .cell_output .output.stderr {
   border: none;
 }
+
+// Hide primary sidebar when there are no navigation items
+// Uses CSS :has() selector to check if the sidebar nav contains any list items
+.bd-sidebar-primary:not(:has(.bd-docs-nav li)) {
+  display: none !important;
+}
+
+// Indent the content area when primary sidebar is hidden (large screens only)
+// This provides better readability by shifting content to the right
+// Using sibling combinator: when sidebar is hidden (via display:none),
+// the next .bd-main sibling should get extra padding
+@media (min-width: 960px) {
+  .bd-sidebar-primary:not(:has(.bd-docs-nav li)) + .bd-main .bd-content .bd-article-container {
+    padding-left: 8rem !important;
+  }
+}
