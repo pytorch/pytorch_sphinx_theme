@@ -1,0 +1,90 @@
+// Navbar dropdown styles for toctree subsections
+// Ensure our dropdowns inherit the same styles as the "More" dropdown
+@use 'variables';
+
+// Desktop: hover to show dropdown
+// Mobile: no dropdown children shown, just a link to the parent page
+.bd-header ul.navbar-nav .dropdown {
+  position: relative;
+
+  // Container for link + toggle button
+  .nav-item-with-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  // Dropdown toggle button - hidden everywhere (we use CSS hover on desktop)
+  .dropdown-toggle-btn {
+    display: none;
+  }
+
+  // Ensure dropdown menu is positioned correctly below the nav item
+  // Use padding-top instead of margin-top to create a hover-safe zone
+  > .dropdown-menu,
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0;
+    padding-top: 0.5rem;
+    max-height: 70vh; // Limit height to 70% of viewport
+    overflow-y: auto; // Enable scroll for long lists
+
+    // Create a pseudo-element to bridge the gap for hover
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.5rem;
+      left: 0;
+      right: 0;
+      height: 0.5rem;
+    }
+  }
+
+  // Desktop: Hover behavior to show dropdown
+  @media (min-width: 960px) {
+    // Show dropdown arrow after link text on desktop
+    .nav-item-with-toggle > a.nav-link::after {
+      display: inline-block;
+      margin-left: 0.25em;
+      vertical-align: middle;
+      content: "";
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-bottom: 0;
+      border-left: 0.3em solid transparent;
+    }
+
+    // Show dropdown on hover of the entire dropdown container (including menu)
+    &:hover > .dropdown-menu,
+    &:hover .dropdown-menu,
+    &:focus-within > .dropdown-menu,
+    &:focus-within .dropdown-menu {
+      display: block;
+    }
+  }
+}
+
+// Mobile: Hide dropdown children completely - users click the parent link
+@media (max-width: 959px) {
+  .bd-header ul.navbar-nav .dropdown .dropdown-menu,
+  .bd-sidebar-primary .navbar-nav .dropdown .dropdown-menu,
+  .sidebar-header-items .navbar-nav .dropdown .dropdown-menu {
+    display: none !important;
+  }
+
+  // Also hide the toggle button on mobile since we're not using it
+  .bd-header ul.navbar-nav .dropdown .dropdown-toggle-btn,
+  .bd-sidebar-primary .navbar-nav .dropdown .dropdown-toggle-btn,
+  .sidebar-header-items .navbar-nav .dropdown .dropdown-toggle-btn {
+    display: none !important;
+  }
+
+  // Remove the dropdown arrow on mobile
+  .bd-header ul.navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after,
+  .bd-sidebar-primary .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after,
+  .sidebar-header-items .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after {
+    display: none !important;
+  }
+}

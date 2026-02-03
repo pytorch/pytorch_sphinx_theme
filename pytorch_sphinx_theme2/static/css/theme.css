@@ -3630,6 +3630,69 @@ span.highlighted {
   margin-bottom: 0.25rem;
 }
 
+.bd-header ul.navbar-nav .dropdown {
+  position: relative;
+}
+.bd-header ul.navbar-nav .dropdown .nav-item-with-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.bd-header ul.navbar-nav .dropdown .dropdown-toggle-btn {
+  display: none;
+}
+.bd-header ul.navbar-nav .dropdown > .dropdown-menu,
+.bd-header ul.navbar-nav .dropdown .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0;
+  padding-top: 0.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.bd-header ul.navbar-nav .dropdown > .dropdown-menu::before,
+.bd-header ul.navbar-nav .dropdown .dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+}
+@media (min-width: 960px) {
+  .bd-header ul.navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after {
+    display: inline-block;
+    margin-left: 0.25em;
+    vertical-align: middle;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+  .bd-header ul.navbar-nav .dropdown:hover > .dropdown-menu, .bd-header ul.navbar-nav .dropdown:hover .dropdown-menu, .bd-header ul.navbar-nav .dropdown:focus-within > .dropdown-menu, .bd-header ul.navbar-nav .dropdown:focus-within .dropdown-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 959px) {
+  .bd-header ul.navbar-nav .dropdown .dropdown-menu,
+  .bd-sidebar-primary .navbar-nav .dropdown .dropdown-menu,
+  .sidebar-header-items .navbar-nav .dropdown .dropdown-menu {
+    display: none !important;
+  }
+  .bd-header ul.navbar-nav .dropdown .dropdown-toggle-btn,
+  .bd-sidebar-primary .navbar-nav .dropdown .dropdown-toggle-btn,
+  .sidebar-header-items .navbar-nav .dropdown .dropdown-toggle-btn {
+    display: none !important;
+  }
+  .bd-header ul.navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after,
+  .bd-sidebar-primary .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after,
+  .sidebar-header-items .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after {
+    display: none !important;
+  }
+}
 /*!
  * Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)

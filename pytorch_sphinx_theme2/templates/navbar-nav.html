@@ -1,0 +1,72 @@
+{#
+  Custom navbar-nav.html for pytorch_sphinx_theme2
+  Renders toctree items as dropdowns showing their subsections.
+
+  This template overrides pydata_sphinx_theme's navbar-nav.html to display
+  top-level navigation items with dropdown menus containing their children.
+
+  Pure CSS/Jinja implementation - no JavaScript required.
+  Uses the `hierarchical_header_nav` context variable populated by __init__.py
+
+  Uses theme_header_links_before_dropdown to control how many items show before "More".
+
+  Mobile: Dropdowns are collapsed by default, parent link is clickable,
+          toggle button expands/collapses children.
+#}
+
+{% set max_visible_items = theme_header_links_before_dropdown|default(4)|int %}
+
+{% if hierarchical_header_nav %}
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    {# Show first N items with dropdown support #}
+    {% for item in hierarchical_header_nav[:max_visible_items] %}
+      <li class="nav-item{% if item.children %} dropdown{% endif %}{% if item.current %} current active{% endif %}">
+        {% if item.children %}
+          {# Dropdown menu for items with children #}
+          <div class="nav-item-with-toggle">
+            <a class="nav-link nav-internal{% if item.current %} active{% endif %}" href="{{ pathto(item.url) }}">
+              {{ item.title }}
+            </a>
+          </div>
+          <ul class="dropdown-menu" id="dropdown-{{ loop.index }}">
+            {% for child in item.children %}
+              <li class=" ">
+                <a class="nav-link dropdown-item nav-internal" href="{{ pathto(child.url) }}">
+                  {{ child.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {# Simple link for items without children #}
+          <a class="nav-link nav-internal{% if item.current %} active{% endif %}" href="{{ pathto(item.url) }}">
+            {{ item.title }}
+          </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+
+    {# "More" dropdown for remaining items - simple links only #}
+    {% if hierarchical_header_nav|length > max_visible_items %}
+      <li class="nav-item dropdown">
+        <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+          More
+        </button>
+        <ul id="pst-nav-more-links" class="dropdown-menu">
+          {% for item in hierarchical_header_nav[max_visible_items:] %}
+            <li class="{{ 'current active' if item.current else '' }}">
+              <a class="nav-link dropdown-item nav-internal" href="{{ pathto(item.url) }}">
+                {{ item.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% else %}
+{# Fallback: use the default header navigation if hierarchical nav is empty #}
+{{ generate_header_nav_html()|safe }}
+{% endif %}

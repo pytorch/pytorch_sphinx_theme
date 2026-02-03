@@ -272,6 +272,83 @@ window.onload = function () {{
 
 
 # =============================================================================
+# Hierarchical header navigation for dropdown menus
+# =============================================================================
+
+
+def _get_toctree_children(app, docname):
+    """Get children of a toctree entry using toctree_includes which handles glob patterns."""
+    children = []
+    try:
+        # Use toctree_includes which properly resolves glob patterns
+        toctree_includes = getattr(app.env, 'toctree_includes', {})
+        child_docnames = toctree_includes.get(docname, [])
+        
+        for child_docname in child_docnames:
+            if child_docname and child_docname != docname:
+                # Get title from env.titles
+                child_title = app.env.titles.get(child_docname, child_docname)
+                if hasattr(child_title, "astext"):
+                    child_title = child_title.astext()
+                children.append({
+                    "title": str(child_title),
+                    "url": child_docname,
+                })
+                if len(children) >= 10:  # Limit children for performance
+                    break
+    except Exception as ex:
+        print(f"DEBUG: _get_toctree_children error for {docname}: {ex}")
+    return children
+
+
+def _generate_hierarchical_header_nav(app, pagename):
+    """Generate hierarchical header navigation data for dropdown menus."""
+    nav_items = []
+    
+    try:
+        root_doc = app.config.root_doc
+        
+        # Use toctree_includes which properly handles all toctree entries including globs
+        toctree_includes = getattr(app.env, 'toctree_includes', {})
+        root_children = toctree_includes.get(root_doc, [])
+        
+        print(f"DEBUG: root_doc={root_doc}, root_children count={len(root_children)}")
+        
+        for docname in root_children:
+            if not docname:
+                continue
+                
+            # Get the title
+            item_title = app.env.titles.get(docname, docname)
+            if hasattr(item_title, "astext"):
+                item_title = item_title.astext()
+            
+            # Check if this is the current page or an ancestor
+            is_current = (docname == pagename or pagename.startswith(docname.rsplit('/', 1)[0] + "/") if '/' in docname else docname == pagename)
+            
+            # Get children (subsections) from this document's toctree
+            children = _get_toctree_children(app, docname)
+            
+            print(f"DEBUG: nav item: {item_title} ({docname}), children={len(children)}")
+            
+            nav_items.append({
+                "title": str(item_title),
+                "url": docname,
+                "current": is_current,
+                "children": children,
+            })
+    except Exception as ex:
+        print(f"DEBUG: _generate_hierarchical_header_nav error: {ex}")
+
+    return nav_items
+
+
+def _add_hierarchical_nav_to_context(app, pagename, templatename, context, doctree):
+    """Add hierarchical navigation data to the template context."""
+    context["hierarchical_header_nav"] = _generate_hierarchical_header_nav(app, pagename)
+
+
+# =============================================================================
 # Sphinx setup function
 # =============================================================================
 
@@ -280,6 +357,9 @@ def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
     app.add_config_value("add_last_updated", False, "html")
     app.connect("html-page-context", add_date_info_to_page)
+
+    # Add hierarchical navigation context for dropdown menus
+    app.connect("html-page-context", _add_hierarchical_nav_to_context)
 
     # Configuration for sphinx-tippy parallel build fix
     # tippy_glossary_page: name of the glossary page (without extension)
