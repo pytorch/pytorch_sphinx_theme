@@ -296,8 +296,8 @@ def _get_toctree_children(app, docname):
                 })
                 if len(children) >= 10:  # Limit children for performance
                     break
-    except Exception as ex:
-        print(f"DEBUG: _get_toctree_children error for {docname}: {ex}")
+    except Exception:
+        pass
     return children
 
 
@@ -311,8 +311,6 @@ def _generate_hierarchical_header_nav(app, pagename):
         # Use toctree_includes which properly handles all toctree entries including globs
         toctree_includes = getattr(app.env, 'toctree_includes', {})
         root_children = toctree_includes.get(root_doc, [])
-        
-        print(f"DEBUG: root_doc={root_doc}, root_children count={len(root_children)}")
         
         for docname in root_children:
             if not docname:
@@ -329,16 +327,14 @@ def _generate_hierarchical_header_nav(app, pagename):
             # Get children (subsections) from this document's toctree
             children = _get_toctree_children(app, docname)
             
-            print(f"DEBUG: nav item: {item_title} ({docname}), children={len(children)}")
-            
             nav_items.append({
                 "title": str(item_title),
                 "url": docname,
                 "current": is_current,
                 "children": children,
             })
-    except Exception as ex:
-        print(f"DEBUG: _generate_hierarchical_header_nav error: {ex}")
+    except Exception:
+        pass
 
     return nav_items
 

@@ -46,8 +46,8 @@
     left: 0;
     margin-top: 0;
     padding-top: 0.75rem; // Visual gap between nav item and dropdown content
-    max-height: 70vh; // Limit height to 70% of viewport
-    overflow-y: auto; // Enable scroll for long lists
+    max-height: 70vh !important; // Limit height to 70% of viewport
+    overflow-y: auto !important; // Enable scroll for long lists
 
     // Create a pseudo-element to bridge any remaining gap for hover
     &::before {
@@ -104,5 +104,17 @@
   .bd-sidebar-primary .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after,
   .sidebar-header-items .navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after {
     display: none !important;
+  }
+}
+
+// Ensure dropdown menus are scrollable for long toctrees (desktop)
+// This needs high specificity to override Bootstrap/pydata defaults
+@media (min-width: 960px) {
+  .bd-header ul.navbar-nav .dropdown .dropdown-menu,
+  .bd-header .navbar-nav .nav-item.dropdown .dropdown-menu,
+  .bd-header .bd-navbar-elements .dropdown .dropdown-menu {
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }
