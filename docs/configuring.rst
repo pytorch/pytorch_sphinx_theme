@@ -106,5 +106,3 @@ is vertically too large, it will revert to static positioning. To disable the st
 altogether change the setting in ``conf.py``.
 
 .. _hidden: http://sphinx-doc.org/markup/toctree.html
-
-
