@@ -623,6 +623,15 @@ div.cell > div.cell_input {
   border: none;
 }
 
+.bd-sidebar-primary:not(:has(.bd-docs-nav li)) {
+  display: none !important;
+}
+
+@media (min-width: 960px) {
+  .bd-sidebar-primary:not(:has(.bd-docs-nav li)) + .bd-main .bd-content .bd-article-container {
+    padding-left: 8rem !important;
+  }
+}
 .bd-footer {
   display: none !important;
 }

@@ -1,0 +1,600 @@
+# Configuration Reference
+
+This document provides a comprehensive reference for all configuration options available in the PyTorch Sphinx Theme 2. These options are set in your project's `conf.py` file.
+
+## Quick Start
+
+```python
+# conf.py
+
+html_theme = "pytorch_sphinx_theme2"
+html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
+
+html_theme_options = {
+    "canonical_url": "https://docs.pytorch.org/your-project/",
+    "analytics_id": "UA-XXXXXXXX-X",
+    "navbar_align": "left",
+    "use_edit_page_button": True,
+}
+```
+
+---
+
+## html_theme_options
+
+All theme-specific options are configured via the `html_theme_options` dictionary in `conf.py`.
+
+### Navigation Options
+
+#### `navbar_align`
+- **Type:** String
+- **Default:** `"left"`
+- **Description:** Controls the alignment of navigation items in the navbar. Options: `"left"`, `"center"`, `"right"`.
+
+#### `navbar_start`
+- **Type:** String (comma-separated list of component names)
+- **Default:** `"navbar-logo"`
+- **Description:** Components to display at the start (left) of the navbar. Common components:
+  - `"navbar-logo"` - The site logo
+  - `"version-switcher"` - Version dropdown switcher
+
+```python
+html_theme_options = {
+    "navbar_start": ["navbar-logo", "version-switcher"],
+}
+```
+
+#### `navbar_center`
+- **Type:** String
+- **Default:** `"navbar-nav"`
+- **Description:** Components to display in the center of the navbar. Typically contains the main navigation links.
+
+#### `navbar_end`
+- **Type:** String (comma-separated list of component names)
+- **Default:** `"search-field-custom, theme-switcher, navbar-icon-links"`
+- **Description:** Components to display at the end (right) of the navbar. Common components:
+  - `"search-field-custom"` - Search input field
+  - `"theme-switcher"` - Light/dark mode toggle
+  - `"navbar-icon-links"` - Social/external icon links
+
+#### `navbar_persistent`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Components that persist across all pages in the navbar.
+
+#### `collapse_navigation`
+- **Type:** Boolean
+- **Default:** `False`
+- **Description:** If `True`, collapses the navigation sections by default, showing `[+]` icons to expand.
+
+#### `show_prev_next`
+- **Type:** Boolean
+- **Default:** `False`
+- **Description:** If `True`, displays "Previous" and "Next" navigation buttons.
+
+#### `display_version`
+- **Type:** Boolean
+- **Default:** `True`
+- **Description:** If `True`, displays the version number in the sidebar/navbar.
+
+#### `logo_text`
+- **Type:** String
+- **Default:** `"Home"`
+- **Description:** Text to display next to or below the logo.
+
+#### `enable_navbar_dropdowns`
+- **Type:** Boolean
+- **Default:** `True`
+- **Description:** Enable dropdown menus in horizontal navbar for items with children. Set to `False` to show only flat links (no dropdowns).
+
+---
+
+### Article Layout Options
+
+#### `article_header_start`
+- **Type:** String
+- **Default:** `"breadcrumbs"`
+- **Description:** Components to display at the start of the article header. Common components:
+  - `"breadcrumbs"` - Navigation breadcrumbs
+
+#### `article_header_end`
+- **Type:** String
+- **Default:** `"rate_page.html"`
+- **Description:** Components to display at the end of the article header.
+
+#### `secondary_sidebar_items`
+- **Type:** String (comma-separated list)
+- **Default:** `"page-toc, edit-this-page, sourcelink"`
+- **Description:** Items to show in the secondary (right) sidebar:
+  - `"page-toc"` - Table of contents for the current page
+  - `"edit-this-page"` - Link to edit the source file
+  - `"sourcelink"` - Link to view the source
+
+#### `article_footer_items`
+- **Type:** String
+- **Default:** `"footer-rating.html"`
+- **Description:** Components to display in the article footer.
+
+#### `use_edit_page_button`
+- **Type:** Boolean
+- **Default:** `True`
+- **Description:** If `True`, displays an "Edit this page" button that links to the source file on GitHub/GitLab.
+
+---
+
+### Project Information
+
+#### `pytorch_project`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Identifies the PyTorch project. Used to customize certain theme behaviors. Common values: `"docs"`, `"tutorials"`.
+
+#### `canonical_url`
+- **Type:** String
+- **Default:** `""`
+- **Description:** The canonical URL for the documentation. Used for SEO to indicate the preferred version of a page to search engines.
+
+```python
+html_theme_options = {
+    "canonical_url": "https://docs.pytorch.org/stable/",
+}
+```
+
+#### `analytics_id`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Google Analytics tracking ID for page analytics.
+
+```python
+html_theme_options = {
+    "analytics_id": "UA-XXXXXXXX-X",
+}
+```
+
+---
+
+### Header and Footer Control
+
+#### `show_lf_header`
+- **Type:** Boolean
+- **Default:** `False`
+- **Description:** If `True`, shows the Linux Foundation header banner.
+
+#### `show_lf_footer`
+- **Type:** Boolean
+- **Default:** `True`
+- **Description:** If `True`, shows the Linux Foundation footer.
+
+---
+
+### RunLLM Widget Configuration
+
+The theme supports integration with RunLLM for AI-powered documentation assistance.
+
+#### `runllm_assistant_id`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Your RunLLM assistant ID. **Required** to enable the widget. Each repository should have its own unique assistant ID from RunLLM.
+
+#### `runllm_name`
+- **Type:** String
+- **Default:** `"Assistant"`
+- **Description:** Display name for the RunLLM assistant.
+
+#### `runllm_position`
+- **Type:** String
+- **Default:** `"BOTTOM_RIGHT"`
+- **Description:** Position of the RunLLM widget on the page. Options: `"BOTTOM_RIGHT"`, `"BOTTOM_LEFT"`.
+
+```python
+html_theme_options = {
+    "runllm_assistant_id": "your-assistant-id",
+    "runllm_name": "PyTorch Assistant",
+    "runllm_position": "BOTTOM_RIGHT",
+}
+```
+
+---
+
+### PyTorch.org Link
+
+#### `show_pytorch_org_link`
+- **Type:** Boolean
+- **Default:** `True`
+- **Description:** If `True`, shows a "Go to pytorch.org" link in the navbar on desktop and sidebar on mobile.
+
+---
+
+### Icon Links
+
+#### `icon_links`
+- **Type:** List of dictionaries
+- **Description:** External links displayed as icons in the navbar.
+
+```python
+html_theme_options = {
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/pytorch/pytorch",
+            "icon": "fa-brands fa-github",
+        },
+        {
+            "name": "X",
+            "url": "https://x.com/PyTorch",
+            "icon": "fa-brands fa-x-twitter",
+        },
+        {
+            "name": "Discourse",
+            "url": "https://dev-discuss.pytorch.org/",
+            "icon": "fa-brands fa-discourse",
+        },
+    ],
+}
+```
+
+---
+
+### Extra Project Links
+
+#### `extra_project_links`
+- **Type:** List of dictionaries
+- **Description:** Additional project-related links to display (e.g., in the sidebar or footer).
+
+```python
+html_theme_options = {
+    "extra_project_links": [
+        {
+            "name": "See All Recipes",
+            "url": "https://pytorch.org/tutorials/recipes/recipes_index.html",
+        },
+        {
+            "name": "See All Prototype Recipes",
+            "url": "https://pytorch.org/tutorials/prototype/prototype_index.html",
+        },
+    ],
+}
+```
+
+---
+
+### External Links
+
+#### `external_links`
+- **Type:** List of dictionaries
+- **Description:** External navigation links to display in the navbar.
+
+```python
+html_theme_options = {
+    "external_links": [
+        {
+            "name": "Tutorials",
+            "url": "https://pytorch.org/tutorials/",
+        },
+    ],
+}
+```
+
+---
+
+### Version Switcher
+
+#### `switcher`
+- **Type:** Dictionary
+- **Description:** Configuration for the version switcher dropdown.
+
+```python
+html_theme_options = {
+    "switcher": {
+        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
+        "version_match": "main",
+    },
+}
+```
+
+---
+
+### Logo Configuration
+
+#### `logo`
+- **Type:** Dictionary
+- **Description:** Custom logo configuration.
+
+```python
+html_theme_options = {
+    "logo": {
+        "image_light": "_static/logo-light.svg",
+        "image_dark": "_static/logo-dark.svg",
+    },
+}
+```
+
+---
+
+### Header Links Before Dropdown
+
+#### `header_links_before_dropdown`
+- **Type:** Integer
+- **Default:** `4`
+- **Description:** Number of navigation links to show before collapsing into a dropdown menu.
+
+---
+
+### Language Bindings Links
+
+#### `language_bindings_links`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Links to language bindings documentation.
+
+---
+
+### Version Info
+
+#### `version_info`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Additional version information to display.
+
+---
+
+## html_context Options
+
+The `html_context` dictionary provides context variables available in templates.
+
+```python
+html_context = {
+    "github_url": "https://github.com",
+    "github_user": "pytorch",
+    "github_repo": "pytorch",
+    "github_version": "main",
+    "doc_path": "docs/source",
+    "feedback_url": "https://github.com/pytorch/pytorch/issues",
+    "version": version,
+}
+```
+
+### Repository Configuration
+
+#### `github_url`
+- **Type:** String
+- **Description:** Base URL for GitHub (typically `"https://github.com"`).
+
+#### `github_user`
+- **Type:** String
+- **Description:** GitHub organization or user name.
+
+#### `github_repo`
+- **Type:** String
+- **Description:** GitHub repository name.
+
+#### `github_version`
+- **Type:** String
+- **Description:** Branch or version for GitHub links (e.g., `"main"`, `"master"`, `"stable"`).
+
+#### `doc_path`
+- **Type:** String
+- **Description:** Path to the documentation source within the repository.
+
+### Colab Integration
+
+#### `colab_branch`
+- **Type:** String
+- **Description:** Branch to use for Colab notebook links.
+
+```python
+html_context = {
+    "colab_branch": "gh-pages",
+}
+```
+
+### Feedback Configuration
+
+#### `feedback_url`
+- **Type:** String
+- **Description:** URL for documentation feedback/issues.
+
+### Date Information
+
+#### `date_info`
+- **Type:** Dictionary
+- **Description:** Configuration for date display on pages.
+
+```python
+html_context = {
+    "date_info": {
+        "paths_to_skip": ["installing", "changelog"],
+    },
+}
+```
+
+---
+
+## Theme Variables
+
+The theme provides additional variables via `get_theme_variables()`:
+
+```python
+import pytorch_sphinx_theme2
+
+theme_variables = pytorch_sphinx_theme2.get_theme_variables()
+html_context = {
+    "theme_variables": theme_variables,
+    "library_links": theme_variables.get("library_links", []),
+}
+```
+
+### Library Links
+
+Pre-configured links to PyTorch ecosystem libraries (loaded from `links.json`):
+
+```json
+{
+  "library_links": [
+    {"url": "https://docs.pytorch.org/executorch", "name": "ExecuTorch"},
+    {"url": "https://docs.pytorch.org/vision", "name": "torchvision"},
+    {"url": "https://docs.pytorch.org/audio", "name": "torchaudio"}
+  ]
+}
+```
+
+---
+
+## Additional Sphinx Configuration
+
+### Last Updated Dates
+
+Enable automatic "Created On" and "Last Updated On" date display:
+
+```python
+def setup(app):
+    app.config.add_last_updated = True
+    from pytorch_sphinx_theme2 import add_date_info_to_page
+    app.connect("html-page-context", add_date_info_to_page)
+```
+
+### Sphinx-Tippy Integration
+
+For glossary tooltips with parallel build support:
+
+```python
+extensions = [
+    "sphinx_tippy",
+    "pytorch_sphinx_theme2",  # Register as extension
+]
+
+tippy_props = {
+    "placement": "auto-start",
+    "maxWidth": 500,
+    "interactive": True,
+    "theme": "material",
+}
+
+# Skip non-glossary URLs
+tippy_skip_urls = (r"^(?!.*_glossary(\.html)?#term-).*$",)
+tippy_enable_mathjax = True
+```
+
+### Custom CSS
+
+Add custom stylesheets:
+
+```python
+html_css_files = [
+    "custom.css",
+]
+```
+
+### Static Files
+
+Configure static file paths:
+
+```python
+html_static_path = ["_static"]
+```
+
+### Source Link
+
+Show/hide links to page source:
+
+```python
+html_show_sourcelink = True
+```
+
+---
+
+## Page-Level Configuration
+
+Individual pages can override theme settings using reStructuredText metadata:
+
+```rst
+:github_url: https://github.com/pytorch/pytorch/blob/main/custom/path.rst
+```
+
+Available page-level options:
+- `:github_url:` - Force the "Edit on GitHub" link to a specific URL
+- `:bitbucket_url:` - Force the "Edit on Bitbucket" link to a specific URL
+- `:gitlab_url:` - Force the "Edit on GitLab" link to a specific URL
+
+---
+
+## Complete Example
+
+Here's a complete `conf.py` example with common configurations:
+
+```python
+import pytorch_sphinx_theme2
+
+html_theme = "pytorch_sphinx_theme2"
+html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
+
+# Extensions
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx_design",
+    "myst_nb",
+    "sphinx_tippy",
+    "pytorch_sphinx_theme2",
+]
+
+# Theme options
+html_theme_options = {
+    # Navigation
+    "navbar_align": "left",
+    "navbar_start": ["navbar-logo", "version-switcher"],
+    "navbar_center": ["navbar-nav"],
+    "navbar_end": ["search-field-custom", "theme-switcher", "navbar-icon-links"],
+    "collapse_navigation": False,
+    "use_edit_page_button": True,
+
+    # Project info
+    "canonical_url": "https://docs.pytorch.org/your-project/",
+    "analytics_id": "UA-XXXXXXXX-X",
+
+    # Header/Footer
+    "show_lf_header": False,
+    "show_lf_footer": True,
+
+    # Icon links
+    "icon_links": [
+        {"name": "GitHub", "url": "https://github.com/pytorch/pytorch", "icon": "fa-brands fa-github"},
+        {"name": "X", "url": "https://x.com/PyTorch", "icon": "fa-brands fa-x-twitter"},
+    ],
+
+    # Version switcher
+    "switcher": {
+        "json_url": "https://docs.pytorch.org/docs/pytorch-versions.json",
+        "version_match": "main",
+    },
+}
+
+# Context for templates
+theme_variables = pytorch_sphinx_theme2.get_theme_variables()
+html_context = {
+    "theme_variables": theme_variables,
+    "github_url": "https://github.com",
+    "github_user": "pytorch",
+    "github_repo": "your-repo",
+    "github_version": "main",
+    "doc_path": "docs",
+}
+
+# Static files
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+
+# Date info setup
+def setup(app):
+    app.config.add_last_updated = True
+    from pytorch_sphinx_theme2 import add_date_info_to_page
+    app.connect("html-page-context", add_date_info_to_page)
+    return {"version": "0.1.0", "parallel_read_safe": True}
+```
+
+---
+
+## See Also
+
+- [PyData Sphinx Theme Documentation](https://pydata-sphinx-theme.readthedocs.io/) - The parent theme
+- [Sphinx Configuration](https://www.sphinx-doc.org/en/master/usage/configuration.html) - Sphinx documentation
