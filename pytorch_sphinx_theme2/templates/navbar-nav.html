@@ -49,12 +49,14 @@
       </li>
     {% endfor %}
 
-    {# "More" dropdown for remaining items - simple links only #}
+    {# "More" dropdown for remaining items - uses CSS hover like other dropdowns #}
     {% if hierarchical_header_nav|length > max_visible_items %}
-      <li class="nav-item dropdown">
-        <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
-          More
-        </button>
+      <li class="nav-item dropdown more-dropdown">
+        <div class="nav-item-with-toggle">
+          <span class="nav-link more-toggle" tabindex="0" role="button" aria-expanded="false" aria-controls="pst-nav-more-links">
+            More
+          </span>
+        </div>
         <ul id="pst-nav-more-links" class="dropdown-menu">
           {% for item in hierarchical_header_nav[max_visible_items:] %}
             <li class="{{ 'current active' if item.current else '' }}">

@@ -264,6 +264,7 @@ html_theme_options = {
     },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
+    #"enable_navbar_dropdowns": False,
     # "pytorch_project": "tutorials",
     #"show_lf_header": False,
     # "show_lf_footer": False,

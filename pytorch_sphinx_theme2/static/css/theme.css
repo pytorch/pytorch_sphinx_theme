@@ -432,6 +432,11 @@ html[data-theme=dark] {
     padding-right: 0.4rem;
     font-size: 0.85rem;
   }
+  .bd-header .navbar-header-items__center .nav-item .more-toggle {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    font-size: 0.85rem;
+  }
 }
 @media (max-width: 1499.98px) and (min-width: 1410px) {
   .bd-header .navbar-header-items__center .navbar-item .nav-link {
@@ -439,9 +444,20 @@ html[data-theme=dark] {
     padding-right: 0.3rem;
     font-size: 0.8rem;
   }
+  .bd-header .navbar-header-items__center .nav-item .more-toggle {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    font-size: 0.8rem;
+  }
 }
 @media (max-width: 1409.98px) and (min-width: 960px) {
   .bd-header .navbar-header-items__center .navbar-item .nav-link {
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+    font-size: 0.72rem;
+    letter-spacing: -0.02em;
+  }
+  .bd-header .navbar-header-items__center .nav-item .more-toggle {
     padding-left: 0.15rem;
     padding-right: 0.15rem;
     font-size: 0.72rem;
@@ -3650,13 +3666,27 @@ span.highlighted {
 .bd-header ul.navbar-nav .dropdown .dropdown-toggle-btn {
   display: none;
 }
+.bd-header ul.navbar-nav .dropdown .more-toggle {
+  cursor: pointer;
+  white-space: nowrap;
+}
+.bd-header ul.navbar-nav .dropdown .more-toggle::after {
+  display: inline-block;
+  margin-left: 0.25em;
+  vertical-align: middle;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
 .bd-header ul.navbar-nav .dropdown > .dropdown-menu,
 .bd-header ul.navbar-nav .dropdown .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
   margin-top: 0;
-  padding-top: 0.5rem;
+  padding-top: 0.75rem;
   max-height: 70vh;
   overflow-y: auto;
 }
@@ -3664,10 +3694,10 @@ span.highlighted {
 .bd-header ul.navbar-nav .dropdown .dropdown-menu::before {
   content: "";
   position: absolute;
-  top: -0.5rem;
+  top: -0.25rem;
   left: 0;
   right: 0;
-  height: 0.5rem;
+  height: 0.25rem;
 }
 @media (min-width: 960px) {
   .bd-header ul.navbar-nav .dropdown .nav-item-with-toggle > a.nav-link::after {

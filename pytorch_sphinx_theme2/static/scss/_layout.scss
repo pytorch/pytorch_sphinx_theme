@@ -37,6 +37,13 @@
           font-size: 0.85rem;
         }
       }
+
+      // Also apply to the "More" toggle
+      .nav-item .more-toggle {
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        font-size: 0.85rem;
+      }
     }
   }
 }
@@ -51,6 +58,13 @@
           padding-right: 0.3rem;
           font-size: 0.8rem;
         }
+      }
+
+      // Also apply to the "More" toggle
+      .nav-item .more-toggle {
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        font-size: 0.8rem;
       }
     }
   }
@@ -67,6 +81,14 @@
           font-size: 0.72rem;
           letter-spacing: -0.02em;
         }
+      }
+
+      // Also apply to the "More" toggle
+      .nav-item .more-toggle {
+        padding-left: 0.15rem;
+        padding-right: 0.15rem;
+        font-size: 0.72rem;
+        letter-spacing: -0.02em;
       }
     }
   }
