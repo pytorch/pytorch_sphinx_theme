@@ -4,6 +4,7 @@ import json
 import os
 import posixpath
 import re
+import shutil
 import subprocess
 from pathlib import Path
 from uuid import uuid4
@@ -158,6 +159,70 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
         except Exception as e:
             print(f"Error getting dates for {full_source_path}: {e}")
 
+
+
+# =============================================================================
+# LLM Navigation Guide (llms.txt) support
+# =============================================================================
+
+
+def _generate_llms_txt(app, exception):
+    """Generate llms.txt from template and copy to site root after build completes."""
+    if exception is not None:
+        return  # Don't generate if build failed
+    
+    if app.builder.name != "html":
+        return
+    
+    # Check if LLM features are disabled
+    theme_options = app.config.html_theme_options or {}
+    if str(theme_options.get("llm_disabled", "false")).lower() == "true":
+        return
+    
+    # Check for custom llms.txt content first
+    custom_content = theme_options.get("llm_custom_llms_txt", "")
+    
+    if custom_content:
+        # Use custom content directly
+        content = custom_content
+    else:
+        # Generate from template
+        try:
+            from jinja2 import Environment, FileSystemLoader
+            
+            template_dir = Path(__file__).parent / "templates"
+            env = Environment(loader=FileSystemLoader(str(template_dir)))
+            template = env.get_template("llms.txt.jinja")
+            
+            # Gather context for template
+            context = {
+                "project": app.config.project,
+                "version": app.config.version or "latest",
+                "master_doc": app.config.root_doc,
+                "llm_description": theme_options.get("llm_description", ""),
+                "llm_docs_base_url": theme_options.get("llm_docs_base_url", ""),
+                "llm_content_types": theme_options.get("llm_content_types", "api-reference, tutorials, guides, examples"),
+                "llm_language": theme_options.get("llm_language", "python"),
+                "llm_important_pages": theme_options.get("llm_important_pages", ""),
+                "llm_key_docs": theme_options.get("llm_key_docs", ""),
+            }
+            
+            content = template.render(**context)
+        except Exception as e:
+            print(f"Warning: Could not generate llms.txt from template: {e}")
+            # Fallback to static file if it exists
+            static_path = Path(app.outdir) / "_static" / "llms.txt"
+            if static_path.exists():
+                shutil.copy2(static_path, Path(app.outdir) / "llms.txt")
+            return
+    
+    # Write to site root
+    dest_path = Path(app.outdir) / "llms.txt"
+    try:
+        dest_path.write_text(content, encoding="utf-8")
+        print(f"Generated llms.txt at site root: {dest_path}")
+    except Exception as e:
+        print(f"Warning: Could not write llms.txt to site root: {e}")
 
 
 # =============================================================================
@@ -368,6 +433,9 @@ def setup(app):
         app.connect("env-merge-info", _merge_glossary_terms)
         # Write JS immediately during page context (high priority to run early)
         app.connect("html-page-context", _write_glossary_tippy_js, priority=900)
+
+    # Copy llms.txt to site root after build completes
+    app.connect("build-finished", _generate_llms_txt)
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)

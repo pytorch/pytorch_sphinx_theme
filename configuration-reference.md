@@ -205,6 +205,126 @@ html_theme_options = {
 
 ---
 
+### LLM Discovery Configuration
+
+The theme includes built-in support for helping AI agents and LLMs discover and navigate the documentation effectively. This follows the emerging [llms.txt](https://llmstxt.org/) standard.
+
+#### How It Works
+
+When enabled, the theme:
+1. Generates a `/llms.txt` file at the site root with navigation guidance
+2. Adds machine-readable `<meta name="llm:*">` tags to every page
+3. Includes a `<link rel="alternate">` pointing to the llms.txt file
+
+#### `llm_description`
+- **Type:** String
+- **Default:** `""` (auto-generated from project name)
+- **Description:** A brief description of the site for LLMs. Appears in the `llm:description` meta tag and at the top of `llms.txt`.
+
+```python
+html_theme_options = {
+    "llm_description": "TorchVision provides datasets, models, and transforms for computer vision tasks.",
+}
+```
+
+#### `llm_content_types`
+- **Type:** String (comma-separated list)
+- **Default:** `"api-reference, tutorials, guides, examples"`
+- **Description:** Types of content available on the site. Helps LLMs understand what to expect.
+
+```python
+html_theme_options = {
+    "llm_content_types": "api-reference, tutorials, examples",
+}
+```
+
+#### `llm_language`
+- **Type:** String
+- **Default:** `"python"`
+- **Description:** Primary programming language of the documentation/code examples.
+
+```python
+html_theme_options = {
+    "llm_language": "python",
+}
+```
+
+#### `llm_important_pages`
+- **Type:** String (comma-separated list)
+- **Default:** `""`
+- **Description:** Key entry points for the documentation. Helps LLMs know where to start.
+
+```python
+html_theme_options = {
+    "llm_important_pages": "getting-started, api/index, tutorials/quickstart",
+}
+```
+
+#### `llm_custom_llms_txt`
+- **Type:** String
+- **Default:** `""`
+- **Description:** Custom content for the `llms.txt` file. If provided, this replaces the auto-generated template entirely. Use this for complete control over the LLM guidance.
+
+```python
+html_theme_options = {
+    "llm_custom_llms_txt": """# Custom LLM Guide for MyProject
+> MyProject is a specialized library for...
+
+## Key APIs
+- my_module.function_a()
+- my_module.function_b()
+""",
+}
+```
+
+#### `llm_disabled`
+- **Type:** Boolean
+- **Default:** `False`
+- **Description:** If `True`, disables all LLM discovery features (no `llms.txt` generation, no meta tags).
+
+```python
+html_theme_options = {
+    "llm_disabled": True,  # Disable LLM discovery features
+}
+```
+
+#### Generated Meta Tags
+
+The theme automatically adds the following meta tags to every page:
+
+```html
+<meta name="llm:site-type" content="documentation">
+<meta name="llm:framework" content="PyTorch">
+<meta name="llm:generator" content="Sphinx">
+<meta name="llm:theme" content="PyTorch Sphinx Theme">
+<meta name="llm:description" content="...">
+<meta name="llm:content-types" content="api-reference, tutorials, guides, examples">
+<meta name="llm:language" content="python">
+<meta name="llm:navigation-file" content="/llms.txt">
+<meta name="llm:sitemap" content="/sitemap.xml">
+<meta name="llm:version" content="2.0.0">
+<meta name="llm:project" content="TorchVision">
+<meta name="llm:page-type" content="api|tutorial|documentation">
+<meta name="llm:important-pages" content="...">  <!-- if configured -->
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
+```
+
+#### Example Configuration for TorchVision
+
+```python
+html_theme_options = {
+    # ... other options ...
+
+    # LLM Discovery
+    "llm_description": "TorchVision provides datasets, model architectures, and image transforms for computer vision. Part of the PyTorch ecosystem.",
+    "llm_content_types": "api-reference, tutorials, examples, datasets",
+    "llm_language": "python",
+    "llm_important_pages": "index, models, datasets, transforms",
+}
+```
+
+---
+
 ### Icon Links
 
 #### `icon_links`
@@ -374,16 +494,108 @@ html_context = {
 
 #### `doc_path`
 - **Type:** String
-- **Description:** Path to the documentation source within the repository.
+- **Description:** Path to the documentation source files within the repository. Used by the "Edit on GitHub" button to construct the correct URL for editing source files.
 
-### Colab Integration
+| Repository Structure | `doc_path` Value |
+|---------------------|------------------|
+| `repo/docs/file.rst` | `"docs"` |
+| `repo/docs/source/file.rst` | `"docs/source"` |
+| `repo/source/file.rst` | `"source"` |
+| `repo/file.rst` (root) | `""` or `"."` |
 
-#### `colab_branch`
-- **Type:** String
-- **Description:** Branch to use for Colab notebook links.
+#### `has_sphinx_gallery`
+- **Type:** Boolean
+- **Description:** Set to `True` to enable call-to-action buttons (Run in Google Colab, Download Notebook, View on GitHub) on sphinx-gallery generated pages.
 
 ```python
 html_context = {
+    "has_sphinx_gallery": True,
+}
+```
+
+### Sphinx-Gallery Call-to-Action Links
+
+When using [sphinx-gallery](https://sphinx-gallery.github.io/) to generate tutorials from Python scripts, the theme can display call-to-action buttons at the top of each tutorial page:
+
+- **Run in Google Colab** - Opens the notebook in Google Colab
+- **Download Notebook** - Downloads the `.ipynb` file
+- **View on GitHub** - Links to the source `.py` file
+
+#### Enabling Call-to-Action Links
+
+To enable these buttons, set `has_sphinx_gallery` to `True` and configure the repository settings:
+
+```python
+html_context = {
+    "has_sphinx_gallery": True,
+    "github_url": "https://github.com",
+    "github_user": "your-org",
+    "github_repo": "your-tutorials-repo",
+    "github_version": "main",           # Branch for source .py files
+    "colab_branch": "gh-pages",         # Branch where .ipynb files are hosted
+}
+```
+
+#### How the Links Work
+
+| Button | URL Pattern |
+|--------|-------------|
+| **Run in Google Colab** | `https://colab.research.google.com/github/{user}/{repo}/blob/{colab_branch}/_downloads/{notebook_path}` |
+| **Download Notebook** | Links to the sphinx-gallery generated `.ipynb` download |
+| **View on GitHub** | `https://github.com/{user}/{repo}/blob/{github_version}/{tutorial_path}.py` |
+
+#### `colab_branch`
+- **Type:** String
+- **Default:** `"gh-pages"`
+- **Description:** The branch where notebook files (`.ipynb`) are hosted for Google Colab access. Typically this is `gh-pages` where the built documentation is deployed.
+
+```python
+html_context = {
+    "colab_branch": "gh-pages",
+}
+```
+
+#### Requirements
+
+1. **sphinx-gallery extension** must be enabled:
+   ```python
+   extensions = [
+       "sphinx_gallery.gen_gallery",
+   ]
+   ```
+
+2. **sphinx-gallery must be configured**:
+   ```python
+   sphinx_gallery_conf = {
+       "examples_dirs": "examples",        # Directory with .py tutorial files
+       "gallery_dirs": "auto_examples",    # Output directory for generated docs
+       "filename_pattern": "/example_",    # Pattern for files to process
+   }
+   ```
+
+3. **Notebooks must be accessible** on the `colab_branch` (e.g., `gh-pages`) for Colab to load them.
+
+#### Complete Example
+
+```python
+# conf.py
+extensions = [
+    "sphinx_gallery.gen_gallery",
+    "pytorch_sphinx_theme2",
+]
+
+sphinx_gallery_conf = {
+    "examples_dirs": "examples",
+    "gallery_dirs": "auto_examples",
+    "filename_pattern": "/example_",
+}
+
+html_context = {
+    "has_sphinx_gallery": True,
+    "github_url": "https://github.com",
+    "github_user": "pytorch",
+    "github_repo": "tutorials",
+    "github_version": "main",
     "colab_branch": "gh-pages",
 }
 ```

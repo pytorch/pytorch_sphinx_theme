@@ -2,6 +2,30 @@
 
 {% block extrahead %}
 {{ super() }}
+{% if theme_llm_disabled|lower != 'true' and theme_llm_disabled != true %}
+<!-- LLM/AI Agent: See /llms.txt for comprehensive navigation guidance -->
+<!-- Machine-readable LLM metadata -->
+<meta name="llm:site-type" content="documentation">
+<meta name="llm:framework" content="PyTorch">
+<meta name="llm:generator" content="Sphinx">
+<meta name="llm:theme" content="PyTorch Sphinx Theme">
+{% if theme_llm_description %}
+<meta name="llm:description" content="{{ theme_llm_description }}">
+{% else %}
+<meta name="llm:description" content="Documentation for {{ project }}, part of the PyTorch ecosystem.">
+{% endif %}
+<meta name="llm:content-types" content="{{ theme_llm_content_types|default('api-reference, tutorials, guides, examples') }}">
+<meta name="llm:language" content="{{ theme_llm_language|default('python') }}">
+<meta name="llm:navigation-file" content="/llms.txt">
+<meta name="llm:sitemap" content="/sitemap.xml">
+<meta name="llm:version" content="{{ version }}">
+<meta name="llm:project" content="{{ project }}">
+<meta name="llm:page-type" content="{% if 'generated' in pagename %}api{% elif 'tutorial' in pagename %}tutorial{% else %}documentation{% endif %}">
+{% if theme_llm_important_pages %}
+<meta name="llm:important-pages" content="{{ theme_llm_important_pages }}">
+{% endif %}
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
+{% endif %}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <script>

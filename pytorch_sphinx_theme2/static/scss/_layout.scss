@@ -207,17 +207,37 @@ body.search-page {
 }
 
 // Ensure search results don't have restricted height
+// Only apply fixed positioning on desktop - mobile uses Bootstrap offcanvas
 .bd-sidebar-primary, .bd-sidebar-secondary {
-  height: calc(100vh - var(--header-height-desktop) - 60px) !important;
-  top: calc(var(--header-height-desktop) + 60px) !important;
+  @media (min-width: 960px) {
+    height: calc(100vh - var(--header-height-desktop) - 60px) !important;
+    top: calc(var(--header-height-desktop) + 60px) !important;
+    overflow-y: auto;
+  }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1200px) and (min-width: 960px) {
     height: calc(100vh - var(--header-height) - 60px) !important;
     top: calc(var(--header-height) + 60px) !important;
   }
+}
 
-  @media (max-width: 767px) {
-    max-height: none !important;
+// Mobile sidebar - ensure Bootstrap offcanvas works correctly
+// pydata_sphinx_theme uses Bootstrap offcanvas which handles positioning via transforms
+@media (max-width: 959.98px) {
+  .bd-sidebar-primary,
+  .bd-sidebar-secondary {
+    // Let pydata_sphinx_theme/Bootstrap handle the offcanvas positioning
+    // Ensure sidebar is above the overlay (overlay is typically z-index 1040)
+    z-index: 1050 !important;
+    overflow-y: auto !important;
+    background-color: var(--pst-color-background) !important; // Ensure solid background
+  }
+
+  // Keep the backdrop/overlay but don't let it cover the sidebar
+  .offcanvas-backdrop,
+  label.overlay,
+  .overlay-primary {
+    z-index: 1040 !important; // Below the sidebar (1050)
   }
 }
 
@@ -298,12 +318,13 @@ div.cell > div.cell_input {
 
 // PR #215/#224: Hide sidebar when empty (no navigation items)
 // CSS-only approach - hides sidebar when there are no list items in the navigation
-.bd-sidebar-primary:not(:has(.bd-docs-nav li)) {
-  display: none !important;
-}
-
-// Adjust main content padding when sidebar is hidden (desktop only)
+// Only apply on desktop - on mobile, sidebar is controlled by offcanvas
 @media (min-width: 960px) {
+  .bd-sidebar-primary:not(:has(.bd-docs-nav li)) {
+    display: none !important;
+  }
+
+  // Adjust main content padding when sidebar is hidden (desktop only)
   .bd-sidebar-primary:not(:has(.bd-docs-nav li)) + .bd-main .bd-content .bd-article-container {
     padding-left: 8rem !important;
   }

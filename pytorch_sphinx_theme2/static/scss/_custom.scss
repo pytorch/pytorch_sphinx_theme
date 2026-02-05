@@ -135,8 +135,8 @@ nav.bd-links li>a {
 
   @media (max-width: 959.98px) {
     width: 75%;
-    top: 30px;
     padding: 1rem;
+    // Don't set top here - let Bootstrap offcanvas handle positioning
   }
 }
 
