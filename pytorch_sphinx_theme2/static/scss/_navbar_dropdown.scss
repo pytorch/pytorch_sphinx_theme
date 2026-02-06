@@ -46,7 +46,7 @@
     left: 0;
     margin-top: 0;
     padding-top: 0.75rem; // Visual gap between nav item and dropdown content
-    max-height: 70vh !important; // Limit height to 70% of viewport
+    max-height: 50vh !important; // Limit height to 50% of viewport
     overflow-y: auto !important; // Enable scroll for long lists
 
     // Create a pseudo-element to bridge any remaining gap for hover
@@ -110,11 +110,33 @@
 // Ensure dropdown menus are scrollable for long toctrees (desktop)
 // This needs high specificity to override Bootstrap/pydata defaults
 @media (min-width: 960px) {
-  .bd-header ul.navbar-nav .dropdown .dropdown-menu,
-  .bd-header .navbar-nav .nav-item.dropdown .dropdown-menu,
-  .bd-header .bd-navbar-elements .dropdown .dropdown-menu {
-    max-height: 70vh !important;
+  // Force the dropdown container to allow overflow
+  .bd-header,
+  .bd-header .navbar-header-items,
+  .bd-header .navbar-header-items__center,
+  .bd-header ul.navbar-nav,
+  .bd-header ul.navbar-nav .nav-item.dropdown {
+    overflow: visible !important;
+  }
+
+  // Scrollable dropdown menus with CSS scroll shadow
+  .bd-header ul.navbar-nav .dropdown-menu {
+    max-height: 50vh !important;
     overflow-y: auto !important;
-    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+
+    // CSS Scroll Shadow technique:
+    // - "cover" uses background-attachment: local (scrolls with content)
+    // - "shadow" uses background-attachment: scroll (stays fixed)
+    // When scrolled to bottom, the cover hides the shadow
+    background:
+      // Shadow cover - scrolls with content, hides shadow when at bottom
+      linear-gradient(rgba(255, 255, 255, 0), var(--pst-color-background, white) 70%) 0 100%,
+      // Shadow - stays fixed at bottom, visible when there's more to scroll
+      radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+    background-repeat: no-repeat;
+    background-color: var(--pst-color-background, white);
+    background-size: 100% 40px, 100% 14px;
+    background-attachment: local, scroll;
   }
 }

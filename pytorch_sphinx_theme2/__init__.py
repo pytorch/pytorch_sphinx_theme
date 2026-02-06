@@ -359,8 +359,6 @@ def _get_toctree_children(app, docname):
                     "title": str(child_title),
                     "url": child_docname,
                 })
-                if len(children) >= 10:  # Limit children for performance
-                    break
     except Exception:
         pass
     return children

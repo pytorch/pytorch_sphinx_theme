@@ -109,8 +109,18 @@ html[data-theme="dark"] {
     margin-right: auto;
   }
 
+  .sd-row[class*="sd-row-cols-"] {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+
+    > .sd-col {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+  }
+
   .sd-card {
-    max-width: 420px;
+    max-width: 500px;
   }
 }
 
