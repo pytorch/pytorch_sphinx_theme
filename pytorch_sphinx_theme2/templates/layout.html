@@ -303,7 +303,7 @@
 
 {% block docs_body %}
 {% include "components/searchbox.html" %}
-<article class="bd-article" id="pytorch-article">
+<div id="pytorch-article">
   <!-- Hidden breadcrumb schema for SEO only -->
   <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
     {% for parent in parents %}
@@ -357,7 +357,7 @@
   {% endif %}
 
   {{ super() }}
-</article>
+</div>
 {% endblock docs_body %}
 
   {% block footer%}
