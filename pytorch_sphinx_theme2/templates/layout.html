@@ -8,22 +8,18 @@
 <meta name="llm:site-type" content="documentation">
 <meta name="llm:framework" content="PyTorch">
 <meta name="llm:generator" content="Sphinx">
-<meta name="llm:theme" content="PyTorch Sphinx Theme">
-{% if theme_llm_description %}
-<meta name="llm:description" content="{{ theme_llm_description }}">
+{% if page_meta_description %}
+<meta name="llm:description" content="{{ page_meta_description }}">
+{% elif theme_llm_description %}
+<meta name="llm:description" content="{{ theme_llm_description }} - {{ title|striptags }}">
 {% else %}
-<meta name="llm:description" content="Documentation for {{ project }}, part of the PyTorch ecosystem.">
+<meta name="llm:description" content="{{ title|striptags }} - Documentation for {{ project }}, part of the PyTorch ecosystem.">
 {% endif %}
-<meta name="llm:content-types" content="{{ theme_llm_content_types|default('api-reference, tutorials, guides, examples') }}">
-<meta name="llm:language" content="{{ theme_llm_language|default('python') }}">
 <meta name="llm:navigation-file" content="/llms.txt">
 <meta name="llm:sitemap" content="/sitemap.xml">
 <meta name="llm:version" content="{{ version }}">
 <meta name="llm:project" content="{{ project }}">
 <meta name="llm:page-type" content="{% if 'generated' in pagename %}api{% elif 'tutorial' in pagename %}tutorial{% else %}documentation{% endif %}">
-{% if theme_llm_important_pages %}
-<meta name="llm:important-pages" content="{{ theme_llm_important_pages }}">
-{% endif %}
 <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
 {% endif %}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -373,7 +369,7 @@
        "@type": "Article",
        "name": {{ title|striptags|trim|tojson }},
        "headline": {{ title|striptags|trim|tojson }},
-       "description": "PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment. Discover tutorials, API references, and guides to help you build and deploy deep learning models efficiently.",
+       "description": {% if page_meta_description %}{{ page_meta_description|tojson }}{% elif theme_llm_description %}{{ (theme_llm_description ~ " - " ~ title|striptags)|tojson }}{% else %}"PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment."{% endif %},
        "url": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}",
        "articleBody": {{ body|striptags|trim|tojson }},
        "author": {

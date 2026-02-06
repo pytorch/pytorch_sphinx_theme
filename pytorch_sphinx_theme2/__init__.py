@@ -4,7 +4,6 @@ import json
 import os
 import posixpath
 import re
-import shutil
 import subprocess
 from pathlib import Path
 from uuid import uuid4
@@ -166,8 +165,48 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
 # =============================================================================
 
 
+def _build_llms_url(domain, base_path, version, relative_path=""):
+    """Build a full URL for llms.txt links.
+    
+    Args:
+        domain: The documentation domain (e.g., "docs.pytorch.org")
+        base_path: The base path after domain (e.g., "docs/", "vision/")
+        version: The documentation version (e.g., "stable", "2.0.0")
+        relative_path: The relative path to the page (e.g., "index.html")
+    
+    Returns:
+        Full URL like "https://docs.pytorch.org/docs/stable/index.html"
+    """
+    # Ensure domain doesn't have trailing slash
+    domain = domain.rstrip("/")
+    
+    # Ensure base_path has proper format (no leading slash, has trailing slash if non-empty)
+    base_path = base_path.strip("/")
+    if base_path:
+        base_path = base_path + "/"
+    
+    # Ensure version doesn't have slashes
+    version = version.strip("/")
+    
+    # Ensure relative_path doesn't have leading slash
+    relative_path = relative_path.lstrip("/")
+    
+    # Build URL
+    if relative_path:
+        return f"https://{domain}/{base_path}{version}/{relative_path}"
+    else:
+        return f"https://{domain}/{base_path}{version}/"
+
+
 def _generate_llms_txt(app, exception):
-    """Generate llms.txt from template and copy to site root after build completes."""
+    """Dynamically generate llms.txt during documentation build.
+    
+    Generates a simple, clean llms.txt following the format used by Hugging Face:
+    - Project header
+    - List of documentation pages as markdown links
+    
+    URLs are constructed from: domain + base_path + version + relative_path
+    """
     if exception is not None:
         return  # Don't generate if build failed
     
@@ -179,48 +218,66 @@ def _generate_llms_txt(app, exception):
     if str(theme_options.get("llm_disabled", "false")).lower() == "true":
         return
     
-    # Check for custom llms.txt content first
-    custom_content = theme_options.get("llm_custom_llms_txt", "")
+    # Get configuration
+    project = app.config.project or "Documentation"
+    version = app.config.version or "latest"
+    domain = theme_options.get("llm_domain", "").strip()
+    base_path = theme_options.get("llm_base_path", "").strip()
     
-    if custom_content:
-        # Use custom content directly
-        content = custom_content
-    else:
-        # Generate from template
-        try:
-            from jinja2 import Environment, FileSystemLoader
+    # Build base URL if domain is provided
+    if not domain:
+        print("Warning: llm_domain not set in html_theme_options, skipping llms.txt generation")
+        return
+    
+    # Helper to build full URL
+    def make_url(relative_path):
+        return _build_llms_url(domain, base_path, version, relative_path)
+    
+    # Collect all documentation pages
+    docs = []
+    
+    try:
+        # Get all document names from the environment
+        all_docs = list(app.env.all_docs.keys()) if hasattr(app.env, 'all_docs') else []
+        
+        for docname in sorted(all_docs):
+            # Skip internal/private pages
+            if docname.startswith("_"):
+                continue
             
-            template_dir = Path(__file__).parent / "templates"
-            env = Environment(loader=FileSystemLoader(str(template_dir)))
-            template = env.get_template("llms.txt.jinja")
+            # Get the page title
+            title = app.env.titles.get(docname, docname)
+            if hasattr(title, "astext"):
+                title = title.astext()
             
-            # Gather context for template
-            context = {
-                "project": app.config.project,
-                "version": app.config.version or "latest",
-                "master_doc": app.config.root_doc,
-                "llm_description": theme_options.get("llm_description", ""),
-                "llm_docs_base_url": theme_options.get("llm_docs_base_url", ""),
-                "llm_content_types": theme_options.get("llm_content_types", "api-reference, tutorials, guides, examples"),
-                "llm_language": theme_options.get("llm_language", "python"),
-                "llm_important_pages": theme_options.get("llm_important_pages", ""),
-                "llm_key_docs": theme_options.get("llm_key_docs", ""),
-            }
+            # Build the URL
+            url = make_url(docname + ".html")
+            docs.append({"title": str(title), "url": url})
             
-            content = template.render(**context)
-        except Exception as e:
-            print(f"Warning: Could not generate llms.txt from template: {e}")
-            # Fallback to static file if it exists
-            static_path = Path(app.outdir) / "_static" / "llms.txt"
-            if static_path.exists():
-                shutil.copy2(static_path, Path(app.outdir) / "llms.txt")
-            return
+    except Exception as e:
+        print(f"Warning: Could not discover pages for llms.txt: {e}")
+    
+    # Build the llms.txt content in Hugging Face style
+    lines = []
+    
+    # Header
+    lines.append(f"# {project}")
+    lines.append("")
+    lines.append("## Docs")
+    lines.append("")
+    
+    # List all documentation pages
+    for doc in docs:
+        lines.append(f"- [{doc['title']}]({doc['url']})")
+    
+    # Join content
+    content = "\n".join(lines)
     
     # Write to site root
     dest_path = Path(app.outdir) / "llms.txt"
     try:
         dest_path.write_text(content, encoding="utf-8")
-        print(f"Generated llms.txt at site root: {dest_path}")
+        print(f"Generated llms.txt with {len(docs)} pages at: {dest_path}")
     except Exception as e:
         print(f"Warning: Could not write llms.txt to site root: {e}")
 
@@ -407,6 +464,27 @@ def _add_hierarchical_nav_to_context(app, pagename, templatename, context, doctr
     context["hierarchical_header_nav"] = _generate_hierarchical_header_nav(app, pagename)
 
 
+def _extract_page_meta_description(app, pagename, templatename, context, doctree):
+    """Extract the meta description from metatags and add it to context for LLM tags.
+    
+    The .. meta:: directive in RST generates HTML meta tags in the 'metatags' context
+    variable. This function parses that HTML to extract the description value and
+    makes it available as 'page_meta_description' for use in templates.
+    """
+    metatags = context.get("metatags", "")
+    if not metatags:
+        return
+    
+    # Parse the metatags HTML to extract the description
+    # metatags contains raw HTML like: <meta content="..." name="description" />
+    import re
+    # Match format: content="..." name="description" (Sphinx typically uses this order)
+    pattern = r'<meta[^>]*content="([^"]*)"[^>]*name="description"[^>]*/?\s*>'
+    match = re.search(pattern, metatags, re.IGNORECASE)
+    if match:
+        context["page_meta_description"] = match.group(1)
+
+
 # =============================================================================
 # Sphinx setup function
 # =============================================================================
@@ -419,6 +497,9 @@ def setup(app):
 
     # Add hierarchical navigation context for dropdown menus
     app.connect("html-page-context", _add_hierarchical_nav_to_context)
+    
+    # Extract page meta description for LLM tags
+    app.connect("html-page-context", _extract_page_meta_description)
 
     # Configuration for sphinx-tippy parallel build fix
     # tippy_glossary_page: name of the glossary page (without extension)
