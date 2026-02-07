@@ -2692,7 +2692,7 @@ a.btn {
 }
 @media (min-width: 2400px) {
   .bd-main .bd-content .bd-article-container .bd-article {
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 }

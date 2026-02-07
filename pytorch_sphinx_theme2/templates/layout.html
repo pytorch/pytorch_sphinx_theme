@@ -7,7 +7,6 @@
 <!-- Machine-readable LLM metadata -->
 <meta name="llm:site-type" content="documentation">
 <meta name="llm:framework" content="PyTorch">
-<meta name="llm:generator" content="Sphinx">
 {% if page_meta_description %}
 <meta name="llm:description" content="{{ page_meta_description }}">
 {% elif theme_llm_description %}
@@ -15,12 +14,20 @@
 {% else %}
 <meta name="llm:description" content="{{ title|striptags }} - Documentation for {{ project }}, part of the PyTorch ecosystem.">
 {% endif %}
-<meta name="llm:navigation-file" content="/llms.txt">
-<meta name="llm:sitemap" content="/sitemap.xml">
+{% if theme_llm_domain %}
+{% set llm_base = ('https://' ~ theme_llm_domain ~ '/' ~ theme_llm_base_path)|replace('//', '/')|replace('https:/', 'https://') %}
+{% elif theme_canonical_url %}
+{% set llm_base = theme_canonical_url %}
+{% else %}
+{% set llm_base = '' %}
+{% endif %}
+{% set llm_base = llm_base.rstrip('/') %}
+<meta name="llm:navigation-file" content="{{ llm_base }}/llms.txt">
+<meta name="llm:sitemap" content="{{ llm_base }}/sitemap.xml">
 <meta name="llm:version" content="{{ version }}">
 <meta name="llm:project" content="{{ project }}">
 <meta name="llm:page-type" content="{% if 'generated' in pagename %}api{% elif 'tutorial' in pagename %}tutorial{% else %}documentation{% endif %}">
-<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
+<link rel="alternate" type="text/plain" href="{{ llm_base }}/llms.txt" title="LLM Navigation Guide">
 {% endif %}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>

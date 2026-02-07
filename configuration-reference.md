@@ -290,24 +290,25 @@ html_theme_options = {
 
 #### Generated Meta Tags
 
-The theme automatically adds the following meta tags to every page:
+The theme automatically adds the following meta tags to every page. When `llm_domain` or `canonical_url` are configured, absolute URLs are generated:
 
 ```html
 <meta name="llm:site-type" content="documentation">
 <meta name="llm:framework" content="PyTorch">
 <meta name="llm:generator" content="Sphinx">
-<meta name="llm:theme" content="PyTorch Sphinx Theme">
 <meta name="llm:description" content="...">
-<meta name="llm:content-types" content="api-reference, tutorials, guides, examples">
-<meta name="llm:language" content="python">
-<meta name="llm:navigation-file" content="/llms.txt">
-<meta name="llm:sitemap" content="/sitemap.xml">
+<meta name="llm:navigation-file" content="https://pytorch.org/tutorials/llms.txt">
+<meta name="llm:sitemap" content="https://pytorch.org/tutorials/sitemap.xml">
 <meta name="llm:version" content="2.0.0">
-<meta name="llm:project" content="TorchVision">
+<meta name="llm:project" content="PyTorch Tutorials">
 <meta name="llm:page-type" content="api|tutorial|documentation">
-<meta name="llm:important-pages" content="...">  <!-- if configured -->
-<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
+<link rel="alternate" type="text/plain" href="https://pytorch.org/tutorials/llms.txt" title="LLM Navigation Guide">
 ```
+
+The base URL is determined in this order of precedence:
+1. `llm_domain` + `llm_base_path` (if `llm_domain` is set)
+2. `canonical_url` (if set)
+3. Root-relative paths (e.g., `/llms.txt`) as fallback
 
 #### Example Configuration for TorchVision
 
