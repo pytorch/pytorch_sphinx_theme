@@ -3723,6 +3723,11 @@ span.highlighted {
   margin-bottom: 0.25rem;
 }
 
+.bd-header ul.navbar-nav .nav-link .external-icon {
+  font-size: 0.85em;
+  vertical-align: baseline;
+}
+
 .bd-header ul.navbar-nav .dropdown {
   position: relative;
 }

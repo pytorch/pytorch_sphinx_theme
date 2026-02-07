@@ -10,6 +10,7 @@ Welcome to PyTorch Sphinx Theme 2 Docs
    :caption: Theme Documentation
    :maxdepth: 1
 
+   Install PyTorch <https://pytorch.org/get-started/locally/>
    installing
    configuring
    changelog

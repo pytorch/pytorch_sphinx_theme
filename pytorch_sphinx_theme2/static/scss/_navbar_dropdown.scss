@@ -2,6 +2,12 @@
 // Ensure our dropdowns inherit the same styles as the "More" dropdown
 @use 'variables';
 
+// External link icon in navbar - match text size
+.bd-header ul.navbar-nav .nav-link .external-icon {
+  font-size: 0.85em;
+  vertical-align: baseline;
+}
+
 // Desktop: hover to show dropdown
 // Mobile: no dropdown children shown, just a link to the parent page
 .bd-header ul.navbar-nav .dropdown {
