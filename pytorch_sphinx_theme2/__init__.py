@@ -463,7 +463,12 @@ def _get_toctree_entries_from_doctree(app, docname):
 
 
 def _generate_hierarchical_header_nav(app, pagename):
-    """Generate hierarchical header navigation data for dropdown menus."""
+    """Generate hierarchical header navigation data for dropdown menus.
+
+    Includes:
+    - Toctree entries from the root document (including external URLs)
+    - External links from html_theme_options["external_links"]
+    """
     nav_items = []
 
     try:
@@ -518,6 +523,21 @@ def _generate_hierarchical_header_nav(app, pagename):
                         "current": is_current,
                         "children": children,
                         "external": False,
+                    }
+                )
+
+        # Also include external_links from html_theme_options
+        theme_options = getattr(app.config, "html_theme_options", {}) or {}
+        external_links = theme_options.get("external_links", [])
+        for link in external_links:
+            if isinstance(link, dict) and link.get("url"):
+                nav_items.append(
+                    {
+                        "title": str(link.get("name", link["url"])),
+                        "url": link["url"],
+                        "current": False,
+                        "children": [],
+                        "external": True,
                     }
                 )
     except Exception:
