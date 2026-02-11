@@ -158,3 +158,11 @@
     width: 50%;
   }
 }
+
+// Wide screen styles - limit main content width for readability
+@media (min-width: 1800px) {
+  .bd-main .bd-content .bd-article-container .bd-article {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

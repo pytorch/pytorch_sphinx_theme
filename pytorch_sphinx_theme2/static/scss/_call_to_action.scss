@@ -16,6 +16,11 @@
     padding-top: 2.5rem;
   }
 
+  // Wide screen - left align
+  @media (min-width: 992px) {
+    justify-content: flex-start;
+  }
+
   #tutorial-type {
     display: none;
   }

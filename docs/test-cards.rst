@@ -1,11 +1,10 @@
-Intro
-=====
+SD-Cards Test Page
+==================
 
-This is a collection of beginner-friendly resources to help you get
-started with PyTorch. These tutorials cover fundamental concepts,
-basic operations, and essential workflows to build a solid foundation
-for your deep learning journey. Perfect for newcomers looking to
-understand PyTorch's core functionality through step-by-step guidance.
+This page tests sd-card components for mobile responsiveness.
+
+Basic 2-Column Grid
+-------------------
 
 .. grid:: 2
 
@@ -29,6 +28,9 @@ understand PyTorch's core functionality through step-by-step guidance.
        +++
        :octicon:`code;1em` Code :octicon:`square-fill;1em` :octicon:`video;1em` Video
 
+Single Card in Grid
+-------------------
+
 .. grid:: 2
 
     .. grid-item-card:: :octicon:`file-code;1em`
@@ -41,41 +43,66 @@ understand PyTorch's core functionality through step-by-step guidance.
        +++
        :octicon:`code;1em` Code
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-   :includehidden:
-   :caption: Getting Started with PyTorch
+What You Will Learn / Prerequisites Cards
+-----------------------------------------
 
-   beginner/basics/intro
-   beginner/introyt/introyt_index
-
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-   :includehidden:
-   :caption: Learning PyTorch
-
-   beginner/deep_learning_60min_blitz
-   beginner/pytorch_with_examples
-   beginner/nn_tutorial
-   intermediate/nlp_from_scratch_index
-   intermediate/tensorboard_tutorial
-   intermediate/pinmem_nonblock
+These are the cards that appear at the top of tutorials (similar to the mobile screenshot):
 
 .. grid:: 2
 
    .. grid-item-card:: :octicon:`mortar-board;1em;` What you will learn
       :class-card: card-prerequisites
 
-      * PyTorch's Fully Sharded Data Parallel Module: A wrapper for sharding module parameters across
-      data parallel workers.
-
-
-
+      * Fundamentals of embeddings and their role in recommendation systems
+      * How to implement embeddings with PyTorch and TorchRec
+      * Handling large embedding tables through distributed training
+      * Advanced optimizations for embedding-based models
 
    .. grid-item-card:: :octicon:`list-unordered;1em;` Prerequisites
       :class-card: card-prerequisites
 
-      * PyTorch 1.12 or later
-      * Read about the `FSDP API <https://pytorch.org/docs/main/fsdp.html>`__.
+      * PyTorch v2.5 or later with CUDA 11.8 or later
+      * Python 3.9 or later
+      * `FBGEMM <https://github.com/pytorch/FBGEMM>`__
+      * Basic understanding of neural networks
+
+3-Column Grid Test
+------------------
+
+.. grid:: 3
+
+    .. grid-item-card:: Card 1
+       :class-card: card-prerequisites
+
+       Content for the first card in a 3-column layout.
+
+    .. grid-item-card:: Card 2
+       :class-card: card-prerequisites
+
+       Content for the second card in a 3-column layout.
+
+    .. grid-item-card:: Card 3
+       :class-card: card-prerequisites
+
+       Content for the third card in a 3-column layout.
+
+4-Column Grid Test
+------------------
+
+.. grid:: 4
+
+    .. grid-item-card:: Item A
+
+       Short content.
+
+    .. grid-item-card:: Item B
+
+       Short content.
+
+    .. grid-item-card:: Item C
+
+       Short content.
+
+    .. grid-item-card:: Item D
+
+       Short content.

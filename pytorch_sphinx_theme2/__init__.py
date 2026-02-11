@@ -159,6 +159,129 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
             print(f"Error getting dates for {full_source_path}: {e}")
 
 
+# =============================================================================
+# LLM Navigation Guide (llms.txt) support
+# =============================================================================
+
+
+def _build_llms_url(domain, base_path, version, relative_path=""):
+    """Build a full URL for llms.txt links.
+
+    Args:
+        domain: The documentation domain (e.g., "docs.pytorch.org")
+        base_path: The base path after domain (e.g., "docs/", "vision/")
+        version: The documentation version (e.g., "stable", "2.0.0")
+        relative_path: The relative path to the page (e.g., "index.html")
+
+    Returns:
+        Full URL like "https://docs.pytorch.org/docs/stable/index.html"
+    """
+    # Ensure domain doesn't have trailing slash
+    domain = domain.rstrip("/")
+
+    # Ensure base_path has proper format (no leading slash, has trailing slash if non-empty)
+    base_path = base_path.strip("/")
+    if base_path:
+        base_path = base_path + "/"
+
+    # Ensure version doesn't have slashes
+    version = version.strip("/")
+
+    # Ensure relative_path doesn't have leading slash
+    relative_path = relative_path.lstrip("/")
+
+    # Build URL
+    if relative_path:
+        return f"https://{domain}/{base_path}{version}/{relative_path}"
+    else:
+        return f"https://{domain}/{base_path}{version}/"
+
+
+def _generate_llms_txt(app, exception):
+    """Dynamically generate llms.txt during documentation build.
+
+    Generates a simple, clean llms.txt following the format used by Hugging Face:
+    - Project header
+    - List of documentation pages as markdown links
+
+    URLs are constructed from: domain + base_path + version + relative_path
+    """
+    if exception is not None:
+        return  # Don't generate if build failed
+
+    if app.builder.name != "html":
+        return
+
+    # Check if LLM features are disabled
+    theme_options = app.config.html_theme_options or {}
+    if str(theme_options.get("llm_disabled", "false")).lower() == "true":
+        return
+
+    # Get configuration
+    project = app.config.project or "Documentation"
+    version = app.config.version or "latest"
+    domain = theme_options.get("llm_domain", "").strip()
+    base_path = theme_options.get("llm_base_path", "").strip()
+
+    # Build base URL if domain is provided
+    if not domain:
+        print(
+            "Warning: llm_domain not set in html_theme_options, skipping llms.txt generation"
+        )
+        return
+
+    # Helper to build full URL
+    def make_url(relative_path):
+        return _build_llms_url(domain, base_path, version, relative_path)
+
+    # Collect all documentation pages
+    docs = []
+
+    try:
+        # Get all document names from the environment
+        all_docs = list(app.env.all_docs.keys()) if hasattr(app.env, "all_docs") else []
+
+        for docname in sorted(all_docs):
+            # Skip internal/private pages
+            if docname.startswith("_"):
+                continue
+
+            # Get the page title
+            title = app.env.titles.get(docname, docname)
+            if hasattr(title, "astext"):
+                title = title.astext()
+
+            # Build the URL
+            url = make_url(docname + ".html")
+            docs.append({"title": str(title), "url": url})
+
+    except Exception as e:
+        print(f"Warning: Could not discover pages for llms.txt: {e}")
+
+    # Build the llms.txt content in Hugging Face style
+    lines = []
+
+    # Header
+    lines.append(f"# {project}")
+    lines.append("")
+    lines.append("## Docs")
+    lines.append("")
+
+    # List all documentation pages
+    for doc in docs:
+        lines.append(f"- [{doc['title']}]({doc['url']})")
+
+    # Join content
+    content = "\n".join(lines)
+
+    # Write to site root
+    dest_path = Path(app.outdir) / "llms.txt"
+    try:
+        dest_path.write_text(content, encoding="utf-8")
+        print(f"Generated llms.txt with {len(docs)} pages at: {dest_path}")
+    except Exception as e:
+        print(f"Warning: Could not write llms.txt to site root: {e}")
+
 
 # =============================================================================
 # Sphinx-tippy parallel build fix
@@ -191,7 +314,8 @@ def _extract_glossary_terms(app, doctree, docname):
 
         term_id = term_node["ids"][0]
         paragraphs = [
-            c.astext() for c in (def_node.children if def_node else [])
+            c.astext()
+            for c in (def_node.children if def_node else [])
             if isinstance(c, nodes.paragraph)
         ][:2]
         def_html = "".join(f"<p>{p}</p>" for p in paragraphs)
@@ -228,19 +352,28 @@ def _write_glossary_tippy_js(app, pagename, templatename, context, doctree):
         if match and match.group(1) in glossary_terms:
             term_id = match.group(1)
             page_dir = posixpath.dirname(pagename)
-            rel_path = posixpath.relpath(glossary_page, page_dir) if page_dir else glossary_page
-            selector_to_html[f'a[href="{rel_path}.html#{term_id}"]'] = glossary_terms[term_id]
+            rel_path = (
+                posixpath.relpath(glossary_page, page_dir)
+                if page_dir
+                else glossary_page
+            )
+            selector_to_html[f'a[href="{rel_path}.html#{term_id}"]'] = glossary_terms[
+                term_id
+            ]
 
     if not selector_to_html:
         return
 
     # Build tippy props
     tippy_props = getattr(app.config, "tippy_props", {})
-    props_str = ", ".join([
-        f"placement: '{tippy_props.get('placement', 'auto-start')}'",
-        f"maxWidth: {tippy_props.get('maxWidth', 500)}",
-        f"interactive: {'true' if tippy_props.get('interactive') else 'false'}",
-    ] + ([f"theme: '{tippy_props['theme']}'"] if tippy_props.get("theme") else []))
+    props_str = ", ".join(
+        [
+            f"placement: '{tippy_props.get('placement', 'auto-start')}'",
+            f"maxWidth: {tippy_props.get('maxWidth', 500)}",
+            f"interactive: {'true' if tippy_props.get('interactive') else 'false'}",
+        ]
+        + ([f"theme: '{tippy_props['theme']}'"] if tippy_props.get("theme") else [])
+    )
 
     # Write JS file
     js_content = f"""selector_to_html = {json.dumps(selector_to_html)}
@@ -268,7 +401,178 @@ window.onload = function () {{
 
     js_path = page_dir / f"{parts[-1]}.{uuid4()}.js"
     js_path.write_text(js_content, encoding="utf-8")
-    app.add_js_file(str(js_path.relative_to(Path(app.outdir) / "_static")), loading_method="defer")
+    app.add_js_file(
+        str(js_path.relative_to(Path(app.outdir) / "_static")), loading_method="defer"
+    )
+
+
+# =============================================================================
+# Hierarchical header navigation for dropdown menus
+# =============================================================================
+
+
+def _get_toctree_children(app, docname):
+    """Get children of a toctree entry using toctree_includes which handles glob patterns."""
+    children = []
+    try:
+        # Use toctree_includes which properly resolves glob patterns
+        toctree_includes = getattr(app.env, "toctree_includes", {})
+        child_docnames = toctree_includes.get(docname, [])
+
+        for child_docname in child_docnames:
+            if child_docname and child_docname != docname:
+                # Get title from env.titles
+                child_title = app.env.titles.get(child_docname, child_docname)
+                if hasattr(child_title, "astext"):
+                    child_title = child_title.astext()
+                children.append(
+                    {
+                        "title": str(child_title),
+                        "url": child_docname,
+                    }
+                )
+    except Exception:
+        pass
+    return children
+
+
+def _get_toctree_entries_from_doctree(app, docname):
+    """Get all toctree entries from a document, including external URLs.
+
+    Returns a list of tuples: (title, reference, is_external)
+    """
+    entries = []
+    try:
+        doctree = app.env.get_doctree(docname)
+
+        # Find all toctree nodes
+        from sphinx import addnodes
+
+        for toctree_node in doctree.findall(addnodes.toctree):
+            # toctree_node['entries'] contains tuples of (title, ref)
+            # where title can be None (use document title) or a string
+            # and ref is either a document name or an external URL
+            for title, ref in toctree_node.get("entries", []):
+                if ref:
+                    is_external = ref.startswith(("http://", "https://", "/"))
+                    entries.append((title, ref, is_external))
+    except Exception:
+        pass
+
+    return entries
+
+
+def _generate_hierarchical_header_nav(app, pagename):
+    """Generate hierarchical header navigation data for dropdown menus.
+
+    Includes:
+    - Toctree entries from the root document (including external URLs)
+    - External links from html_theme_options["external_links"]
+    """
+    nav_items = []
+
+    try:
+        root_doc = app.config.root_doc
+
+        # Get toctree entries from the root document (includes external URLs)
+        toctree_entries = _get_toctree_entries_from_doctree(app, root_doc)
+
+        for entry_title, ref, is_external in toctree_entries:
+            if not ref:
+                continue
+
+            if is_external:
+                # External URL - use the provided title or the URL itself
+                item_title = entry_title if entry_title else ref
+                nav_items.append(
+                    {
+                        "title": str(item_title),
+                        "url": ref,
+                        "current": False,
+                        "children": [],
+                        "external": True,
+                    }
+                )
+            else:
+                # Internal document
+                docname = ref
+
+                # Get the title - use explicit title if provided, otherwise get from env
+                if entry_title:
+                    item_title = entry_title
+                else:
+                    item_title = app.env.titles.get(docname, docname)
+                    if hasattr(item_title, "astext"):
+                        item_title = item_title.astext()
+
+                # Check if this is the current page or an ancestor
+                is_current = (
+                    docname == pagename
+                    or pagename.startswith(docname.rsplit("/", 1)[0] + "/")
+                    if "/" in docname
+                    else docname == pagename
+                )
+
+                # Get children (subsections) from this document's toctree
+                children = _get_toctree_children(app, docname)
+
+                nav_items.append(
+                    {
+                        "title": str(item_title),
+                        "url": docname,
+                        "current": is_current,
+                        "children": children,
+                        "external": False,
+                    }
+                )
+
+        # Also include external_links from html_theme_options
+        theme_options = getattr(app.config, "html_theme_options", {}) or {}
+        external_links = theme_options.get("external_links", [])
+        for link in external_links:
+            if isinstance(link, dict) and link.get("url"):
+                nav_items.append(
+                    {
+                        "title": str(link.get("name", link["url"])),
+                        "url": link["url"],
+                        "current": False,
+                        "children": [],
+                        "external": True,
+                    }
+                )
+    except Exception:
+        pass
+
+    return nav_items
+
+
+def _add_hierarchical_nav_to_context(app, pagename, templatename, context, doctree):
+    """Add hierarchical navigation data to the template context."""
+    context["hierarchical_header_nav"] = _generate_hierarchical_header_nav(
+        app, pagename
+    )
+
+
+def _extract_page_meta_description(app, pagename, templatename, context, doctree):
+    """Extract the meta description from metatags and add it to context for LLM tags.
+
+    The .. meta:: directive in RST generates HTML meta tags in the 'metatags' context
+    variable. This function parses that HTML to extract the description value and
+    makes it available as 'page_meta_description' for use in templates.
+    """
+    metatags = context.get("metatags", "")
+    if not metatags:
+        return
+
+    # Parse the metatags HTML to extract the description
+    # metatags contains raw HTML like: <meta content="..." name="description" />
+    import re
+
+    # Match format: content="..." name="description" (Sphinx typically uses this order)
+    pattern = r'<meta[^>]*content="([^"]*)"[^>]*name="description"[^>]*/?\s*>'
+    match = re.search(pattern, metatags, re.IGNORECASE)
+    if match:
+        context["page_meta_description"] = match.group(1)
 
 
 # =============================================================================
@@ -281,6 +585,12 @@ def setup(app):
     app.add_config_value("add_last_updated", False, "html")
     app.connect("html-page-context", add_date_info_to_page)
 
+    # Add hierarchical navigation context for dropdown menus
+    app.connect("html-page-context", _add_hierarchical_nav_to_context)
+
+    # Extract page meta description for LLM tags
+    app.connect("html-page-context", _extract_page_meta_description)
+
     # Configuration for sphinx-tippy parallel build fix
     # tippy_glossary_page: name of the glossary page (without extension)
     app.add_config_value("tippy_glossary_page", "_glossary", "html")
@@ -292,6 +602,9 @@ def setup(app):
         app.connect("env-merge-info", _merge_glossary_terms)
         # Write JS immediately during page context (high priority to run early)
         app.connect("html-page-context", _write_glossary_tippy_js, priority=900)
+
+    # Copy llms.txt to site root after build completes
+    app.connect("build-finished", _generate_llms_txt)
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)

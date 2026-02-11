@@ -2,6 +2,33 @@
 
 {% block extrahead %}
 {{ super() }}
+{% if theme_llm_disabled|lower != 'true' and theme_llm_disabled != true %}
+<!-- LLM/AI Agent: See /llms.txt for comprehensive navigation guidance -->
+<!-- Machine-readable LLM metadata -->
+<meta name="llm:site-type" content="documentation">
+<meta name="llm:framework" content="PyTorch">
+{% if page_meta_description %}
+<meta name="llm:description" content="{{ page_meta_description }}">
+{% elif theme_llm_description %}
+<meta name="llm:description" content="{{ theme_llm_description }} - {{ title|striptags }}">
+{% else %}
+<meta name="llm:description" content="{{ title|striptags }} - Documentation for {{ project }}, part of the PyTorch ecosystem.">
+{% endif %}
+{% if theme_llm_domain %}
+{% set llm_base = ('https://' ~ theme_llm_domain ~ '/' ~ theme_llm_base_path)|replace('//', '/')|replace('https:/', 'https://') %}
+{% elif theme_canonical_url %}
+{% set llm_base = theme_canonical_url %}
+{% else %}
+{% set llm_base = '' %}
+{% endif %}
+{% set llm_base = llm_base.rstrip('/') %}
+<meta name="llm:navigation-file" content="{{ llm_base }}/llms.txt">
+<meta name="llm:sitemap" content="{{ llm_base }}/sitemap.xml">
+<meta name="llm:version" content="{{ version }}">
+<meta name="llm:project" content="{{ project }}">
+<meta name="llm:page-type" content="{% if 'generated' in pagename %}api{% elif 'tutorial' in pagename %}tutorial{% else %}documentation{% endif %}">
+<link rel="alternate" type="text/plain" href="{{ llm_base }}/llms.txt" title="LLM Navigation Guide">
+{% endif %}
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 <script>
@@ -283,7 +310,7 @@
 
 {% block docs_body %}
 {% include "components/searchbox.html" %}
-<article class="bd-article" id="pytorch-article">
+<div id="pytorch-article">
   <!-- Hidden breadcrumb schema for SEO only -->
   <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
     {% for parent in parents %}
@@ -337,7 +364,7 @@
   {% endif %}
 
   {{ super() }}
-</article>
+</div>
 {% endblock docs_body %}
 
   {% block footer%}
@@ -349,7 +376,7 @@
        "@type": "Article",
        "name": {{ title|striptags|trim|tojson }},
        "headline": {{ title|striptags|trim|tojson }},
-       "description": "PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment. Discover tutorials, API references, and guides to help you build and deploy deep learning models efficiently.",
+       "description": {% if page_meta_description %}{{ page_meta_description|tojson }}{% elif theme_llm_description %}{{ (theme_llm_description ~ " - " ~ title|striptags)|tojson }}{% else %}"PyTorch Documentation. Explore PyTorch, an open-source machine learning library that accelerates the path from research prototyping to production deployment."{% endif %},
        "url": "{{ canonical_url|default((url_root if url_root is defined else '/') + pagename + '.html', true) }}",
        "articleBody": {{ body|striptags|trim|tojson }},
        "author": {

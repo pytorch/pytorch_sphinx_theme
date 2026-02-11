@@ -25,6 +25,10 @@ To make changes to JavaScript functionality, edit the JS files in
 concatenated into a single `theme.js` file using Grunt. Do not
 make changes in the `theme.js`
 
+## Configuration Reference
+
+For a complete list of all available theme options and their descriptions, see the [Configuration Reference](configuration-reference.md).
+
 ## Local Development
 
 Install PyTorch Sphinx Theme:

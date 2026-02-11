@@ -9,7 +9,7 @@ import pytorch_sphinx_theme2
 
 html_theme = "pytorch_sphinx_theme2"
 html_theme_path = [pytorch_sphinx_theme2.get_html_theme_path()]
-__version__ = "v0.1.0"
+__version__ = "2.10"
 
 RELEASE = os.environ.get("RELEASE", False)
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -264,6 +264,11 @@ html_theme_options = {
     },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
+    #"llm_domain": "docs.pytorch.org",
+    #"llm_base_path": "docs/",
+    #"llm_description": "PyTorch is an optimized tensor library for deep learning",
+    #"llm_important_pages": "index, notes/cuda",
+    #"enable_navbar_dropdowns": False,
     # "pytorch_project": "tutorials",
     #"show_lf_header": False,
     # "show_lf_footer": False,

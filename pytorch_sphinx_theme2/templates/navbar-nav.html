@@ -1,0 +1,97 @@
+{#
+  Custom navbar-nav.html for pytorch_sphinx_theme2
+  Renders toctree items as dropdowns showing their subsections.
+
+  This template overrides pydata_sphinx_theme's navbar-nav.html to display
+  top-level navigation items with dropdown menus containing their children.
+
+  Pure CSS/Jinja implementation - no JavaScript required.
+  Uses the `hierarchical_header_nav` context variable populated by __init__.py
+
+  Uses theme_header_links_before_dropdown to control how many items show before "More".
+  Uses theme_enable_navbar_dropdowns to enable/disable dropdown menus (default: true).
+
+  Mobile: Dropdowns are collapsed by default, parent link is clickable,
+          toggle button expands/collapses children.
+
+  Supports external URLs (http://, https://) in toctree entries.
+#}
+
+{% set max_visible_items = theme_header_links_before_dropdown|default(4)|int %}
+{% set dropdowns_enabled = theme_enable_navbar_dropdowns|default('true')|lower == 'true' %}
+
+{# Macro to generate the correct href for internal or external links #}
+{% macro item_href(item) %}
+  {%- if item.external -%}
+    {{ item.url }}
+  {%- else -%}
+    {{ pathto(item.url) }}
+  {%- endif -%}
+{% endmacro %}
+
+{# Macro to generate link attributes for external links #}
+{% macro external_attrs(item) %}
+  {%- if item.external %} target="_blank" rel="noopener noreferrer"{% endif -%}
+{% endmacro %}
+
+{# Macro to generate external link icon #}
+{% macro external_icon(item) %}
+  {%- if item.external -%}&nbsp;<i class="fa-solid fa-arrow-up-right-from-square external-icon"></i>{%- endif -%}
+{% endmacro %}
+
+{% if hierarchical_header_nav %}
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    {# Show first N items with dropdown support (if enabled) #}
+    {% for item in hierarchical_header_nav[:max_visible_items] %}
+      <li class="nav-item{% if dropdowns_enabled and item.children %} dropdown{% endif %}{% if item.current %} current active{% endif %}">
+        {% if dropdowns_enabled and item.children %}
+          {# Dropdown menu for items with children #}
+          <div class="nav-item-with-toggle">
+            <a class="nav-link{% if not item.external %} nav-internal{% endif %}{% if item.current %} active{% endif %}" href="{{ item_href(item) }}"{{ external_attrs(item) }}>
+              {{ item.title }}{{ external_icon(item) }}
+            </a>
+          </div>
+          <ul class="dropdown-menu" id="dropdown-{{ loop.index }}">
+            {% for child in item.children %}
+              <li class=" ">
+                <a class="nav-link dropdown-item nav-internal" href="{{ pathto(child.url) }}">
+                  {{ child.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {# Simple link for items without children or dropdowns disabled #}
+          <a class="nav-link{% if not item.external %} nav-internal{% endif %}{% if item.current %} active{% endif %}" href="{{ item_href(item) }}"{{ external_attrs(item) }}>
+            {{ item.title }}{{ external_icon(item) }}
+          </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+
+    {# "More" dropdown for remaining items - uses CSS hover like other dropdowns #}
+    {% if hierarchical_header_nav|length > max_visible_items %}
+      <li class="nav-item dropdown more-dropdown">
+        <div class="nav-item-with-toggle">
+          <span class="nav-link more-toggle" tabindex="0" role="button" aria-expanded="false" aria-controls="pst-nav-more-links">
+            More
+          </span>
+        </div>
+        <ul id="pst-nav-more-links" class="dropdown-menu">
+          {% for item in hierarchical_header_nav[max_visible_items:] %}
+            <li class="{{ 'current active' if item.current else '' }}">
+              <a class="nav-link dropdown-item{% if not item.external %} nav-internal{% endif %}" href="{{ item_href(item) }}"{{ external_attrs(item) }}>
+                {{ item.title }}{{ external_icon(item) }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% else %}
+{# Fallback: use the default header navigation if hierarchical nav is empty #}
+{{ generate_header_nav_html()|safe }}
+{% endif %}

@@ -10,10 +10,16 @@ Welcome to PyTorch Sphinx Theme 2 Docs
    :caption: Theme Documentation
    :maxdepth: 1
 
+   Install PyTorch <https://pytorch.org/get-started/locally/>
    installing
    configuring
    changelog
 
+.. toctree::
+    :maxdepth: 1
+    :caption: Community
+
+    community/index
 
 .. toctree::
     :maxdepth: 2
@@ -41,11 +47,6 @@ Welcome to PyTorch Sphinx Theme 2 Docs
     test-glossary
     test_tutorials_landing_page
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Community
-
-    community/index
 
 .. toctree::
     :maxdepth: 1
