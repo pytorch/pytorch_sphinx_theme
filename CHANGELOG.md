@@ -1,0 +1,80 @@
+# Changelog
+
+All notable changes to pytorch_sphinx_theme2 are documented here.
+
+## v0.4.0
+
+### New Features
+
+- **Dropdown Navigation Menus** (PR #225) — The horizontal navbar now supports hierarchical dropdown menus. Top-level toctree entries with children display hover-activated dropdowns on desktop. Overflow items collapse into a "More" dropdown. External URLs are supported. Configurable via `enable_navbar_dropdowns` theme option (default: `true`). Pure CSS — no JavaScript required.
+- **LLM Discovery Support** — Automatically generates `/llms.txt` at build time listing all documentation pages as Markdown links, following the [llms.txt standard](https://llmstxt.org/). Every page includes machine-readable `<meta name="llm:*">` tags (site-type, framework, description, version, page-type, navigation-file, sitemap). Configured via `llm_domain`, `llm_base_path`, `llm_description`, and `llm_disabled` theme options.
+- **RunLLM Widget Integration** (PR #216) — AI-powered documentation assistant widget. Enable by setting `runllm_assistant_id` in theme options. Additional options: `runllm_name`, `runllm_position`, `runllm_keyboard_shortcut`.
+- **Sphinx-Tippy Parallel Build Fix** — Fixes tooltip data loss when using sphinx-tippy with parallel Sphinx builds. Glossary terms are now extracted during the read phase and properly merged across workers. Configurable glossary page via `tippy_glossary_page` setting.
+- **Page Date Information** — Displays "Created On" and "Last Updated On" dates below page titles, sourced from git history. Enable with `add_last_updated = True`. Supports `paths_to_skip` for excluding specific pages.
+- **SEO Structured Data** — Every page now includes JSON-LD structured data (`Article` schema) with headline, description, URL, author, dates, and image. Hidden breadcrumb schema for search engine optimization. OpenGraph image meta tag support.
+- **Configurable Tutorial Call-to-Action Links** — "Run in Colab", "Download Notebook", and "View on GitHub" buttons now work for any repository via `github_user`, `github_repo`, `github_version`, and `colab_branch` in `html_context`.
+
+### UI/Layout Improvements
+
+- **Responsive Layout Overhaul** (PR #223) — Wide screen content capped at `max-width: 1800px` with auto centering. Progressive navbar font and padding compaction across three breakpoints to prevent wrapping. Adaptive header padding for desktop and mobile.
+- **Auto-Hide Empty Sidebar** (PR #226) — Left sidebar automatically hides via CSS when it contains no navigation items, with main content padding adjusted accordingly.
+- **Smooth Scroll with TOC Locking** — Custom smooth scroll animation. Clicking an anchor link locks the TOC highlight to that target until the user manually scrolls.
+- **Myst-NB Code Cell Styling** — Styled code cells and output cells with "Out:" labels, matching the tutorials page look.
+- **Conditional Header/Footer Height** — Dynamic CSS variable adjustment when `show_lf_header` or `show_lf_footer` are disabled.
+
+### Bug Fixes
+
+- Fixed broken external links in the navigation bar.
+- Fixed top padding layout on mobile.
+- Fixed sidebar positioning with proper viewport height calculation on desktop.
+- Fixed search page scroll by overriding height and overflow restrictions on result containers.
+- Fixed glossary page path references.
+- Fixed cookie banner to properly hide on localhost, `docs.pytorch.org`, `docs-preview.pytorch.org`, and local network addresses.
+
+### Content/Data Updates
+
+- Updated PyTorch library links to include only libraries in the official PyTorch GitHub org.
+- Added comprehensive configuration reference documentation covering all theme options with examples.
+
+### Infrastructure
+
+- Modernized CI workflows (PR #219).
+- Added Netlify documentation preview support (PR #221).
+- Added S3 documentation preview upload (PR #222).
+
+---
+
+## v0.3.0
+
+### New Features
+
+- **Tippy.js Tooltips Support** (PR #212, #213) — Added glossary tooltips using tippy.js, with a parallel build fix to prevent data loss in multi-worker Sphinx builds.
+- **Top Navigation Bar Dropdown Categories** (PR #210) — Updated the top navigation bar with reorganized dropdown categories.
+
+### Bug Fixes
+
+- Fixed 404.html template to use JavaScript-based path detection, ensuring the "Back Home" button works across all deployment paths.
+- Fixed JSON-LD structured data to use `Article` schema with `articleBody`.
+- Fixed search highlighting.
+- Fixed OG image path.
+- Fixed copyright banner for non-LF projects.
+- Fixed Sphinx footer for non-LF projects.
+- Hid old cookie banner on `docs.pytorch.org`; added Osano cookie consent for LF-owned domains.
+- Fixed `canonical_url` to avoid duplicates.
+- Fixed `includenodoc` directive to parse raw docstrings (PR #209).
+- Fixed condition for sphinx-gallery widgets at the top of the page.
+
+### Improvements
+
+- Removed the `override-version` script (PR #214).
+- Updated requirements.txt (PR #211).
+- Updated `theme_variables` with correct links.
+- Added condition for tutorials-specific widgets.
+- Updated output cell styles for `--sg-script-pre`.
+- Updated sitemap settings and version acquisition.
+
+---
+
+## v0.0.18 and earlier
+
+Initial versions of `pytorch_sphinx_theme2`, based on `pydata-sphinx-theme`. Included core layout, navigation, styling, and sphinx-gallery integration for PyTorch documentation sites.

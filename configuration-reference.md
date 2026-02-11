@@ -211,10 +211,23 @@ The theme includes built-in support for helping AI agents and LLMs discover and 
 
 #### How It Works
 
-When enabled, the theme:
+When enabled (opt-in), the theme:
 1. Generates a `/llms.txt` file at the site root with navigation guidance
 2. Adds machine-readable `<meta name="llm:*">` tags to every page
 3. Includes a `<link rel="alternate">` pointing to the llms.txt file
+
+By default, `llms.txt` uses **relative URLs** so it works in any environment (production, preview, localhost). If `llm_domain` is set, absolute URLs are generated instead.
+
+#### `llm_disabled`
+- **Type:** String (`"true"` or `"false"`)
+- **Default:** `"true"` (disabled by default)
+- **Description:** Set to `"false"` to enable `llms.txt` generation and LLM meta tags.
+
+```python
+html_theme_options = {
+    "llm_disabled": "false",  # Enable LLM discovery features
+}
+```
 
 #### `llm_description`
 - **Type:** String
@@ -227,100 +240,65 @@ html_theme_options = {
 }
 ```
 
-#### `llm_content_types`
-- **Type:** String (comma-separated list)
-- **Default:** `"api-reference, tutorials, guides, examples"`
-- **Description:** Types of content available on the site. Helps LLMs understand what to expect.
-
-```python
-html_theme_options = {
-    "llm_content_types": "api-reference, tutorials, examples",
-}
-```
-
-#### `llm_language`
+#### `llm_domain` (optional)
 - **Type:** String
-- **Default:** `"python"`
-- **Description:** Primary programming language of the documentation/code examples.
+- **Default:** `""` (uses relative URLs)
+- **Description:** Domain for the documentation site. When set, `llms.txt` generates absolute URLs instead of relative ones.
 
 ```python
 html_theme_options = {
-    "llm_language": "python",
+    "llm_domain": "docs.pytorch.org",  # Optional: generates absolute URLs
 }
 ```
 
-#### `llm_important_pages`
-- **Type:** String (comma-separated list)
-- **Default:** `""`
-- **Description:** Key entry points for the documentation. Helps LLMs know where to start.
-
-```python
-html_theme_options = {
-    "llm_important_pages": "getting-started, api/index, tutorials/quickstart",
-}
-```
-
-#### `llm_custom_llms_txt`
+#### `llm_base_path` (optional)
 - **Type:** String
 - **Default:** `""`
-- **Description:** Custom content for the `llms.txt` file. If provided, this replaces the auto-generated template entirely. Use this for complete control over the LLM guidance.
+- **Description:** Base path after domain (e.g., `"tutorials/"`, `"vision/"`). Only used when `llm_domain` is set.
 
 ```python
 html_theme_options = {
-    "llm_custom_llms_txt": """# Custom LLM Guide for MyProject
-> MyProject is a specialized library for...
-
-## Key APIs
-- my_module.function_a()
-- my_module.function_b()
-""",
-}
-```
-
-#### `llm_disabled`
-- **Type:** Boolean
-- **Default:** `False`
-- **Description:** If `True`, disables all LLM discovery features (no `llms.txt` generation, no meta tags).
-
-```python
-html_theme_options = {
-    "llm_disabled": True,  # Disable LLM discovery features
+    "llm_domain": "docs.pytorch.org",
+    "llm_base_path": "tutorials",
 }
 ```
 
 #### Generated Meta Tags
 
-The theme automatically adds the following meta tags to every page. When `llm_domain` or `canonical_url` are configured, absolute URLs are generated:
+The theme automatically adds the following meta tags to every page:
 
 ```html
 <meta name="llm:site-type" content="documentation">
 <meta name="llm:framework" content="PyTorch">
 <meta name="llm:generator" content="Sphinx">
 <meta name="llm:description" content="...">
-<meta name="llm:navigation-file" content="https://pytorch.org/tutorials/llms.txt">
-<meta name="llm:sitemap" content="https://pytorch.org/tutorials/sitemap.xml">
+<meta name="llm:navigation-file" content="/llms.txt">
+<meta name="llm:sitemap" content="/sitemap.xml">
 <meta name="llm:version" content="2.0.0">
 <meta name="llm:project" content="PyTorch Tutorials">
 <meta name="llm:page-type" content="api|tutorial|documentation">
-<link rel="alternate" type="text/plain" href="https://pytorch.org/tutorials/llms.txt" title="LLM Navigation Guide">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Navigation Guide">
 ```
 
-The base URL is determined in this order of precedence:
-1. `llm_domain` + `llm_base_path` (if `llm_domain` is set)
-2. `canonical_url` (if set)
-3. Root-relative paths (e.g., `/llms.txt`) as fallback
+When `llm_domain` is configured, URLs become absolute (e.g., `https://docs.pytorch.org/tutorials/llms.txt`).
 
-#### Example Configuration for TorchVision
+#### Example: Minimal Configuration (Relative URLs)
 
 ```python
 html_theme_options = {
-    # ... other options ...
+    "llm_disabled": "false",
+    "llm_description": "TorchVision provides datasets, model architectures, and image transforms for computer vision.",
+}
+```
 
-    # LLM Discovery
-    "llm_description": "TorchVision provides datasets, model architectures, and image transforms for computer vision. Part of the PyTorch ecosystem.",
-    "llm_content_types": "api-reference, tutorials, examples, datasets",
-    "llm_language": "python",
-    "llm_important_pages": "index, models, datasets, transforms",
+#### Example: Full Configuration (Absolute URLs)
+
+```python
+html_theme_options = {
+    "llm_disabled": "false",
+    "llm_description": "TorchVision provides datasets, model architectures, and image transforms for computer vision.",
+    "llm_domain": "docs.pytorch.org",
+    "llm_base_path": "vision",
 }
 ```
 
