@@ -1,4 +1,4 @@
-__version__ = "0.1.0"
+__version__ = "0.4.1"
 
 import json
 import os
@@ -204,7 +204,11 @@ def _generate_llms_txt(app, exception):
     - Project header
     - List of documentation pages as markdown links
 
-    URLs are constructed from: domain + base_path + version + relative_path
+    By default uses relative URLs so the file works in any environment
+    (production, preview, localhost). If llm_domain is set, absolute URLs
+    are generated instead.
+
+    Opt-in: set ``llm_disabled = false`` in html_theme_options to enable.
     """
     if exception is not None:
         return  # Don't generate if build failed
@@ -212,9 +216,9 @@ def _generate_llms_txt(app, exception):
     if app.builder.name != "html":
         return
 
-    # Check if LLM features are disabled
+    # Disabled by default; opt-in with llm_disabled = false
     theme_options = app.config.html_theme_options or {}
-    if str(theme_options.get("llm_disabled", "false")).lower() == "true":
+    if str(theme_options.get("llm_disabled", "true")).lower() == "true":
         return
 
     # Get configuration
@@ -222,17 +226,13 @@ def _generate_llms_txt(app, exception):
     version = app.config.version or "latest"
     domain = theme_options.get("llm_domain", "").strip()
     base_path = theme_options.get("llm_base_path", "").strip()
+    use_absolute = bool(domain)
 
-    # Build base URL if domain is provided
-    if not domain:
-        print(
-            "Warning: llm_domain not set in html_theme_options, skipping llms.txt generation"
-        )
-        return
-
-    # Helper to build full URL
+    # Helper to build URL (absolute if domain is set, relative otherwise)
     def make_url(relative_path):
-        return _build_llms_url(domain, base_path, version, relative_path)
+        if use_absolute:
+            return _build_llms_url(domain, base_path, version, relative_path)
+        return relative_path
 
     # Collect all documentation pages
     docs = []
@@ -618,7 +618,7 @@ def setup(app):
         )
 
     return {
-        "version": "0.1.0",
+        "version": "0.4.1",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
