@@ -425,6 +425,13 @@ html[data-theme=dark] {
 .bd-page-width {
   max-width: 100% !important;
 }
+@media (min-width: 1800px) {
+  .bd-page-width {
+    max-width: 1800px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 @media (max-width: 1699.98px) and (min-width: 1500px) {
   .bd-header .navbar-header-items__center .navbar-item .nav-link {
@@ -2690,7 +2697,7 @@ a.btn {
     width: 50%;
   }
 }
-@media (min-width: 2400px) {
+@media (min-width: 1800px) {
   .bd-main .bd-content .bd-article-container .bd-article {
     max-width: 1200px;
     margin: 0 auto;
@@ -3588,7 +3595,7 @@ html[data-theme=dark] {
 @media (min-width: 992px) {
   .sd-container-fluid {
     max-width: 1100px;
-    margin-left: 0;
+    margin-left: auto;
     margin-right: auto;
   }
   .sd-row[class*=sd-row-cols-] {

@@ -20,8 +20,15 @@
 }
 
 // Main content width - make it use full available width
+// On wide screens (2400px+), limit width to center content together
 .bd-page-width {
   max-width: 100% !important;
+
+  @media (min-width: 1800px) {
+    max-width: 1800px !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 // Make navbar items more compact on screens under 1700px to prevent wrapping
