@@ -3180,22 +3180,27 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   height: 96px;
   width: 96px;
   opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image img {
-  height: 100%;
-  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 @media screen and (min-width: 768px) {
   #tutorial-cards-container .card.tutorials-card .tutorials-image {
     height: 100%;
-    width: 25%;
+    width: 200px;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
   #tutorial-cards-container .card.tutorials-card .tutorials-image {
     height: 100%;
-    width: 198px;
+    width: 175px;
   }
+}
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image:before {
   content: "";
