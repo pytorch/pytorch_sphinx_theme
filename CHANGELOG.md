@@ -2,6 +2,27 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.3
+
+- **Custom `llms.txt` Support** — Projects can provide their own hand-crafted `llms.txt` instead of relying on auto-generation. Two mechanisms are supported: (1) set the `llm_custom_file` theme option to point to a file relative to the source directory, or (2) place an `llms.txt` file in the Sphinx source root (next to `conf.py`) and it will be used automatically. The resolution order is: explicit `llm_custom_file` → source-root convention → auto-generation.
+- **Version Switcher Compact Display** — The version-switcher dropdown button now truncates long version strings (e.g. `v2.11.0 (cu128)` → `v2.11.0`) using CSS `max-width` with `text-overflow: ellipsis`. The version text is styled in the theme's primary color with bold weight. The dropdown caret is absolutely positioned so it remains visible despite the overflow clipping.
+- **Logo-to-Version Spacing** — Added `0.5rem` left margin between the navbar logo and the version switcher to prevent them from appearing too close together.
+- Minor code formatting and comment cleanup in `docs/conf.py` and `theme.conf`.
+
+---
+
+## v0.4.2
+
+### Bug Fixes
+
+- **Oversized Navbar Logo** — Constrained the desktop navbar logo to `max-height: 20px` so it sits proportionally within the 45px header bar instead of rendering at full SVG size.
+
+### Improvements
+
+- **LLM URL Resolution Fallback** — The `llms.txt` generator now resolves page URLs through a three-tier fallback: `llm_domain` + `llm_base_path` → Sphinx `html_baseurl` → relative URLs. Previously, only `llm_domain` or relative URLs were supported, which meant projects using `html_baseurl` without `llm_domain` got relative-only links.
+
+---
+
 ## v0.4.0
 
 ### New Features

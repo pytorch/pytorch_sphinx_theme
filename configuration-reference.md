@@ -216,7 +216,12 @@ When enabled (opt-in), the theme:
 2. Adds machine-readable `<meta name="llm:*">` tags to every page
 3. Includes a `<link rel="alternate">` pointing to the llms.txt file
 
-By default, `llms.txt` uses **relative URLs** so it works in any environment (production, preview, localhost). If `llm_domain` is set, absolute URLs are generated instead.
+URLs in `llms.txt` are resolved in this priority order:
+1. **`llm_domain`** + `llm_base_path` theme options → fully constructed URLs (e.g., `https://docs.pytorch.org/docs/stable/index.html`)
+2. **`html_baseurl`** Sphinx config → baseurl + relative path (e.g., `https://docs.pytorch.org/docs/stable/index.html`)
+3. **Relative URLs** as a last resort (e.g., `index.html`)
+
+Most PyTorch doc sets already define `html_baseurl` in their `conf.py`, so absolute URLs are generated automatically without any extra theme configuration.
 
 #### `llm_disabled`
 - **Type:** String (`"true"` or `"false"`)
@@ -262,6 +267,27 @@ html_theme_options = {
     "llm_base_path": "tutorials",
 }
 ```
+
+#### `llm_custom_file` (optional)
+- **Type:** String
+- **Default:** `""` (auto-generate or use convention)
+- **Description:** Path to a custom `llms.txt` file, relative to the Sphinx source directory. When set, this file is copied verbatim to the output instead of auto-generating one.
+
+```python
+html_theme_options = {
+    "llm_disabled": "false",
+    "llm_custom_file": "my-custom-llms.txt",  # relative to source dir
+}
+```
+
+#### Source-Root Convention
+
+If no `llm_custom_file` is specified, the theme automatically checks for a file named `llms.txt` in the Sphinx source root directory (the same directory as `conf.py`). If found, it is used as-is instead of auto-generating one. This allows a zero-config override — just drop an `llms.txt` file next to `conf.py`.
+
+**Resolution order:**
+1. `llm_custom_file` theme option → copy that file
+2. `llms.txt` in the source root → copy that file
+3. Auto-generate from the documentation pages
 
 #### Generated Meta Tags
 

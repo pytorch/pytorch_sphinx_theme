@@ -7,7 +7,7 @@ setup(
     author_email="svekars@meta.com",
     url="https://github.com/pytorch/pytorch_sphinx_theme",
     license="MIT",
-    version="0.4.1",
+    version="0.4.3",
     install_requires=[
         "pydata-sphinx-theme==0.15.4",
         "sphinx>=5.3.0,<=7.2.6",
