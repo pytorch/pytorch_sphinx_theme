@@ -1,9 +1,10 @@
-__version__ = "0.4.1"
+__version__ = "0.4.4"
 
 import json
 import os
 import posixpath
 import re
+import shutil
 import subprocess
 from pathlib import Path
 from uuid import uuid4
@@ -200,13 +201,16 @@ def _build_llms_url(domain, base_path, version, relative_path=""):
 def _generate_llms_txt(app, exception):
     """Dynamically generate llms.txt during documentation build.
 
-    Generates a simple, clean llms.txt following the format used by Hugging Face:
-    - Project header
-    - List of documentation pages as markdown links
+    The file is resolved in this order:
 
-    By default uses relative URLs so the file works in any environment
-    (production, preview, localhost). If llm_domain is set, absolute URLs
-    are generated instead.
+    1. **Explicit option** — ``llm_custom_file`` theme option pointing to a file
+       relative to the Sphinx source directory.
+    2. **Convention** — A file named ``llms.txt`` in the Sphinx source root.
+    3. **Auto-generation** — A simple page listing following the Hugging Face
+       style, with URLs resolved as:
+       a. ``llm_domain`` + ``llm_base_path`` theme options → fully constructed URLs
+       b. Sphinx ``html_baseurl`` config → baseurl + relative path
+       c. Relative URLs as a last resort
 
     Opt-in: set ``llm_disabled = false`` in html_theme_options to enable.
     """
@@ -221,17 +225,46 @@ def _generate_llms_txt(app, exception):
     if str(theme_options.get("llm_disabled", "true")).lower() == "true":
         return
 
+    dest_path = Path(app.outdir) / "llms.txt"
+
+    # --- 1. Explicit option: llm_custom_file ---
+    custom_file = theme_options.get("llm_custom_file", "").strip()
+    if custom_file:
+        custom_path = Path(app.srcdir) / custom_file
+        if custom_path.is_file():
+            shutil.copy2(custom_path, dest_path)
+            print(f"Copied custom llms.txt from: {custom_path}")
+            return
+        else:
+            print(
+                f"Warning: llm_custom_file '{custom_file}' not found at "
+                f"{custom_path}, falling back to auto-generation"
+            )
+
+    # --- 2. Convention: llms.txt in the source root ---
+    source_llms = Path(app.srcdir) / "llms.txt"
+    if source_llms.is_file():
+        shutil.copy2(source_llms, dest_path)
+        print(f"Using project-provided llms.txt from: {source_llms}")
+        return
+
+    # --- 3. Auto-generation ---
     # Get configuration
     project = app.config.project or "Documentation"
     version = app.config.version or "latest"
     domain = theme_options.get("llm_domain", "").strip()
     base_path = theme_options.get("llm_base_path", "").strip()
-    use_absolute = bool(domain)
 
-    # Helper to build URL (absolute if domain is set, relative otherwise)
+    # Resolve the base URL for links:
+    # Priority: llm_domain > html_baseurl > relative
+    html_baseurl = getattr(app.config, "html_baseurl", None) or ""
+    html_baseurl = html_baseurl.strip().rstrip("/")
+
     def make_url(relative_path):
-        if use_absolute:
+        if domain:
             return _build_llms_url(domain, base_path, version, relative_path)
+        if html_baseurl:
+            return f"{html_baseurl}/{relative_path}"
         return relative_path
 
     # Collect all documentation pages
@@ -275,7 +308,6 @@ def _generate_llms_txt(app, exception):
     content = "\n".join(lines)
 
     # Write to site root
-    dest_path = Path(app.outdir) / "llms.txt"
     try:
         dest_path.write_text(content, encoding="utf-8")
         print(f"Generated llms.txt with {len(docs)} pages at: {dest_path}")
@@ -618,7 +650,7 @@ def setup(app):
         )
 
     return {
-        "version": "0.4.1",
+        "version": "0.4.4",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }

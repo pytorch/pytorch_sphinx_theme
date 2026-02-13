@@ -205,10 +205,10 @@ pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY = True
 html_theme_options = {
     "header_links_before_dropdown": 4,
     # Test with a different logo to verify custom logo works
-    #"logo": {
+    # "logo": {
     #    "image_light": "_static/logo-icon.svg",
     #    "image_dark": "_static/logo-icon.svg",
-    #},
+    # },
     "icon_links": [
         {
             "name": "X",
@@ -264,13 +264,13 @@ html_theme_options = {
     },
     # "canonical_url": "https://pytorch.org/docs/stable/",
     "canonical_url": "http://localhost:8000",
-    #"llm_domain": "docs.pytorch.org",
-    #"llm_base_path": "docs/",
-    #"llm_description": "PyTorch is an optimized tensor library for deep learning",
-    #"llm_important_pages": "index, notes/cuda",
-    #"enable_navbar_dropdowns": False,
+    # "llm_domain": "docs.pytorch.org",
+    # "llm_base_path": "docs/",
+    # "llm_description": "PyTorch is an optimized tensor library for deep learning",
+    # "llm_important_pages": "index, notes/cuda",
+    # "enable_navbar_dropdowns": False,
     # "pytorch_project": "tutorials",
-    #"show_lf_header": False,
+    # "show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
     # Each repository should have its own unique assistant_id from RunLLM
@@ -306,7 +306,7 @@ def setup(app):
     # Solution: Extract glossary terms during doctree-resolved (read phase),
     # store in app.env where it merges properly, then write JS files for
     # glossary tooltips during html-page-context (immediately, not deferred).
-    
+
     return {"version": version, "parallel_read_safe": True}
 
 

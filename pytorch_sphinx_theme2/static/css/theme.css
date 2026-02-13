@@ -2774,6 +2774,34 @@ h1 .toc-backref:hover, h1 .toc-backref:active, h1 .toc-backref:visited, h1 .toc-
     display: none;
   }
 }
+.navbar-header-items__start .navbar-brand .logo__image {
+  max-height: 20px;
+  width: auto;
+}
+
+.navbar-header-items__start .desktop-only-version {
+  margin-left: 0.5rem;
+}
+
+button.btn.version-switcher__button {
+  max-width: 5.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  padding-right: 1.2rem;
+  color: var(--pst-color-primary);
+  font-weight: 600;
+}
+button.btn.version-switcher__button::after {
+  position: absolute;
+  right: 0.3rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+button.btn.version-switcher__button:hover, button.btn.version-switcher__button:focus, button.btn.version-switcher__button:active {
+  color: var(--pst-color-primary);
+}
 
 @media (max-width: 959px) {
   .desktop-only-version {
@@ -3152,21 +3180,25 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   height: 96px;
   width: 96px;
   opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image img {
-  height: 100%;
-  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 @media screen and (min-width: 768px) {
   #tutorial-cards-container .card.tutorials-card .tutorials-image {
     height: 100%;
-    width: 25%;
+    width: 200px;
   }
 }
 @media (min-width: 768px) and (max-width: 1239px) {
   #tutorial-cards-container .card.tutorials-card .tutorials-image {
     height: 100%;
-    width: 198px;
+    width: 175px;
   }
 }
 #tutorial-cards-container .card.tutorials-card .tutorials-image:before {
