@@ -2,6 +2,12 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.4
+
+- **Tutorial Card Image Sizing Fix** — Constrained tutorial card images to a fixed width (`200px` desktop, `175px` tablet) instead of `25%`, and switched the `<img>` to `max-width: 100%; max-height: 100%; object-fit: contain` so images maintain their aspect ratio. Images are now centered within the container using flexbox.
+
+---
+
 ## v0.4.3
 
 - **Custom `llms.txt` Support** — Projects can provide their own hand-crafted `llms.txt` instead of relying on auto-generation. Two mechanisms are supported: (1) set the `llm_custom_file` theme option to point to a file relative to the source directory, or (2) place an `llms.txt` file in the Sphinx source root (next to `conf.py`) and it will be used automatically. The resolution order is: explicit `llm_custom_file` → source-root convention → auto-generation.

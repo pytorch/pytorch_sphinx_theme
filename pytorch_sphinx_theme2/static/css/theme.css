@@ -3201,7 +3201,6 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
     width: 175px;
   }
 }
-}
 #tutorial-cards-container .card.tutorials-card .tutorials-image:before {
   content: "";
   position: absolute;
