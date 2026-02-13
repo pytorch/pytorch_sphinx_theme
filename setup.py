@@ -1,8 +1,13 @@
 from setuptools import setup  # noqa: F401
 
+with open("README.md", encoding="utf-8") as f:
+    long_description = f.read()
+
 setup(
     name="pytorch_sphinx_theme2",
     description="PyTorch Sphinx Theme",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="PyTorch Team",
     author_email="svekars@meta.com",
     url="https://github.com/pytorch/pytorch_sphinx_theme",
