@@ -417,13 +417,14 @@ a.btn {
 
 // Announcement Banner
 // Configurable banner for surveys, events, releases, deprecation notices, etc.
+// Styled to match pytorch.org conference banner
 .announcement-banner {
-  background: linear-gradient(135deg, var(--pst-color-primary) 0%, #f15a24 100%);
+  background-color: #CC2FAA;
   color: white;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
+  padding: 0.5rem 1rem;
   position: relative;
+  width: 100%;
+  text-align: center;
 
   &.is-visible {
     animation: announcementSlideDown 0.3s ease-out;
@@ -437,8 +438,8 @@ a.btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    max-width: 1200px;
+    gap: 0.5rem;
+    max-width: 100%;
     margin: 0 auto;
     flex-wrap: wrap;
   }
@@ -447,12 +448,12 @@ a.btn {
     flex-shrink: 0;
 
     i {
-      font-size: 1rem;
+      font-size: 0.875rem;
     }
   }
 
   .announcement-banner-text {
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.4;
   }
@@ -460,24 +461,20 @@ a.btn {
   .announcement-banner-link {
     flex-shrink: 0;
     color: white;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: background 0.2s ease;
-    white-space: nowrap;
+    font-size: 0.875rem;
+    transition: opacity 0.2s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.35);
-      text-decoration: none;
+      opacity: 0.85;
+      text-decoration: underline;
       color: white;
     }
 
     i {
-      margin-left: 0.4rem;
-      font-size: 0.75rem;
+      margin-left: 0.25rem;
+      font-size: 0.7rem;
     }
   }
 
@@ -487,15 +484,14 @@ a.btn {
     border: none;
     color: white;
     cursor: pointer;
-    padding: 0.35rem 0.5rem;
-    margin-left: 0.5rem;
-    opacity: 0.7;
+    padding: 0.25rem 0.4rem;
+    margin-left: 0.75rem;
+    opacity: 0.8;
     transition: opacity 0.2s ease;
     border-radius: 4px;
 
     &:hover {
       opacity: 1;
-      background: rgba(255, 255, 255, 0.1);
     }
 
     &:focus {
@@ -504,20 +500,19 @@ a.btn {
     }
 
     i {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
   html[data-theme="dark"] & {
-    background: linear-gradient(135deg, #c0392b 0%, #d94520 100%);
+    background-color: #a8258c;
   }
 
   @media (max-width: 768px) {
-    padding: 0.6rem 0.75rem;
-    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.75rem;
 
     .announcement-banner-container {
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     .announcement-banner-icon {
@@ -525,23 +520,18 @@ a.btn {
     }
 
     .announcement-banner-text {
-      font-size: 0.85rem;
-      text-align: center;
-      flex: 1 1 100%;
-      order: 1;
+      font-size: 0.8rem;
     }
 
     .announcement-banner-link {
-      padding: 0.35rem 0.75rem;
       font-size: 0.8rem;
-      order: 2;
     }
 
     .announcement-banner-close {
       position: absolute;
-      top: 0.4rem;
-      right: 0.4rem;
-      order: 3;
+      top: 50%;
+      right: 0.5rem;
+      transform: translateY(-50%);
     }
   }
 }
