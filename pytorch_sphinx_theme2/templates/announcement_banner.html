@@ -1,7 +1,7 @@
 {# Announcement Banner - Configurable banner for surveys, events, releases, etc. #}
-{# Only renders if announcement dict is provided with text #}
-{% if theme_announcement and theme_announcement.text %}
-{% set ann = theme_announcement %}
+{# Only renders if announcement_banner dict is provided with text #}
+{% if theme_announcement_banner and theme_announcement_banner.text %}
+{% set ann = theme_announcement_banner %}
 {% set is_dismissible = ann.dismissible is not defined or ann.dismissible %}
 <div class="announcement-banner{% if not is_dismissible %} no-dismiss{% endif %}" id="announcement-banner"{% if is_dismissible %} style="display: none;"{% endif %}>
   <div class="announcement-banner-container">

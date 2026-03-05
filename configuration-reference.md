@@ -211,10 +211,12 @@ The theme supports an optional announcement banner that appears at the top of th
 
 Configure it as a dictionary with the following keys:
 
-#### `announcement`
+#### `announcement_banner`
 - **Type:** Dictionary
 - **Default:** `None` (banner disabled)
 - **Description:** Configuration dictionary for the announcement banner.
+
+> **Note:** This option is named `announcement_banner` (not `announcement`) to avoid conflicts with PyData Sphinx Theme's built-in `announcement` option which expects a string.
 
 **Dictionary keys:**
 
@@ -229,7 +231,7 @@ Configure it as a dictionary with the following keys:
 
 ```python
 html_theme_options = {
-    "announcement": {
+    "announcement_banner": {
         "text": "Help us improve PyTorch! Take our 2-minute survey.",
         "url": "https://forms.gle/your-survey-id",
         "link_text": "Take Survey",
@@ -242,7 +244,7 @@ html_theme_options = {
 
 ```python
 html_theme_options = {
-    "announcement": {
+    "announcement_banner": {
         "text": "PyTorch Conference 2026 registration is now open!",
         "url": "https://pytorch.org/conference",
         "link_text": "Register Now",
@@ -255,7 +257,7 @@ html_theme_options = {
 
 ```python
 html_theme_options = {
-    "announcement": {
+    "announcement_banner": {
         "text": "PyTorch 3.0 has been released! Check the release notes in the sidebar.",
     },
 }

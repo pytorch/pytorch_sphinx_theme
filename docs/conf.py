@@ -279,7 +279,7 @@ html_theme_options = {
     # "runllm_position": "BOTTOM_RIGHT",  # Optional: BOTTOM_RIGHT, BOTTOM_LEFT, etc.
     # "show_pytorch_org_link": False,  # Set to False to hide "Go to pytorch.org" link
     # Announcement Banner Configuration
-    "announcement": {
+    "announcement_banner": {
         "text": "Help us understand how you use PyTorch! Take our quick survey.",
         "url": "https://docs.google.com/forms/d/e/1FAIpQLSfsGAWBcfutRcbO6kfrShBMOMmRuBezRjjOcXk0e9I9luBzvQ/viewform",
         "link_text": "Take Survey",
