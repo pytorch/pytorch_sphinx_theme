@@ -1,11 +1,9 @@
 {# Announcement Banner - Configurable banner for surveys, events, releases, etc. #}
 {# Only renders if enabled AND text is provided #}
 {% if (theme_announcement_banner_enabled|lower == 'true' or theme_announcement_banner_enabled == true) and theme_announcement_banner_text %}
-<div class="announcement-banner" id="announcement-banner" style="display: none;">
+{% set is_dismissible = theme_announcement_banner_dismissible|lower == 'true' or theme_announcement_banner_dismissible == true %}
+<div class="announcement-banner{% if not is_dismissible %} no-dismiss{% endif %}" id="announcement-banner"{% if is_dismissible %} style="display: none;"{% endif %}>
   <div class="announcement-banner-container">
-    <span class="announcement-banner-icon">
-      <i class="fa fa-bullhorn" aria-hidden="true"></i>
-    </span>
     <span class="announcement-banner-text">{{ theme_announcement_banner_text }}</span>
     {% if theme_announcement_banner_url %}
     <a href="{{ theme_announcement_banner_url }}"
@@ -13,17 +11,19 @@
        rel="noopener noreferrer"
        class="announcement-banner-link">
       {{ theme_announcement_banner_link_text }}
-      <i class="fa fa-external-link-alt" aria-hidden="true"></i>
     </a>
     {% endif %}
+    {% if is_dismissible %}
     <button class="announcement-banner-close"
             id="announcement-banner-close"
             aria-label="Dismiss announcement"
             title="Dismiss">
       <i class="fa fa-times" aria-hidden="true"></i>
     </button>
+    {% endif %}
   </div>
 </div>
+{% if is_dismissible %}
 <script>
 (function() {
   var STORAGE_KEY = 'pytorch_announcement_dismissed';
@@ -51,4 +51,5 @@
   }
 })();
 </script>
+{% endif %}
 {% endif %}
