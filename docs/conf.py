@@ -282,7 +282,7 @@ html_theme_options = {
     "announcement_banner_enabled": True,
     "announcement_banner_text": "Help us understand how you use PyTorch! Take our quick survey.",
     "announcement_banner_url": "https://docs.google.com/forms/d/e/1FAIpQLSfsGAWBcfutRcbO6kfrShBMOMmRuBezRjjOcXk0e9I9luBzvQ/viewform",
-    "announcement_banner_link_text": "Take Survey",
+    "announcement_banner_link_text": "Take Survey.",
 }
 
 
