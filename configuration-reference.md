@@ -209,42 +209,32 @@ html_theme_options = {
 
 The theme supports an optional announcement banner that appears at the top of the page (above the navigation). Use it for surveys, event announcements, release notes, deprecation notices, or any important information you want to highlight to users.
 
-When dismissible, the banner remembers user preferences via localStorage.
+Configure it as a dictionary with the following keys:
 
-#### `announcement_banner_enabled`
-- **Type:** Boolean
-- **Default:** `False`
-- **Description:** If `True`, displays the announcement banner on all documentation pages.
+#### `announcement`
+- **Type:** Dictionary
+- **Default:** `None` (banner disabled)
+- **Description:** Configuration dictionary for the announcement banner.
 
-#### `announcement_banner_text`
-- **Type:** String
-- **Default:** `""`
-- **Description:** The main message to display in the banner. **Required** when banner is enabled.
+**Dictionary keys:**
 
-#### `announcement_banner_url`
-- **Type:** String
-- **Default:** `""`
-- **Description:** URL for the call-to-action link. Optional — the banner works without a link.
-
-#### `announcement_banner_link_text`
-- **Type:** String
-- **Default:** `"Learn More"`
-- **Description:** Text for the call-to-action link.
-
-#### `announcement_banner_dismissible`
-- **Type:** Boolean
-- **Default:** `True`
-- **Description:** If `True`, shows a close button (X) that allows users to dismiss the banner. Dismissal is remembered via localStorage. Set to `False` to always show the banner without a close button.
+| Key | Type | Required | Default | Description |
+|-----|------|----------|---------|-------------|
+| `text` | String | **Yes** | - | The main message to display in the banner |
+| `url` | String | No | `""` | URL for the call-to-action link |
+| `link_text` | String | No | `"Learn More"` | Text for the call-to-action link |
+| `dismissible` | Boolean | No | `True` | If `True`, shows a close button (X) that allows users to dismiss the banner. Dismissal is remembered via localStorage. |
 
 #### Example: Survey Banner (Dismissible)
 
 ```python
 html_theme_options = {
-    "announcement_banner_enabled": True,
-    "announcement_banner_text": "Help us improve PyTorch! Take our 2-minute survey.",
-    "announcement_banner_url": "https://forms.gle/your-survey-id",
-    "announcement_banner_link_text": "Take Survey",
-    "announcement_banner_dismissible": True,
+    "announcement": {
+        "text": "Help us improve PyTorch! Take our 2-minute survey.",
+        "url": "https://forms.gle/your-survey-id",
+        "link_text": "Take Survey",
+        "dismissible": True,
+    },
 }
 ```
 
@@ -252,11 +242,12 @@ html_theme_options = {
 
 ```python
 html_theme_options = {
-    "announcement_banner_enabled": True,
-    "announcement_banner_text": "PyTorch Conference 2026 registration is now open!",
-    "announcement_banner_url": "https://pytorch.org/conference",
-    "announcement_banner_link_text": "Register Now",
-    "announcement_banner_dismissible": False,
+    "announcement": {
+        "text": "PyTorch Conference 2026 registration is now open!",
+        "url": "https://pytorch.org/conference",
+        "link_text": "Register Now",
+        "dismissible": False,
+    },
 }
 ```
 
@@ -264,8 +255,9 @@ html_theme_options = {
 
 ```python
 html_theme_options = {
-    "announcement_banner_enabled": True,
-    "announcement_banner_text": "PyTorch 3.0 has been released! Check the release notes in the sidebar.",
+    "announcement": {
+        "text": "PyTorch 3.0 has been released! Check the release notes in the sidebar.",
+    },
 }
 ```
 
