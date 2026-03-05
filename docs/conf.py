@@ -278,6 +278,11 @@ html_theme_options = {
     # "runllm_name": "PyTorch",  # Optional: Display name (default: "Assistant")
     # "runllm_position": "BOTTOM_RIGHT",  # Optional: BOTTOM_RIGHT, BOTTOM_LEFT, etc.
     # "show_pytorch_org_link": False,  # Set to False to hide "Go to pytorch.org" link
+    # Announcement Banner Configuration
+    "announcement_banner_enabled": True,
+    "announcement_banner_text": "Help us understand how you use PyTorch! Take our quick survey.",
+    "announcement_banner_url": "https://docs.google.com/forms/d/e/1FAIpQLSfsGAWBcfutRcbO6kfrShBMOMmRuBezRjjOcXk0e9I9luBzvQ/viewform",
+    "announcement_banner_link_text": "Take Survey",
 }
 
 
