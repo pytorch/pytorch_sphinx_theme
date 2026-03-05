@@ -1,0 +1,54 @@
+{# Announcement Banner - Configurable banner for surveys, events, releases, etc. #}
+{# Only renders if enabled AND text is provided #}
+{% if (theme_announcement_banner_enabled|lower == 'true' or theme_announcement_banner_enabled == true) and theme_announcement_banner_text %}
+<div class="announcement-banner" id="announcement-banner" style="display: none;">
+  <div class="announcement-banner-container">
+    <span class="announcement-banner-icon">
+      <i class="fa fa-bullhorn" aria-hidden="true"></i>
+    </span>
+    <span class="announcement-banner-text">{{ theme_announcement_banner_text }}</span>
+    {% if theme_announcement_banner_url %}
+    <a href="{{ theme_announcement_banner_url }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="announcement-banner-link">
+      {{ theme_announcement_banner_link_text }}
+      <i class="fa fa-external-link-alt" aria-hidden="true"></i>
+    </a>
+    {% endif %}
+    <button class="announcement-banner-close"
+            id="announcement-banner-close"
+            aria-label="Dismiss announcement"
+            title="Dismiss">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<script>
+(function() {
+  var STORAGE_KEY = 'pytorch_announcement_dismissed';
+  var banner = document.getElementById('announcement-banner');
+  var closeBtn = document.getElementById('announcement-banner-close');
+
+  if (!banner) return;
+
+  if (localStorage.getItem(STORAGE_KEY) === 'true') {
+    return;
+  }
+
+  banner.style.display = 'block';
+  banner.classList.add('is-visible');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      banner.classList.remove('is-visible');
+      banner.classList.add('is-hiding');
+      setTimeout(function() {
+        banner.style.display = 'none';
+      }, 300);
+      localStorage.setItem(STORAGE_KEY, 'true');
+    });
+  }
+})();
+</script>
+{% endif %}

@@ -311,6 +311,7 @@
 {% block docs_body %}
 {% include "components/searchbox.html" %}
 <div id="pytorch-article">
+  {% include "announcement_banner.html" %}
   <!-- Hidden breadcrumb schema for SEO only -->
   <div style="display:none;" itemscope itemtype="https://schema.org/BreadcrumbList">
     {% for parent in parents %}

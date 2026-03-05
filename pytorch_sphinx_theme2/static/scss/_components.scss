@@ -414,3 +414,158 @@ a.btn {
     margin-right: 0.5rem;
   }
 }
+
+// Announcement Banner
+// Configurable banner for surveys, events, releases, deprecation notices, etc.
+.announcement-banner {
+  background: linear-gradient(135deg, var(--pst-color-primary) 0%, #f15a24 100%);
+  color: white;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  position: relative;
+
+  &.is-visible {
+    animation: announcementSlideDown 0.3s ease-out;
+  }
+
+  &.is-hiding {
+    animation: announcementSlideUp 0.3s ease-out;
+  }
+
+  .announcement-banner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .announcement-banner-icon {
+    flex-shrink: 0;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  .announcement-banner-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .announcement-banner-link {
+    flex-shrink: 0;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      color: white;
+    }
+
+    i {
+      margin-left: 0.4rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .announcement-banner-close {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.35rem 0.5rem;
+    margin-left: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    border-radius: 4px;
+
+    &:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+
+    i {
+      font-size: 0.9rem;
+    }
+  }
+
+  html[data-theme="dark"] & {
+    background: linear-gradient(135deg, #c0392b 0%, #d94520 100%);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 0.75rem;
+    margin-bottom: 0.75rem;
+
+    .announcement-banner-container {
+      gap: 0.5rem;
+    }
+
+    .announcement-banner-icon {
+      display: none;
+    }
+
+    .announcement-banner-text {
+      font-size: 0.85rem;
+      text-align: center;
+      flex: 1 1 100%;
+      order: 1;
+    }
+
+    .announcement-banner-link {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      order: 2;
+    }
+
+    .announcement-banner-close {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      order: 3;
+    }
+  }
+}
+
+@keyframes announcementSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes announcementSlideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

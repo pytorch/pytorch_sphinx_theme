@@ -205,6 +205,65 @@ html_theme_options = {
 
 ---
 
+### Announcement Banner Configuration
+
+The theme supports an optional announcement banner that appears at the top of article content. Use it for surveys, event announcements, release notes, deprecation notices, or any important information you want to highlight to users.
+
+The banner is dismissible and remembers user preferences via localStorage. Each unique announcement (based on text content) is tracked separately, so new announcements will appear even if previous ones were dismissed.
+
+#### `announcement_banner_enabled`
+- **Type:** Boolean
+- **Default:** `False`
+- **Description:** If `True`, displays the announcement banner on all documentation pages.
+
+#### `announcement_banner_text`
+- **Type:** String
+- **Default:** `""`
+- **Description:** The main message to display in the banner. **Required** when banner is enabled.
+
+#### `announcement_banner_url`
+- **Type:** String
+- **Default:** `""`
+- **Description:** URL for the call-to-action link. Optional — the banner works without a link.
+
+#### `announcement_banner_link_text`
+- **Type:** String
+- **Default:** `"Learn More"`
+- **Description:** Text for the call-to-action link button.
+
+#### Example: Survey Banner
+
+```python
+html_theme_options = {
+    "announcement_banner_enabled": True,
+    "announcement_banner_text": "Help us improve PyTorch! Take our 2-minute survey.",
+    "announcement_banner_url": "https://forms.gle/your-survey-id",
+    "announcement_banner_link_text": "Take Survey",
+}
+```
+
+#### Example: Event Announcement
+
+```python
+html_theme_options = {
+    "announcement_banner_enabled": True,
+    "announcement_banner_text": "PyTorch Conference 2026 registration is now open!",
+    "announcement_banner_url": "https://pytorch.org/conference",
+    "announcement_banner_link_text": "Register Now",
+}
+```
+
+#### Example: Text-Only Notice (No Link)
+
+```python
+html_theme_options = {
+    "announcement_banner_enabled": True,
+    "announcement_banner_text": "PyTorch 3.0 has been released! Check the release notes in the sidebar.",
+}
+```
+
+---
+
 ### LLM Discovery Configuration
 
 The theme includes built-in support for helping AI agents and LLMs discover and navigate the documentation effectively. This follows the emerging [llms.txt](https://llmstxt.org/) standard.
