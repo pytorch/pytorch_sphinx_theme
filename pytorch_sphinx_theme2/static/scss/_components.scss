@@ -419,8 +419,8 @@ a.btn {
 // Configurable banner for surveys, events, releases, deprecation notices, etc.
 // Styled to match pytorch.org conference banner
 .announcement-banner {
-  background-color: #CC2FAA;
-  color: white;
+  background-color: $pytorch-fuchsia;
+  color: $light-text;
   padding: 0.25rem 1rem;
   position: relative;
   width: 100%;
@@ -460,7 +460,7 @@ a.btn {
 
   .announcement-banner-link {
     flex-shrink: 0;
-    color: white;
+    color: $light-text;
     text-decoration: underline;
     font-weight: 600;
     font-size: 0.8rem;
@@ -469,7 +469,7 @@ a.btn {
     &:hover {
       opacity: 0.85;
       text-decoration: underline;
-      color: white;
+      color: $light-text;
     }
   }
 
@@ -477,7 +477,7 @@ a.btn {
     flex-shrink: 0;
     background: transparent;
     border: none;
-    color: white;
+    color: $light-text;
     cursor: pointer;
     padding: 0.15rem 0.35rem;
     margin-left: 0.5rem;
@@ -507,7 +507,7 @@ a.btn {
   }
 
   html[data-theme="dark"] & {
-    background-color: #a8258c;
+    background-color: $pytorch-fuchsia-dark;
   }
 
   @media (max-width: 768px) {
