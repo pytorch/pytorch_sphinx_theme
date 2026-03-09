@@ -205,6 +205,66 @@ html_theme_options = {
 
 ---
 
+### Announcement Banner Configuration
+
+The theme supports an optional announcement banner that appears at the top of the page (above the navigation). Use it for surveys, event announcements, release notes, deprecation notices, or any important information you want to highlight to users.
+
+Configure it as a dictionary with the following keys:
+
+#### `announcement_banner`
+- **Type:** Dictionary
+- **Default:** `None` (banner disabled)
+- **Description:** Configuration dictionary for the announcement banner.
+
+> **Note:** This option is named `announcement_banner` (not `announcement`) to avoid conflicts with PyData Sphinx Theme's built-in `announcement` option which expects a string.
+
+**Dictionary keys:**
+
+| Key | Type | Required | Default | Description |
+|-----|------|----------|---------|-------------|
+| `text` | String | **Yes** | - | The main message to display in the banner |
+| `url` | String | No | `""` | URL for the call-to-action link |
+| `link_text` | String | No | `"Learn More"` | Text for the call-to-action link |
+| `dismissible` | Boolean | No | `True` | If `True`, shows a close button (X) that allows users to dismiss the banner. Dismissal is remembered via localStorage. |
+
+#### Example: Survey Banner (Dismissible)
+
+```python
+html_theme_options = {
+    "announcement_banner": {
+        "text": "Help us improve PyTorch! Take our 2-minute survey.",
+        "url": "https://forms.gle/your-survey-id",
+        "link_text": "Take Survey",
+        "dismissible": True,
+    },
+}
+```
+
+#### Example: Persistent Event Banner (Non-Dismissible)
+
+```python
+html_theme_options = {
+    "announcement_banner": {
+        "text": "PyTorch Conference 2026 registration is now open!",
+        "url": "https://pytorch.org/conference",
+        "link_text": "Register Now",
+        "dismissible": False,
+    },
+}
+```
+
+#### Example: Text-Only Notice (No Link)
+
+```python
+html_theme_options = {
+    "announcement_banner": {
+        "text": "PyTorch 3.0 has been released! Check the release notes in the sidebar.",
+    },
+}
+```
+
+---
+
 ### LLM Discovery Configuration
 
 The theme includes built-in support for helping AI agents and LLMs discover and navigate the documentation effectively. This follows the emerging [llms.txt](https://llmstxt.org/) standard.
