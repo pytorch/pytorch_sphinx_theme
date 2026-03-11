@@ -2,10 +2,12 @@
 We want to make contributing to this project as easy and transparent as
 possible.
 
+> ⚠️ **IMPORTANT**: This package (`pytorch_sphinx_theme`) is no longer actively supported. Please submit all new pull requests to the [`pytorch_sphinx_theme2`](https://github.com/pytorch/pytorch_sphinx_theme/tree/pytorch_sphinx_theme2) branch.
+
 ## Pull Requests
 We actively welcome your pull requests.
 
-1. Fork the repo and create your branch from `master`.
+1. Fork the repo and create your branch from [`pytorch_sphinx_theme2`](https://github.com/pytorch/pytorch_sphinx_theme/tree/pytorch_sphinx_theme2).
 2. If you've added code that should be tested, add tests.
 3. If you've changed APIs, update the documentation.
 4. Ensure the test suite passes.
