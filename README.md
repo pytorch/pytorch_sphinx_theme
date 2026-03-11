@@ -1,5 +1,7 @@
 # PyTorch Sphinx Theme
 
+> ⚠️ **DEPRECATION NOTICE**: This package (`pytorch_sphinx_theme`) is no longer actively supported. We are now actively working on `pytorch_sphinx_theme2` (see the [`pytorch_sphinx_theme2`](https://github.com/pytorch/pytorch_sphinx_theme/tree/pytorch_sphinx_theme2) branch in this repo). All new contributions should be directed there. At some point, the `pytorch_sphinx_theme2` branch will be renamed to `main` and become the default branch.
+
 Sphinx theme for [PyTorch Docs](https://pytorch.org/docs/master/torch.html) and [PyTorch Tutorials](https://pytorch.org/tutorials) based on the [Read the Docs Sphinx Theme](https://sphinx-rtd-theme.readthedocs.io/en/latest).
 
 ## Local Development
