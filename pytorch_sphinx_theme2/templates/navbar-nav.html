@@ -40,7 +40,7 @@
 {% endmacro %}
 
 {% if hierarchical_header_nav %}
-<nav>
+<nav aria-label="Primary navigation">
   <ul class="bd-navbar-elements navbar-nav">
     {# Show first N items with dropdown support (if enabled) #}
     {% for item in hierarchical_header_nav[:max_visible_items] %}
