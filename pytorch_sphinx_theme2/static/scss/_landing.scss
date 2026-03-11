@@ -1,0 +1,262 @@
+// =============================================================================
+// Landing Page Styles
+// =============================================================================
+
+// Landing page body class removes right sidebar
+body.landing-page .bd-sidebar-secondary {
+  display: none;
+}
+
+body.landing-page .bd-main .bd-content .bd-article-container {
+  max-width: 100%;
+}
+
+body.landing-page .bd-article {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+// Landing searchbar directive styles
+.landing-searchbar {
+  width: 100%;
+  padding: 1.5rem 0;
+
+  &--prominent {
+    padding: 2rem 0;
+  }
+
+  &--minimal {
+    padding: 1rem 0;
+  }
+
+  &__wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background: var(--pst-color-surface);
+    border: 1px solid var(--pst-color-border);
+    border-radius: 12px;
+    padding: 0.875rem 1.25rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover,
+    &:focus-within {
+      border-color: var(--pst-color-primary);
+      box-shadow: 0 0 0 3px rgba(238, 76, 44, 0.1);
+    }
+  }
+
+  &__icon {
+    color: var(--pst-color-text-muted);
+    margin-right: 0.875rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--pst-color-text-base);
+    outline: none;
+    cursor: pointer;
+
+    &::placeholder {
+      color: var(--pst-color-text-muted);
+    }
+  }
+
+  &__arrow {
+    color: var(--pst-color-text-muted);
+    display: flex;
+    align-items: center;
+    padding-left: 0.875rem;
+    border-left: 1px solid var(--pst-color-border);
+    margin-left: 0.875rem;
+    background: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--pst-color-primary);
+    }
+  }
+}
+
+// =============================================================================
+// Landing Card Grid (custom directive)
+// =============================================================================
+
+.landing-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+
+  // 2 columns
+  &--2-col {
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  // 3 columns (default)
+  &--3-col {
+    @media (min-width: 960px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // 4 columns
+  &--4-col {
+    @media (min-width: 960px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+// PyTorch brand accent colors for card right borders
+$card-colors: #EE4C2C, #6C4BF6, #0D96F2, #2BAF2B, #F2711C, #E91E63;
+
+// Landing card item (individual card)
+.landing-card-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--pst-color-border);
+  border-right: 3px solid var(--pst-color-primary);
+  border-radius: 8px;
+  text-decoration: none;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+  // Cycle accent colors across cards (right border + title dot)
+  @for $i from 1 through length($card-colors) {
+    &:nth-child(#{length($card-colors)}n + #{$i}) {
+      border-right-color: nth($card-colors, $i);
+
+      .landing-card-item__title::before {
+        background: nth($card-colors, $i);
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    text-decoration: none;
+
+    .landing-card-item__arrow {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--pst-color-primary);
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pst-color-primary);
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+    }
+  }
+
+  &__arrow {
+    opacity: 0;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: 0.86rem;
+    color: var(--pst-color-text-muted);
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+}
+
+// Dark mode: use a dark card background instead of white
+html[data-theme="dark"] .landing-card-item {
+  background: #1e1e1e;
+}
+
+// Badge styling for cards (like "Most Popular")
+.landing-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+  background: var(--pst-color-primary);
+  color: white;
+}
+
+// Section header with colored badge (like "Core" badge)
+.landing-section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    background: var(--pst-color-primary);
+    color: white;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--pst-color-text-base);
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 0.875rem;
+    color: var(--pst-color-text-muted);
+    margin: 0 0 1rem 0;
+  }
+}
+
+// Dark mode adjustments
+html[data-theme="dark"] {
+  .landing-card {
+    background: #2a2a2a !important;
+    border-left-color: #404040 !important;
+
+    &:hover {
+      background: #333333 !important;
+      border-left-color: var(--pst-color-primary) !important;
+    }
+  }
+
+  .landing-searchbar__wrapper {
+    background: var(--pst-color-surface);
+  }
+}

@@ -463,6 +463,91 @@ def _extract_page_meta_description(app, pagename, templatename, context, doctree
         context["page_meta_description"] = match.group(1)
 
 
+def _select_template_from_meta(app, pagename, templatename, context, doctree):
+    """Select a custom template based on meta directive in the page.
+
+    This allows pages to specify a custom template via the .. meta:: directive:
+
+    .. meta::
+       :template: landing
+
+    Available templates:
+    - landing: Landing page layout with left sidebar only and optional search bar
+
+    The template name maps to templates/{name}.html in the theme.
+    """
+    metatags = context.get("metatags", "")
+    if not metatags:
+        return templatename
+
+    import re
+
+    # Match format: content="..." name="template"
+    pattern = r'<meta[^>]*content="([^"]*)"[^>]*name="template"[^>]*/?\s*>'
+    match = re.search(pattern, metatags, re.IGNORECASE)
+    if match:
+        template_name = match.group(1).strip().lower()
+        # Validate template name to prevent path traversal
+        if template_name in ("landing",):
+            return f"{template_name}.html"
+
+    return templatename
+
+
+def _update_html_context_for_template(app, pagename, templatename, context, doctree):
+    """Add template-specific context variables.
+
+    This runs after template selection and adds context variables needed
+    by specific templates.
+    """
+    metatags = context.get("metatags", "")
+    if not metatags:
+        return
+
+    import re
+
+    # Check if this is a landing page and extract landing-specific options
+    template_pattern = r'<meta[^>]*content="([^"]*)"[^>]*name="template"[^>]*/?\s*>'
+    template_match = re.search(template_pattern, metatags, re.IGNORECASE)
+
+    if template_match and template_match.group(1).strip().lower() == "landing":
+        # Check for landing-show-search option
+        show_search_pattern = (
+            r'<meta[^>]*content="([^"]*)"[^>]*name="landing-show-search"[^>]*/?\s*>'
+        )
+        show_search_match = re.search(show_search_pattern, metatags, re.IGNORECASE)
+        if show_search_match:
+            context["theme_landing_show_search"] = (
+                show_search_match.group(1).strip().lower() == "true"
+            )
+
+
+def _apply_template_selection(app, pagename, templatename, context, doctree):
+    """Apply custom template selection based on page metadata.
+
+    This handler modifies the context to use an alternative template
+    when specified via the .. meta:: directive.
+
+    Note: Sphinx's html-page-context event doesn't allow changing the template
+    directly, so we use a workaround by adding the template name to context
+    and using Jinja2's extends mechanism in our templates.
+    """
+    metatags = context.get("metatags", "")
+    if not metatags:
+        return
+
+    import re
+
+    # Match format: content="..." name="template"
+    pattern = r'<meta[^>]*content="([^"]*)"[^>]*name="template"[^>]*/?\s*>'
+    match = re.search(pattern, metatags, re.IGNORECASE)
+    if match:
+        template_name = match.group(1).strip().lower()
+        # Validate template name to prevent path traversal
+        if template_name in ("landing",):
+            context["custom_template"] = f"{template_name}.html"
+
+
 # =============================================================================
 # Sphinx setup function
 # =============================================================================
@@ -482,6 +567,13 @@ def setup(app):
 
     # Extract page meta description for LLM tags
     app.connect("html-page-context", _extract_page_meta_description)
+
+    # Add template context variables for landing pages and other templates
+    app.connect("html-page-context", _update_html_context_for_template)
+
+    # Template selection from meta directive (must return new template name)
+    # This event handler returns templatename via html-collect-pages hook instead
+    app.connect("html-page-context", _apply_template_selection)
 
     # Configuration for sphinx-tippy parallel build fix
     # tippy_glossary_page: name of the glossary page (without extension)
@@ -508,6 +600,11 @@ def setup(app):
         app.add_directive(
             "customcalloutitem", custom_directives.CustomCalloutItemDirective
         )
+
+    # Register landing page directives (available without sphinx_gallery)
+    app.add_directive("landingcardgrid", custom_directives.LandingCardGridDirective)
+    app.add_directive("landingcard", custom_directives.LandingCardDirective)
+    app.add_directive("landingsearchbar", custom_directives.LandingSearchBarDirective)
 
     return {
         "version": "0.4.9",

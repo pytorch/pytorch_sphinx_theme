@@ -12,9 +12,11 @@ except NameError:
 
 try:
     import sphinx_gallery
+
     HAS_SPHINX_GALLERY = True
 except ImportError:
     HAS_SPHINX_GALLERY = False
+
 
 class IncludeDirective(Directive):
     """Include source file without docstring at the top of file.
@@ -92,7 +94,9 @@ class GalleryItemDirective(Directive):
             if "intro" in self.options:
                 intro = self.options["intro"][:195] + "..."
             else:
-                block_parser = sphinx_gallery.gen_rst.BlockParser(abs_fname, {"filetype_parsers": {}})
+                block_parser = sphinx_gallery.gen_rst.BlockParser(
+                    abs_fname, {"filetype_parsers": {}}
+                )
                 _, blocks, _ = block_parser.split_code_and_text_blocks(abs_fname)
                 intro, _ = sphinx_gallery.gen_rst.extract_intro_and_title(
                     abs_fname, blocks[0][1]
@@ -368,4 +372,217 @@ CALLOUT_TEMPLATE = """
             <a class="btn callout-button" href="{button_link}">{button_text}</a>
         </div>
     </div>
+"""
+
+
+# =============================================================================
+# Landing Page Directives
+# =============================================================================
+
+
+class LandingCardGridDirective(Directive):
+    """Create a grid container for landing page cards.
+
+    Example usage:
+
+    .. landingcardgrid::
+       :columns: 3
+
+       .. landingcard::
+          :title: PyTorch
+          :link: https://pytorch.org/docs/stable/
+
+          Open source machine learning framework
+
+    """
+
+    required_arguments = 0
+    optional_arguments = 0
+    final_argument_whitespace = True
+    option_spec = {
+        "columns": directives.unchanged,  # Number of columns: 2, 3, or 4
+    }
+    has_content = True
+    add_index = False
+
+    def run(self):
+        columns = self.options.get("columns", "3")
+
+        # Use a container node so the grid div directly wraps the card elements
+        container = nodes.container()
+        container["classes"] = [
+            "landing-card-grid",
+            f"landing-card-grid--{columns}-col",
+        ]
+
+        # Parse the nested card directives into the container
+        self.state.nested_parse(self.content, self.content_offset, container)
+
+        return [container]
+
+
+class LandingCardDirective(Directive):
+    """Create a single card for landing pages.
+
+    Example usage:
+
+    .. landingcard::
+       :title: PyTorch
+       :link: https://pytorch.org/docs/stable/
+
+       Open source machine learning framework for tensors and neural networks
+
+    """
+
+    required_arguments = 0
+    optional_arguments = 0
+    final_argument_whitespace = True
+    option_spec = {
+        "title": directives.unchanged,
+        "link": directives.unchanged,
+    }
+    has_content = True
+    add_index = False
+
+    def run(self):
+        title = self.options.get("title", "")
+        link = self.options.get("link", "#")
+
+        # Get the description from content
+        description = "\n".join(self.content) if self.content else ""
+
+        card_html = (
+            f'<a href="{link}" class="landing-card-item">'
+            f'<div class="landing-card-item__title">'
+            f"<span>{title}</span>"
+            f'<svg class="landing-card-item__arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+            f'<path d="m9 18 6-6-6-6"></path></svg>'
+            f"</div>"
+            f'<div class="landing-card-item__desc">{description}</div>'
+            f"</a>"
+        )
+        raw_node = nodes.raw("", card_html, format="html")
+        return [raw_node]
+
+
+class LandingSearchBarDirective(Directive):
+    """Insert a prominent search bar for landing pages.
+
+    This directive creates a search input that integrates with RunLLM if configured.
+
+    Example usage:
+
+    .. landingsearchbar::
+       :placeholder: Ask PyTorch Assistant...
+       :style: prominent
+
+    """
+
+    required_arguments = 0
+    optional_arguments = 0
+    final_argument_whitespace = True
+    option_spec = {
+        "placeholder": directives.unchanged,
+        "style": directives.unchanged,  # "prominent" or "minimal"
+    }
+    has_content = False
+    add_index = False
+
+    def run(self):
+        try:
+            placeholder = self.options.get("placeholder", "Ask a question...")
+            style = self.options.get("style", "prominent")
+
+            searchbar_rst = LANDING_SEARCHBAR_TEMPLATE.format(
+                placeholder=placeholder,
+                style=style,
+            )
+            searchbar_list = StringList(searchbar_rst.split("\n"))
+            searchbar = nodes.paragraph()
+            self.state.nested_parse(searchbar_list, self.content_offset, searchbar)
+            return [searchbar]
+
+        except ValueError as e:
+            print(e)
+            raise
+            return []
+
+
+LANDING_SEARCHBAR_TEMPLATE = """
+.. raw:: html
+
+    <form class="landing-searchbar landing-searchbar--{style}" id="landing-searchbar-form" action="" method="get">
+        <div class="landing-searchbar__wrapper">
+            <span class="landing-searchbar__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </span>
+            <input type="text"
+                   class="landing-searchbar__input"
+                   id="landing-searchbar-input"
+                   placeholder="{placeholder}"
+                   autocomplete="off">
+            <button type="submit" class="landing-searchbar__arrow" aria-label="Search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </form>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {{
+        var form = document.getElementById('landing-searchbar-form');
+        var input = document.getElementById('landing-searchbar-input');
+        if (!form || !input) return;
+
+        // Check if RunLLM is available (may load asynchronously)
+        function hasRunLLM() {{
+            return (window.runllmConfig && window.runllmConfig.assistant_id) ||
+                   document.getElementById('runllm-widget-script');
+        }}
+
+        function openRunLLM(query) {{
+            // Try the RunLLM API
+            if (window.RunLLM && window.RunLLM.open) {{
+                window.RunLLM.open(query);
+                return true;
+            }}
+            // Try clicking the widget element
+            var widget = document.querySelector('runllm-search') ||
+                         document.querySelector('[data-runllm-widget]');
+            if (widget) {{
+                widget.click();
+                return true;
+            }}
+            // Try triggering the keyboard shortcut
+            var shortcut = (window.runllmConfig && window.runllmConfig.keyboard_shortcut) || 'Mod+j';
+            var key = shortcut.split('+').pop();
+            var isMac = /Mac|iPhone|iPad/.test(navigator.platform);
+            document.dispatchEvent(new KeyboardEvent('keydown', {{
+                key: key, code: 'Key' + key.toUpperCase(),
+                metaKey: isMac, ctrlKey: !isMac, bubbles: true
+            }}));
+            return true;
+        }}
+
+        form.addEventListener('submit', function(e) {{
+            e.preventDefault();
+            var query = input.value.trim();
+            if (!query) return;
+
+            // If RunLLM is configured, use it
+            if (hasRunLLM()) {{
+                openRunLLM(query);
+                return;
+            }}
+
+            // Fallback: redirect to Sphinx search
+            var searchUrl = (DOCUMENTATION_OPTIONS && DOCUMENTATION_OPTIONS.URL_ROOT || '') + 'search.html';
+            window.location.href = searchUrl + '?q=' + encodeURIComponent(query);
+        }});
+    }});
+    </script>
 """

@@ -1,0 +1,75 @@
+{# Landing page template - shows left sidebar only, with optional RunLLM search bar #}
+{% extends "!layout.html" %}
+
+{# Override article header to optionally show RunLLM search bar #}
+{% block article_header %}
+{% if theme_landing_show_search|default(false) %}
+<div class="landing-search-container">
+  <div class="landing-search-wrapper">
+    <div class="landing-search-input">
+      <span class="landing-search-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </span>
+      {% if theme_runllm_assistant_id %}
+      <input type="text"
+             id="landing-runllm-search"
+             placeholder="Ask {{ theme_runllm_name|default('Assistant') }}"
+             class="landing-search-field"
+             readonly>
+      {% else %}
+      <input type="text"
+             id="landing-search"
+             placeholder="Search documentation..."
+             class="landing-search-field">
+      {% endif %}
+      <span class="landing-search-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+</div>
+{% if theme_runllm_assistant_id %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var searchInput = document.getElementById('landing-runllm-search');
+  if (searchInput) {
+    searchInput.addEventListener('click', function() {
+      // Trigger RunLLM widget if available
+      if (window.RunLLM && window.RunLLM.open) {
+        window.RunLLM.open();
+      } else if (document.querySelector('[data-runllm-widget]')) {
+        document.querySelector('[data-runllm-widget]').click();
+      }
+    });
+  }
+});
+</script>
+{% endif %}
+{% endif %}
+{{ super() }}
+{% endblock %}
+
+{# Hide the secondary sidebar (right side) for landing pages #}
+{% block docs_sidebar %}
+{{ super() }}
+{% endblock %}
+
+{% block docs_toc %}
+{# Empty - removes right sidebar TOC #}
+{% endblock %}
+
+{# Add landing page class to body for CSS targeting #}
+{% block body_tag %}
+<body data-feedback-url="{{ feedback_url }}" class="pytorch-body landing-page">
+  {% include "announcement_banner.html" %}
+  {% if theme_show_lf_header|lower == 'true' or theme_show_lf_header == true %}
+  {% include "pytorch_header.html" %}
+  {% endif %}
+  {{ super() }}
+{% endblock %}
