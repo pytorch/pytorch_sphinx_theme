@@ -1,9 +1,10 @@
 {% if pagename != 'index' and pagename != 'genindex' and pagename != 'search' and pagename != '404' and status_code != 404 %}
 <div class="rating">
-    Rate this Page
-    <div class="stars">
+    <span id="rate-this-page-label">Rate this Page</span>
+    <div class="stars" role="group" aria-labelledby="rate-this-page-label">
         {% for i in range(1, 6) %}
-        <span class="star" data-behavior="tutorial-rating" data-count="{{ i }}" data-value="{{ i }}">★</span>
+        <button class="star" type="button" data-behavior="tutorial-rating" data-count="{{ i }}" data-value="{{ i }}"
+                aria-label="Rate {{ i }} out of 5 stars">★</button>
         {% endfor %}
     </div>
 </div>
