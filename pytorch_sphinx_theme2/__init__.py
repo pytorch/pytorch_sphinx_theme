@@ -1,4 +1,4 @@
-__version__ = "0.4.4"
+__version__ = "0.4.5"
 
 import json
 import os
@@ -650,7 +650,7 @@ def setup(app):
         )
 
     return {
-        "version": "0.4.4",
+        "version": "0.4.5",
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
