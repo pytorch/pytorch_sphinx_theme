@@ -10,6 +10,8 @@ var cookieBanner = {
   },
 
   bind: function() {
+    // Selector covers both the new <button class="close-button"> (accessible)
+    // and the legacy <img class="close-button"> in case of cached templates.
     $(".close-button").on("click", function() {
       cookieBanner.hideCookieNotice();
       cookieBanner.setCookie(); // Set the cookie or local storage item when the banner is closed
