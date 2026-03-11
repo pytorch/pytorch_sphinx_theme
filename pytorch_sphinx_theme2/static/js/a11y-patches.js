@@ -7,9 +7,10 @@
  * scripts (e.g. the version switcher).
  *
  * WCAG criteria addressed:
- *   - 4.1.2  Name, Role, Value  → summary-name, select-name
+ *   - 4.1.2  Name, Role, Value  → summary-name, select-name, label (search-toggle)
  *   - 1.3.1  Info & Relationships → definition-list (dl/dt/dd structure)
  *   - 2.1.1  Keyboard           → scrollable-region-focusable
+ *   - 1.4.1  Use of Colour      → inline link cookie-banner underline fallback
  */
 
 (function () {
@@ -223,6 +224,57 @@
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
+  // ── Fix 6: label — search-toggle checkbox (WCAG 1.3.1, 4.1.2) ───────────
+  // The theme renders <input type="checkbox" id="search-toggle"> to control
+  // the mobile search bar via CSS. The checkbox has no associated <label>
+  // text, aria-label, or aria-labelledby, so screen readers cannot identify
+  // its purpose (axe-core: label, 37 nodes across all pages).
+  // Fix: add aria-label="Toggle search" and, if the companion <label> element
+  // is empty, inject a visually-hidden text node so the label is also
+  // programmatically associated.
+
+  function fixSearchToggle() {
+    var checkbox = document.getElementById("search-toggle");
+    if (!checkbox) return;
+    if (
+      checkbox.getAttribute("aria-label") ||
+      checkbox.getAttribute("aria-labelledby")
+    ) {
+      return; // already labelled by a later theme update
+    }
+    checkbox.setAttribute("aria-label", "Toggle search");
+
+    // If there is a companion <label for="search-toggle"> that is visually
+    // empty (icon-only), inject a visually-hidden span so the label is also
+    // meaningful for screen readers.
+    document.querySelectorAll("label").forEach(function (lbl) {
+      if (lbl.htmlFor === "search-toggle" && !lbl.textContent.trim()) {
+        lbl.appendChild(srOnly("Toggle search"));
+      }
+    });
+  }
+
+  // ── Fix 7: link-in-text-block — cookie banner links (WCAG 1.4.1) ─────────
+  // The HubSpot cookie banner injects links that are distinguishable from
+  // surrounding text only by colour. The SCSS fix in _a11y.scss covers
+  // static prose links; this function handles the dynamically-injected
+  // cookie banner links that are not present at DOMContentLoaded.
+  // Fix: ensure cookie-banner links always have a visible underline.
+
+  function fixCookieBannerLinks() {
+    var selectors = [
+      "#hs-eu-policy-wording a",
+      "#hs-eu-cookie-disclaimer a",
+      ".hs-cookie-notification-position-bottom a",
+    ];
+    document.querySelectorAll(selectors.join(", ")).forEach(function (link) {
+      if (!link.style.textDecoration) {
+        link.style.textDecoration = "underline";
+        link.style.textUnderlineOffset = "0.15em";
+      }
+    });
+  }
+
   // ── Initialise ───────────────────────────────────────────────────────────
 
   onReady(function () {
@@ -231,5 +283,7 @@
     fixScrollableRegions();
     fixDefinitionLists();
     observeVersionSwitcher();
+    fixSearchToggle();
+    fixCookieBannerLinks();
   });
 })();
