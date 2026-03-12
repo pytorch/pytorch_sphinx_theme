@@ -156,7 +156,7 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
                 h1_pattern = r"<h1([^>]*)>(.*?)</h1>"
                 match = re.search(h1_pattern, body)
                 if match:
-                    date_info = f'<p class="date-info-last-verified" style="color: #6c6c6d; font-size: small;">Created On: {created_on} | Last Updated On: {last_updated}</p>'
+                    date_info = f'<p class="date-info-last-verified" data-pagefind-ignore style="color: #6c6c6d; font-size: small;">Created On: {created_on} | Last Updated On: {last_updated}</p>'
                     context["body"] = re.sub(
                         h1_pattern, r"<h1\1>\2</h1>\n" + date_info, body, count=1
                     )
@@ -204,6 +204,13 @@ def _extract_glossary_terms(app, doctree, docname):
         app.env.glossary_terms_for_tippy[term_id] = (
             f'<dt id="{term_id}">{term_node.astext()}</dt><dd>{def_html}</dd>'
         )
+
+
+def _merge_toctree_entries(app, env, docnames, other):
+    """Merge root toctree entries from parallel workers."""
+    other_entries = getattr(other, "_root_toctree_entries", [])
+    if other_entries and not getattr(env, "_root_toctree_entries", []):
+        env._root_toctree_entries = other_entries
 
 
 def _merge_glossary_terms(app, env, docnames, other):
@@ -549,6 +556,220 @@ def _apply_template_selection(app, pagename, templatename, context, doctree):
 
 
 # =============================================================================
+# Rich Landing Page (YAML frontmatter-driven)
+# =============================================================================
+
+# Try to import yaml; fall back to a built-in minimal parser
+try:
+    import yaml as _yaml
+except ImportError:
+    _yaml = None
+
+
+def _parse_yaml_frontmatter(text):
+    """Minimal YAML parser for landing page frontmatter.
+
+    Handles the subset of YAML used by landing_page configs: nested dicts,
+    lists, strings, booleans. Uses PyYAML when available, otherwise falls
+    back to a simple line-by-line parser.
+    """
+    if _yaml is not None:
+        return _yaml.safe_load(text)
+
+    # ---- Minimal built-in parser ----
+    result = {}
+    stack = [(result, -1)]  # (current_dict_or_list, indent_level)
+
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.lstrip()
+        i += 1
+
+        if not stripped or stripped.startswith("#"):
+            continue
+
+        indent = len(line) - len(stripped)
+
+        # Pop stack to find parent at correct indent level
+        while len(stack) > 1 and stack[-1][1] >= indent:
+            stack.pop()
+
+        parent, _ = stack[-1]
+
+        # List item
+        if stripped.startswith("- "):
+            item_text = stripped[2:].strip()
+
+            if isinstance(parent, dict):
+                # Find the last key that should hold this list
+                last_key = list(parent.keys())[-1] if parent else None
+                if last_key is not None and parent[last_key] is None:
+                    parent[last_key] = []
+                if last_key is not None and isinstance(parent[last_key], list):
+                    target_list = parent[last_key]
+                else:
+                    target_list = parent.setdefault("_items", [])
+            elif isinstance(parent, list):
+                target_list = parent
+            else:
+                continue
+
+            if ":" in item_text:
+                # Inline dict item: "- key: value"
+                new_dict = {}
+                k, v = item_text.split(":", 1)
+                new_dict[k.strip()] = _yaml_cast(v.strip())
+                target_list.append(new_dict)
+                stack.append((new_dict, indent + 2))
+            else:
+                target_list.append(_yaml_cast(item_text))
+
+        # Key-value pair
+        elif ":" in stripped:
+            key, _, val = stripped.partition(":")
+            key = key.strip().strip('"').strip("'")
+            val = val.strip()
+
+            if isinstance(parent, dict):
+                if val:
+                    parent[key] = _yaml_cast(val)
+                else:
+                    parent[key] = None  # Will be filled by nested content
+                    stack.append((parent, indent))
+            elif isinstance(parent, list):
+                # dict inside a list (continuation of last list item)
+                if parent and isinstance(parent[-1], dict):
+                    parent[-1][key] = _yaml_cast(val) if val else None
+                    if not val:
+                        stack.append((parent[-1], indent))
+
+    return result
+
+
+def _yaml_cast(val):
+    """Cast a YAML string value to the appropriate Python type."""
+    if not val or val == "~" or val == "null":
+        return None
+    if val.strip('"').strip("'") != val:
+        return val.strip('"').strip("'")
+    low = val.lower()
+    if low == "true":
+        return True
+    if low == "false":
+        return False
+    try:
+        return int(val)
+    except ValueError:
+        pass
+    try:
+        return float(val)
+    except ValueError:
+        pass
+    return val
+
+
+def _inject_landing_page_data(app, pagename, templatename, context, doctree):
+    """Extract landing_page YAML frontmatter and inject into template context.
+
+    When a .md page contains a ``landing_page:`` key in its YAML frontmatter,
+    the parsed data is injected into the Jinja template context so that the
+    landing.html template can render a rich, category-based landing page.
+    """
+    source_path = app.env.doc2path(pagename)
+    if not source_path.endswith(".md"):
+        return
+
+    try:
+        with open(source_path, "r") as f:
+            content = f.read()
+    except (IOError, OSError):
+        return
+
+    # Parse YAML frontmatter (between --- markers)
+    if not content.startswith("---"):
+        return
+    end = content.find("---", 3)
+    if end == -1:
+        return
+
+    try:
+        frontmatter = _parse_yaml_frontmatter(content[3:end])
+    except Exception:
+        return
+
+    if not isinstance(frontmatter, dict) or "landing_page" not in frontmatter:
+        return
+
+    landing_data = frontmatter["landing_page"]
+    context["landing_page"] = landing_data
+    # Return template name to tell Sphinx to use landing.html for this page
+    return "landing.html"
+
+
+def _run_pagefind(app, exception):
+    """Run Pagefind after build to create the search index."""
+    if exception:
+        return
+    if app.builder.name != "html":
+        return
+
+    outdir = app.outdir
+
+    import glob as globmod
+    hidden_pages = []
+    for pattern in ["genindex*.html", "py-modindex.html", "search.html", "404.html"]:
+        for filepath in globmod.glob(os.path.join(outdir, pattern)):
+            hidden = filepath + "._pagefind_skip"
+            try:
+                os.rename(filepath, hidden)
+                hidden_pages.append((filepath, hidden))
+            except OSError:
+                pass
+
+    exclude_selectors = (
+        ".headerlink, .rating, .date-info-last-verified, "
+        ".pytorch-call-to-action-links, .bd-header, "
+        ".bd-sidebar-primary, .bd-sidebar-secondary, "
+        ".site-footer, .pytorch-footer, nav, .breadcrumb, "
+        ".search-container-wrapper, .bd-header-article, "
+        ".skip-link, #pst-skip-link, .back-to-top, #pst-back-to-top"
+    )
+
+    try:
+        for cmd in ["npx pagefind", "pagefind"]:
+            try:
+                result = subprocess.run(
+                    f'{cmd} --site "{outdir}" --exclude-selectors "{exclude_selectors}"',
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=120,
+                )
+                if result.returncode == 0:
+                    from sphinx.util import logging
+                    logger = logging.getLogger(__name__)
+                    logger.info("Pagefind search index built successfully")
+                    return
+            except (subprocess.TimeoutExpired, FileNotFoundError):
+                continue
+
+        from sphinx.util import logging
+        logger = logging.getLogger(__name__)
+        logger.warning(
+            "Pagefind not found. Install with 'npm install pagefind' for full-text search. "
+            "Search will fall back to title-only matching."
+        )
+    finally:
+        for original, hidden in hidden_pages:
+            try:
+                os.rename(hidden, original)
+            except OSError:
+                pass
+
+
+# =============================================================================
 # Sphinx setup function
 # =============================================================================
 
@@ -561,6 +782,7 @@ def setup(app):
     # Cache root doc toctree entries during read phase (before doctrees may be
     # discarded by builders that skip disk writes for performance)
     app.connect("doctree-read", _cache_root_toctree_entries)
+    app.connect("env-merge-info", _merge_toctree_entries)
 
     # Add hierarchical navigation context for dropdown menus
     app.connect("html-page-context", _add_hierarchical_nav_to_context)
@@ -574,6 +796,9 @@ def setup(app):
     # Template selection from meta directive (must return new template name)
     # This event handler returns templatename via html-collect-pages hook instead
     app.connect("html-page-context", _apply_template_selection)
+
+    # Rich landing page: extract landing_page YAML frontmatter
+    app.connect("html-page-context", _inject_landing_page_data)
 
     # Configuration for sphinx-tippy parallel build fix
     # tippy_glossary_page: name of the glossary page (without extension)
@@ -589,6 +814,9 @@ def setup(app):
 
     # Generate llms.txt (and optionally .md files) after build completes
     app.connect("build-finished", _generate_llms_txt)
+
+    # Run Pagefind to build search index after HTML build completes
+    app.connect("build-finished", _run_pagefind)
 
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)

@@ -1,0 +1,159 @@
+{# Override Sphinx search page to use Pagefind #}
+{% extends "layout.html" %}
+
+{% block body %}
+<div data-pagefind-ignore>
+<h1>Search Results</h1>
+<div class="pagefind-fullpage-search">
+  <div class="pagefind-fullpage-search__input-wrapper">
+    <input type="text" class="pagefind-fullpage-search__input" id="pagefind-fullpage-input"
+           placeholder="Search documentation..." autocomplete="off" autofocus>
+  </div>
+  <div class="pagefind-fullpage-search__status" id="pagefind-fullpage-status"></div>
+  <div class="pagefind-fullpage-search__results" id="pagefind-fullpage-results"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  var input = document.getElementById('pagefind-fullpage-input');
+  var resultsContainer = document.getElementById('pagefind-fullpage-results');
+  var statusEl = document.getElementById('pagefind-fullpage-status');
+  var debounceTimer = null;
+
+  function cleanTitle(title) {
+    return (title || '').replace(/#\s*$/g, '').replace(/\s*#\s*/g, ' ').trim();
+  }
+  function cleanExcerpt(excerpt) {
+    if (!excerpt) return '';
+    var cleaned = excerpt.replace(/<(?!\/?mark)[^>]+>/gi, '');
+    cleaned = cleaned.replace(/Created On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Last (Updated|Verified) On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Rate this Page[\s★☆✩✪⭐]*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/[★☆✩✪⭐]{2,}/g, '');
+    cleaned = cleaned.replace(/Run in Google Colab\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Download Notebook\.?\s*/gi, '');
+    cleaned = cleaned.replace(/View on GitHub\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\b(Colab|Notebook|GitHub)\.\s*/g, '');
+    cleaned = cleaned.replace(/Skip to main content\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Back to top\.?\s*/gi, '');
+    cleaned = cleaned.replace(/PyPi\s*/gi, '');
+    cleaned = cleaned.replace(/Theme Documentation\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\s{2,}/g, ' ').replace(/^\s*[.\s]+/, '').trim();
+    return cleaned;
+  }
+
+  var PAGE_SIZE = 20;
+  var currentResults = [];  // pagefind result handles from last search
+  var loadedCount = 0;      // how many results have been rendered
+
+  function renderResult(d) {
+    var title = cleanTitle(d.meta.title || d.url);
+    var excerpt = cleanExcerpt(d.excerpt);
+    var div = document.createElement('div');
+    div.className = 'pagefind-fullpage-result';
+    div.innerHTML =
+      '<a href="' + d.url + '" class="pagefind-fullpage-result__title">' + title + '</a>' +
+      (excerpt ? '<p class="pagefind-fullpage-result__excerpt">' + excerpt + '</p>' : '') +
+      '<span class="pagefind-fullpage-result__url">' + d.url + '</span>';
+    resultsContainer.appendChild(div);
+  }
+
+  function removeShowMore() {
+    var existing = resultsContainer.querySelector('.pagefind-fullpage-show-more');
+    if (existing) existing.remove();
+  }
+
+  async function loadPage() {
+    var nextBatch = currentResults.slice(loadedCount, loadedCount + PAGE_SIZE);
+    if (nextBatch.length === 0) return;
+
+    var dataResults = await Promise.all(
+      nextBatch.map(function(r) { return r.data(); })
+    );
+
+    // Sort first page by title match; subsequent pages keep pagefind ranking
+    if (loadedCount === 0) {
+      var qLower = (input.value || '').trim().toLowerCase();
+      dataResults.sort(function(a, b) {
+        var aTitle = (a.meta.title || '').toLowerCase();
+        var bTitle = (b.meta.title || '').toLowerCase();
+        var aInTitle = aTitle.indexOf(qLower) !== -1;
+        var bInTitle = bTitle.indexOf(qLower) !== -1;
+        if (aInTitle && !bInTitle) return -1;
+        if (!aInTitle && bInTitle) return 1;
+        return 0;
+      });
+    }
+
+    removeShowMore();
+    dataResults.forEach(renderResult);
+    loadedCount += dataResults.length;
+
+    // Add "Show more" button if there are remaining results
+    if (loadedCount < currentResults.length) {
+      var btn = document.createElement('button');
+      btn.className = 'pagefind-fullpage-show-more';
+      btn.textContent = 'Show more results (' + (currentResults.length - loadedCount) + ' remaining)';
+      btn.addEventListener('click', function() { loadPage(); });
+      resultsContainer.appendChild(btn);
+    }
+  }
+
+  async function doSearch(query) {
+    if (!query || query.length < 2) {
+      resultsContainer.innerHTML = '';
+      statusEl.textContent = '';
+      currentResults = [];
+      loadedCount = 0;
+      return;
+    }
+
+    var pf = await window._pagefindReady;
+    if (!pf) {
+      statusEl.textContent = 'Search index not available. Try rebuilding with pagefind.';
+      return;
+    }
+
+    statusEl.textContent = 'Searching...';
+    var search = await pf.search(query);
+
+    if (search.results.length === 0) {
+      statusEl.textContent = 'No results found for "' + query + '"';
+      resultsContainer.innerHTML = '';
+      currentResults = [];
+      loadedCount = 0;
+      return;
+    }
+
+    statusEl.textContent = search.results.length + ' result' + (search.results.length !== 1 ? 's' : '') + ' for "' + query + '"';
+
+    currentResults = search.results;
+    loadedCount = 0;
+    resultsContainer.innerHTML = '';
+    await loadPage();
+  }
+
+  // Read query from URL
+  var params = new URLSearchParams(window.location.search);
+  var initialQuery = params.get('q') || '';
+  if (initialQuery) {
+    input.value = initialQuery;
+    doSearch(initialQuery);
+  }
+
+  // Live search as user types
+  input.addEventListener('input', function() {
+    var q = this.value.trim();
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(function() {
+      // Update URL without reload
+      var url = new URL(window.location);
+      url.searchParams.set('q', q);
+      history.replaceState(null, '', url);
+      doSearch(q);
+    }, 200);
+  });
+});
+</script>
+</div>
+{% endblock %}

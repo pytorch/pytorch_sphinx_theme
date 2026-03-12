@@ -94,6 +94,20 @@
 {% endif %}
 <link rel="stylesheet" type="text/css" href="{{ pathto('_static/css/theme.css', 1) }}" crossorigin="anonymous">
 <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
+<script>
+  // Initialize Pagefind globally (loaded once, used by navbar search)
+  window._pagefindReady = (async function() {
+    try {
+      var pageDir = window.location.pathname.replace(/[^/]*$/, '');
+      var pf = await import(pageDir + 'pagefind/pagefind.js');
+      await pf.init();
+      return pf;
+    } catch(e) {
+      console.warn('Pagefind not available:', e.message);
+      return null;
+    }
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
@@ -351,7 +365,7 @@
   </script>
   {% endif %}
   {% if theme_pytorch_project == 'tutorials' or has_sphinx_gallery %}
-  <div class="pytorch-call-to-action-links">
+  <div class="pytorch-call-to-action-links" data-pagefind-ignore>
     <div id="tutorial-type">{{ pagename }}</div>
     <a id="colab-link" data-behavior="call-to-action-event" data-response="Run in Google Colab" target="_blank">
       <div id="google-colab-link">

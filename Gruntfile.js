@@ -61,6 +61,9 @@ module.exports = function(grunt) {
       },
       sphinx: {
         command: 'cd docs && rm -rf _build && PYTHONPATH=.. sphinx-build -j auto -b html . _build/html'
+      },
+      pagefind: {
+        command: 'npx pagefind --site docs/_build/html --exclude-selectors ".headerlink, .rating, .date-info-last-verified, .pytorch-call-to-action-links, .bd-header, .bd-sidebar-primary, .bd-sidebar-secondary, .site-footer, .pytorch-footer, nav, .breadcrumb, .search-container-wrapper, .bd-header-article, .skip-link, #pst-skip-link, .back-to-top, #pst-back-to-top"'
       }
     },
     connect: {
@@ -85,6 +88,6 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('docs', ['clean', 'copy:fontawesome', 'sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'connect:server', 'watch']);
+  grunt.registerTask('docs', ['clean', 'copy:fontawesome', 'sass', 'concat', 'shell:reinstall', 'shell:sphinx', 'shell:pagefind', 'connect:server', 'watch']);
   grunt.registerTask('default', ['clean', 'copy:fontawesome', 'sass', 'concat']);
 };

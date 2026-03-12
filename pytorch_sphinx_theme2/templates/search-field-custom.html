@@ -1,7 +1,14 @@
 {% if theme_pytorch_project in ['docs', 'tutorials'] %}
 <div class="search-container-wrapper">
   <div id="sphinx-search" class="search-container">
-    {% include "search-field.html" %}
+    <div class="pagefind-search-wrapper">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="text" class="pagefind-search-input" id="pagefind-nav-input"
+             placeholder="Search the docs ..." autocomplete="off">
+      <div class="pagefind-search-results" id="pagefind-nav-results" style="display: none;">
+        <ul class="pagefind-search-results__list" id="pagefind-nav-results-list"></ul>
+      </div>
+    </div>
   </div>
 
   <div id="google-search" class="search-container" style="display:none;">
@@ -57,11 +64,40 @@
     document.body.classList.add('search-page');
   }
 
-  // Function to reinitialize Google CSE
+  // Function to reinitialize Google CSE and show fallback if needed
   function reinitializeGoogleSearch() {
-    if (window.__gcse && window.__gcse.initializationCallback) {
-      window.__gcse.initializationCallback();
+    // Use Google's official render API to re-render the search element
+    if (window.google && window.google.search && window.google.search.cse && window.google.search.cse.element) {
+      var el = window.google.search.cse.element.getElement('standard0');
+      if (!el) {
+        window.google.search.cse.element.render({div: 'google-search', tag: 'search'});
+      }
+      return;
     }
+
+    // CSE not loaded — show fallback input after a short delay
+    setTimeout(function() {
+      var gcseDiv = document.querySelector('#google-search .gcse-search');
+      var fallback = document.getElementById('gcse-fallback-input');
+      if (fallback && gcseDiv && gcseDiv.children.length === 0) {
+        gcseDiv.style.display = 'none';
+        fallback.style.display = '';
+      }
+    }, 1500);
+  }
+
+  // Wire up the fallback input to Google search
+  var fallbackInput = document.getElementById('gcse-fallback-input');
+  if (fallbackInput) {
+    fallbackInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        var q = this.value.trim();
+        if (q) {
+          window.open('https://www.google.com/search?q=' + encodeURIComponent(q + ' site:pytorch.org'), '_blank');
+        }
+      }
+    });
   }
 
   // Execute Google CSE search programmatically from our custom input
@@ -298,7 +334,7 @@
         sphinxSearch.style.display = 'block';
         googleSearch.style.display = 'none';
         localStorage.setItem('searchPreference', 'sphinx');
-        trackSearchEngineSwitch('Sphinx');
+        trackSearchEngineSwitch('Pagefind');
       }
 
       updateTooltip(this.checked);
@@ -313,7 +349,7 @@
 
     tooltipElement.setAttribute('data-bs-title', isChecked ? 'Google Search On' : 'Google Search Off');
 
-    if (bootstrap && bootstrap.Tooltip) {
+    if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip) {
       const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipElement);
       if (tooltipInstance) tooltipInstance.dispose();
       new bootstrap.Tooltip(tooltipElement);
@@ -403,6 +439,124 @@
 
   const searchObserver = new MutationObserver(applyToSearchInputs);
   searchObserver.observe(document.body, { childList: true, subtree: true });
+
+  // ==========================================
+  // Pagefind result cleanup helpers
+  // ==========================================
+  function cleanTitle(title) {
+    return (title || '').replace(/#\s*$/g, '').replace(/\s*#\s*/g, ' ').trim();
+  }
+  function cleanExcerpt(excerpt) {
+    if (!excerpt) return '';
+    var cleaned = excerpt.replace(/<(?!\/?mark)[^>]+>/gi, '');
+    cleaned = cleaned.replace(/Created On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Last (Updated|Verified) On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Rate this Page[\s★☆✩✪⭐]*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/[★☆✩✪⭐]{2,}/g, '');
+    cleaned = cleaned.replace(/Run in Google Colab\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Download Notebook\.?\s*/gi, '');
+    cleaned = cleaned.replace(/View on GitHub\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\b(Colab|Notebook|GitHub)\.\s*/g, '');
+    cleaned = cleaned.replace(/Skip to main content\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Back to top\.?\s*/gi, '');
+    cleaned = cleaned.replace(/PyPi\s*/gi, '');
+    cleaned = cleaned.replace(/Theme Documentation\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\s{2,}/g, ' ').replace(/^\s*[.\s]+/, '').trim();
+    if (cleaned.length > 120) {
+      cleaned = cleaned.substring(0, 120).replace(/\s+\S*$/, '') + '...';
+    }
+    return cleaned;
+  }
+
+  // ==========================================
+  // Pagefind navbar search
+  // ==========================================
+  var pfInput = document.getElementById('pagefind-nav-input');
+  var pfResultsContainer = document.getElementById('pagefind-nav-results');
+  var pfResultsList = document.getElementById('pagefind-nav-results-list');
+  var pfDebounce = null;
+
+  if (pfInput && pfResultsContainer && pfResultsList && !pfInput.hasAttribute('data-pagefind-bound')) {
+    pfInput.setAttribute('data-pagefind-bound', 'true');
+    pfInput.addEventListener('input', function() {
+      var q = this.value.trim();
+      clearTimeout(pfDebounce);
+      if (!q || q.length < 2) {
+        pfResultsContainer.style.display = 'none';
+        return;
+      }
+      pfDebounce = setTimeout(async function() {
+        var pf = await window._pagefindReady;
+        if (!pf) {
+          pfResultsContainer.style.display = 'none';
+          return;
+        }
+        var search = await pf.search(q);
+        pfResultsList.innerHTML = '';
+        if (search.results.length === 0) {
+          pfResultsList.innerHTML = '<li class="pagefind-search-results__empty">No results found</li>';
+        } else {
+          var dataResults = await Promise.all(
+            search.results.slice(0, 10).map(function(r) { return r.data(); })
+          );
+          var qLower = q.toLowerCase();
+          dataResults.sort(function(a, b) {
+            var aTitle = (a.meta.title || '').toLowerCase();
+            var bTitle = (b.meta.title || '').toLowerCase();
+            var aInTitle = aTitle.indexOf(qLower) !== -1;
+            var bInTitle = bTitle.indexOf(qLower) !== -1;
+            if (aInTitle && !bInTitle) return -1;
+            if (!aInTitle && bInTitle) return 1;
+            return 0;
+          });
+          dataResults.forEach(function(d) {
+            var title = cleanTitle(d.meta.title || d.url);
+            var excerpt = cleanExcerpt(d.excerpt);
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = d.url;
+            a.className = 'pagefind-search-results__link';
+            a.innerHTML = '<span class="pagefind-search-results__title">' + title + '</span>';
+            if (excerpt) {
+              a.innerHTML += '<span class="pagefind-search-results__excerpt">' + excerpt + '</span>';
+            }
+            li.appendChild(a);
+            pfResultsList.appendChild(li);
+          });
+          if (search.results.length > 10) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = 'search.html?q=' + encodeURIComponent(pfInput.value.trim());
+            a.className = 'pagefind-search-results__see-all';
+            a.textContent = 'See all ' + search.results.length + ' results →';
+            li.appendChild(a);
+            pfResultsList.appendChild(li);
+          }
+        }
+        pfResultsContainer.style.display = '';
+      }, 150);
+    });
+
+    pfInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        var q = this.value.trim();
+        if (q) window.location.href = 'search.html?q=' + encodeURIComponent(q);
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.pagefind-search-wrapper')) {
+        pfResultsContainer.style.display = 'none';
+      }
+    });
+
+    pfInput.addEventListener('focus', function() {
+      if (this.value.trim() && pfResultsList.children.length > 0) {
+        pfResultsContainer.style.display = '';
+      }
+    });
+  }
 
   // Watch for mobile menu creation
   const mobileMenuObserver = new MutationObserver(function(mutations) {
