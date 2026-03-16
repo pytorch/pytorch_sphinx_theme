@@ -56,7 +56,7 @@ sphinx_gallery_conf = {
     "first_notebook_cell": ("%matplotlib inline"),
 }
 
-# pytorch_project = "tutorials"
+pytorch_project = "docs"
 # torch_version = str(torch.__version__)  # Temporarily commented out for testing
 torch_version = "2.0.0"  # Hardcoded for testing
 version = "main (" + torch_version + " )"
@@ -269,7 +269,7 @@ html_theme_options = {
     # "llm_description": "PyTorch is an optimized tensor library for deep learning",
     # "llm_important_pages": "index, notes/cuda",
     # "enable_navbar_dropdowns": False,
-    # "pytorch_project": "tutorials",
+    "pytorch_project": "docs",
     # "show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)
