@@ -270,6 +270,8 @@ html_theme_options = {
     # "llm_important_pages": "index, notes/cuda",
     # "enable_navbar_dropdowns": False,
     "pytorch_project": "docs",
+    # llms.txt configuration
+    "llm_deduplicate_titles": "true",  # Enable title deduplication
     # "show_lf_header": False,
     # "show_lf_footer": False,
     # RunLLM Widget Configuration (uncomment and set assistant_id to enable)

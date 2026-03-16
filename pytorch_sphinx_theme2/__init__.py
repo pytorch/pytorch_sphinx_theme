@@ -203,16 +203,17 @@ def _generate_llms_txt(app, exception):
 
     The file is resolved in this order:
 
-    1. **Explicit option** — ``llm_custom_file`` theme option pointing to a file
+    1. **Explicit disable** — ``llm_disabled = "true"`` skips generation entirely.
+    2. **Custom file** — ``llm_custom_file`` theme option pointing to a file
        relative to the Sphinx source directory.
-    2. **Convention** — A file named ``llms.txt`` in the Sphinx source root.
-    3. **Auto-generation** — A simple page listing following the Hugging Face
-       style, with URLs resolved as:
+    3. **Convention** — A file named ``llms.txt`` in the Sphinx source root.
+    4. **Auto-generation** — A simple page listing following the llms.txt spec,
+       with URLs resolved as:
        a. ``llm_domain`` + ``llm_base_path`` theme options → fully constructed URLs
        b. Sphinx ``html_baseurl`` config → baseurl + relative path
        c. Relative URLs as a last resort
 
-    Opt-in: set ``llm_disabled = false`` in html_theme_options to enable.
+    Enabled by default. Set ``llm_disabled = "true"`` to disable.
     """
     if exception is not None:
         return  # Don't generate if build failed
@@ -220,9 +221,9 @@ def _generate_llms_txt(app, exception):
     if app.builder.name != "html":
         return
 
-    # Disabled by default; opt-in with llm_disabled = false
+    # Enabled by default; opt-out with llm_disabled = "true"
     theme_options = app.config.html_theme_options or {}
-    if str(theme_options.get("llm_disabled", "true")).lower() == "true":
+    if str(theme_options.get("llm_disabled", "false")).lower() == "true":
         return
 
     dest_path = Path(app.outdir) / "llms.txt"
@@ -286,10 +287,42 @@ def _generate_llms_txt(app, exception):
 
             # Build the URL
             url = make_url(docname + ".html")
-            docs.append({"title": str(title), "url": url})
+            docs.append({"title": str(title), "url": url, "docname": docname})
 
     except Exception as e:
         print(f"Warning: Could not discover pages for llms.txt: {e}")
+
+    # Deduplicate titles if enabled
+    # This adds a disambiguating suffix to duplicate titles based on their URL path
+    deduplicate = (
+        str(theme_options.get("llm_deduplicate_titles", "false")).lower() == "true"
+    )
+    if deduplicate:
+        # Count title occurrences
+        title_counts = {}
+        for doc in docs:
+            title_counts[doc["title"]] = title_counts.get(doc["title"], 0) + 1
+
+        # Find duplicates and add disambiguation
+        for doc in docs:
+            if title_counts[doc["title"]] > 1:
+                # Extract module/path info from docname for disambiguation
+                # e.g., "generated/torch.nn.GRU" -> "torch.nn.GRU"
+                docname = doc["docname"]
+
+                # Try to get a meaningful suffix from the docname
+                if "/" in docname:
+                    suffix = docname.split("/")[-1]
+                else:
+                    suffix = docname
+
+                # Remove "generated/" prefix if present (Sphinx autodoc convention)
+                if suffix.startswith("generated/"):
+                    suffix = suffix[10:]
+
+                # Only add suffix if it's different from the title
+                if suffix.lower() != doc["title"].lower():
+                    doc["title"] = f"{doc['title']} ({suffix})"
 
     # Build the llms.txt content in Hugging Face style
     lines = []
@@ -297,6 +330,17 @@ def _generate_llms_txt(app, exception):
     # Header
     lines.append(f"# {project}")
     lines.append("")
+
+    # Quote block with project description (for spec compliance)
+    # If llm_description is set, use it. Otherwise, generate a generic one from project name.
+    llm_description = theme_options.get("llm_description", "").strip()
+    if not llm_description:
+        # Generic fallback using Sphinx project name
+        llm_description = f"{project} documentation."
+
+    lines.append(f"> {llm_description}")
+    lines.append("")
+
     lines.append("## Docs")
     lines.append("")
 
