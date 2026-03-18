@@ -2,6 +2,34 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.6
+
+### Improvements
+
+- **LLM Navigation Guide (llms.txt) Improvements** (PR #237) — Enhanced the `llms.txt` generator with several fixes:
+  - Now enabled by default — generates `llms.txt` automatically unless disabled or a custom file is provided
+  - Spec-compliant format with H1 title, quote block description, H2 sections, and proper title format
+  - Added optional `llm_deduplicate_titles` theme option to disambiguate duplicate titles (e.g., "GRU" → "GRU (torch.nn.GRU)")
+  - Generic fallback uses project name for description if `llm_description` is not set
+
+### Bug Fixes
+
+- **Google Search Fix** (PR #236) — Fixed issues with the Google custom search bar styling and responsive behavior
+
+---
+
+## v0.4.5
+
+### New Features
+
+- **Announcement Banner** (PR #231) — Added configurable announcement banner component for displaying site-wide notifications, surveys, and announcements. Supports customizable text, link, background color, and optional dismiss button. Configure via `announcement` theme option with `text`, `link`, `background_color`, and `dismissable` properties.
+
+### Bug Fixes
+
+- **Cookie Policy Link Update** (PR #230) — Updated the cookie policy link in the cookie banner to point to the correct URL.
+
+---
+
 ## v0.4.4
 
 - **Tutorial Card Image Sizing Fix** — Constrained tutorial card images to a fixed width (`200px` desktop, `175px` tablet) instead of `25%`, and switched the `<img>` to `max-width: 100%; max-height: 100%; object-fit: contain` so images maintain their aspect ratio. Images are now centered within the container using flexbox.
