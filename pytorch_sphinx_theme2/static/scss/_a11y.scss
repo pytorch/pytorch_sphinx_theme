@@ -34,20 +34,20 @@
 // than colour alone. The theme's default link style relies solely on the link
 // colour (#de3412 / #f2765d), which fails WCAG 1.4.1 for links in running text.
 //
-// Scope: article body and content areas only. Navigation links are already
-// visually distinct by their container context and are excluded.
-//
-// Exclusions:
-//   - .nav-link, .toctree-l* — sidebar/nav links (container provides context)
-//   - .headerlink             — section anchor ¶ symbols
-//   - .btn, [role="button"]   — button-styled links
-//   - .highlight a, pre a     — links inside code blocks (monospace is a cue)
-//   - .reference.internal in API docs — already styled with monospace
+// Scope: links inside <p> and <dd> elements only — these are the true "running
+// text" contexts where WCAG 1.4.1 applies. This deliberately excludes:
+//   - toctree links in <li> elements (navigation lists — container provides context)
+//   - table cell links in <td>/<th> (tabular context is a sufficient cue)
+//   - definition term links in <dt>
+//   - .nav-link, .headerlink, .btn, [role="button"] — already excluded
+//   - .reference.internal in API docs — monospace font is a sufficient cue
+//   - links inside code blocks — monospace font is a sufficient cue
 
 .bd-article-container,
 .bd-content,
 article {
-  a:not(.nav-link):not(.headerlink):not(.btn):not([role="button"]):not(.reference.internal) {
+  p a:not(.headerlink):not(.btn):not([role="button"]):not(.reference.internal),
+  dd a:not(.headerlink):not(.btn):not([role="button"]):not(.reference.internal) {
     text-decoration: underline;
     text-underline-offset: 0.15em;
 
