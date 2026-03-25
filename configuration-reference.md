@@ -340,6 +340,47 @@ html_theme_options = {
 }
 ```
 
+#### `llm_generate_md`
+- **Type:** String (`"true"` or `"false"`)
+- **Default:** `"true"` (enabled by default)
+- **Description:** When enabled, generates a clean `.md` (Markdown) file alongside each `.html` page in the build output, and links to `.md` files in `llms.txt` instead of `.html` files. Also generates `llms-full.txt`, a single file concatenating all page content for easy LLM ingestion (per the [llms.txt spec](https://llmstxt.org/)).
+
+The generated `.md` files strip all navigation, sidebars, scripts, and theme-injected metadata (e.g., date info), producing clean, readable content suitable for LLMs. Unicode smart quotes and other typographic characters are normalized to ASCII equivalents for maximum compatibility.
+
+**Generated files:**
+- `*.md` — one per HTML page, alongside the `.html` files
+- `llms.txt` — page index with links to `.md` files
+- `llms-full.txt` — all page content concatenated into a single file
+
+```python
+html_theme_options = {
+    "llm_generate_md": "true",  # Enabled by default
+}
+```
+
+To disable markdown generation (links in `llms.txt` will point to `.html` files):
+
+```python
+html_theme_options = {
+    "llm_generate_md": "false",
+}
+```
+
+#### `llm_deduplicate_titles`
+- **Type:** String (`"true"` or `"false"`)
+- **Default:** `"false"`
+- **Description:** When enabled, adds disambiguating suffixes to duplicate page titles in `llms.txt`. Useful for projects with auto-generated API docs where multiple pages share the same title.
+
+For example, if two pages are both titled "GRU", they become:
+- `GRU (torch.nn.GRU)`
+- `GRU (torch.nn.GRUCell)`
+
+```python
+html_theme_options = {
+    "llm_deduplicate_titles": "true",
+}
+```
+
 #### Source-Root Convention
 
 If no `llm_custom_file` is specified, the theme automatically checks for a file named `llms.txt` in the Sphinx source root directory (the same directory as `conf.py`). If found, it is used as-is instead of auto-generating one. This allows a zero-config override — just drop an `llms.txt` file next to `conf.py`.
