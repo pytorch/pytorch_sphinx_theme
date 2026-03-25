@@ -4,13 +4,18 @@ import json
 import os
 import posixpath
 import re
-import shutil
 import subprocess
 from pathlib import Path
 from uuid import uuid4
 
 from . import custom_directives
 from .custom_directives import HAS_SPHINX_GALLERY
+from .llm_generation import (
+    _generate_llms_txt,
+    _generate_md_files,
+    _generate_llms_full_txt,
+    _html_to_markdown,
+)
 
 # Optional import for tippy glossary support
 try:
@@ -158,205 +163,6 @@ def add_date_info_to_page(app, pagename, templatename, context, doctree):
 
         except Exception as e:
             print(f"Error getting dates for {full_source_path}: {e}")
-
-
-# =============================================================================
-# LLM Navigation Guide (llms.txt) support
-# =============================================================================
-
-
-def _build_llms_url(domain, base_path, version, relative_path=""):
-    """Build a full URL for llms.txt links.
-
-    Args:
-        domain: The documentation domain (e.g., "docs.pytorch.org")
-        base_path: The base path after domain (e.g., "docs/", "vision/")
-        version: The documentation version (e.g., "stable", "2.0.0")
-        relative_path: The relative path to the page (e.g., "index.html")
-
-    Returns:
-        Full URL like "https://docs.pytorch.org/docs/stable/index.html"
-    """
-    # Ensure domain doesn't have trailing slash
-    domain = domain.rstrip("/")
-
-    # Ensure base_path has proper format (no leading slash, has trailing slash if non-empty)
-    base_path = base_path.strip("/")
-    if base_path:
-        base_path = base_path + "/"
-
-    # Ensure version doesn't have slashes
-    version = version.strip("/")
-
-    # Ensure relative_path doesn't have leading slash
-    relative_path = relative_path.lstrip("/")
-
-    # Build URL
-    if relative_path:
-        return f"https://{domain}/{base_path}{version}/{relative_path}"
-    else:
-        return f"https://{domain}/{base_path}{version}/"
-
-
-def _generate_llms_txt(app, exception):
-    """Dynamically generate llms.txt during documentation build.
-
-    The file is resolved in this order:
-
-    1. **Explicit disable** — ``llm_disabled = "true"`` skips generation entirely.
-    2. **Custom file** — ``llm_custom_file`` theme option pointing to a file
-       relative to the Sphinx source directory.
-    3. **Convention** — A file named ``llms.txt`` in the Sphinx source root.
-    4. **Auto-generation** — A simple page listing following the llms.txt spec,
-       with URLs resolved as:
-       a. ``llm_domain`` + ``llm_base_path`` theme options → fully constructed URLs
-       b. Sphinx ``html_baseurl`` config → baseurl + relative path
-       c. Relative URLs as a last resort
-
-    Enabled by default. Set ``llm_disabled = "true"`` to disable.
-    """
-    if exception is not None:
-        return  # Don't generate if build failed
-
-    if app.builder.name != "html":
-        return
-
-    # Enabled by default; opt-out with llm_disabled = "true"
-    theme_options = app.config.html_theme_options or {}
-    if str(theme_options.get("llm_disabled", "false")).lower() == "true":
-        return
-
-    dest_path = Path(app.outdir) / "llms.txt"
-
-    # --- 1. Explicit option: llm_custom_file ---
-    custom_file = theme_options.get("llm_custom_file", "").strip()
-    if custom_file:
-        custom_path = Path(app.srcdir) / custom_file
-        if custom_path.is_file():
-            shutil.copy2(custom_path, dest_path)
-            print(f"Copied custom llms.txt from: {custom_path}")
-            return
-        else:
-            print(
-                f"Warning: llm_custom_file '{custom_file}' not found at "
-                f"{custom_path}, falling back to auto-generation"
-            )
-
-    # --- 2. Convention: llms.txt in the source root ---
-    source_llms = Path(app.srcdir) / "llms.txt"
-    if source_llms.is_file():
-        shutil.copy2(source_llms, dest_path)
-        print(f"Using project-provided llms.txt from: {source_llms}")
-        return
-
-    # --- 3. Auto-generation ---
-    # Get configuration
-    project = app.config.project or "Documentation"
-    version = app.config.version or "latest"
-    domain = theme_options.get("llm_domain", "").strip()
-    base_path = theme_options.get("llm_base_path", "").strip()
-
-    # Resolve the base URL for links:
-    # Priority: llm_domain > html_baseurl > relative
-    html_baseurl = getattr(app.config, "html_baseurl", None) or ""
-    html_baseurl = html_baseurl.strip().rstrip("/")
-
-    def make_url(relative_path):
-        if domain:
-            return _build_llms_url(domain, base_path, version, relative_path)
-        if html_baseurl:
-            return f"{html_baseurl}/{relative_path}"
-        return relative_path
-
-    # Collect all documentation pages
-    docs = []
-
-    try:
-        # Get all document names from the environment
-        all_docs = list(app.env.all_docs.keys()) if hasattr(app.env, "all_docs") else []
-
-        for docname in sorted(all_docs):
-            # Skip internal/private pages
-            if docname.startswith("_"):
-                continue
-
-            # Get the page title
-            title = app.env.titles.get(docname, docname)
-            if hasattr(title, "astext"):
-                title = title.astext()
-
-            # Build the URL
-            url = make_url(docname + ".html")
-            docs.append({"title": str(title), "url": url, "docname": docname})
-
-    except Exception as e:
-        print(f"Warning: Could not discover pages for llms.txt: {e}")
-
-    # Deduplicate titles if enabled
-    # This adds a disambiguating suffix to duplicate titles based on their URL path
-    deduplicate = (
-        str(theme_options.get("llm_deduplicate_titles", "false")).lower() == "true"
-    )
-    if deduplicate:
-        # Count title occurrences
-        title_counts = {}
-        for doc in docs:
-            title_counts[doc["title"]] = title_counts.get(doc["title"], 0) + 1
-
-        # Find duplicates and add disambiguation
-        for doc in docs:
-            if title_counts[doc["title"]] > 1:
-                # Extract module/path info from docname for disambiguation
-                # e.g., "generated/torch.nn.GRU" -> "torch.nn.GRU"
-                docname = doc["docname"]
-
-                # Try to get a meaningful suffix from the docname
-                if "/" in docname:
-                    suffix = docname.split("/")[-1]
-                else:
-                    suffix = docname
-
-                # Remove "generated/" prefix if present (Sphinx autodoc convention)
-                if suffix.startswith("generated/"):
-                    suffix = suffix[10:]
-
-                # Only add suffix if it's different from the title
-                if suffix.lower() != doc["title"].lower():
-                    doc["title"] = f"{doc['title']} ({suffix})"
-
-    # Build the llms.txt content in Hugging Face style
-    lines = []
-
-    # Header
-    lines.append(f"# {project}")
-    lines.append("")
-
-    # Quote block with project description (for spec compliance)
-    # If llm_description is set, use it. Otherwise, generate a generic one from project name.
-    llm_description = theme_options.get("llm_description", "").strip()
-    if not llm_description:
-        # Generic fallback using Sphinx project name
-        llm_description = f"{project} documentation."
-
-    lines.append(f"> {llm_description}")
-    lines.append("")
-
-    lines.append("## Docs")
-    lines.append("")
-
-    # List all documentation pages
-    for doc in docs:
-        lines.append(f"- [{doc['title']}]({doc['url']})")
-
-    # Join content
-    content = "\n".join(lines)
-
-    # Write to site root
-    try:
-        dest_path.write_text(content, encoding="utf-8")
-        print(f"Generated llms.txt with {len(docs)} pages at: {dest_path}")
-    except Exception as e:
-        print(f"Warning: Could not write llms.txt to site root: {e}")
 
 
 # =============================================================================
@@ -679,7 +485,7 @@ def setup(app):
         # Write JS immediately during page context (high priority to run early)
         app.connect("html-page-context", _write_glossary_tippy_js, priority=900)
 
-    # Copy llms.txt to site root after build completes
+    # Generate llms.txt (and optionally .md files) after build completes
     app.connect("build-finished", _generate_llms_txt)
 
     if HAS_SPHINX_GALLERY:
