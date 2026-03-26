@@ -1,45 +1,54 @@
 /**
  * Collapsible "Subclassed by" list behavior.
- * Finds paragraphs starting with "Subclassed by" that have more than 5 links,
+ * Finds paragraphs starting with "Subclassed by" that have more than 5 items,
  * collapses them to a single line, and adds a "See All" / "Hide" toggle button.
+ *
+ * Breathe/Doxygen renders "Subclassed by" in a <p> tag. The subclass names may
+ * be <a> links (when targets exist) or plain text (when they don't). We count
+ * both to determine whether to collapse.
  */
 document.addEventListener('DOMContentLoaded', function() {
-    // Find all paragraphs that start with "Subclassed by"
-    const paragraphs = document.querySelectorAll('p');
+    var paragraphs = document.querySelectorAll('p');
 
     paragraphs.forEach(function(p) {
-        // Check if the paragraph starts with "Subclassed by"
-        if (p.textContent.trim().startsWith('Subclassed by')) {
-            // Only add toggle if there are many subclasses (more than ~5 links)
-            const links = p.querySelectorAll('a');
-            if (links.length > 5) {
-                // Add the class for styling
-                p.classList.add('subclassed-by-list', 'collapsed');
+        var text = p.textContent.trim();
+        if (!text.startsWith('Subclassed by')) return;
 
-                // Create the toggle button
-                const toggle = document.createElement('button');
-                toggle.className = 'subclassed-by-toggle';
-                toggle.textContent = 'See All (' + links.length + ')';
-                toggle.type = 'button';
-
-                // Handle click to expand/collapse
-                toggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-
-                    if (p.classList.contains('collapsed')) {
-                        p.classList.remove('collapsed');
-                        p.classList.add('expanded');
-                        toggle.textContent = 'Hide';
-                    } else {
-                        p.classList.remove('expanded');
-                        p.classList.add('collapsed');
-                        toggle.textContent = 'See All (' + links.length + ')';
-                    }
-                });
-
-                // Append the toggle to the paragraph
-                p.appendChild(toggle);
+        // Count items: use <a> links if present, otherwise count comma-separated entries
+        var links = p.querySelectorAll('a');
+        var itemCount = links.length;
+        if (itemCount <= 5) {
+            // Links may not exist (plain text subclass names). Count comma-separated items.
+            var afterLabel = text.replace(/^Subclassed by\s*/, '');
+            var commaCount = afterLabel.split(',').filter(function(s) { return s.trim().length > 0; }).length;
+            if (commaCount > itemCount) {
+                itemCount = commaCount;
             }
+        }
+
+        if (itemCount > 5) {
+            p.classList.add('subclassed-by-list', 'collapsed');
+
+            var toggle = document.createElement('button');
+            toggle.className = 'subclassed-by-toggle';
+            toggle.textContent = 'See All (' + itemCount + ')';
+            toggle.type = 'button';
+
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (p.classList.contains('collapsed')) {
+                    p.classList.remove('collapsed');
+                    p.classList.add('expanded');
+                    toggle.textContent = 'Hide';
+                } else {
+                    p.classList.remove('expanded');
+                    p.classList.add('collapsed');
+                    toggle.textContent = 'See All (' + itemCount + ')';
+                }
+            });
+
+            p.appendChild(toggle);
         }
     });
 });
