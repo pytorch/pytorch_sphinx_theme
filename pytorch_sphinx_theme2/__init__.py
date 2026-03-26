@@ -488,6 +488,10 @@ def setup(app):
     # Generate llms.txt (and optionally .md files) after build completes
     app.connect("build-finished", _generate_llms_txt)
 
+    # WCAG 2.2 runtime accessibility patches
+    # Fixes: summary-name, select-name, scrollable-region-focusable, definition-list
+    app.add_js_file("js/a11y-patches.js", loading_method="defer")
+
     if HAS_SPHINX_GALLERY:
         app.add_directive("includenodoc", custom_directives.IncludeDirective)
         app.add_directive("galleryitem", custom_directives.GalleryItemDirective)

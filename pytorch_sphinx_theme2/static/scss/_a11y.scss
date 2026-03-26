@@ -1,0 +1,109 @@
+/*
+ * _a11y.scss — pytorch_sphinx_theme2 WCAG 2.2 AA accessibility fixes
+ *
+ * CSS companion to a11y-patches.js.
+ *
+ * WCAG criteria addressed:
+ *   - 1.4.1  Use of Colour      → inline links in prose must have a non-colour cue
+ *   - 2.1.1  Keyboard           → focus styles for keyboard-accessible scrollable regions
+ *   - 1.3.1  Info & Relationships → visually-hidden utility used by a11y-patches.js
+ *
+ * axe-core violations fixed:
+ *   - link-in-text-block  (26 nodes, 26 pages)
+ *   - scrollable-region-focusable focus ring
+ */
+
+// ── Visually-hidden utility ───────────────────────────────────────────────────
+// Used by a11y-patches.js to inject screen-reader-only text into icon-only
+// elements (e.g. the search-toggle label).
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// ── Inline links in prose must be underlined (WCAG 1.4.1) ────────────────────
+//
+// Links within body text must be distinguishable from surrounding text by more
+// than colour alone. The theme's default link style relies solely on the link
+// colour (#de3412 / #f2765d), which fails WCAG 1.4.1 for links in running text.
+//
+// Scope: links inside <p> and <dd> elements only — these are the true "running
+// text" contexts where WCAG 1.4.1 applies. This deliberately excludes:
+//   - toctree links in <li> elements (navigation lists — container provides context)
+//   - table cell links in <td>/<th> (tabular context is a sufficient cue)
+//   - definition term links in <dt>
+//   - .nav-link, .headerlink, .btn, [role="button"] — already excluded
+//   - .reference.internal in API docs — monospace font is a sufficient cue
+//   - links inside code blocks — monospace font is a sufficient cue
+
+.bd-article-container,
+.bd-content,
+article {
+  p a:not(.headerlink):not(.btn):not([role="button"]):not(.reference.internal),
+  dd a:not(.headerlink):not(.btn):not([role="button"]):not(.reference.internal) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+
+    &:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+}
+
+// Restore no-underline for links inside code blocks (monospace font is a
+// sufficient non-colour cue for distinguishing links from surrounding text).
+.highlight a,
+pre a,
+code a,
+.docutils.literal a {
+  text-decoration: none;
+}
+
+// Cookie banner and footer links (injected by HubSpot after page load;
+// the JS fallback in a11y-patches.js handles dynamically-injected instances).
+#hs-eu-policy-wording a,
+#hs-eu-cookie-disclaimer a,
+.hs-cookie-notification-position-bottom a,
+.footer-content a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+// ── Focus ring for keyboard-accessible scrollable regions (WCAG 2.1.1) ───────
+//
+// a11y-patches.js adds tabindex="0" to overflowing code blocks and tables.
+// Provide a visible focus ring so keyboard users know the region is focused.
+
+div.highlight[tabindex="0"]:focus,
+div.highlight[tabindex="0"]:focus-visible,
+pre[tabindex="0"]:focus,
+pre[tabindex="0"]:focus-visible,
+.codeblock-height-limiter[tabindex="0"]:focus,
+.codeblock-height-limiter[tabindex="0"]:focus-visible {
+  outline: 2px solid #de3412;
+  outline-offset: 2px;
+}
+
+html[data-theme="dark"] {
+  div.highlight[tabindex="0"]:focus,
+  div.highlight[tabindex="0"]:focus-visible,
+  pre[tabindex="0"]:focus,
+  pre[tabindex="0"]:focus-visible,
+  .codeblock-height-limiter[tabindex="0"]:focus,
+  .codeblock-height-limiter[tabindex="0"]:focus-visible {
+    outline-color: #f2765d;
+  }
+}

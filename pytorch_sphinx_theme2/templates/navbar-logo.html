@@ -19,7 +19,7 @@
   {% set logo_text = '' %}
 {% endif %}
 
-<a class="navbar-brand logo" href="{{ pathto(root_doc) }}">
+<a class="navbar-brand logo" href="{{ pathto(root_doc) }}" aria-label="{{ project }} home">
   {% if logo_light or logo_dark %}
     {% if logo_light %}
     <img src="{{ pathto(logo_light, 1) }}" class="logo__image only-light" alt="{{ project }} - Home"/>
