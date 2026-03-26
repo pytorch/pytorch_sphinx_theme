@@ -208,11 +208,24 @@
         link.parentElement.classList.remove('active');
       });
 
-      // Add active class to the matching link
+      // Add active class to the matching link and all its ancestor TOC items
       const matchingLink = tocNav.querySelector(`a[href="#${CSS.escape(targetId)}"]`);
       if (matchingLink) {
         matchingLink.classList.add('active');
         matchingLink.parentElement.classList.add('active');
+
+        // Walk up the DOM to activate parent TOC entries (e.g. h2 parent of h3)
+        let ancestor = matchingLink.parentElement.parentElement;
+        while (ancestor && ancestor !== tocNav) {
+          if (ancestor.classList.contains('toc-entry')) {
+            ancestor.classList.add('active');
+            const parentLink = ancestor.querySelector(':scope > a.nav-link');
+            if (parentLink) {
+              parentLink.classList.add('active');
+            }
+          }
+          ancestor = ancestor.parentElement;
+        }
       }
 
       // Use setTimeout to reset the guard after the current call stack
