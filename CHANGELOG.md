@@ -2,6 +2,22 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.7
+
+### New Features
+
+- **Markdown Generation for LLM Docs** (PR #239) — Refactored the LLM content generation into a dedicated `llm_generation.py` module with a new markdown generation function. Added support for new theme options and comprehensive test coverage.
+
+- **Collapsible List Component** (PR #240) — Added collapsible list styles and JavaScript for C++ documentation pages. Supports nested expandable/collapsible sections with smooth animations.
+
+### Bug Fixes
+
+- **Right Nav Scroll Fix** (PR #240) — Fixed right-side navigation scroll behavior in the layout template.
+
+- **Google Search Thumbnail Fix** (PR #241) — Fixed red X thumbnail appearing in Google search results by updating component styles and cookie banner markup.
+
+---
+
 ## v0.4.6
 
 ### Improvements
