@@ -336,6 +336,10 @@ def _convert_single_doc(args):
 def _generate_md_files(app, docs):
     """Generate .md files from built HTML pages using parallel processing.
 
+    Uses ProcessPoolExecutor for parallel conversion, with automatic fallback
+    to sequential processing if multiprocessing is unavailable (e.g., in
+    sandboxed build environments like Netlify).
+
     Args:
         app: The Sphinx application object.
         docs: List of doc dicts with 'docname' keys.
@@ -347,13 +351,21 @@ def _generate_md_files(app, docs):
     args_list = [(doc["docname"], outdir_str) for doc in docs]
     results = {}
 
-    with ProcessPoolExecutor() as executor:
-        futures = {
-            executor.submit(_convert_single_doc, args): args[0]
-            for args in args_list
-        }
-        for future in as_completed(futures):
-            docname, md_content = future.result()
+    try:
+        with ProcessPoolExecutor() as executor:
+            futures = {
+                executor.submit(_convert_single_doc, args): args[0]
+                for args in args_list
+            }
+            for future in as_completed(futures):
+                docname, md_content = future.result()
+                if md_content is not None:
+                    results[docname] = md_content
+    except (OSError, RuntimeError) as e:
+        print(f"Parallel processing unavailable ({e}), falling back to sequential")
+        results = {}
+        for args in args_list:
+            docname, md_content = _convert_single_doc(args)
             if md_content is not None:
                 results[docname] = md_content
 
