@@ -8,6 +8,7 @@ This module handles:
 
 import re
 import shutil
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from html import unescape
 from pathlib import Path
 
@@ -299,49 +300,77 @@ def _html_to_markdown(html_content):
     return md
 
 
+def _convert_single_doc(args):
+    """Convert a single HTML doc to markdown. Top-level function for multiprocessing.
+
+    Args:
+        args: Tuple of (docname, outdir_str).
+
+    Returns:
+        Tuple of (docname, md_content) on success, or (docname, None) on failure.
+    """
+    docname, outdir_str = args
+    outdir = Path(outdir_str)
+    html_path = outdir / (docname + ".html")
+
+    if not html_path.is_file():
+        return (docname, None)
+
+    try:
+        html_content = html_path.read_text(encoding="utf-8")
+        md_content = _html_to_markdown(html_content)
+
+        if not md_content.strip():
+            return (docname, None)
+
+        md_path = outdir / (docname + ".md")
+        md_path.parent.mkdir(parents=True, exist_ok=True)
+        md_path.write_text(md_content, encoding="utf-8")
+        return (docname, md_content)
+
+    except Exception as e:
+        print(f"Warning: Could not convert {docname}.html to markdown: {e}")
+        return (docname, None)
+
+
 def _generate_md_files(app, docs):
-    """Generate .md files from built HTML pages.
+    """Generate .md files from built HTML pages using parallel processing.
 
     Args:
         app: The Sphinx application object.
         docs: List of doc dicts with 'docname' keys.
 
     Returns:
-        Number of .md files successfully generated.
+        Dict mapping docname -> md_content for successfully converted pages.
     """
-    outdir = Path(app.outdir)
-    md_count = 0
+    outdir_str = str(app.outdir)
+    args_list = [(doc["docname"], outdir_str) for doc in docs]
+    results = {}
 
-    for doc in docs:
-        docname = doc["docname"]
-        html_path = outdir / (docname + ".html")
+    with ProcessPoolExecutor() as executor:
+        futures = {
+            executor.submit(_convert_single_doc, args): args[0]
+            for args in args_list
+        }
+        for future in as_completed(futures):
+            docname, md_content = future.result()
+            if md_content is not None:
+                results[docname] = md_content
 
-        if not html_path.is_file():
-            continue
-
-        try:
-            html_content = html_path.read_text(encoding="utf-8")
-            md_content = _html_to_markdown(html_content)
-
-            if not md_content.strip():
-                continue
-
-            md_path = outdir / (docname + ".md")
-            md_path.parent.mkdir(parents=True, exist_ok=True)
-            md_path.write_text(md_content, encoding="utf-8")
-            md_count += 1
-
-        except Exception as e:
-            print(f"Warning: Could not convert {docname}.html to markdown: {e}")
-
-    return md_count
+    return results
 
 
-def _generate_llms_full_txt(app, docs, outdir):
+def _generate_llms_full_txt(app, docs, outdir, md_contents):
     """Generate llms-full.txt by concatenating all markdown content.
 
     Per the llms.txt spec, llms-full.txt contains the full content of all
     documentation pages in a single file for easy LLM ingestion.
+
+    Args:
+        app: The Sphinx application object.
+        docs: List of doc dicts with 'docname' keys.
+        outdir: The output directory path.
+        md_contents: Dict mapping docname -> md_content (from _generate_md_files).
     """
     project = app.config.project or "Documentation"
     theme_options = app.config.html_theme_options or {}
@@ -352,16 +381,13 @@ def _generate_llms_full_txt(app, docs, outdir):
     sections = []
     sections.append(f"# {project}\n\n> {llm_description}\n")
 
-    out_path = Path(outdir)
     for doc in docs:
-        md_path = out_path / (doc["docname"] + ".md")
-        if md_path.is_file():
-            md_content = md_path.read_text(encoding="utf-8")
-            if md_content.strip():
-                sections.append(f"\n---\n\n{md_content}")
+        md_content = md_contents.get(doc["docname"])
+        if md_content and md_content.strip():
+            sections.append(f"\n---\n\n{md_content}")
 
     full_content = "\n".join(sections)
-    full_path = out_path / "llms-full.txt"
+    full_path = Path(outdir) / "llms-full.txt"
 
     try:
         full_path.write_text(full_content, encoding="utf-8")
@@ -505,11 +531,11 @@ def _generate_llms_txt(app, exception):
 
     # Generate .md files from HTML if enabled
     if generate_md and docs:
-        md_count = _generate_md_files(app, docs)
-        print(f"Generated {md_count} markdown files from HTML pages")
+        md_contents = _generate_md_files(app, docs)
+        print(f"Generated {len(md_contents)} markdown files from HTML pages")
 
-        # Also generate llms-full.txt with all content concatenated
-        _generate_llms_full_txt(app, docs, app.outdir)
+        # Also generate llms-full.txt with all content concatenated (using in-memory content)
+        _generate_llms_full_txt(app, docs, app.outdir, md_contents)
 
     # Deduplicate titles if enabled
     # This adds a disambiguating suffix to duplicate titles based on their URL path
