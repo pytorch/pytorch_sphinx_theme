@@ -2,6 +2,19 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.8
+
+### Improvements
+
+- **Parallel Markdown Generation** (PR #243) — Parallelized HTML-to-markdown
+  conversion using `ProcessPoolExecutor` for significantly faster `llms.txt`
+  builds on large doc sets. Includes automatic fallback to sequential processing
+  when multiprocessing is unavailable (e.g., sandboxed environments like Netlify).
+  Added comprehensive parallelism tests covering correctness, determinism,
+  and synthetic-scale workloads.
+
+---
+
 ## v0.4.7
 
 ### New Features
