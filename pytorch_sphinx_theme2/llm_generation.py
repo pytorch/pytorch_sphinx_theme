@@ -8,7 +8,7 @@ This module handles:
 
 import re
 import shutil
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from html import unescape
 from pathlib import Path
 
@@ -301,7 +301,7 @@ def _html_to_markdown(html_content):
 
 
 def _convert_single_doc(args):
-    """Convert a single HTML doc to markdown. Top-level function for multiprocessing.
+    """Convert a single HTML doc to markdown. Designed for use with concurrent executor.
 
     Args:
         args: Tuple of (docname, outdir_str).
@@ -336,9 +336,9 @@ def _convert_single_doc(args):
 def _generate_md_files(app, docs):
     """Generate .md files from built HTML pages using parallel processing.
 
-    Uses ProcessPoolExecutor for parallel conversion, with automatic fallback
-    to sequential processing if multiprocessing is unavailable (e.g., in
-    sandboxed build environments like Netlify).
+    Uses ThreadPoolExecutor for parallel conversion. ThreadPoolExecutor is
+    preferred over ProcessPoolExecutor because fork-based multiprocessing
+    can deadlock in complex Python environments like Sphinx builds.
 
     Args:
         app: The Sphinx application object.
@@ -351,21 +351,13 @@ def _generate_md_files(app, docs):
     args_list = [(doc["docname"], outdir_str) for doc in docs]
     results = {}
 
-    try:
-        with ProcessPoolExecutor() as executor:
-            futures = {
-                executor.submit(_convert_single_doc, args): args[0]
-                for args in args_list
-            }
-            for future in as_completed(futures):
-                docname, md_content = future.result()
-                if md_content is not None:
-                    results[docname] = md_content
-    except (OSError, RuntimeError) as e:
-        print(f"Parallel processing unavailable ({e}), falling back to sequential")
-        results = {}
-        for args in args_list:
-            docname, md_content = _convert_single_doc(args)
+    with ThreadPoolExecutor() as executor:
+        futures = {
+            executor.submit(_convert_single_doc, args): args[0]
+            for args in args_list
+        }
+        for future in as_completed(futures):
+            docname, md_content = future.result()
             if md_content is not None:
                 results[docname] = md_content
 
@@ -542,12 +534,16 @@ def _generate_llms_txt(app, exception):
         print(f"Warning: Could not discover pages for llms.txt: {e}")
 
     # Generate .md files from HTML if enabled
+    generate_full = (
+        str(theme_options.get("llm_generate_full", "true")).lower() == "true"
+    )
     if generate_md and docs:
         md_contents = _generate_md_files(app, docs)
         print(f"Generated {len(md_contents)} markdown files from HTML pages")
 
-        # Also generate llms-full.txt with all content concatenated (using in-memory content)
-        _generate_llms_full_txt(app, docs, app.outdir, md_contents)
+        # Generate llms-full.txt with all content concatenated (unless disabled)
+        if generate_full:
+            _generate_llms_full_txt(app, docs, app.outdir, md_contents)
 
     # Deduplicate titles if enabled
     # This adds a disambiguating suffix to duplicate titles based on their URL path

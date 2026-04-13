@@ -343,14 +343,14 @@ html_theme_options = {
 #### `llm_generate_md`
 - **Type:** String (`"true"` or `"false"`)
 - **Default:** `"true"` (enabled by default)
-- **Description:** When enabled, generates a clean `.md` (Markdown) file alongside each `.html` page in the build output, and links to `.md` files in `llms.txt` instead of `.html` files. Also generates `llms-full.txt`, a single file concatenating all page content for easy LLM ingestion (per the [llms.txt spec](https://llmstxt.org/)).
+- **Description:** When enabled, generates a clean `.md` (Markdown) file alongside each `.html` page in the build output, and links to `.md` files in `llms.txt` instead of `.html` files.
 
 The generated `.md` files strip all navigation, sidebars, scripts, and theme-injected metadata (e.g., date info), producing clean, readable content suitable for LLMs. Unicode smart quotes and other typographic characters are normalized to ASCII equivalents for maximum compatibility.
 
 **Generated files:**
 - `*.md` — one per HTML page, alongside the `.html` files
 - `llms.txt` — page index with links to `.md` files
-- `llms-full.txt` — all page content concatenated into a single file
+- `llms-full.txt` — all page content concatenated (controlled separately by `llm_generate_full`)
 
 ```python
 html_theme_options = {
@@ -363,6 +363,18 @@ To disable markdown generation (links in `llms.txt` will point to `.html` files)
 ```python
 html_theme_options = {
     "llm_generate_md": "false",
+}
+```
+
+#### `llm_generate_full`
+- **Type:** String (`"true"` or `"false"`)
+- **Default:** `"true"` (enabled by default)
+- **Description:** When enabled, generates `llms-full.txt` — a single file concatenating all page content for LLM ingestion. For large projects (e.g., PyTorch with thousands of API pages), this file can be extremely large and may not fit in most LLM context windows. Set to `"false"` to skip generating `llms-full.txt` while still generating individual `.md` files and `llms.txt`.
+
+```python
+html_theme_options = {
+    "llm_generate_md": "true",
+    "llm_generate_full": "false",  # Skip llms-full.txt for large projects
 }
 ```
 
