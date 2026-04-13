@@ -8,7 +8,7 @@ This module handles:
 
 import re
 import shutil
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from html import unescape
 from pathlib import Path
 
@@ -336,9 +336,9 @@ def _convert_single_doc(args):
 def _generate_md_files(app, docs):
     """Generate .md files from built HTML pages using parallel processing.
 
-    Uses ProcessPoolExecutor for parallel conversion, with automatic fallback
-    to sequential processing if multiprocessing is unavailable (e.g., in
-    sandboxed build environments like Netlify).
+    Uses ThreadPoolExecutor for parallel conversion. Preferred over
+    ProcessPoolExecutor because fork-based multiprocessing can deadlock
+    in complex Python environments like Sphinx builds.
 
     Args:
         app: The Sphinx application object.
@@ -351,21 +351,13 @@ def _generate_md_files(app, docs):
     args_list = [(doc["docname"], outdir_str) for doc in docs]
     results = {}
 
-    try:
-        with ProcessPoolExecutor() as executor:
-            futures = {
-                executor.submit(_convert_single_doc, args): args[0]
-                for args in args_list
-            }
-            for future in as_completed(futures):
-                docname, md_content = future.result()
-                if md_content is not None:
-                    results[docname] = md_content
-    except (OSError, RuntimeError) as e:
-        print(f"Parallel processing unavailable ({e}), falling back to sequential")
-        results = {}
-        for args in args_list:
-            docname, md_content = _convert_single_doc(args)
+    with ThreadPoolExecutor() as executor:
+        futures = {
+            executor.submit(_convert_single_doc, args): args[0]
+            for args in args_list
+        }
+        for future in as_completed(futures):
+            docname, md_content = future.result()
             if md_content is not None:
                 results[docname] = md_content
 
