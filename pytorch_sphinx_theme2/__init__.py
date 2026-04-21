@@ -325,7 +325,12 @@ def _get_toctree_entries_from_doctree(app, docname):
     """
     entries = []
     try:
-        doctree = app.env.get_doctree(docname)
+        # Check in-memory cache first (supports builders that skip disk writes)
+        cache = getattr(app.env, "_write_doc_doctree_cache", {})
+        if docname in cache:
+            doctree = cache[docname]
+        else:
+            doctree = app.env.get_doctree(docname)
 
         # Find all toctree nodes
         from sphinx import addnodes
