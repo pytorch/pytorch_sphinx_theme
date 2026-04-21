@@ -2,6 +2,18 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.8
+
+### Performance
+
+- **Optimized llms-full.txt Generation** (PR #244) — Added `llm_generate_full` theme option to skip expensive llms-full.txt generation on large builds. Uses `lxml` parser when available for faster HTML-to-markdown conversion. Capped parallel workers at 8 and added progress logging.
+
+### Bug Fixes
+
+- **Navbar Fix for Parallel Writes** (PR #245) — Fixed empty navbar when doctree disk writes are skipped (e.g., by PyTorch CI optimization PR #180177). Toctree entries are now cached during the read phase via `doctree-read` so all parallel write workers have access to navigation data.
+
+---
+
 ## v0.4.7
 
 ### New Features
