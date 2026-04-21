@@ -318,30 +318,36 @@ def _get_toctree_children(app, docname):
     return children
 
 
+def _cache_root_toctree_entries(app, doctree, docname):
+    """Cache toctree entries from the root doc during the read phase.
+
+    Called via doctree-resolved so the doctree is available in memory.
+    Stores entries on app.env so the navbar can use them during the write
+    phase without calling get_doctree() (which reads from disk and fails
+    when doctree disk writes are skipped).
+    """
+    if docname != app.config.root_doc:
+        return
+
+    from sphinx import addnodes
+
+    entries = []
+    for toctree_node in doctree.findall(addnodes.toctree):
+        for title, ref in toctree_node.get("entries", []):
+            if ref:
+                is_external = ref.startswith(("http://", "https://", "/"))
+                entries.append((title, ref, is_external))
+
+    app.env._root_toctree_entries = entries
+
+
 def _get_toctree_entries_from_doctree(app, docname):
     """Get all toctree entries from a document, including external URLs.
 
     Returns a list of tuples: (title, reference, is_external)
+    Uses entries cached during the read phase by _cache_root_toctree_entries.
     """
-    entries = []
-    try:
-        doctree = app.env.get_doctree(docname)
-
-        # Find all toctree nodes
-        from sphinx import addnodes
-
-        for toctree_node in doctree.findall(addnodes.toctree):
-            # toctree_node['entries'] contains tuples of (title, ref)
-            # where title can be None (use document title) or a string
-            # and ref is either a document name or an external URL
-            for title, ref in toctree_node.get("entries", []):
-                if ref:
-                    is_external = ref.startswith(("http://", "https://", "/"))
-                    entries.append((title, ref, is_external))
-    except Exception:
-        pass
-
-    return entries
+    return getattr(app.env, "_root_toctree_entries", [])
 
 
 def _generate_hierarchical_header_nav(app, pagename):
@@ -466,6 +472,10 @@ def setup(app):
     app.add_html_theme("pytorch_sphinx_theme2", get_html_theme_path())
     app.add_config_value("add_last_updated", False, "html")
     app.connect("html-page-context", add_date_info_to_page)
+
+    # Cache root doc toctree entries during read phase (before doctrees may be
+    # discarded by builders that skip disk writes for performance)
+    app.connect("doctree-resolved", _cache_root_toctree_entries)
 
     # Add hierarchical navigation context for dropdown menus
     app.connect("html-page-context", _add_hierarchical_nav_to_context)

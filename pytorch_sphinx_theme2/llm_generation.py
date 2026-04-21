@@ -6,6 +6,7 @@ This module handles:
 - Generating llms-full.txt with all content concatenated
 """
 
+import os
 import re
 import shutil
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -23,7 +24,12 @@ def _html_to_markdown(html_content):
     try:
         from bs4 import BeautifulSoup, NavigableString, Tag
 
-        soup = BeautifulSoup(html_content, "html.parser")
+        try:
+            import lxml  # noqa: F401
+            parser = "lxml"
+        except ImportError:
+            parser = "html.parser"
+        soup = BeautifulSoup(html_content, parser)
 
         # Remove script, style, nav, and sidebar elements
         for tag in soup.find_all(
@@ -350,24 +356,33 @@ def _generate_md_files(app, docs):
     outdir_str = str(app.outdir)
     args_list = [(doc["docname"], outdir_str) for doc in docs]
     results = {}
+    total = len(args_list)
+    max_workers = min(os.cpu_count() or 4, 8)
 
     try:
-        with ProcessPoolExecutor() as executor:
+        with ProcessPoolExecutor(max_workers=max_workers) as executor:
             futures = {
                 executor.submit(_convert_single_doc, args): args[0]
                 for args in args_list
             }
+            done_count = 0
+            log_interval = max(1, total // 10)
             for future in as_completed(futures):
                 docname, md_content = future.result()
                 if md_content is not None:
                     results[docname] = md_content
+                done_count += 1
+                if done_count % log_interval == 0 or done_count == total:
+                    print(f"  Markdown conversion: {done_count}/{total} files processed")
     except (OSError, RuntimeError) as e:
         print(f"Parallel processing unavailable ({e}), falling back to sequential")
         results = {}
-        for args in args_list:
+        for i, args in enumerate(args_list):
             docname, md_content = _convert_single_doc(args)
             if md_content is not None:
                 results[docname] = md_content
+            if (i + 1) % max(1, total // 10) == 0:
+                print(f"  Markdown conversion: {i + 1}/{total} files processed")
 
     return results
 
@@ -457,6 +472,10 @@ def _generate_llms_txt(app, exception):
        c. Relative URLs as a last resort
 
     Enabled by default. Set ``llm_disabled = "true"`` to disable.
+
+    Additional options:
+    - ``llm_generate_full = "false"`` — skip llms-full.txt generation (expensive
+      on large builds with thousands of pages).
     """
     if exception is not None:
         return  # Don't generate if build failed
@@ -541,12 +560,20 @@ def _generate_llms_txt(app, exception):
     except Exception as e:
         print(f"Warning: Could not discover pages for llms.txt: {e}")
 
+    generate_full = (
+        str(theme_options.get("llm_generate_full", "true")).lower() == "true"
+    )
+
     # Generate .md files from HTML if enabled
     if generate_md and docs:
         md_contents = _generate_md_files(app, docs)
         print(f"Generated {len(md_contents)} markdown files from HTML pages")
 
-        # Also generate llms-full.txt with all content concatenated (using in-memory content)
+        if generate_full:
+            _generate_llms_full_txt(app, docs, app.outdir, md_contents)
+    elif generate_full and docs:
+        md_contents = _generate_md_files(app, docs)
+        print(f"Generated {len(md_contents)} markdown files for llms-full.txt")
         _generate_llms_full_txt(app, docs, app.outdir, md_contents)
 
     # Deduplicate titles if enabled
