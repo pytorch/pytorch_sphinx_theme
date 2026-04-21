@@ -318,14 +318,14 @@ def _get_toctree_children(app, docname):
     return children
 
 
-def _cache_root_toctree_entries(app, doctree, docname):
+def _cache_root_toctree_entries(app, doctree):
     """Cache toctree entries from the root doc during the read phase.
 
-    Called via doctree-resolved so the doctree is available in memory.
-    Stores entries on app.env so the navbar can use them during the write
-    phase without calling get_doctree() (which reads from disk and fails
-    when doctree disk writes are skipped).
+    Called via doctree-read (not doctree-resolved) so this runs in the main
+    process before parallel write workers are spawned. The cached data on
+    app.env gets pickled and distributed to all workers.
     """
+    docname = app.env.docname
     if docname != app.config.root_doc:
         return
 
@@ -475,7 +475,7 @@ def setup(app):
 
     # Cache root doc toctree entries during read phase (before doctrees may be
     # discarded by builders that skip disk writes for performance)
-    app.connect("doctree-resolved", _cache_root_toctree_entries)
+    app.connect("doctree-read", _cache_root_toctree_entries)
 
     # Add hierarchical navigation context for dropdown menus
     app.connect("html-page-context", _add_hierarchical_nav_to_context)
