@@ -2,7 +2,7 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
-## v0.4.8
+## v0.4.9
 
 ### Performance
 
