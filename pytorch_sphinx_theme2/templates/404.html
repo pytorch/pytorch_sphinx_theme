@@ -48,7 +48,7 @@
 
 {% block body_tag %}
 
-<body data-feedback-url="{{ feedback_url }}" class="pytorch-body">
+<body data-feedback-url="{{ feedback_url }}" class="pytorch-body" data-pagefind-ignore>
     {% if theme_show_lf_header|lower == 'true' or theme_show_lf_header == true %}
     {% include "pytorch_header.html" %}
     {% endif %}

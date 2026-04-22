@@ -46,6 +46,7 @@ Welcome to PyTorch Sphinx Theme 2 Docs
     test-cards
     test-glossary
     test_tutorials_landing_page
+    test-landing-page
 
 
 .. toctree::

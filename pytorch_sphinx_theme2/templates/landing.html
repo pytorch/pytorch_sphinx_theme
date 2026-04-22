@@ -1,0 +1,375 @@
+{# Landing page template - supports rich YAML-driven layout #}
+{% extends "!layout.html" %}
+
+{# Hide the right sidebar TOC #}
+{% block docs_toc %}
+{% endblock %}
+
+{# Add landing-page class to body via JS (avoids duplicate <body> tags) #}
+{% block extrahead %}
+{{ super() }}
+<script>document.documentElement.classList.add('landing-page-html');</script>
+<style>
+  :root { --header-height: 0px !important; --header-height-desktop: 0px !important; }
+</style>
+<link href="{{ pathto('pagefind/pagefind-ui.css', 1) }}" rel="stylesheet" onerror="this.remove()">
+<script>
+  // Initialize Pagefind globally (needed for navbar search on landing pages)
+  if (!window._pagefindReady) {
+    window._pagefindReady = (async function() {
+      try {
+        // Resolve pagefind path relative to the page URL
+        var pageDir = window.location.pathname.replace(/[^/]*$/, '');
+        var pf = await import(pageDir + 'pagefind/pagefind.js');
+        await pf.init();
+        return pf;
+      } catch(e) {
+        console.warn('Pagefind not available:', e.message);
+        return null;
+      }
+    })();
+  }
+</script>
+{% endblock %}
+
+{# Override article body to render rich landing page when data is available #}
+{% block body %}
+{% if landing_page is defined and landing_page %}
+{# ---------- Rich landing page from YAML frontmatter ---------- #}
+
+{# Intro #}
+{% if landing_page.intro is defined %}
+<div class="rl-intro">
+  <h1 class="rl-intro__title">{{ landing_page.intro.title }}</h1>
+  {% if landing_page.intro.description is defined %}
+  <p class="rl-intro__desc">{{ landing_page.intro.description }}</p>
+  {% endif %}
+</div>
+{% endif %}
+
+{# Search bar #}
+{% if landing_page.show_search is defined and landing_page.show_search %}
+<form class="rl-search" id="rl-search-form" action="" method="get">
+  <div class="rl-search__wrapper">
+    <span class="rl-search__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </span>
+    <input type="text" class="rl-search__input" id="rl-search-input"
+           placeholder="Search documentation..." autocomplete="off">
+    <button type="submit" class="rl-search__submit" aria-label="Search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="rl-search-results" id="rl-search-results" style="display: none;">
+    <ul class="rl-search-results__list" id="rl-search-results-list"></ul>
+  </div>
+</form>
+{% endif %}
+
+{# Right-aligned link to full toctree (if present) #}
+{% if body and 'toctree-wrapper' in body %}
+<div class="rl-controls">
+  <a href="#full-api-list" class="rl-view-all-link">View List</a>
+</div>
+{% endif %}
+
+{# Categories #}
+{% if landing_page.categories is defined %}
+{% for category in landing_page.categories %}
+<section class="rl-category">
+  <div class="rl-category__header">
+    <h2 class="rl-category__name">{{ category.name }}</h2>
+    {% if category.description is defined %}
+    <p class="rl-category__desc">{{ category.description }}</p>
+    {% endif %}
+  </div>
+
+  <div class="rl-grid">
+    {% if category['items'] is defined %}
+    {% for item in category['items'] %}
+    <a href="{{ item.link }}" class="rl-card{% if item.featured|default(false) %} rl-card--featured{% endif %}">
+      <div class="rl-card__top">
+        <div class="rl-card__title">{{ item.title }}</div>
+      </div>
+      <div class="rl-card__desc">{{ item.description }}</div>
+      <div class="rl-card__badges">
+        {% if item.type is defined %}
+        <span class="rl-badge rl-badge--type">{{ item.type }}</span>
+        {% endif %}
+        {% if item.level is defined %}
+        <span class="rl-badge rl-badge--level rl-badge--{{ item.level|lower }}">{{ item.level }}</span>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endfor %}
+{% endif %}
+
+{# Full toctree list (anchor target) #}
+{% if body and 'toctree-wrapper' in body %}
+<div id="full-api-list" class="rl-toctree-section">
+  {{ body }}
+</div>
+{% endif %}
+
+{# Pagefind search with YAML item boosting #}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // YAML items from frontmatter (curated, may link externally)
+  var yamlItems = [
+    {% if landing_page.categories is defined %}
+    {% for category in landing_page.categories %}
+    {% if category['items'] is defined %}
+    {% for item in category['items'] %}
+    {title: {{ item.title|tojson }}, desc: {{ item.description|default('')|tojson }}, link: {{ item.link|tojson }}, priority: 1},
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% if landing_page['search_entries'] is defined %}
+    {% for entry in landing_page['search_entries'] %}
+    {title: {{ entry.title|tojson }}, desc: '', link: {{ entry.link|tojson }}, priority: 2},
+    {% endfor %}
+    {% endif %}
+  ];
+
+  // Also scrape toctree links
+  var toctreeLinks = document.querySelectorAll('.rl-toctree-section .toctree-wrapper a');
+  toctreeLinks.forEach(function(a) {
+    if (a.href && a.textContent.trim()) {
+      yamlItems.push({title: a.textContent.trim(), desc: '', link: a.href, priority: 3});
+    }
+  });
+
+  // Normalize a link for dedup comparison
+  function normalizeLink(link) {
+    return link.replace(/^https?:\/\/[^/]+/, '').replace(/\/$/, '').replace(/\.html$/, '').replace(/^\/+/, '');
+  }
+
+  // Deduplicate
+  var seen = {};
+  yamlItems = yamlItems.filter(function(item) {
+    var key = normalizeLink(item.link);
+    if (seen[key]) return false;
+    seen[key] = true;
+    return true;
+  });
+
+  var input = document.getElementById('rl-search-input');
+  var resultsContainer = document.getElementById('rl-search-results');
+  var resultsList = document.getElementById('rl-search-results-list');
+  var form = document.getElementById('rl-search-form');
+  var pagefind = null;
+  var debounceTimer = null;
+
+  if (!input || !resultsContainer || !resultsList) return;
+
+  if (form) {
+    form.addEventListener('submit', function(e) { e.preventDefault(); });
+  }
+
+  // Reuse the global Pagefind instance (shared with navbar search)
+  async function initPagefind() {
+    if (window._pagefindReady) {
+      pagefind = await window._pagefindReady;
+    }
+  }
+
+  // Simple fuzzy match for YAML items (case-insensitive substring + dot-aware)
+  function matchYamlItems(query) {
+    var q = query.toLowerCase();
+    var qNoDots = q.replace(/\./g, '');
+    return yamlItems.filter(function(item) {
+      var t = item.title.toLowerCase();
+      var tNoDots = t.replace(/\./g, '');
+      // Substring match on title (with or without dots)
+      if (t.indexOf(q) !== -1 || tNoDots.indexOf(qNoDots) !== -1) return true;
+      // Also check description
+      if (item.desc && item.desc.toLowerCase().indexOf(q) !== -1) return true;
+      return false;
+    }).sort(function(a, b) {
+      // Exact prefix matches first, then by priority
+      var aTitle = a.title.toLowerCase();
+      var bTitle = b.title.toLowerCase();
+      var aPrefix = aTitle.indexOf(q) === 0 || aTitle.indexOf('torch.' + q) === 0;
+      var bPrefix = bTitle.indexOf(q) === 0 || bTitle.indexOf('torch.' + q) === 0;
+      if (aPrefix && !bPrefix) return -1;
+      if (!aPrefix && bPrefix) return 1;
+      return a.priority - b.priority;
+    });
+  }
+
+  // Clean up Pagefind result titles and excerpts
+  function cleanTitle(title) {
+    return (title || '').replace(/#\s*$/g, '').replace(/\s*#\s*/g, ' ').trim();
+  }
+  function cleanExcerpt(excerpt) {
+    if (!excerpt) return '';
+    var cleaned = excerpt.replace(/<(?!\/?mark)[^>]+>/gi, '');
+    cleaned = cleaned.replace(/Created On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Last (Updated|Verified) On:[^|.]*(\|[^|.]*)*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Rate this Page[\s★☆✩✪⭐]*\.?\s*/gi, '');
+    cleaned = cleaned.replace(/[★☆✩✪⭐]{2,}/g, '');
+    cleaned = cleaned.replace(/Run in Google Colab\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Download Notebook\.?\s*/gi, '');
+    cleaned = cleaned.replace(/View on GitHub\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\b(Colab|Notebook|GitHub)\.\s*/g, '');
+    cleaned = cleaned.replace(/Skip to main content\.?\s*/gi, '');
+    cleaned = cleaned.replace(/Back to top\.?\s*/gi, '');
+    cleaned = cleaned.replace(/PyPi\s*/gi, '');
+    cleaned = cleaned.replace(/Theme Documentation\.?\s*/gi, '');
+    cleaned = cleaned.replace(/\s{2,}/g, ' ').replace(/^\s*[.\s]+/, '').trim();
+    if (cleaned.length > 120) {
+      cleaned = cleaned.substring(0, 120).replace(/\s+\S*$/, '') + '...';
+    }
+    return cleaned;
+  }
+
+  function renderResults(items, totalCount, query) {
+    resultsList.innerHTML = '';
+    if (items.length === 0) {
+      resultsList.innerHTML = '<li class="rl-search-results__empty">No results found</li>';
+    } else {
+      items.slice(0, 15).forEach(function(item) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = item.link;
+        a.className = 'rl-search-results__link';
+        a.textContent = cleanTitle(item.title);
+        if (item.desc) {
+          var cleaned = item.isHtml ? cleanExcerpt(item.desc) : item.desc;
+          if (cleaned) {
+            var span = document.createElement('span');
+            span.className = 'rl-search-results__desc';
+            if (item.isHtml) {
+              span.innerHTML = cleaned;
+            } else {
+              span.textContent = cleaned;
+            }
+            a.appendChild(span);
+          }
+        }
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      });
+      // "See all results" link at the very end
+      if (totalCount && totalCount > 15 && query) {
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = 'search.html?q=' + encodeURIComponent(query);
+        a.className = 'rl-search-results__see-all';
+        a.textContent = 'See all ' + totalCount + ' results \u2192';
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    }
+    resultsContainer.style.display = '';
+  }
+
+  async function doSearch(query) {
+    if (!query || query.length < 2) {
+      resultsContainer.style.display = 'none';
+      return;
+    }
+
+    // Get YAML matches (instant)
+    var yamlMatches = matchYamlItems(query);
+
+    // Get Pagefind matches (async, full-text)
+    var pagefindItems = [];
+    var totalPagefindCount = 0;
+    if (pagefind) {
+      try {
+        var search = await pagefind.search(query);
+        totalPagefindCount = search.results.length;
+        var dataPromises = search.results.slice(0, 15).map(function(r) { return r.data(); });
+        var dataResults = await Promise.all(dataPromises);
+        // Sort: title matches first
+        var qLower = query.toLowerCase();
+        dataResults.sort(function(a, b) {
+          var aTitle = (a.meta.title || '').toLowerCase();
+          var bTitle = (b.meta.title || '').toLowerCase();
+          var aInTitle = aTitle.indexOf(qLower) !== -1;
+          var bInTitle = bTitle.indexOf(qLower) !== -1;
+          if (aInTitle && !bInTitle) return -1;
+          if (!aInTitle && bInTitle) return 1;
+          return 0;
+        });
+        pagefindItems = dataResults.map(function(d) {
+          return {title: d.meta.title || d.url, desc: d.excerpt || '', link: d.url, priority: 4, isHtml: true};
+        });
+      } catch (e) {
+        // Pagefind search failed, continue with YAML results
+      }
+    }
+
+    // Merge: YAML items first, then Pagefind results (deduplicated)
+    var merged = yamlMatches.slice();
+    var seenUrls = {};
+    merged.forEach(function(item) {
+      seenUrls[normalizeLink(item.link)] = true;
+    });
+    pagefindItems.forEach(function(item) {
+      var key = normalizeLink(item.link);
+      if (!seenUrls[key]) {
+        seenUrls[key] = true;
+        merged.push(item);
+      }
+    });
+
+    var totalCount = Math.max(merged.length, totalPagefindCount);
+    renderResults(merged, totalCount, query);
+  }
+
+  input.addEventListener('input', function() {
+    var q = this.value.trim();
+    clearTimeout(debounceTimer);
+    if (!q || q.length < 2) {
+      resultsContainer.style.display = 'none';
+      return;
+    }
+    // Show YAML results immediately (no "See all" for YAML-only)
+    var yamlMatches = matchYamlItems(q);
+    if (yamlMatches.length > 0) {
+      renderResults(yamlMatches, 0, null);
+    }
+    // Debounce the full search (YAML + Pagefind)
+    debounceTimer = setTimeout(function() { doSearch(q); }, 150);
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.rl-search, .rl-search-results')) {
+      resultsContainer.style.display = 'none';
+    }
+  });
+
+  input.addEventListener('focus', function() {
+    if (this.value.trim() && resultsList.children.length > 0) {
+      resultsContainer.style.display = '';
+    }
+  });
+
+  // Init Pagefind in background
+  initPagefind();
+});
+</script>
+
+{% else %}
+{# Simple directive-based landing page (fallback) #}
+{{ super() }}
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+{% include "pytorch_footer.html" %}
+{{ super() }}
+{% endblock %}

@@ -1,0 +1,619 @@
+// =============================================================================
+// Landing Page Styles (Rich YAML-driven layout)
+// =============================================================================
+
+// Landing page body class — hide both sidebars, full-width content
+html.landing-page-html .bd-sidebar-primary,
+html.landing-page-html .bd-sidebar-secondary {
+  display: none !important;
+}
+
+html.landing-page-html .bd-container__inner,
+html.landing-page-html .bd-page-width {
+  max-width: 100% !important;
+}
+
+html.landing-page-html .bd-main,
+html.landing-page-html .bd-main .bd-content,
+html.landing-page-html .bd-main .bd-content .bd-article-container {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+// Override the empty-sidebar padding that shifts content left
+@media (min-width: 960px) {
+  html.landing-page-html .bd-sidebar-primary:not(:has(.bd-docs-nav li)) + .bd-main .bd-content .bd-article-container {
+    padding-left: 0 !important;
+  }
+}
+
+html.landing-page-html .bd-article {
+  max-width: 1600px !important;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @media (min-width: 600px) {
+    padding: 0 2rem;
+  }
+
+  @media (min-width: 960px) {
+    padding: 0 3rem;
+  }
+}
+
+// PyTorch brand palette
+$rl-colors: #EE4C2C, #6C4BF6, #0D96F2, #2BAF2B, #F2711C, #E91E63;
+
+// =============================================================================
+// Intro
+// =============================================================================
+
+.rl-intro {
+  text-align: center;
+  padding: 1.5rem 0 0.75rem;
+
+  @media (min-width: 600px) {
+    padding: 2.5rem 0 1rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--pst-color-text-base);
+
+    @media (min-width: 600px) {
+      font-size: 2rem;
+      margin: 0 0 0.75rem;
+    }
+  }
+
+  &__desc {
+    font-size: 0.875rem;
+    color: var(--pst-color-text-muted);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+
+    @media (min-width: 600px) {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+// =============================================================================
+// Search bar
+// =============================================================================
+
+.rl-search {
+  max-width: 900px;
+  margin: 1rem auto 0.75rem;
+  position: relative;
+
+  @media (min-width: 600px) {
+    margin: 1.5rem auto 1rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--pst-color-surface);
+    border: 1px solid var(--pst-color-border);
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    @media (min-width: 600px) {
+      padding: 0.75rem 1rem;
+    }
+
+    &:focus-within {
+      border-color: var(--pst-color-primary);
+      box-shadow: 0 0 0 3px rgba(238, 76, 44, 0.1);
+    }
+  }
+
+  &__icon {
+    color: var(--pst-color-text-muted);
+    margin-right: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.875rem;
+    color: var(--pst-color-text-base);
+    outline: none;
+    min-width: 0;
+
+    @media (min-width: 600px) {
+      font-size: 1rem;
+    }
+
+    &::placeholder {
+      color: var(--pst-color-text-muted);
+    }
+  }
+
+  &__submit {
+    color: var(--pst-color-text-muted);
+    display: flex;
+    align-items: center;
+    padding-left: 0.75rem;
+    border: none;
+    border-left: 1px solid var(--pst-color-border);
+    margin-left: 0.75rem;
+    background: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--pst-color-primary);
+    }
+  }
+}
+
+// =============================================================================
+// Search results dropdown
+// =============================================================================
+
+.rl-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--pst-color-background);
+  border: 1px solid var(--pst-color-border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: var(--pst-color-text-base);
+    text-decoration: none;
+    border-bottom: 1px solid var(--pst-color-border);
+    font-weight: 500;
+
+    &:hover {
+      background: var(--pst-color-surface);
+      text-decoration: none;
+      color: var(--pst-color-primary);
+    }
+  }
+
+  &__desc {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--pst-color-text-muted);
+    margin-top: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__empty {
+    padding: 1rem;
+    color: var(--pst-color-text-muted);
+    text-align: center;
+    font-size: 0.875rem;
+  }
+
+  &__see-all {
+    display: block;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--pst-color-primary);
+    text-decoration: none;
+    background: var(--pst-color-surface);
+    border-radius: 0 0 12px 12px;
+
+    &:hover {
+      background: var(--pst-color-border);
+      text-decoration: none;
+    }
+  }
+}
+
+// =============================================================================
+// View toggle
+// =============================================================================
+
+.rl-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.rl-view-toggle {
+  display: inline-flex;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 6px;
+  overflow: hidden;
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    border: none;
+    background: transparent;
+    color: var(--pst-color-text-muted);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+
+    &:not(:last-child) {
+      border-right: 1px solid var(--pst-color-border);
+    }
+
+    &:hover {
+      background: var(--pst-color-surface);
+    }
+
+    &--active {
+      background: var(--pst-color-primary);
+      color: #fff;
+
+      &:hover {
+        background: var(--pst-color-primary);
+      }
+    }
+  }
+}
+
+// =============================================================================
+// Category sections
+// =============================================================================
+
+.rl-category {
+  margin-bottom: 1.5rem;
+
+  @media (min-width: 600px) {
+    margin-bottom: 2.5rem;
+  }
+
+  &__header {
+    margin-bottom: 0.75rem;
+
+    @media (min-width: 600px) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  &__name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0.25rem;
+    color: var(--pst-color-text-base);
+
+    @media (min-width: 600px) {
+      font-size: 1.35rem;
+    }
+  }
+
+  &__desc {
+    font-size: 0.875rem;
+    color: var(--pst-color-text-muted);
+    margin: 0;
+  }
+}
+
+// =============================================================================
+// Card grid
+// =============================================================================
+
+.rl-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1500px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Individual card
+.rl-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 8px;
+  text-decoration: none;
+  background: var(--pst-color-background);
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  @media (min-width: 600px) {
+    padding: 1.25rem;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: var(--pst-color-primary);
+    text-decoration: none;
+  }
+
+  &--featured {
+    // No special border styling
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--pst-color-text-base);
+  }
+
+  &__featured-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pst-color-primary);
+    flex-shrink: 0;
+    margin-left: 0.4rem;
+  }
+
+  &__desc {
+    font-size: 0.8rem;
+    color: var(--pst-color-text-muted);
+    line-height: 1.45;
+    flex-grow: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: auto;
+  }
+}
+
+// =============================================================================
+// Badges (type, level)
+// =============================================================================
+
+.rl-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  border-radius: 3px;
+  line-height: 1.4;
+
+  &--type {
+    background: #e8eaf6;
+    color: #3949ab;
+  }
+
+  &--level {
+    background: #f3f3f3;
+    color: #666;
+  }
+
+  // Level-specific colors
+  &--essential {
+    background: #fff3e0;
+    color: #e65100;
+  }
+
+  &--common {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &--advanced {
+    background: #ede7f6;
+    color: #5e35b1;
+  }
+
+  &--specialized {
+    background: #e3f2fd;
+    color: #1565c0;
+  }
+}
+
+// =============================================================================
+// List view (table)
+// =============================================================================
+
+.rl-list {
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    th {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid var(--pst-color-border);
+      font-weight: 600;
+      color: var(--pst-color-text-muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--pst-color-border);
+      vertical-align: top;
+    }
+
+    tr:hover td {
+      background: var(--pst-color-surface);
+    }
+  }
+
+  &__link {
+    font-weight: 600;
+    color: var(--pst-color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__desc {
+    color: var(--pst-color-text-muted);
+    max-width: 400px;
+  }
+}
+
+// =============================================================================
+// View all APIs link
+// =============================================================================
+
+.rl-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--pst-color-text-muted);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--pst-color-surface);
+    color: var(--pst-color-primary);
+    text-decoration: none;
+  }
+}
+
+// =============================================================================
+// Full toctree section
+// =============================================================================
+
+.rl-toctree-section {
+  margin: 3rem 0 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pst-color-border);
+
+  // Hide the h1 title and date info that Sphinx renders
+  h1, .date-info-last-verified {
+    display: none;
+  }
+
+  // Style the toctree list
+  .toctree-wrapper ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    column-count: 3;
+    column-gap: 1.5rem;
+
+    @media (max-width: 1100px) {
+      column-count: 2;
+    }
+
+    @media (max-width: 600px) {
+      column-count: 1;
+    }
+  }
+
+  .toctree-wrapper li {
+    break-inside: avoid;
+    padding: 0.3rem 0;
+    font-size: 0.875rem;
+  }
+
+  // Style toctree caption
+  .caption-text {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--pst-color-text-muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+// =============================================================================
+// Dark mode
+// =============================================================================
+
+html[data-theme="dark"] {
+  .rl-card {
+    background: var(--pst-color-background);
+  }
+
+  .rl-badge--type {
+    background: #283593;
+    color: #c5cae9;
+  }
+
+  .rl-badge--level {
+    background: #333;
+    color: #aaa;
+  }
+
+  .rl-badge--essential {
+    background: #bf360c;
+    color: #ffccbc;
+  }
+
+  .rl-badge--common {
+    background: #1b5e20;
+    color: #c8e6c9;
+  }
+
+  .rl-badge--advanced {
+    background: #4a148c;
+    color: #d1c4e9;
+  }
+
+  .rl-badge--specialized {
+    background: #0d47a1;
+    color: #bbdefb;
+  }
+}

@@ -4,3 +4,242 @@
 span.highlighted {
     background-color: #ffe4e4;
 }
+
+// Hide pydata's default search button — we use our own custom search field
+.search-button__wrapper {
+  display: none !important;
+}
+
+// =============================================================================
+// Pagefind navbar search
+// =============================================================================
+
+.pagefind-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .fa-magnifying-glass {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--pst-color-text-muted);
+    font-size: 0.85rem;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.pagefind-search-input {
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem 0.4rem 32px;
+  font-size: 0.875rem;
+  color: var(--pst-color-text-base);
+  background: var(--pst-color-background);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &::placeholder {
+    color: var(--pst-color-text-muted);
+  }
+
+  &:focus {
+    border-color: var(--pst-color-primary);
+    box-shadow: 0 0 0 2px rgba(238, 76, 44, 0.1);
+  }
+
+  // Prevent iOS zoom on focus
+  @media (max-width: 991.98px) {
+    font-size: 16px;
+  }
+}
+
+.pagefind-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+  background: var(--pst-color-background);
+  border: 1px solid var(--pst-color-border);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  min-width: 350px;
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: var(--pst-color-text-base);
+    text-decoration: none;
+    border-bottom: 1px solid var(--pst-color-border);
+    transition: background 0.1s;
+
+    &:hover {
+      background: var(--pst-color-surface);
+      text-decoration: none;
+      color: var(--pst-color-primary);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__title {
+    display: block;
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+
+  &__excerpt {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--pst-color-text-muted);
+    margin-top: 0.15rem;
+    line-height: 1.4;
+    // Pagefind wraps matches in <mark>
+    mark {
+      background: rgba(238, 76, 44, 0.15);
+      color: inherit;
+      padding: 0 1px;
+      border-radius: 2px;
+    }
+  }
+
+  &__empty {
+    padding: 0.75rem;
+    color: var(--pst-color-text-muted);
+    text-align: center;
+    font-size: 0.8rem;
+  }
+
+  &__see-all {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--pst-color-primary);
+    text-decoration: none;
+    background: var(--pst-color-surface);
+    border-radius: 0 0 8px 8px;
+
+    &:hover {
+      background: var(--pst-color-border);
+      text-decoration: none;
+    }
+  }
+}
+
+// =============================================================================
+// Pagefind full-page search (search.html)
+// =============================================================================
+
+.pagefind-fullpage-search {
+  max-width: 800px;
+
+  &__input-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    border: 2px solid var(--pst-color-border);
+    border-radius: 8px;
+    color: var(--pst-color-text-base);
+    background: var(--pst-color-background);
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: var(--pst-color-primary);
+    }
+
+    &::placeholder {
+      color: var(--pst-color-text-muted);
+    }
+  }
+
+  &__status {
+    font-size: 0.875rem;
+    color: var(--pst-color-text-muted);
+    margin-bottom: 1rem;
+    min-height: 1.25rem;
+  }
+}
+
+.pagefind-fullpage-result {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--pst-color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--pst-color-primary);
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__excerpt {
+    font-size: 0.875rem;
+    color: var(--pst-color-text-base);
+    line-height: 1.5;
+    margin: 0.25rem 0;
+
+    mark {
+      background: rgba(238, 76, 44, 0.15);
+      color: inherit;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__url {
+    font-size: 0.75rem;
+    color: var(--pst-color-text-muted);
+  }
+}
+
+.pagefind-fullpage-show-more {
+  display: block;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--pst-color-primary);
+  background: var(--pst-color-surface);
+  border: 1px solid var(--pst-color-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--pst-color-border);
+  }
+}
