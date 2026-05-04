@@ -321,9 +321,8 @@ def _get_toctree_children(app, docname):
 def _cache_root_toctree_entries(app, doctree):
     """Cache toctree entries from the root doc during the read phase.
 
-    Called via doctree-read (not doctree-resolved) so this runs in the main
-    process before parallel write workers are spawned. The cached data on
-    app.env gets pickled and distributed to all workers.
+    Called via doctree-read (not doctree-resolved) so this runs before the
+    write phase, even when builders skip writing doctrees to disk.
     """
     docname = app.env.docname
     if docname != app.config.root_doc:
@@ -339,6 +338,19 @@ def _cache_root_toctree_entries(app, doctree):
                 entries.append((title, ref, is_external))
 
     app.env._root_toctree_entries = entries
+
+
+def _merge_root_toctree_entries(app, env, docnames, other):
+    """Merge cached root toctree entries from a parallel-read worker env.
+
+    With sphinx-build -j, doctree-read fires in worker processes; custom
+    attributes set on the worker's env are not preserved unless we copy them
+    here. Without this, _root_toctree_entries stays empty in the main env
+    and the navbar falls back to generate_header_nav_html().
+    """
+    other_entries = getattr(other, "_root_toctree_entries", None)
+    if other_entries:
+        env._root_toctree_entries = other_entries
 
 
 def _get_toctree_entries_from_doctree(app, docname):
@@ -476,6 +488,9 @@ def setup(app):
     # Cache root doc toctree entries during read phase (before doctrees may be
     # discarded by builders that skip disk writes for performance)
     app.connect("doctree-read", _cache_root_toctree_entries)
+    # With parallel reads (sphinx-build -j), doctree-read fires in workers;
+    # merge the cached entries back into the main env.
+    app.connect("env-merge-info", _merge_root_toctree_entries)
 
     # Add hierarchical navigation context for dropdown menus
     app.connect("html-page-context", _add_hierarchical_nav_to_context)
