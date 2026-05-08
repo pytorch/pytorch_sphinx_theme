@@ -403,6 +403,10 @@ html[data-theme=dark] {
   margin-left: 5px;
 }
 
+.navbar-header-items__center .navbar-item li.nav-item {
+  list-style: none;
+}
+
 .bd-header {
   top: var(--header-height-desktop) !important;
   position: sticky !important;
