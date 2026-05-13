@@ -163,6 +163,10 @@ nav.bd-links li>a {
   color: var(--pst-color-text-base) !important;
 }
 
+.bd-sidebar-secondary .section-nav {
+  display: block;
+}
+
 .bd-sidebar-secondary .toc-entry a.nav-link {
   padding-top: 0.125rem;
   padding-bottom: 0.125rem;
