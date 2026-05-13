@@ -92,6 +92,13 @@
   </ul>
 </nav>
 {% else %}
-{# Fallback: use the default header navigation if hierarchical nav is empty #}
-{{ generate_header_nav_html()|safe }}
+{# Fallback: use the default header navigation if hierarchical nav is empty.
+   Wrap in <nav><ul> because generate_header_nav_html() returns only inner <li>
+   markup; without this wrapper, browsers render the bare <li>s with default
+   list-item bullets. #}
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    {{ generate_header_nav_html()|safe }}
+  </ul>
+</nav>
 {% endif %}
