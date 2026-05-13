@@ -163,7 +163,7 @@ nav.bd-links li>a {
   color: var(--pst-color-text-base) !important;
 }
 
-.bd-sidebar-secondary .section-nav {
+.page-toc .section-nav {
   display: block;
 }
 
@@ -185,9 +185,13 @@ nav.bd-links li>a {
 }
 
 .bd-sidebar-secondary {
+  width: 15%;
+  min-width: 180px;
   padding: 1rem 3rem 1rem 1rem;
 
   @media (max-width: 959.98px) {
+    width: 75%;
+    top: 30px;
     padding: 1rem;
   }
 }
