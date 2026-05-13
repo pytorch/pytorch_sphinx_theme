@@ -2,6 +2,15 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.10
+
+### Bug Fixes
+
+- **C++ Docs Navbar Bullets Fix** — Fixed top navigation bar rendering as a bulleted list in C++ docs. Wrapped fallback `generate_header_nav_html()` output in proper `<nav><ul class="bd-navbar-elements navbar-nav">` markup, and added `env-merge-info` handler to preserve toctree entries across parallel build workers.
+- **Right Nav Spacing Fix** — Fixed excessive vertical spacing between "On this page" TOC entries by switching `.page-toc .section-nav` from flex to block layout, restoring proper margin collapsing between items.
+
+---
+
 ## v0.4.9
 
 ### Performance
