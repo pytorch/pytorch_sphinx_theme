@@ -2,6 +2,18 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.11
+
+### Bug Fixes
+
+- **Dropdown Width Fix** — Fixed sphinx-design `{dropdown}` directives rendering at 30% page width instead of full article width. The `.sd-card` styles (width: 30%, max-width: 500px) were unintentionally applied to dropdowns since sphinx-design renders them as `.sd-card.sd-dropdown`. Added targeted overrides so dropdowns span the full content area while regular cards remain unchanged.
+
+### New
+
+- **MyST Directives Test Page** — Added comprehensive test page (`test-myst-directives.md`) covering dropdowns, admonitions, tab sets, cards, badges, buttons, definition lists, code blocks, math, tables, nested dropdowns, and responsive grids to catch theme styling issues.
+
+---
+
 ## v0.4.10
 
 ### Bug Fixes
