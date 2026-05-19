@@ -43,6 +43,7 @@ Welcome to PyTorch Sphinx Theme 2 Docs
     :caption: Test Pages
 
     test-myst
+    test-myst-directives
     test-cards
     test-glossary
     test_tutorials_landing_page
