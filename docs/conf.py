@@ -40,7 +40,17 @@ extensions = [
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
+    "fieldlist",
+    "substitution",
+    "tasklist",
+    "attrs_inline",
+    "attrs_block",
 ]
+
+myst_substitutions = {
+    "project_name": "PyTorch",
+    "version_num": "2.0",
+}
 
 print(
     f"HAS_SPHINX_GALLERY value: {pytorch_sphinx_theme2.custom_directives.HAS_SPHINX_GALLERY}"
