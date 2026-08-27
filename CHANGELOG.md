@@ -14,6 +14,20 @@ All notable changes to pytorch_sphinx_theme2 are documented here.
 
 ---
 
+## v0.4.11
+
+Released to PyPI on 2026-05-19. The version bump itself was never merged, so this entry is recorded retroactively.
+
+### Bug Fixes
+
+- **Dropdown Width Fix** (PR #251) — `sphinx-design` dropdowns are rendered as `.sd-card`, so they inherited the card constraints and were clipped to the card width (500px at mobile breakpoints). `.sd-card.sd-dropdown` now spans the full container width, and the card hover underline pseudo-element is suppressed on dropdowns.
+
+### Documentation
+
+- **MyST Directives Test Page** (PR #251) — Added `docs/test-myst-directives.md` covering the MyST directive set, and enabled the `fieldlist`, `substitution`, `tasklist`, `attrs_inline` and `attrs_block` extensions plus `myst_substitutions` in `docs/conf.py`.
+
+---
+
 ## v0.4.10
 
 ### Bug Fixes
