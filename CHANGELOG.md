@@ -2,6 +2,32 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.12
+
+### Bug Fixes
+
+- **Search Relevance for Symbol Queries** (PR #252) — Replaced Sphinx's stock `Scorer` so API symbols rank above module stub pages. The Python domain gives every module search priority 0 (worth +15) against +5 for classes and functions, and `performSearch` merges three passes onto one list without normalising their scales. Searching `nn.linear` returned twelve `*.modules.linear` module pages ahead of `torch.nn.Linear` at rank 29; it is now first. Measured over 16 symbol queries against the PyTorch `main` index: MRR 0.488 to 0.969, top-1 4/16 to 15/16.
+
+### Infrastructure
+
+- **GitHub Actions Node 20 Deprecation** (PR #253) — Bumped `actions/checkout`, `actions/setup-python`, `actions/setup-node`, `actions/upload-artifact` and `actions/download-artifact` to their current majors.
+
+---
+
+## v0.4.11
+
+Released to PyPI on 2026-05-19. The version bump itself was never merged, so this entry is recorded retroactively.
+
+### Bug Fixes
+
+- **Dropdown Width Fix** (PR #251) — `sphinx-design` dropdowns are rendered as `.sd-card`, so they inherited the card constraints and were clipped to the card width (500px at mobile breakpoints). `.sd-card.sd-dropdown` now spans the full container width, and the card hover underline pseudo-element is suppressed on dropdowns.
+
+### Documentation
+
+- **MyST Directives Test Page** (PR #251) — Added `docs/test-myst-directives.md` covering the MyST directive set, and enabled the `fieldlist`, `substitution`, `tasklist`, `attrs_inline` and `attrs_block` extensions plus `myst_substitutions` in `docs/conf.py`.
+
+---
+
 ## v0.4.10
 
 ### Bug Fixes
