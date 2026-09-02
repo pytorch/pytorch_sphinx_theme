@@ -2,6 +2,14 @@
 
 All notable changes to pytorch_sphinx_theme2 are documented here.
 
+## v0.4.13
+
+### Bug Fixes
+
+- **Duplicate Search Results Collapsed** (PR #255) — Follow-up to #252, addressing the other half of the upstream report. `performSearch` runs a title, object and fulltext pass that each emit their own row for one page, and the built-in dedup keys on `[docname, title, anchor, descr, filename]`, which differs per pass — so a single symbol page was listed repeatedly. Rows were also labelled with whichever heading matched, so searching `linear` produced eight indistinguishable `Linear` entries. Rows for one `generated/<symbol>` page now collapse into a single entry labelled with that symbol. Same-page duplicates in the top 10: `nn.linear` 4 to 0, `conv2d` 2 to 0.
+
+---
+
 ## v0.4.12
 
 ### Bug Fixes
